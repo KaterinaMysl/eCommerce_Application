@@ -2,7 +2,8 @@
 
 # Check if .eslintrc.json configuration file exist
 if [ ! -f ".eslintrc.json" ]; then
-    echo "ESLint configuration file (.eslintrc.json) not found in the current directory. Please make sure to run this script in the root of your project."
+    echo "ESLint configuration file (.eslintrc.json) not found in the current directory." 
+    echo "Please make sure to run this script in the root of your project."
     exit 1
 fi
 

@@ -2,7 +2,8 @@
 
 # Check if .prettierrc configuration file exist
 if [ ! -f ".prettierrc" ]; then
-    echo "Prettier configuration file (.prettierrc) not found in the current directory. Please make sure to run this script in the root of your project."
+    echo "Prettier configuration file (.prettierrc) not found in the current directory."
+    echo "Please make sure to run this script in the root of your project."
     exit 1
 fi
 

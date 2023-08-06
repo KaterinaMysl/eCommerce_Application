@@ -2,7 +2,8 @@
 
 # Check if jest configuration file exist
 if [ ! -f "jest.config.js" ]; then
-    echo "Jest configuration file (jest.config.js) not found in the current directory. Please make sure to run this script in the root of your project."
+    echo "Jest configuration file (jest.config.js) not found in the current directory."
+    echo "Please make sure to run this script in the root of your project."
     exit 1
 fi
 
