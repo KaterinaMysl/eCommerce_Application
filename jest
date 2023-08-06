@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check if jest configuration file exist
+if [ ! -f "jest.config.js" ]; then
+    echo "Jest configuration file (jest.config.js) not found in the current directory. Please make sure to run this script in the root of your project."
+    exit 1
+fi
+
+# Run Jest on the entire project
+npm test
+
+# Check if Jest exited with errors
+if [ $? -ne 0 ]; then
+    echo "Jest tests failed."
+    exit 1
+fi
+
+echo "Jest tests completed successfully."
+exit 0

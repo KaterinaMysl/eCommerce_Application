@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check if .prettierrc configuration file exist
+if [ ! -f ".prettierrc" ]; then
+    echo "Prettier configuration file (.prettierrc) not found in the current directory. Please make sure to run this script in the root of your project."
+    exit 1
+fi
+
+# Run Prettier on the entire project
+npm run format --write .
+
+# Check if Prettier exited with errors
+if [ $? -ne 0 ]; then
+    echo "Prettier found issues in your codebase."
+    exit 1
+fi
+
+echo "Prettier run completed. Your codebase has been formatted."
+exit 0
