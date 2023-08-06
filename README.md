@@ -12,12 +12,12 @@ We use a task board in our project such as Jira for ease of work, interacting an
 
 **This project is created with:**
 
-* Webpack
-* TypeScript
-* ESLint
-* Prettier
-* Husky
-* Jest
+- Webpack
+- TypeScript
+- ESLint
+- Prettier
+- Husky
+- Jest
 
 **Prerequisites**
 
