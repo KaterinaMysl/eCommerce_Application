@@ -1,5 +1,6 @@
 # eCommerce_Application
-We are students [katerinamysl](https://github.com/katerinamysl) 🙋‍♀️, [kazymirt](https://github.com/kazymirt) 🙋‍♂️, [katemihalovskaya](https://github.com/katemihalovskaya) 🙋‍♀️ of [The Rolling Scopes School](https://rollingscopes.com/). This is our educational project 📓🧑‍🎓. 
+
+We are students [katerinamysl](https://github.com/katerinamysl) 🙋‍♀️, [kazymirt](https://github.com/kazymirt) 🙋‍♂️, [katemihalovskaya](https://github.com/katemihalovskaya) 🙋‍♀️ of [The Rolling Scopes School](https://rollingscopes.com/). This is our educational project 📓🧑‍🎓.
 
 This project replicates real-world shopping experiences 🛒. Users can browse through a range of products, view detailed descriptions, add their favorite items to the basket, and proceed to checkout.
 

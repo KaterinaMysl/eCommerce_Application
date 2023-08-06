@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Check if .eslintrc.json configuration file exist
+if [ ! -f ".eslintrc.json" ]; then
+    echo "ESLint configuration file (.eslintrc.json) not found in the current directory." 
+    echo "Please make sure to run this script in the root of your project."
+    exit 1
+fi
+
+# Run ESLint on the entire project
+npx eslint .
+
+# Check if ESLint exited with errors
+if [ $? -ne 0 ]; then
+    echo "ESLint found issues in your codebase."
+    exit 1
+fi
+
+echo "ESLint run completed with no issues."
+exit 0
