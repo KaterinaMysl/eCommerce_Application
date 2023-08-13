@@ -53,8 +53,7 @@ class RegisterController implements Controller {
       })
       .catch(error => {
         console.log(error);
-        errorMessageElement.textContent =
-          'Something goes wrong. Please try again.';
+        errorMessageElement.textContent = `${error?.message}`;
         errorMessageElement.style.opacity = '1';
       });
   }

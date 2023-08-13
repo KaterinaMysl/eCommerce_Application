@@ -41,7 +41,8 @@ form .input-box span.details {
   font-weight: 500;
   margin-bottom: 5px;
 }
-.input-box input {
+.input-box input,
+select {
   height: 45px;
   width: 100%;
   outline: none;
