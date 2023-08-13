@@ -1,4 +1,5 @@
 import LoginController from '../controller/LoginController';
+import LogoutController from '../controller/LogoutController';
 import RegisterController from '../controller/RegisterController';
 import StorageController from '../controller/StorageController';
 import Client from './Client';
@@ -7,12 +8,14 @@ class App {
   private storage: StorageController;
   private loginController: LoginController;
   private registerController: RegisterController;
+  private logoutController: LogoutController;
 
   constructor() {
     const client = new Client();
     this.storage = new StorageController();
     this.loginController = new LoginController(client, this.storage);
     this.registerController = new RegisterController(client);
+    this.logoutController = new LogoutController(client, this.storage);
   }
 
   start() {

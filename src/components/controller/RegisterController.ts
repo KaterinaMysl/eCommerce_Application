@@ -1,6 +1,7 @@
 import Client from '../app/Client';
 import RegistrationForm from '../view/registrationForm/RegistrationForm';
 import SuccessRegisterForm from '../view/successRegisterForm/SuccessRegisterForm';
+import { Controller } from './Controller';
 
 class RegisterController implements Controller {
   private registrationForm: RegistrationForm;

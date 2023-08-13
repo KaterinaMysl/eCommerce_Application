@@ -1,3 +1,3 @@
-interface Controller {
+export interface Controller {
   draw(): void;
 }

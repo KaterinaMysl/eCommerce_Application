@@ -2,6 +2,7 @@ import StorageController from './StorageController';
 import Client from '../app/Client';
 import LoginForm from '../view/loginForm/LoginForm';
 import LoginPage from '../view/loginPage/LoginPage';
+import { Controller } from './Controller';
 
 class LoginController implements Controller {
   private client: Client;

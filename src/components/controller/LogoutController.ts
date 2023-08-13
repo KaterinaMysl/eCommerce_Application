@@ -16,3 +16,5 @@ class LogoutController {
     window.location.href = '/';
   }
 }
+
+export default LogoutController;
