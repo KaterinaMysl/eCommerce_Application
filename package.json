@@ -21,11 +21,14 @@
   "homepage": "",
   "devDependencies": {
     "@types/jest": "^29.5.3",
+    "@types/node-fetch": "^2.6.4",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.1.0",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.27.5",
@@ -45,7 +48,9 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
+    "@commercetools/platform-sdk": "^4.11.0",
     "@commercetools/sdk-client-v2": "^2.2.0",
-    "@commercetools/platform-sdk": "^4.11.0"
+    "dotenv": "^16.3.1",
+    "uuid": "^9.0.0"
   }
 }
