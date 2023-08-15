@@ -1,154 +1,165 @@
-.box-form {
+.form-box {
   margin: 0 auto;
-  width: 80%;
-  background: #ffffff;
-  border-radius: 10px;
-  overflow: hidden;
+  width: 100%;
   display: flex;
-  flex: 1 1 100%;
-  align-items: stretch;
-  justify-content: space-between;
-  box-shadow: 0 0 20px 6px #090b6f85;
+  align-items: center;
+  justify-content: center;
 }
-@media (max-width: 980px) {
-  .box-form {
-    flex-flow: wrap;
-    text-align: center;
-    align-content: center;
-    align-items: center;
-  }
+
+.form-box .form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 90%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.box-form div {
-  height: auto;
+
+.form-content h3{
+  color: #ff1552;
+  font-size: 60px;
+  text-align: center;
 }
-.box-form .left {
-  color: #ffffff;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url('https://i.pinimg.com/736x/5d/73/ea/5d73eaabb25e3805de1f8cdea7df4a42--tumblr-backgrounds-iphone-phone-wallpapers-iphone-wallaper-tumblr.jpg');
-  overflow: hidden;
+
+.form-content p{
+  color: #000;
+  text-align: center;
 }
-.box-form .left .overlay {
-  padding: 30px;
+
+.form-content p a {
+  color: #ff1552;
+}
+
+.form-login input[type="text"],
+.form-login input[type="password"]{
+  display: block;
+  margin-bottom: 3px;
+  border: 1px solid black ;
+  outline: none;
   width: 100%;
-  height: 100%;
-  background: #5961f9ad;
-  overflow: hidden;
-  box-sizing: border-box;
+  min-width: 300px;
+  border-radius: 5px;
+  border-bottom: 2px solid black;
+  padding: 15px 5px 15px 10px;
 }
-.box-form .left .overlay h1 {
-  font-size: 10vmax;
-  line-height: 1;
-  font-weight: 900;
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-.box-form .left .overlay span p {
-  margin-top: 30px;
-  font-weight: 900;
-}
-.box-form .left .overlay span a {
-  background: #3b5998;
-  color: #ffffff;
-  margin-top: 10px;
-  padding: 14px 50px;
-  border-radius: 100px;
-  display: inline-block;
-  box-shadow: 0 3px 6px 1px #042d4657;
-}
-.box-form .left .overlay span a:last-child {
-  background: #1dcaff;
-  margin-left: 30px;
-}
-.box-form .right {
-  padding: 40px;
-  overflow: hidden;
-}
-@media (max-width: 980px) {
-  .box-form .right {
-    width: 100%;
-  }
-}
-.box-form .right h5 {
-  font-size: 5vmax;
-  line-height: 0;
-}
-.box-form .right p {
-  font-size: 14px;
-  color: #b0b3b9;
-}
-.box-form .right .inputs {
-  overflow: hidden;
-}
-.box-form .right input {
+
+.form-login input[type="submit"]{
+  border-radius: 10px;
   width: 100%;
-  padding: 10px;
-  margin-top: 25px;
-  font-size: 16px;
+  height: 50px;
   border: none;
   outline: none;
-  border-bottom: 2px solid #b0b3b9;
-}
-.box-form .right .remember-me--forget-password {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.box-form .right .remember-me--forget-password input {
-  margin: 0;
-  margin-right: 7px;
-  width: auto;
-}
-/* .box-form .right .submit-btn {
-    float: right;
-    color: #fff;
-    font-size: 16px;
-    padding: 12px 35px;
-    border-radius: 50px;
-    border: 0;
-    outline: 0;
-    box-shadow: 0px 4px 20px 0px #49c628a6;
-    background-image: linear-gradient(135deg, #70f570 10%, #49c628 100%);
-  } */
-
-label {
-  display: block;
-  position: relative;
-  margin-left: 30px;
-}
-
-label::before {
-  content: ' \f00c';
-  position: absolute;
-  font-family: FontAwesome;
-  background: transparent;
-  border: 3px solid #70f570;
-  border-radius: 4px;
-  color: transparent;
-  left: -30px;
-  transition: all 0.2s linear;
-}
-
-label:hover::before {
-  font-family: FontAwesome;
-  content: ' \f00c';
   color: #fff;
-  cursor: pointer;
-  background: #70f570;
+  font-size: 20px;
+  background: #0016df;
 }
 
-label:hover::before .text-checkbox {
-  background: #70f570;
+.form-login input[type="submit"]:hover{
+  cursor: pointer;;
 }
 
-label span.text-checkbox {
-  display: inline-block;
-  height: auto;
+.form-login div{
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+.form-login div input{
+  margin-bottom: 3px;
+}
+
+.form-login div label{
+  display: block;
+  padding-bottom: 5px;
+}
+
+.form-login div div {
   position: relative;
-  cursor: pointer;
-  transition: all 0.2s linear;
 }
 
-label input[type='checkbox'] {
-  display: none;
+.form-login div div span{
+  position: absolute;
+  font-size: 20px;
+  top: 12px;
+  left: 10px;
+  transition: all 1s;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.form-login div div span.active-focus{
+  font-size: 12px;
+  top: 0px;
+  transition: all 1s;
+}
+
+.form-login .img-password{
+  cursor: pointer;
+  width: 15px;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  right: 20px;
+  top: 16px;
+}
+
+.form-login div.visible .error-message {
+  font-size: 14px;
+  height: 33px;
+  color: transparent;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  max-width: 275px;
+  word-wrap: break-word;
+  color: #000;
+  margin: 0 auto;
+}
+
+div.visible .error-message  {
+  color: #000;
+  text-align: center;
+}
+
+.form-login input.invalid {
+  border-bottom: red 4px solid;
+}
+
+.form-login input.valid {
+  border-bottom: green 4px solid;
+}
+
+div.visible.invalidText .error-message {
+  color: red;
+  width: 300px;
+}
+
+.form-login input.active{
+  margin-bottom: 5px;
+}
+
+@media (max-width: 480px) {
+  .form-box{
+    width: 100%;
+  }
+
+  .form-box .form-container{
+    width: 95%;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-box .form-container{
+    width: 100%;
+    padding: 25px 5px;
+  }
+
+  .form-box .form-login input[type="text"],
+  .form-box .form-login input[type="password"],
+  .form-box .form-login input[type="password"]{
+    min-width: 270px;
+  }
 }

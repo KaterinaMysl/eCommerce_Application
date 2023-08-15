@@ -1,4 +1,5 @@
 import './LoginForm.css';
+import eyeHidden from '../../../assets/icons/icon-eye-hidden.png';
 
 class LoginForm {
   draw() {
@@ -6,35 +7,34 @@ class LoginForm {
       '.body-container',
     ) as HTMLElement;
     const content = `
-            <div class="box-form">
-                <div class="left">
-                    <div class="overlay">
-                    <h1>Hello World.</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur et est sed felis aliquet sollicitudin</p>
-                    </div>
+            <div class="form-box">
+                <div class="form-container">
+                  <div class="form-content">
+                    <h3>Sign in</h3>
+                    <p>Don't have an account? <a class="new-account" href="#">Sign Up</a></p>
+                    <form id="login-form" class="form-login">   
+                      <div>
+                        <div>
+                          <input class="input-email" type="text" data-pattern="email" name="username" id="form-email">
+                          <span>user@example.com</span>
+                          <p class="error-message" data-message="Please enter your email address"></p>
+                        </div>
+                      </div>
+                      <div class="password-container">
+                        <div>
+                          <input class="input-password" type="password" name="password" data-pattern="password" id="form-password">
+                          <span>password</span>
+                            <img src="${eyeHidden}" class="img-password">
+                          <p class="error-message" data-message="Please enter your password."></p>
+                        </div>
+                      </div>
+                      <div>
+                        <input class="submit-btn" type="submit" value="Login">
+                        <p id="error-message" class="error-message" style="opacity: 0; color: red;"></p>
+                      </div>
+                  </form>
+                  </div> 
                 </div>
-                <form id="login-form" class="right">
-                    <h5>Login</h5>
-                    <p>Don't have an account? <a class="new-account" href="#">Create Your Account</a> it takes less than a minute</p>
-                    <div class="inputs">
-                        <input type="text" placeholder="user name" id="username" name="username" required>
-                        <br>
-                        <input type="password" id="password" name="password" placeholder="password" required>
-                    </div><br><br>
-                    <div class="remember-me--forget-password">
-                        <label>
-                            <input type="checkbox" name="item" checked/>
-                            <span class="text-checkbox">Remember me</span>
-                        </label>
-                        <p>forget password?</p>
-                    </div>
-                    <br>
-                    <div id="error-message" style="opacity: 0; color: red; height:20px"></div>
-                    <div class="button">
-                      <input class="submit-btn" type="submit" value="Login">
-                    </div>
-                </form>
             </div>                 
         `;
     bodyContainer.innerHTML = content;
