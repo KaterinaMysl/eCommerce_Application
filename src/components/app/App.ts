@@ -3,6 +3,7 @@ import LogoutController from '../controller/LogoutController';
 import RegisterController from '../controller/RegisterController';
 import StorageController from '../controller/StorageController';
 import Client from './Client';
+import Validator from '../controller/Validator/Validator';
 
 class App {
   private storage: StorageController;
@@ -28,8 +29,13 @@ class App {
     const createAccountLink = document.querySelector(
       '.new-account',
     ) as HTMLElement;
-
-    loginForm.addEventListener('submit', e => this.loginController.login(e));
+    const validator = new Validator(loginForm);
+    validator.initFormListeners();
+    loginForm.addEventListener('submit', e => {
+      if (validator.checkSubmit(e)) {
+        this.loginController.login(e);
+      }
+    });
     createAccountLink.addEventListener('click', () => {
       this.registerController
         .draw()
@@ -41,10 +47,13 @@ class App {
     const registrationForm = document.getElementById(
       'register-form',
     ) as HTMLFormElement;
-
-    registrationForm.addEventListener('submit', e =>
-      this.registerController.register(e),
-    );
+    const validator = new Validator(registrationForm);
+    validator.initFormListeners();
+    registrationForm.addEventListener('submit', e => {
+      if (validator.checkSubmit(e)) {
+        this.registerController.register(e);
+      }
+    });
   }
 }
 

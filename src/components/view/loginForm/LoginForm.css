@@ -19,13 +19,13 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.form-content h3{
+.form-content h3 {
   color: #ff1552;
   font-size: 60px;
   text-align: center;
 }
 
-.form-content p{
+.form-content p {
   color: #000;
   text-align: center;
 }
@@ -34,11 +34,11 @@
   color: #ff1552;
 }
 
-.form-login input[type="text"],
-.form-login input[type="password"]{
+.form-login input[type='text'],
+.form-login input[type='password'] {
   display: block;
   margin-bottom: 3px;
-  border: 1px solid black ;
+  border: 1px solid black;
   outline: none;
   width: 100%;
   min-width: 300px;
@@ -47,7 +47,7 @@
   padding: 15px 5px 15px 10px;
 }
 
-.form-login input[type="submit"]{
+.form-login input[type='submit'] {
   border-radius: 10px;
   width: 100%;
   height: 50px;
@@ -58,20 +58,20 @@
   background: #0016df;
 }
 
-.form-login input[type="submit"]:hover{
-  cursor: pointer;;
+.form-login input[type='submit']:hover {
+  cursor: pointer;
 }
 
-.form-login div{
+.form-login div {
   margin: 0;
   margin-bottom: 3px;
 }
 
-.form-login div input{
+.form-login div input {
   margin-bottom: 3px;
 }
 
-.form-login div label{
+.form-login div label {
   display: block;
   padding-bottom: 5px;
 }
@@ -80,7 +80,7 @@
   position: relative;
 }
 
-.form-login div div span{
+.form-login div div span {
   position: absolute;
   font-size: 20px;
   top: 12px;
@@ -89,13 +89,13 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-.form-login div div span.active-focus{
+.form-login div div span.active-focus {
   font-size: 12px;
   top: 0px;
   transition: all 1s;
 }
 
-.form-login .img-password{
+.form-login .img-password {
   cursor: pointer;
   width: 15px;
   position: absolute;
@@ -119,7 +119,7 @@
   margin: 0 auto;
 }
 
-div.visible .error-message  {
+div.visible .error-message {
   color: #000;
   text-align: center;
 }
@@ -137,29 +137,29 @@ div.visible.invalidText .error-message {
   width: 300px;
 }
 
-.form-login input.active{
+.form-login input.active {
   margin-bottom: 5px;
 }
 
 @media (max-width: 480px) {
-  .form-box{
+  .form-box {
     width: 100%;
   }
 
-  .form-box .form-container{
+  .form-box .form-container {
     width: 95%;
   }
 }
 
 @media (max-width: 400px) {
-  .form-box .form-container{
+  .form-box .form-container {
     width: 100%;
     padding: 25px 5px;
   }
 
-  .form-box .form-login input[type="text"],
-  .form-box .form-login input[type="password"],
-  .form-box .form-login input[type="password"]{
+  .form-box .form-login input[type='text'],
+  .form-box .form-login input[type='password'],
+  .form-box .form-login input[type='password'] {
     min-width: 270px;
   }
 }
