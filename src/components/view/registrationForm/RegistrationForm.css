@@ -67,7 +67,7 @@
 .form-registration input[type='text']:hover,
 .form-registration input[type='date']:hover,
 .form-registration input[type='password']:hover,
-.form-registration select:hover{
+.form-registration select:hover {
   cursor: pointer;
 }
 
@@ -75,7 +75,7 @@
 .form-registration input[type='date']:focus:not(:placeholder-shown),
 .form-registration input[type='password']:focus:not(:placeholder-shown),
 .form-registration select:focus {
-  cursor: text; 
+  cursor: text;
 }
 
 .form-registration input[type='submit'] {
@@ -99,12 +99,12 @@
   margin-bottom: 3px;
 }
 
-fieldset{
+fieldset {
   margin-bottom: 15px;
   width: 100%;
 }
 .form-registration feBlend input,
-.form-registration feBlend select{
+.form-registration feBlend select {
   min-width: 90%;
 }
 
@@ -112,7 +112,7 @@ fieldset{
 .form-registration__three {
   padding: 20px 0px;
 }
-.form-registration__two{
+.form-registration__two {
   display: flex;
   flex-direction: column;
 }
@@ -186,7 +186,7 @@ fieldset{
   left: 10px;
   font-size: 20px;
   color: rgba(0, 0, 0, 0.5);
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .form-registration div div div span.date {
@@ -202,7 +202,7 @@ fieldset{
   font-size: 12px;
   color: rgb(0, 0, 0);
   transform: translateY(-10px);
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .password-container {
@@ -265,13 +265,13 @@ div div.visible.invalidText .error-message {
   width: 100%;
 }
 
-.form-registration .flex-box{
+.form-registration .flex-box {
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
 
-.container .login-accountP{
+.container .login-accountP {
   margin: 0 auto;
   text-align: center;
 }
@@ -279,39 +279,42 @@ div div.visible.invalidText .error-message {
 @media (max-width: 764px) {
   .form-registration input[type='text'],
   .form-registration input[type='date'],
-  .form-registration input[type="password"],
+  .form-registration input[type='password'],
   .form-registration .form-registration__two fieldset,
-  .form-registration .form-registration__two fieldset input:not([type="checkbox"]),
-  .form-registration .form-registration__two fieldset select{
+  .form-registration
+    .form-registration__two
+    fieldset
+    input:not([type='checkbox']),
+  .form-registration .form-registration__two fieldset select {
     width: 100%;
   }
 
-.form-registration .error-message{
-  min-width: 100%
-}
+  .form-registration .error-message {
+    min-width: 100%;
+  }
 
-.form-registration .form-registration__two .input-checkbox{
-  order: 2;
-}
+  .form-registration .form-registration__two .input-checkbox {
+    order: 2;
+  }
 
-.form-registration .form-registration__two .fieldset-two{
-  order: 3;
-}
+  .form-registration .form-registration__two .fieldset-two {
+    order: 3;
+  }
 
-.form-registration .input-checkbox label {
-  text-align: center;
-}
+  .form-registration .input-checkbox label {
+    text-align: center;
+  }
 
-.form-registration #set-billing-and-shipping{
-  min-width: 20px;
-}
+  .form-registration #set-billing-and-shipping {
+    min-width: 20px;
+  }
 
-.form-registration .flex-box{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: space-around;
-}
+  .form-registration .flex-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+  }
 }
 
 @media (max-width: 400px) {
