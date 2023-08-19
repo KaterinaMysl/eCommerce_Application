@@ -53,7 +53,7 @@
 .form-registration input[type='password'],
 .form-registration select {
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   height: 50px;
   border: 1px solid black;
   outline: none;
@@ -61,18 +61,37 @@
   border-radius: 5px;
   border-bottom: 2px solid black;
   padding: 15px 5px 15px 10px;
+  cursor: pointer;
+}
+
+.form-registration input[type='text']:hover,
+.form-registration input[type='date']:hover,
+.form-registration input[type='password']:hover,
+.form-registration select:hover{
+  cursor: pointer;
+}
+
+.form-registration input[type='text']:focus:not(:placeholder-shown),
+.form-registration input[type='date']:focus:not(:placeholder-shown),
+.form-registration input[type='password']:focus:not(:placeholder-shown),
+.form-registration select:focus {
+  cursor: text; 
 }
 
 .form-registration input[type='submit'] {
   border-radius: 10px;
   width: 100%;
-  max-width: 350px;
   height: 50px;
   border: none;
   outline: none;
   color: #fff;
   font-size: 20px;
-  background: #0016df;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  transition: all 2s;
+}
+
+.form-registration input[type='submit']:hover {
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
   cursor: pointer;
 }
 
@@ -80,44 +99,48 @@
   margin-bottom: 3px;
 }
 
-.form-registration .form-registration__one {
-  border-bottom: 2px solid black;
-  border-radius: 0 0 15px 15px;
+fieldset{
+  margin-bottom: 15px;
+  width: 100%;
 }
-
-.form-registration .form-registration__two {
-  border-radius: 15px;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+.form-registration feBlend input,
+.form-registration feBlend select{
+  min-width: 90%;
 }
 
 .form-registration__two,
 .form-registration__three {
   padding: 20px 0px;
 }
-
+.form-registration__two{
+  display: flex;
+  flex-direction: column;
+}
 .form-registration__two .input-checkbox {
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 5px;
   font-size: 20px;
   color: black;
 }
 
-.form-registration__two .input-checkbox input {
+.form-registration__two .input-checkbox input,
+#set-billing-and-shipping {
+  cursor: pointer;
   margin-right: 5px;
   width: 20px;
   height: 20px;
 }
 
-.form-registration__two .input-checkbox label {
-  padding-bottom: 0;
+.form-registration__two .input-checkbox input:disabled,
+.form-registration input:disabled + span,
+#set-billing-and-shipping:disabled {
+  cursor: auto;
 }
 
-.form-registration__three {
-  border-top: 2px solid black;
-  border-bottom: 3px solid black;
-  border-radius: 15px 15px 0 0;
+.form-registration__two .input-checkbox label {
+  padding-bottom: 0;
 }
 
 .form-registration__four {
@@ -132,7 +155,8 @@
 
 .form-registration .input-box input:disabled,
 .form-registration .input-box select:disabled {
-  background-color: rgb(220, 220, 218);
+  background-color: rgb(243, 243, 239);
+  cursor: auto;
 }
 
 .form-registration select {
@@ -156,12 +180,13 @@
 }
 
 .form-registration div div div span {
+  cursor: pointer;
   position: absolute;
-  font-size: 20px;
-  top: 12px;
+  top: 10px;
   left: 10px;
-  transition: all 1s;
+  font-size: 20px;
   color: rgba(0, 0, 0, 0.5);
+  transition: all .5s ease-in-out;
 }
 
 .form-registration div div div span.date {
@@ -175,9 +200,9 @@
 
 .form-registration div div div span.active-focus {
   font-size: 12px;
-  top: 0px;
-  color: rgba(0, 0, 0, 0.5);
-  transition: all 1s;
+  color: rgb(0, 0, 0);
+  transform: translateY(-10px);
+  transition: all .5s ease-in-out;
 }
 
 .password-container {
@@ -194,15 +219,20 @@
   top: 18px;
 }
 
-div div .error-message {
+.form-registration .error-message {
   font-size: 14px;
   height: 33px;
+  width: 100%;
+  max-width: 250px;
   color: transparent;
   text-align: center;
   padding: 0;
-  margin: 0;
-  max-width: 300px;
+  margin: 0 auto;
   word-wrap: break-word;
+}
+
+.form-registration .button > .error-message {
+  min-width: 100%;
 }
 
 div div.visible .error-message {
@@ -235,45 +265,57 @@ div div.visible.invalidText .error-message {
   width: 100%;
 }
 
-@media (max-width: 748px) {
-  .form-registration__two .input-checkbox {
-    order: 2;
-    padding: 20px 0;
-  }
-
-  .form-registration__two .fieldset-two {
-    order: 3;
-  }
+.form-registration .flex-box{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 
-@media (max-width: 682px) {
-  .form-registration input[type='text'],
-  .form-registration input[type='date'],
-  .form-registration input[type='password'],
-  .form-registration select {
-    width: 100%;
-    min-width: 350px;
-  }
+.container .login-accountP{
+  margin: 0 auto;
+  text-align: center;
 }
 
-@media (max-width: 430px) {
+@media (max-width: 764px) {
   .form-registration input[type='text'],
   .form-registration input[type='date'],
-  .form-registration input[type='password'],
-  .form-registration select {
+  .form-registration input[type="password"],
+  .form-registration .form-registration__two fieldset,
+  .form-registration .form-registration__two fieldset input:not([type="checkbox"]),
+  .form-registration .form-registration__two fieldset select{
     width: 100%;
-    min-width: 250px;
   }
+
+.form-registration .error-message{
+  min-width: 100%
+}
+
+.form-registration .form-registration__two .input-checkbox{
+  order: 2;
+}
+
+.form-registration .form-registration__two .fieldset-two{
+  order: 3;
+}
+
+.form-registration .input-checkbox label {
+  text-align: center;
+}
+
+.form-registration #set-billing-and-shipping{
+  min-width: 20px;
+}
+
+.form-registration .flex-box{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around;
+}
 }
 
 @media (max-width: 400px) {
   .form-registration input[type='submit'] {
     width: 100%;
-  }
-
-  .form-registration .form-registration__one,
-  .form-registration .form-registration__two,
-  .form-registration .form-registration__three {
-    border-radius: 0;
   }
 }

@@ -1,27 +1,41 @@
 import { ValidatorForm } from './ValidatorForm';
 import ValidatorPassword from './ValidatorPassword';
 import ValidatorAddress from './ValidatorAddress';
+import { toggleButtonError } from './handleServerError';
 
 export default class ValidationInput {
-  checkInput(event: Event) {
-    const targetElement = event.target as HTMLInputElement;
+  private validatorPassword: ValidatorPassword;
 
-    if (targetElement.id === 'confirm-password') {
-      const validationPassword = new ValidatorPassword();
-      return validationPassword.checkConfirmPassword(targetElement);
+  constructor() {
+    this.validatorPassword = new ValidatorPassword();
+  }
+
+  public handleInputEvent(event: Event): void {
+    const targetInput = event.target as HTMLInputElement;
+
+    if (this.shouldToggleErrorOnInput(targetInput)) {
+      const form = targetInput.closest('form') as HTMLFormElement;
+      toggleButtonError(form, false);
     }
 
-    if (targetElement.type !== 'checkbox') {
-      const validator = new ValidatorForm(targetElement);
-      validator.checkInput();
+    if (targetInput.id === 'confirm-password') {
+      this.validatorPassword.validateConfirmPassword(targetInput);
+    } else {
+      this.processInput(targetInput);
+    }
+  }
+
+  private shouldToggleErrorOnInput(input: HTMLInputElement): boolean {
+    return input.id === 'form-email' || input.id === 'form-password';
+  }
+
+  private processInput(input: HTMLInputElement): void {
+    if (input.type !== 'checkbox') {
+      const validator = new ValidatorForm(input);
+      validator.handleInput();
     } else {
       const validatorAddress = new ValidatorAddress();
-      validatorAddress.copyAddress(targetElement);
-    }
-
-    if (targetElement.closest('fieldset[name="shippingAddress"]')) {
-      const validatorAddress = new ValidatorAddress();
-      validatorAddress.checkAddress(targetElement);
+      validatorAddress.toggleShippingAddressVisibility(input);
     }
   }
 }

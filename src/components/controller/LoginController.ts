@@ -3,6 +3,7 @@ import Client from '../app/Client';
 import LoginForm from '../view/loginForm/LoginForm';
 import LoginPage from '../view/loginPage/LoginPage';
 import { Controller } from './Controller';
+import { handleServerError } from './Validator/handleServerError';
 
 class LoginController implements Controller {
   private client: Client;
@@ -19,9 +20,6 @@ class LoginController implements Controller {
 
   login(e: Event) {
     e.preventDefault();
-    const errorMessageElement = document.getElementById(
-      'error-message',
-    ) as HTMLElement;
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
     const username = formData.get('username') as string;
@@ -33,10 +31,7 @@ class LoginController implements Controller {
         window.location.href = '/';
       })
       .catch(error => {
-        console.log(error);
-        errorMessageElement.textContent =
-          'Invalid username or password. Please try again.';
-        errorMessageElement.style.opacity = '1';
+        handleServerError(error, form);
       });
   }
 

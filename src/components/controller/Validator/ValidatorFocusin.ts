@@ -1,23 +1,17 @@
 import { ERROR_MESSAGES } from '../../constants';
 
 export default class ValidatorFocusin {
-  focusin(event: Event) {
-    console.log('focusin');
+  handleFocusValidation(event: Event): void {
     const targetElement = event.target as HTMLInputElement;
-    if (targetElement.tagName === 'DETAILS') {
-      return;
-    }
-    if (targetElement.id === 'checkbox-address') {
-      console.log('focusin return');
-      return;
-    }
-    this.addActiveFocus(event);
 
     if (
-      targetElement.classList.contains('valid') ||
-      targetElement.classList.contains('btn')
+      targetElement.tagName === 'DETAILS' ||
+      targetElement.classList.contains('new-account') ||
+      targetElement.type === 'checkbox' ||
+      targetElement.classList.contains('submit-btn') ||
+      targetElement.classList.contains('valid')
     ) {
-      console.log('valid');
+      return;
     } else {
       targetElement.classList.add('active');
       const parentElement = targetElement.parentElement;
@@ -35,25 +29,29 @@ export default class ValidatorFocusin {
         parentElement?.classList.remove('visible');
       }
     }
+    this.addActiveFocus(event);
   }
-  addActiveFocus(event: Event) {
+
+  addActiveFocus(event: Event): void {
     const element = event.target as HTMLElement;
     const form = element.closest('form') as HTMLFormElement;
+    const incorrectLength = 0;
 
     if (element.tagName === 'INPUT') {
-      const formInput = Array.from(
-        form.querySelectorAll('input'),
-      ) as HTMLInputElement[];
+      const formInputs = form.querySelectorAll('input');
 
-      formInput.forEach(input => {
-        if (input.value.length === 0) {
-          const span = input.nextElementSibling as HTMLElement;
-          span.classList.remove('active-focus');
+      formInputs.forEach(input => {
+        const inputElement = input as HTMLInputElement;
+
+        if (inputElement.value.length === incorrectLength) {
+          const siblingSpan = inputElement.nextElementSibling as HTMLElement;
+          siblingSpan.classList.remove('active-focus');
         }
       });
-      element.nextElementSibling?.classList.add('active-focus');
-    }
-    if (element.tagName === 'SPAN') {
+
+      const nextSibling = element.nextElementSibling as HTMLElement;
+      nextSibling?.classList.add('active-focus');
+    } else if (element.tagName === 'SPAN') {
       element.classList.add('active-focus');
     }
   }

@@ -3,53 +3,45 @@ import ValidationInput from './ValidatorInput';
 import ValidationClick from './ValidatorClick';
 import ValidatorFocusin from './ValidatorFocusin';
 import ValidatorFocusOut from './ValidatorFocusOut';
-import FormSubmitHandler from './FormSubmitHandler';
+import FormSubmitHandle from './FormSubmitHandle';
 
 export default class Validator {
-  constructor(private form: HTMLFormElement) {
-    this.form = form;
-  }
-
-  public initFormListeners(): void {
-    this.form.addEventListener('focusin', (event: Event) =>
-      this.focusin(event),
-    );
-    this.form.addEventListener('focusout', (event: Event) =>
-      this.focusout(event),
-    );
-    this.form.addEventListener('input', (event: Event) => this.input(event));
-    this.form.addEventListener('click', (event: Event) => this.click(event));
-    this.form.addEventListener('change', (event: Event) => this.select(event));
+  public initFormListeners(form: HTMLFormElement): void {
+    form.addEventListener('focusin', (event: Event) => this.focusin(event));
+    form.addEventListener('focusout', (event: Event) => this.focusout(event));
+    form.addEventListener('input', (event: Event) => this.input(event));
+    form.addEventListener('click', (event: Event) => this.click(event));
+    form.addEventListener('change', (event: Event) => this.select(event));
   }
 
   private focusin(event: Event): void {
     const validatorFocusin = new ValidatorFocusin();
-    validatorFocusin.focusin(event);
+    validatorFocusin.handleFocusValidation(event);
   }
 
   private focusout(event: Event): void {
     const validatorFocusOut = new ValidatorFocusOut();
-    validatorFocusOut.focusout(event);
+    validatorFocusOut.handleBlurValidation(event);
   }
 
   private click(event: Event): void {
     const validatorClick = new ValidationClick();
-    validatorClick.checkClick(event);
+    validatorClick.handleClick(event);
   }
 
   private input(event: Event): void {
     const validatorInput = new ValidationInput();
-    validatorInput.checkInput(event);
+    validatorInput.handleInputEvent(event);
   }
 
-  public checkSubmit(event: Event): boolean {
+  public checkSubmit(event: Event, form: HTMLFormElement): boolean {
     event.preventDefault();
-    const handlerSubmit = new FormSubmitHandler();
-    return handlerSubmit.handlerSubmit(this.form);
+    const handlerSubmit = new FormSubmitHandle();
+    return handlerSubmit.handleSubmit(form);
   }
 
   private select(event: Event): void {
     const validatorSelect = new ValidatorSelect();
-    validatorSelect.checkSelect(event);
+    validatorSelect.handleSelectChange(event);
   }
 }

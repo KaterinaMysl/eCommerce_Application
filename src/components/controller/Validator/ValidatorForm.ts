@@ -1,13 +1,15 @@
 import { VALIDATOR_PATTERNS } from '../../constants';
 import ValidatorPassword from './ValidatorPassword';
-import FormSubmitHandler from './FormSubmitHandler';
+import FormSubmitHandler from './FormSubmitHandle';
 import ValidatorDate from './ValidatorDate';
 
 export class ValidatorForm {
+  private incorrectLength: number;
   constructor(private input: HTMLInputElement) {
     this.input = input;
+    this.incorrectLength = 0;
   }
-  public writeErrorMessage(): string {
+  private writeErrorMessage(): string {
     const pattern = this.input.dataset.pattern as string;
     const patterns = VALIDATOR_PATTERNS[pattern];
 
@@ -21,29 +23,31 @@ export class ValidatorForm {
           errorMessages.push(pattern.MESSAGE);
         }
       }
-      return errorMessages.length > 0 ? errorMessages.join(', ') : '';
+      return errorMessages.length > this.incorrectLength
+        ? errorMessages.join(', ')
+        : '';
     }
     return '';
   }
-  public checkInput() {
+  public handleInput(): void {
     const span = this.input.parentElement?.lastElementChild as HTMLElement;
     this.input.closest('div')?.classList.add('visible');
 
-    if (this.input.value.length === 0) {
+    if (this.input.value.length === this.incorrectLength) {
       span.textContent = '';
       const markInvalid = new FormSubmitHandler();
-      markInvalid.markInvalid(this.input);
+      markInvalid.showErrorMessage(this.input);
     } else {
       let errorMessageString = this.writeErrorMessage();
       if (this.input.id === 'form-age') {
         const validatorDate = new ValidatorDate();
         errorMessageString += validatorDate.getAge(this.input.value);
       }
-      span.textContent = this.checkValid(errorMessageString);
+      span.textContent = this.handleValidationAndClasses(errorMessageString);
     }
   }
-  public checkValid(message: string): string {
-    if (message.length === 0) {
+  private handleValidationAndClasses(message: string): string {
+    if (message.length === this.incorrectLength) {
       message = '';
       this.input.classList.add('valid');
       this.input.classList.remove('invalid');
@@ -53,7 +57,7 @@ export class ValidatorForm {
     }
     if (this.input.id === 'form-password') {
       const validationPassword = new ValidatorPassword();
-      validationPassword.checkPassword(this.input);
+      validationPassword.updatePasswordConfirmStatus(this.input);
     }
     return message;
   }

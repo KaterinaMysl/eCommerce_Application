@@ -10,10 +10,11 @@ class App {
   private loginController: LoginController;
   private registerController: RegisterController;
   private logoutController: LogoutController;
-
+  private validator: Validator;
   constructor() {
     const client = new Client();
     this.storage = new StorageController();
+    this.validator = new Validator();
     this.loginController = new LoginController(client, this.storage);
     this.registerController = new RegisterController(client);
     this.logoutController = new LogoutController(client, this.storage);
@@ -29,10 +30,9 @@ class App {
     const createAccountLink = document.querySelector(
       '.new-account',
     ) as HTMLElement;
-    const validator = new Validator(loginForm);
-    validator.initFormListeners();
+    this.validator.initFormListeners(loginForm);
     loginForm.addEventListener('submit', e => {
-      if (validator.checkSubmit(e)) {
+      if (this.validator.checkSubmit(e, loginForm)) {
         this.loginController.login(e);
       }
     });
@@ -47,12 +47,19 @@ class App {
     const registrationForm = document.getElementById(
       'register-form',
     ) as HTMLFormElement;
-    const validator = new Validator(registrationForm);
-    validator.initFormListeners();
+    const loginAccount = document.querySelector(
+      '.login-account',
+    ) as HTMLElement;
+
+    this.validator.initFormListeners(registrationForm);
     registrationForm.addEventListener('submit', e => {
-      if (validator.checkSubmit(e)) {
+      if (this.validator.checkSubmit(e, registrationForm)) {
         this.registerController.register(e);
       }
+    });
+    loginAccount.addEventListener('click', () => {
+      this.loginController.draw();
+      this.initLoginListeners();
     });
   }
 }

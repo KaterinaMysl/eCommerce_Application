@@ -7,36 +7,37 @@ class LoginForm {
       '.body-container',
     ) as HTMLElement;
     const content = `
-            <div class="form-box">
-                <div class="form-container">
-                  <div class="form-content">
-                    <h3>Sign in</h3>
-                    <p>Don't have an account? <a class="new-account" href="#">Sign Up</a></p>
-                    <form id="login-form" class="form-login">   
-                      <div>
-                        <div>
-                          <input class="input-email" type="text" data-pattern="email" name="username" id="form-email">
-                          <span>user@example.com</span>
-                          <p class="error-message" data-message="Please enter your email address"></p>
-                        </div>
-                      </div>
-                      <div class="password-container">
-                        <div>
-                          <input class="input-password" type="password" name="password" data-pattern="password" id="form-password">
-                          <span>password</span>
-                            <img src="${eyeHidden}" class="img-password">
-                          <p class="error-message" data-message="Please enter your password."></p>
-                        </div>
-                      </div>
-                      <div>
-                        <input class="submit-btn" type="submit" value="Login">
-                        <p id="error-message" class="error-message" style="opacity: 0; color: red;"></p>
-                      </div>
-                  </form>
-                  </div> 
+            <div class="box-form">
+              <div class="left">
+                <div class="overlay">
+                  <h1>Hello World.</h1>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Curabitur et est sed felis aliquet sollicitudin</p>
                 </div>
+              </div>
+              <form id="login-form" class="right form-login">
+                <h5>Login</h5>
+                <p>Don't have an account? <a class="new-account" href="#">Create Your Account</a> it takes less than a minute</p>
+                <div class="inputs">
+                  <div class="login-container">
+                    <input class="input-email required" type="text" data-pattern="email" name="username" id="form-email">
+                    <span>user@example.com</span>
+                    <p class="error-message" data-message="Please enter your email address"></p>
+                  </div>
+                  <div class="password-container">
+                    <input class="input-password required" type="password" name="password" data-pattern="password" id="form-password">
+                    <span>password</span>
+                    <img src="${eyeHidden}" class="img-password">
+                    <p class="error-message" data-message="Please enter your password."></p>
+                  </div>
+                </div>               
+                <div class="button">
+                  <input class="submit-btn" type="submit" value="Login">
+                  <p class="error-message" style="color: red; height:20px"></p>
+                </div>
+              </form>
             </div>                 
-        `;
+    `;
     bodyContainer.innerHTML = content;
   }
 }

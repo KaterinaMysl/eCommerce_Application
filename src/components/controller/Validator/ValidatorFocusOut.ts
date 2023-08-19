@@ -1,27 +1,37 @@
-import FormSubmitHandler from './FormSubmitHandler';
+import FormSubmitHandler from './FormSubmitHandle';
 
 export default class ValidatorFocusOut {
-  focusout(event: Event) {
+  public handleBlurValidation(event: Event): void {
     this.removeActiveFocus(event);
     const targetElement = event.target as HTMLInputElement;
 
-    if (targetElement.tagName === 'DETAILS') {
+    if (this.shouldSkipValidation(targetElement)) {
       return;
     }
+
+    const formSubmitHandler = new FormSubmitHandler();
+
     if (
       !targetElement.classList.contains('valid') &&
       !targetElement.classList.contains('btn') &&
       targetElement.value.length === 0
     ) {
-      const markInvalid = new FormSubmitHandler();
-      markInvalid.markInvalid(targetElement);
+      formSubmitHandler.showErrorMessage(targetElement);
     }
+
     if (targetElement.classList.contains('valid')) {
       targetElement.classList.remove('active');
     }
   }
 
-  removeActiveFocus(event: Event) {
+  private shouldSkipValidation(targetElement: HTMLInputElement): boolean {
+    return (
+      targetElement.tagName === 'DETAILS' ||
+      targetElement.classList.contains('new-account')
+    );
+  }
+
+  private removeActiveFocus(event: Event): void {
     const element = event.target as HTMLElement;
     const form = element.closest('form') as HTMLFormElement;
     const formInput = Array.from(

@@ -1,10 +1,14 @@
 import { MessageError, ValidatorPattern } from './interfaces';
+import { MessageType } from './type';
 
 export const ERROR_MESSAGES: MessageError = {
   EMAIL: 'Please enter a valid email address. user@example.com',
   PASSWORD:
     '1 lowercase letter, 1 uppercase letter, 1 number, at least 8 characters',
   CONFIRM_PASSWORD: '',
+  EMAIL_OR_PASSWORD: 'Invalid email or password. Please try again.',
+  ERROR_REGISTERED:
+    'This email is already registered. Please log in to your account or use a different email.',
 };
 
 export const VALIDATOR_PATTERNS: ValidatorPattern = {
@@ -75,3 +79,23 @@ export const VALIDATOR_PATTERNS: ValidatorPattern = {
     },
   ],
 };
+
+export const TYPE_SERVER_ERROR_MAP: MessageType = {
+  InvalidJsonInput: {
+    dateOfBirth: 'Please enter valid date of birth. ',
+    address: 'Please enter valid address. ',
+  },
+  DuplicateField: {
+    email:
+      'This email is already registered. Please Sign in to your account or use a different email. ',
+  },
+  InvalidOperation: {
+    password: 'Password should not be empty. ',
+    email: 'The provided value is not a valid email. ',
+  },
+};
+
+export const LOGIN_ERROR = [
+  { error: 'username', message: 'Incorrect email or password' },
+  { error: 'password', message: 'Incorrect email or password' },
+];

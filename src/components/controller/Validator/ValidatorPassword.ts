@@ -2,7 +2,7 @@ import imgHidden from '../../../assets/icons/icon-eye-hidden.png';
 import imgVisible from '../../../assets/icons/icon-eye-visible.png';
 
 export default class ValidatorPassword {
-  passwordVisibility(event: HTMLElement) {
+  public togglePasswordVisibility(event: HTMLElement): void {
     const input = event.parentElement?.firstElementChild as HTMLInputElement;
     const img = event as HTMLImageElement;
 
@@ -11,7 +11,7 @@ export default class ValidatorPassword {
     img.src = isTextType ? imgHidden : imgVisible;
   }
 
-  checkPassword(input: HTMLInputElement) {
+  public updatePasswordConfirmStatus(input: HTMLInputElement): void {
     const passwordConfirm: HTMLInputElement | null = document.querySelector(
       '#confirm-password',
     );
@@ -21,12 +21,12 @@ export default class ValidatorPassword {
       passwordConfirm.disabled = isDisabled;
 
       if (!isDisabled) {
-        this.checkConfirmPassword(passwordConfirm);
+        this.validateConfirmPassword(passwordConfirm);
       }
     }
   }
 
-  checkConfirmPassword(element: HTMLInputElement) {
+  public validateConfirmPassword(element: HTMLInputElement): void {
     const confirmPassword = element;
     const password = document.querySelector(
       '#form-password',
