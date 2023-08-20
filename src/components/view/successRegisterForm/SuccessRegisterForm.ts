@@ -3,7 +3,9 @@ import './SuccessRegisterForm.css';
 
 class SuccessRegisterForm {
   draw() {
-    const bodyContainer = document.querySelector('.container') as HTMLElement;
+    const bodyContainer = document.querySelector(
+      '.body-container',
+    ) as HTMLElement;
     const content = `
         <div class="title">Registration</div>
         <div class="content">
