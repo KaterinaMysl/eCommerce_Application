@@ -60,6 +60,7 @@ class RegisterController implements Controller {
         this.successRegisterForm.draw();
       })
       .catch(error => {
+        console.log(error);
         handleServerError(error.body.errors, form);
       });
   }

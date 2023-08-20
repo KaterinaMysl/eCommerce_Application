@@ -7,6 +7,7 @@ class LoginForm {
       '.body-container',
     ) as HTMLElement;
     const content = `
+          <div class="container-login">
             <div class="box-form">
               <div class="left">
                 <div class="overlay">
@@ -36,7 +37,8 @@ class LoginForm {
                   <p class="error-message" style="color: red; height:20px"></p>
                 </div>
               </form>
-            </div>                 
+            </div>
+          </div>                 
     `;
     bodyContainer.innerHTML = content;
   }

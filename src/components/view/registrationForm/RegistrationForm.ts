@@ -7,7 +7,8 @@ class RegistrationForm {
       '.body-container',
     ) as HTMLElement;
     const content = `
-      <div class="container">
+    <div class="container-registration">
+      <div class="container-form">
         <div class="title">Sign Up</div>
         <div class="content">
           <form id="register-form" class="form-registration">
@@ -173,6 +174,7 @@ class RegistrationForm {
             <p class="login-accountP">Already have an account? <a class="login-account" href="#">Sign in</a></p>
           </div>
         </div>
+      </div>
     `;
     bodyContainer.innerHTML = content;
   }
