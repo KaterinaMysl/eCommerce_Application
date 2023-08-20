@@ -12,9 +12,8 @@ export default class ValidatorPassword {
   }
 
   public updatePasswordConfirmStatus(input: HTMLInputElement): void {
-    const passwordConfirm: HTMLInputElement | null = document.querySelector(
-      '#confirm-password',
-    );
+    const passwordConfirm: HTMLInputElement | null =
+      document.querySelector('#confirm-password');
 
     if (passwordConfirm && input.id === 'form-password') {
       const isDisabled = !input.classList.contains('valid');

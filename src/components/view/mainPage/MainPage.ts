@@ -1,6 +1,7 @@
 import './MainPage.css';
 import logoImage from '../../../assets/images/logo.png';
 import homeSlider from '../../../assets/images/home_slider.jpg';
+import { SCROLL_THRESHOLD } from '../../constants';
 
 class MainPage {
   constructor() {
@@ -98,18 +99,11 @@ class MainPage {
   private setHeader() {
     const header = document.querySelector('.header') as HTMLElement;
     function handleScroll() {
-      if (window.innerWidth < 992) {
-        if (window.pageYOffset > 100) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
+      const scrollOffset = window.scrollY || window.scrollY;
+      if (scrollOffset > SCROLL_THRESHOLD) {
+        header.classList.add('scrolled');
       } else {
-        if (window.pageYOffset > 100) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
+        header.classList.remove('scrolled');
       }
     }
     window.addEventListener('scroll', handleScroll);

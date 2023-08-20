@@ -42,9 +42,7 @@ export default class ValidatorSelect {
     const correctLengthValue = 2;
     if (select.value.length < correctLengthValue) {
       const formSubmitHandler = new FormSubmitHandler();
-      formSubmitHandler.showErrorMessage(
-        (select as unknown) as HTMLInputElement,
-      );
+      formSubmitHandler.showErrorMessage(select as unknown as HTMLInputElement);
     } else {
       select.classList.add('valid');
       const p = select.nextElementSibling as HTMLElement;

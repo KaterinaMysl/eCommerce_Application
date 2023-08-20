@@ -99,3 +99,5 @@ export const LOGIN_ERROR = [
   { error: 'username', message: 'Incorrect email or password' },
   { error: 'password', message: 'Incorrect email or password' },
 ];
+
+export const SCROLL_THRESHOLD = 100;
