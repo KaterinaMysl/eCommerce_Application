@@ -1,3 +1,4 @@
+import MainController from '../controller/MainController';
 import LoginController from '../controller/LoginController';
 import LogoutController from '../controller/LogoutController';
 import RegisterController from '../controller/RegisterController';
@@ -6,12 +7,14 @@ import Client from './Client';
 import Validator from '../controller/Validator/Validator';
 
 class App {
+  private mainController: MainController;
   private storage: StorageController;
   private loginController: LoginController;
   private registerController: RegisterController;
   private logoutController: LogoutController;
   private validator: Validator;
   constructor() {
+    this.mainController = new MainController();
     const client = new Client();
     this.storage = new StorageController();
     this.validator = new Validator();
@@ -21,10 +24,33 @@ class App {
   }
 
   start() {
-    this.loginController.draw();
-    this.initLoginListeners();
+    this.mainController.draw();
+    this.initMainLoginListeners();
   }
 
+  private initMainLoginListeners() {
+    const loginButton = document.querySelector(
+      '.user_box_login',
+    ) as HTMLElement;
+
+    if (loginButton) {
+      loginButton.addEventListener('click', () => {
+        this.loginController.draw();
+        this.initLoginListeners();
+      });
+    }
+    const registerButton = document.querySelector(
+      '.user_box_register',
+    ) as HTMLElement;
+
+    if (registerButton) {
+      registerButton.addEventListener('click', () => {
+        this.registerController
+          .draw()
+          .finally(() => this.initRegisterListeners());
+      });
+    }
+  }
   private initLoginListeners() {
     const loginForm = document.getElementById('login-form') as HTMLFormElement;
     const createAccountLink = document.querySelector(

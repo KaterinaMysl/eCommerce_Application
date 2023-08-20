@@ -3,9 +3,7 @@ import eyeHidden from '../../../assets/icons/icon-eye-hidden.png';
 
 class LoginForm {
   draw() {
-    const bodyContainer = document.querySelector(
-      '.body-container',
-    ) as HTMLElement;
+    const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
           <div class="container-login">
             <div class="box-form">

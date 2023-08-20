@@ -25,6 +25,29 @@ const baseConfig = {
         test: [/\.ts$/i],
         use: ['ts-loader'],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/',
+          },
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'images/[name].[ext]',
+              esModule: false,
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
