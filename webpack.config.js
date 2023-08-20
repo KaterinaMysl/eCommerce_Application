@@ -15,13 +15,6 @@ const baseConfig = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(jpe?g|png|webp|gif|svg)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/images/[name][ext]',
-        },
-      },
-      {
         test: [/\.ts$/i],
         use: ['ts-loader'],
       },

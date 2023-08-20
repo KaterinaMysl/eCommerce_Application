@@ -25,9 +25,9 @@ export const handleServerError = (
       p.dataset.serverError = error.message;
       markError.showErrorMessage(input);
     } else {
-      const selects = (Array.from(
+      const selects = Array.from(
         document.querySelectorAll('select'),
-      ) as unknown) as HTMLInputElement[];
+      ) as unknown as HTMLInputElement[];
       selects
         .filter(select => select.value.length)
         .forEach(select => {
