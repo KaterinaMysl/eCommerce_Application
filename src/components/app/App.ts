@@ -3,16 +3,18 @@ import LogoutController from '../controller/LogoutController';
 import RegisterController from '../controller/RegisterController';
 import StorageController from '../controller/StorageController';
 import Client from './Client';
+import Validator from '../controller/Validator/Validator';
 
 class App {
   private storage: StorageController;
   private loginController: LoginController;
   private registerController: RegisterController;
   private logoutController: LogoutController;
-
+  private validator: Validator;
   constructor() {
     const client = new Client();
     this.storage = new StorageController();
+    this.validator = new Validator();
     this.loginController = new LoginController(client, this.storage);
     this.registerController = new RegisterController(client);
     this.logoutController = new LogoutController(client, this.storage);
@@ -28,8 +30,12 @@ class App {
     const createAccountLink = document.querySelector(
       '.new-account',
     ) as HTMLElement;
-
-    loginForm.addEventListener('submit', e => this.loginController.login(e));
+    this.validator.initFormListeners(loginForm);
+    loginForm.addEventListener('submit', e => {
+      if (this.validator.checkSubmit(e, loginForm)) {
+        this.loginController.login(e);
+      }
+    });
     createAccountLink.addEventListener('click', () => {
       this.registerController
         .draw()
@@ -41,10 +47,20 @@ class App {
     const registrationForm = document.getElementById(
       'register-form',
     ) as HTMLFormElement;
+    const loginAccount = document.querySelector(
+      '.login-account',
+    ) as HTMLElement;
 
-    registrationForm.addEventListener('submit', e =>
-      this.registerController.register(e),
-    );
+    this.validator.initFormListeners(registrationForm);
+    registrationForm.addEventListener('submit', e => {
+      if (this.validator.checkSubmit(e, registrationForm)) {
+        this.registerController.register(e);
+      }
+    });
+    loginAccount.addEventListener('click', () => {
+      this.loginController.draw();
+      this.initLoginListeners();
+    });
   }
 }
 
