@@ -5,18 +5,18 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 @font-face {
   font-family: 'Beyond';
-  src: url('../../../fonts/beyond_the_mountains.otf') format('truetype'),
-    url('../../../fonts/beyond_the_mountains.otf') format('opentype');
+  src: url('../../../assets/fonts/beyond_the_mountains.otf') format('truetype'),
+    url('../../../assets/fonts/beyond_the_mountains.otf') format('opentype');
 }
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../../../fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot')
+  src: url('../../../assets/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot')
       format('embedded-opentype'),
-    url('../../../fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2')
+    url('../../../assets/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2')
       format('woff2'),
-    url('../../../fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff')
+    url('../../../assets/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff')
       format('woff'),
-    url('../../../fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf')
+    url('../../../assets/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf')
       format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -469,7 +469,7 @@ h6 {
   }
   .top_bar {
     background: none;
-}
+  }
 }
 
 .main_nav_col {

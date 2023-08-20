@@ -1,6 +1,6 @@
 import './MainPage.css';
-import logoImage from '../../../assets/logo.png';
-import homeSlider from '../../../assets/home_slider.jpg';
+import logoImage from '../../../assets/images/logo.png';
+import homeSlider from '../../../assets/images/home_slider.jpg';
 
 class MainPage {
   constructor() {
