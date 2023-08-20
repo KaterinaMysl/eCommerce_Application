@@ -1,7 +1,7 @@
 export default class FormSubmitHandle {
   public handleSubmit(form: HTMLFormElement): boolean {
     const inputs = Array.from(
-      (form.querySelectorAll('.required') as unknown) as HTMLInputElement[],
+      form.querySelectorAll('.required') as unknown as HTMLInputElement[],
     );
 
     if (inputs.every(input => input.classList.contains('valid'))) {
