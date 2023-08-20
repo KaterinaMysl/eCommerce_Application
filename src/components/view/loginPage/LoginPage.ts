@@ -2,12 +2,13 @@ import './LoginPage.css';
 
 class LoginPage {
   draw() {
+    const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
-      <div class="body-container">
+      <div class="main">
         
       </div>
     `;
-    document.body.innerHTML = content;
+    bodyContainer.innerHTML = content;
   }
 }
 

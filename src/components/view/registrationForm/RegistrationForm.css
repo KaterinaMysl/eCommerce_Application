@@ -1,3 +1,7 @@
+.main_registration_form {
+  padding: 140px 10px 40px 10px;
+}
+
 .container {
   display: flex;
   justify-content: center;

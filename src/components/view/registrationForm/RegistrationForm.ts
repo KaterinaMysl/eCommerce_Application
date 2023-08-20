@@ -2,10 +2,9 @@ import './RegistrationForm.css';
 
 class RegistrationForm {
   draw(countries: string[]) {
-    const bodyContainer = document.querySelector(
-      '.body-container',
-    ) as HTMLElement;
+    const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
+    <div class="main_registration_form">
       <div class="container">
         <div class="title">Registration</div>
         <div class="content">
@@ -66,6 +65,7 @@ class RegistrationForm {
           </form>
         </div>
       </div>
+    </div>
     `;
     bodyContainer.innerHTML = content;
   }

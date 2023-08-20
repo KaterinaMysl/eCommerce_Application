@@ -10,7 +10,6 @@
 }
 @font-face {
   font-family: 'FontAwesome';
-  /* src: url('../../../fonts/font-awesome-4.7.0/fonts'); */
   src: url('../../../fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot')
       format('embedded-opentype'),
     url('../../../fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2')
@@ -220,7 +219,7 @@ h6 {
 
 .body-container {
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .home_slider_button {
@@ -380,12 +379,6 @@ h6 {
   transition: all 400ms ease;
 }
 
-@media only screen and (max-width: 575px) {
-  .top_bar {
-    display: none;
-  }
-}
-
 .header.scrolled .top_bar {
   visibility: hidden;
   opacity: 0;
@@ -469,8 +462,18 @@ h6 {
   content: '';
 }
 
+@media only screen and (max-width: 575px) {
+  .phone,
+  .social {
+    display: none;
+  }
+  .top_bar {
+    background: none;
+}
+}
+
 .main_nav_col {
-  height: 143px;
+  height: 80px;
   -webkit-transition: all 400ms ease;
   -moz-transition: all 400ms ease;
   -ms-transition: all 400ms ease;
@@ -563,7 +566,7 @@ h6 {
 
 .main_nav_container {
   margin-right: 151px;
-  margin-left: 10px;
+  margin-left: auto;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -575,15 +578,14 @@ h6 {
 @media only screen and (max-width: 991px) {
   .main_nav_container {
     margin-right: 20px;
-    margin-left: 5px;
     font-size: 10px;
   }
 }
 
 @media only screen and (max-width: 520px) {
   .main_nav_container {
-    margin-right: 5px;
     font-size: 5px;
+    margin: 0 auto;
   }
 }
 

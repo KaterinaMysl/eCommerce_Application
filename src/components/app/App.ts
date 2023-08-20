@@ -75,27 +75,3 @@ class App {
 }
 
 export default App;
-
-// private initLoginListeners() {
-//   const loginForm = document.getElementById('login-form') as HTMLFormElement;
-//   const createAccountLink = document.querySelector(
-//     '.new-account',
-//   ) as HTMLElement;
-
-//   loginForm.addEventListener('submit', e => this.loginController.login(e));
-//   createAccountLink.addEventListener('click', () => {
-//     this.registerController
-//       .draw()
-//       .finally(() => this.initRegisterListeners());
-//   });
-// }
-
-// private initRegisterListeners() {
-//   const registrationForm = document.getElementById(
-//     'register-form',
-//   ) as HTMLFormElement;
-
-//   registrationForm.addEventListener('submit', e =>
-//     this.registerController.register(e),
-//   );
-// }

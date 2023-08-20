@@ -2,10 +2,9 @@ import './LoginForm.css';
 
 class LoginForm {
   draw() {
-    const bodyContainer = document.querySelector(
-      '.body-container',
-    ) as HTMLElement;
+    const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
+          <div class="main_login_form">
             <div class="box-form">
                 <div class="left">
                     <div class="overlay">
@@ -35,7 +34,8 @@ class LoginForm {
                       <input class="submit-btn" type="submit" value="Login">
                     </div>
                 </form>
-            </div>                 
+            </div>
+          </div>
         `;
     bodyContainer.innerHTML = content;
   }
