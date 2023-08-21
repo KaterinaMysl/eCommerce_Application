@@ -1,4 +1,8 @@
 class StorageController {
+  isLoggedIn(): boolean {
+    return localStorage.getItem('session-id') ? true : false;
+  }
+
   getCustomerSessionId(): string {
     return localStorage.getItem('session-id') || '';
   }

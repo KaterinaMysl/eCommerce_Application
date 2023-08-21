@@ -1,18 +1,17 @@
 import Client from '../app/Client';
 import RegistrationForm from '../view/registrationForm/RegistrationForm';
-import SuccessRegisterForm from '../view/successRegisterForm/SuccessRegisterForm';
 import { Controller } from './Controller';
+import LoginController from './LoginController';
 import { handleServerError } from './Validator/handleServerError';
 
 class RegisterController implements Controller {
   private registrationForm: RegistrationForm;
-  private successRegisterForm: SuccessRegisterForm;
-
+  private loginController: LoginController;
   private client: Client;
 
-  constructor(client: Client) {
+  constructor(client: Client, loginController: LoginController) {
     this.registrationForm = new RegistrationForm();
-    this.successRegisterForm = new SuccessRegisterForm();
+    this.loginController = loginController;
     this.client = client;
   }
 
@@ -57,7 +56,7 @@ class RegisterController implements Controller {
     this.client
       .register(customer)
       .then(() => {
-        this.successRegisterForm.draw();
+        this.loginController.loginWithCreds(customer.email, customer.password);
       })
       .catch(error => {
         console.log(error);

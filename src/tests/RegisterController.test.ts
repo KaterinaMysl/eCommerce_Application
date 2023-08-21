@@ -4,8 +4,12 @@
 import RegisterController from '../components/controller/RegisterController';
 import Client from '../components/app/Client';
 import { handleServerError } from '../components/controller/Validator/handleServerError';
+import LoginController from '../components/controller/LoginController';
+import StorageController from '../components/controller/StorageController';
 
 jest.mock('../components/app/Client');
+jest.mock('../components/controller/LoginController');
+jest.mock('../components/controller/StorageController');
 jest.mock('../components/controller/Validator/handleServerError', () => ({
   handleServerError: jest.fn(),
 }));
@@ -13,6 +17,8 @@ jest.mock('../components/controller/Validator/handleServerError', () => ({
 describe('RegisterController', () => {
   let registerController: RegisterController;
   const mockClient = new Client();
+  const mockStorage = new StorageController();
+  const mockLoginController = new LoginController(mockClient, mockStorage);
 
   const mockEvent = {
     preventDefault: jest.fn(),
@@ -20,16 +26,19 @@ describe('RegisterController', () => {
   };
 
   beforeEach(() => {
-    registerController = new RegisterController(mockClient);
+    registerController = new RegisterController(
+      mockClient,
+      mockLoginController,
+    );
   });
 
   describe('register', () => {
     it('should handle registration', async () => {
       const mockRegisterPromise = Promise.resolve();
       mockClient.register = jest.fn().mockReturnValue(mockRegisterPromise);
-      jest
-        .spyOn(registerController['successRegisterForm'], 'draw')
-        .mockReturnValueOnce(undefined);
+
+      mockLoginController.loginWithCreds = jest.fn();
+
       jest.spyOn(console, 'log').mockReturnValueOnce(undefined);
 
       registerController.register(mockEvent as unknown as Event);

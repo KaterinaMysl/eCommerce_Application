@@ -14,12 +14,15 @@ class App {
   private logoutController: LogoutController;
   private validator: Validator;
   constructor() {
-    this.mainController = new MainController();
     const client = new Client();
     this.storage = new StorageController();
     this.validator = new Validator();
+    this.mainController = new MainController(this.storage);
     this.loginController = new LoginController(client, this.storage);
-    this.registerController = new RegisterController(client);
+    this.registerController = new RegisterController(
+      client,
+      this.loginController,
+    );
     this.logoutController = new LogoutController(client, this.storage);
   }
 
@@ -33,21 +36,33 @@ class App {
       '.user_box_login',
     ) as HTMLElement;
 
+    const registerButton = document.querySelector(
+      '.user_box_register',
+    ) as HTMLElement;
+
+    const logoutButton = document.querySelector(
+      '.user_box_logout',
+    ) as HTMLElement;
+
     if (loginButton) {
       loginButton.addEventListener('click', () => {
         this.loginController.draw();
         this.initLoginListeners();
       });
     }
-    const registerButton = document.querySelector(
-      '.user_box_register',
-    ) as HTMLElement;
 
     if (registerButton) {
       registerButton.addEventListener('click', () => {
         this.registerController
           .draw()
           .finally(() => this.initRegisterListeners());
+      });
+    }
+
+    if (logoutButton) {
+      logoutButton.addEventListener('click', () => {
+        this.logoutController.logout();
+        this.initLoginListeners();
       });
     }
   }
