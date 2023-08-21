@@ -2,7 +2,7 @@ import { MessageError, ValidatorPattern } from './interfaces';
 import { MessageType } from './type';
 
 export const ERROR_MESSAGES: MessageError = {
-  EMAIL: 'Please enter a valid email address. user@example.com',
+  EMAIL: 'Please enter a valid email address.',
   PASSWORD:
     '1 lowercase letter, 1 uppercase letter, 1 number, at least 8 characters',
   CONFIRM_PASSWORD: '',

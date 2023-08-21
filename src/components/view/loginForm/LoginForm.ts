@@ -15,7 +15,7 @@ class LoginForm {
               </div>
               <form id="login-form" class="right form-login">
                 <h5>Login</h5>
-                <p>Don't have an account? <a class="new-account" href="#">Create Your Account</a> it takes less than a minute</p>
+                <p>Don't have an account? <a class="new-account navigator" href="/register">Create Your Account</a> it takes less than a minute</p>
                 <div class="inputs">
                   <div class="login-container">
                     <input class="input-email required" type="text" data-pattern="email" name="email" id="form-email">
