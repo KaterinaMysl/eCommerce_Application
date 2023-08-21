@@ -1,12 +1,28 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
+const mainHtmlPlugin = new HtmlWebpackPlugin({
+  template: path.resolve(__dirname, './src/index.html'),
+  filename: 'index.html',
+  chunks: ['main'],
+});
+
+const notFoundHtmlPlugin = new HtmlWebpackPlugin({
+  template: path.resolve(__dirname, './public/404.html'),
+  filename: '404.html',
+  chunks: ['404'],
+});
+
 const baseConfig = {
-  entry: path.resolve(__dirname, './src/index'),
+  entry: {
+    main: path.resolve(__dirname, './src/index'),
+    404: path.resolve(__dirname, './public/404'),
+  },
   mode: 'development',
   module: {
     rules: [
@@ -47,13 +63,16 @@ const baseConfig = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, '../dist'),
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-      filename: 'index.html',
+    mainHtmlPlugin,
+    notFoundHtmlPlugin,
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'netlify.toml' },
+      ],
     }),
     new CleanWebpackPlugin(),
     new EslingPlugin({ extensions: 'ts' }),

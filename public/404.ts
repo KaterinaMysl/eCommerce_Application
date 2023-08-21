@@ -1,5 +1,9 @@
 import './Page404.css';
-import image404 from '../../../assets/images/bird404.png';
+import image404 from '../src/assets/images/bird404.png';
+import App from '../src/components/app/App';
+
+const app = new App();
+app.start();
 
 function show404Page() {
   const bodyContainer = document.querySelector('.main') as HTMLElement;
@@ -22,4 +26,4 @@ function show404Page() {
   bodyContainer.innerHTML = content;
 }
 
-export { show404Page };
+show404Page();
