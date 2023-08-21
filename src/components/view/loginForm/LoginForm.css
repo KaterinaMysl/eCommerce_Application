@@ -36,27 +36,6 @@
   box-shadow: 0 0 20px 6px #090b6f85;
 }
 
-@media (max-width: 980px) {
-  .box-form {
-    flex-flow: wrap;
-    text-align: center;
-    align-content: center;
-    align-items: center;
-  }
-}
-
-@media (max-width: 460px) {
-  .box-form {
-    width: 90%;
-  }
-}
-
-@media (max-width: 400px) {
-  .box-form {
-    width: 99%;
-  }
-}
-
 .box-form div {
   height: auto;
 }
@@ -138,7 +117,7 @@
   color: #dc8710;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1000px) {
   .box-form .right {
     width: 100%;
   }
@@ -151,7 +130,7 @@
   }
   .box-form .right h5 {
     margin-top: 30px;
-}
+  }
 }
 
 .box-form .right p {
@@ -194,6 +173,13 @@
   font-size: 20px;
   color: rgba(0, 0, 0, 0.5);
   transition: all 0.5s ease-in-out;
+}
+@media (max-width: 1230px) {
+  .login-container span,
+  .password-container span {
+    top: 20px;
+    font-size: 16px;
+  }
 }
 
 .login-container span:hover,
@@ -262,4 +248,30 @@ div.visible.invalidText .error-message {
 .box-form .right .submit-btn:hover {
   cursor: pointer;
   background: linear-gradient(135deg, #9b59b6, #71b7e6);
+}
+
+@media (max-width: 980px) {
+  .box-form {
+    flex-flow: wrap;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+  }
+  .login-container span,
+  .password-container span {
+    top: 10px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 460px) {
+  .box-form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 400px) {
+  .box-form {
+    width: 99%;
+  }
 }
