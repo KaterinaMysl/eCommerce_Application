@@ -177,7 +177,6 @@
 @media (max-width: 1230px) {
   .login-container span,
   .password-container span {
-    top: 20px;
     font-size: 16px;
   }
 }
@@ -256,10 +255,10 @@ div.visible.invalidText .error-message {
     text-align: center;
     align-content: center;
     align-items: center;
+    width: 80%;
   }
   .login-container span,
   .password-container span {
-    top: 10px;
     font-size: 20px;
   }
 }

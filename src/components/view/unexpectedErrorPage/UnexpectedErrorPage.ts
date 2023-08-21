@@ -6,7 +6,7 @@ class UnexpectedErrorPage {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
         <div class="unexpexted-error">
-          <div class="title">Unexpected error occurred!</div>
+          <div class="title-un">Unexpected error occurred!</div>
           <div class="content">
             <div>Please contact Administrator!</div>
           </div>
