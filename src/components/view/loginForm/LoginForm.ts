@@ -9,9 +9,8 @@ class LoginForm {
             <div class="box-form">
               <div class="left">
                 <div class="overlay">
-                  <h1>Hello World.</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Curabitur et est sed felis aliquet sollicitudin</p>
+                  <h1>Your journey starts here!</h1>
+                  <p>Log in to your account to begin planning your future adventures with our exclusive tours.</p>
                 </div>
               </div>
               <form id="login-form" class="right form-login">
