@@ -70,9 +70,7 @@ const baseConfig = {
     mainHtmlPlugin,
     notFoundHtmlPlugin,
     new CopyWebpackPlugin({
-      patterns: [
-        { from: 'netlify.toml' },
-      ],
+      patterns: [{ from: 'netlify.toml' }],
     }),
     new CleanWebpackPlugin(),
     new EslingPlugin({ extensions: 'ts' }),
