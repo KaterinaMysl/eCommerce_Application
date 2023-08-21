@@ -169,7 +169,7 @@ class RegistrationForm {
                 <p id="error-message" class="error-message" data-message=" " style="color: red; height:40px"></p>
               </div>
             </form>
-            <p class="login-accountP">Already have an account? <a class="login-account" href="#">Sign in</a></p>
+            <p class="login-accountP">Already have an account? <a class="login-account navigator" href="/login">Sign in</a></p>
           </div>
         </div>
       </div>

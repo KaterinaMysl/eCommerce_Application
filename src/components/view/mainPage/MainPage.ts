@@ -40,11 +40,11 @@ class MainPage {
         <div class="row">
           <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
             <div class="logo_container">
-              <div class="logo"><a href="#"><img src="${logoImage}" alt="">seagull</a></div>
+              <div class="logo"><a href="/" class="navigator"><img src="${logoImage}" alt="">seagull</a></div>
             </div>
             <div class="main_nav_container">
               <ul class="main_nav_list">
-                <li class="main_nav_item"><a href="#">home</a></li>
+                <li class="main_nav_item"><a href="/" class="navigator">home</a></li>
                 <li class="main_nav_item"><a href="#">about us</a></li>
                 <li class="main_nav_item"><a href="#">offers</a></li>
                 <li class="main_nav_item"><a href="#">news</a></li>
@@ -112,10 +112,10 @@ class MainPage {
 
   private getButtons(isLoggedIn: boolean): string {
     return isLoggedIn
-      ? `<div class="user_box_logout user_box_link"><a href="#">logout</a></div>`
+      ? `<div class="user_box_logout user_box_link"><a href="/" class="navigator">logout</a></div>`
       : `
-        <div class="user_box_login user_box_link"><a href="#">login</a></div>
-        <div class="user_box_register user_box_link"><a href="#">register</a></div>
+        <div class="user_box_login user_box_link"><a href="/login" class="navigator">login</a></div>
+        <div class="user_box_register user_box_link"><a href="/register" class="navigator">register</a></div>
       `;
   }
 }

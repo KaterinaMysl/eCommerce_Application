@@ -5,6 +5,8 @@ import RegisterController from '../controller/RegisterController';
 import StorageController from '../controller/StorageController';
 import Client from './Client';
 import Validator from '../controller/Validator/Validator';
+import { show404Page } from '../view/page404/page404';
+import UnexpectedErrorPage from '../view/unexpectedErrorPage/UnexpectedErrorPage';
 
 class App {
   private mainController: MainController;
@@ -13,6 +15,7 @@ class App {
   private registerController: RegisterController;
   private logoutController: LogoutController;
   private validator: Validator;
+  private unexpectedErrorPage: UnexpectedErrorPage;
   constructor() {
     const client = new Client();
     this.storage = new StorageController();
@@ -24,11 +27,51 @@ class App {
       this.loginController,
     );
     this.logoutController = new LogoutController(client, this.storage);
+    this.unexpectedErrorPage = new UnexpectedErrorPage();
   }
-
+  async router() {
+    const routes = [
+      { path: '/', view: this.main.bind(this) },
+      { path: '/login', view: this.login.bind(this) },
+      { path: '/register', view: this.register.bind(this) },
+      { path: '/unexpected-error', view: this.errorPage.bind(this) },
+    ];
+    const potentialMatches = routes.map(route => {
+      return {
+        route: route,
+        isMatch: location.pathname === route.path,
+      };
+    });
+    let match = potentialMatches.find(potentialMatch => potentialMatch.isMatch);
+    if (!match) {
+      match = {
+        route: { path: '/404', view: this.page404 },
+        isMatch: true,
+      };
+    }
+    match.route.view();
+  }
+  page404() {
+    show404Page();
+  }
+  errorPage() {
+    this.unexpectedErrorPage.draw();
+  }
   start() {
     this.mainController.draw();
     this.initMainLoginListeners();
+  }
+  main() {
+    this.mainController.draw();
+    this.initMainLoginListeners();
+  }
+  login() {
+    console.log(this.loginController);
+    this.loginController.draw();
+    this.initLoginListeners();
+  }
+  register() {
+    this.registerController.draw().finally(() => this.initRegisterListeners());
   }
 
   private initMainLoginListeners() {
