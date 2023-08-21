@@ -1,5 +1,5 @@
 .container-registration {
-  padding: 10px;
+  padding: 140px 10px 30px 10px;
   height: 100%;
   min-height: 100vh;
   background-image: linear-gradient(135deg, #fab2ff 10%, #1904e5 100%);
@@ -29,6 +29,7 @@
   font-size: 25px;
   font-weight: 500;
   position: relative;
+  color: #350a4e;
 }
 
 .container-form .title::before {
@@ -47,11 +48,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: black;
+  color: #350a4e;
 }
 
 .form-registration label {
-  color: black;
+  color: #350a4e;
 }
 
 .form-registration > div {
@@ -69,11 +70,12 @@
   display: block;
   margin-bottom: 5px;
   height: 50px;
-  border: 1px solid black;
+  border: 1px solid #de870d;
   outline: none;
   width: 300px;
   border-radius: 5px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #de870d;
+  box-shadow: 2px 2px 5px #2b1a023d;
   padding: 15px 5px 15px 10px;
   cursor: pointer;
 }
@@ -117,6 +119,11 @@ fieldset {
   margin-bottom: 15px;
   width: 100%;
 }
+
+fieldset legend{
+color: #de870d;
+}
+
 .form-registration feBlend input,
 .form-registration feBlend select {
   min-width: 90%;
@@ -136,7 +143,7 @@ fieldset {
   align-items: center;
   padding-top: 5px;
   font-size: 20px;
-  color: black;
+  color: #de870d;
 }
 
 .form-registration__two .input-checkbox input,
@@ -199,7 +206,7 @@ fieldset {
   top: 10px;
   left: 10px;
   font-size: 20px;
-  color: rgba(0, 0, 0, 0.5);
+  color: #350a4e7e;
   transition: all 0.5s ease-in-out;
 }
 
@@ -214,7 +221,7 @@ fieldset {
 
 .form-registration div div div span.active-focus {
   font-size: 12px;
-  color: rgb(0, 0, 0);
+  color: #350a4e;
   transform: translateY(-10px);
   transition: all 0.5s ease-in-out;
 }
@@ -251,7 +258,7 @@ fieldset {
 }
 
 div div.visible .error-message {
-  color: black;
+  color: #350a4e;
 }
 
 .form-registration input.invalid,

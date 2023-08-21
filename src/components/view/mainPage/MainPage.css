@@ -179,7 +179,7 @@ p a:active {
 
 p a:hover {
   color: #ffffff;
-  background: #ffa07f;
+  background: #dc8710bd;
 }
 
 p a:hover::after {
