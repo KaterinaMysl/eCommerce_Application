@@ -22,7 +22,7 @@ class LoginController implements Controller {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
-    const username = formData.get('username') as string;
+    const username = formData.get('email') as string;
     const password = formData.get('password') as string;
     this.client
       .login(username, password)
@@ -32,6 +32,18 @@ class LoginController implements Controller {
       })
       .catch(error => {
         handleServerError(error, form);
+      });
+  }
+
+  loginWithCreds(username: string, password: string) {
+    this.client
+      .login(username, password)
+      .then((id: string) => {
+        this.storage.saveCustomerSessionId(id);
+        window.location.href = '/';
+      })
+      .catch(() => {
+        window.location.href = '/unexpected-error';
       });
   }
 

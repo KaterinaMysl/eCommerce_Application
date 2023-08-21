@@ -19,7 +19,7 @@ class LoginForm {
                 <p>Don't have an account? <a class="new-account" href="#">Create Your Account</a> it takes less than a minute</p>
                 <div class="inputs">
                   <div class="login-container">
-                    <input class="input-email required" type="text" data-pattern="email" name="username" id="form-email">
+                    <input class="input-email required" type="text" data-pattern="email" name="email" id="form-email">
                     <span>user@example.com</span>
                     <p class="error-message" data-message="Please enter your email address"></p>
                   </div>

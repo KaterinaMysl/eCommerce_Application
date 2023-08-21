@@ -57,7 +57,7 @@ describe('LoginController', () => {
     mockClient.login.mockResolvedValue(mockId);
 
     const mockFormData = new MockFormData();
-    mockFormData.append('username', 'username');
+    mockFormData.append('email', 'email');
     mockFormData.append('password', 'password');
 
     (global.FormData as jest.Mocked<typeof FormData>) = jest.fn(
@@ -66,7 +66,7 @@ describe('LoginController', () => {
 
     await loginController.login(mockEvent as Event);
 
-    expect(mockClient.login).toHaveBeenCalledWith('username', 'password');
+    expect(mockClient.login).toHaveBeenCalledWith('email', 'password');
     expect(mockStorage.saveCustomerSessionId).toHaveBeenCalledWith(mockId);
     expect(window.location.href).toBe('/');
   });

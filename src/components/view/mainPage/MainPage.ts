@@ -9,7 +9,7 @@ class MainPage {
       this.setHeader();
     });
   }
-  draw() {
+  draw(isLoggedIn: boolean) {
     const content = `
 <div class="body-container">
   <header class="header">
@@ -29,8 +29,7 @@ class MainPage {
               </ul>
             </div>
             <div class="user_box ml-auto">
-              <div class="user_box_login user_box_link"><a href="#">login</a></div>
-              <div class="user_box_register user_box_link"><a href="#">register</a></div>
+              ${this.getButtons(isLoggedIn)}
             </div>
           </div>
         </div>
@@ -96,6 +95,7 @@ class MainPage {
     `;
     document.body.innerHTML = content;
   }
+
   private setHeader() {
     const header = document.querySelector('.header') as HTMLElement;
     function handleScroll() {
@@ -108,6 +108,15 @@ class MainPage {
     }
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
+  }
+
+  private getButtons(isLoggedIn: boolean): string {
+    return isLoggedIn
+      ? `<div class="user_box_logout user_box_link"><a href="#">logout</a></div>`
+      : `
+        <div class="user_box_login user_box_link"><a href="#">login</a></div>
+        <div class="user_box_register user_box_link"><a href="#">register</a></div>
+      `;
   }
 }
 
