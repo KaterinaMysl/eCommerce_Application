@@ -59,7 +59,6 @@ class RegisterController implements Controller {
         this.loginController.loginWithCreds(customer.email, customer.password);
       })
       .catch(error => {
-        console.log(error);
         handleServerError(error.body.errors, form);
       });
   }

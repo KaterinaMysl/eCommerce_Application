@@ -5,11 +5,11 @@ app.start();
 
 export const navigateTo = (url: string) => {
   history.pushState({}, '', url);
-  app.router();
+  app.routerControllers();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  app.router();
+  app.routerControllers();
 });
 
 document.addEventListener('click', e => {
@@ -22,4 +22,4 @@ document.addEventListener('click', e => {
     }
   }
 });
-window.addEventListener('popstate', () => app.router());
+window.addEventListener('popstate', () => app.routerControllers());
