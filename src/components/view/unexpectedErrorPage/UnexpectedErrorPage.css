@@ -1,4 +1,4 @@
-.main .unexpexted-error{
+.main .unexpexted-error {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@
   padding-top: 130px;
 }
 .main .title-un,
-.main .content{
+.main .content {
   font-size: 30px;
   color: white;
 }

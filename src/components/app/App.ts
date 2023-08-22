@@ -31,6 +31,11 @@ class App {
     this.logoutController = new LogoutController(client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
   }
+  navigateTo(url: string) {
+    history.pushState({}, '', url);
+    this.routerControllers();
+  }
+
   routerControllers() {
     const routes = [
       { path: '/', view: this.start.bind(this), name: 'Home' },

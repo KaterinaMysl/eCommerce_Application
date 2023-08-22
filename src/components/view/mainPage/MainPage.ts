@@ -4,11 +4,6 @@ import homeSlider from '../../../assets/images/home_slider.jpg';
 import { SCROLL_THRESHOLD } from '../../constants';
 
 class MainPage {
-  constructor() {
-    document.addEventListener('DOMContentLoaded', () => {
-      this.setHeader();
-    });
-  }
   draw(isLoggedIn: boolean) {
     const content = `
 <div class="body-container">
@@ -94,6 +89,7 @@ class MainPage {
 </div>
     `;
     document.body.innerHTML = content;
+    this.setHeader();
   }
 
   private setHeader() {
