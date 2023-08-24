@@ -77,7 +77,7 @@
   border-radius: 5px;
   border-bottom: 2px solid #de870d;
   box-shadow: 2px 2px 5px #2b1a023d;
-  padding: 15px 5px 15px 10px;
+  padding: 15px 5px 5px 10px;
   cursor: pointer;
 }
 
@@ -243,6 +243,7 @@ fieldset legend {
 
 .form-registration .error-message {
   font-size: 14px;
+  line-height: 16px;
   height: 33px;
   width: 100%;
   max-width: 250px;
