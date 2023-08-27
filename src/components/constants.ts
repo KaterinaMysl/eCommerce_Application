@@ -96,7 +96,7 @@ export const TYPE_SERVER_ERROR_MAP: MessageType = {
 };
 
 export const LOGIN_ERROR = [
-  { error: 'username', message: 'Incorrect email or password' },
+  { error: 'email', message: 'Incorrect email or password' },
   { error: 'password', message: 'Incorrect email or password' },
 ];
 
