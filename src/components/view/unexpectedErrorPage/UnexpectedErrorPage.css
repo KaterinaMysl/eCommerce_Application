@@ -1,0 +1,14 @@
+.main .unexpexted-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  padding-top: 130px;
+}
+.main .title-un,
+.main .content {
+  font-size: 30px;
+  color: white;
+}
