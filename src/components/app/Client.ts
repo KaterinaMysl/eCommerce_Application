@@ -45,7 +45,9 @@ class Client {
     }
     throw new Error(`401 Unauthorized.`);
   }
-
+  getAnonymsApi() {
+    return anonymusApi;
+  }
   getProducts() {
     return anonymusApi.products().get().execute();
   }
