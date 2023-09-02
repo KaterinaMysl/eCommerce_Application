@@ -16,7 +16,7 @@ export default class CatalogProductPage {
     const attributeKeys: Record<string, string | number> = {
       days: '',
       stars: '',
-      reviewsRating: '',
+      rating: '',
       reviewsSubtitle: '',
       reviewsTitle: '',
     };
@@ -75,8 +75,8 @@ export default class CatalogProductPage {
                   } reviews</div>
                 </div>
                 <div class="offer_reviews_rating reviews_rating_${Math.floor(
-                  attributeObject.reviewsRating as number,
-                )} text-center">${attributeObject.reviewsRating}</div>
+                  attributeObject.rating as number,
+                )} text-center">${attributeObject.rating}</div>
               </div>
             </div>
           </div>
