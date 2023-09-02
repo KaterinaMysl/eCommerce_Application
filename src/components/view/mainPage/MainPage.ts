@@ -108,7 +108,9 @@ class MainPage {
 
   private getButtons(isLoggedIn: boolean): string {
     return isLoggedIn
-      ? `<div class="user_box_logout user_box_link"><a href="/" class="navigator">logout</a></div>`
+      ? `<div class="user_box_logout user_box_link"><a href="/" class="navigator">logout</a></div>
+         <div class="user_box_profile user_box_link"><a href="/profile" class="navigator">profile</a></div>
+        `
       : `
         <div class="user_box_login user_box_link"><a href="/login" class="navigator">login</a></div>
         <div class="user_box_register user_box_link"><a href="/register" class="navigator">register</a></div>

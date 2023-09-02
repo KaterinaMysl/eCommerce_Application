@@ -1,6 +1,7 @@
 import MainController from '../controller/MainController';
 import LoginController from '../controller/LoginController';
 import LogoutController from '../controller/LogoutController';
+import ProfileController from '../controller/ProfileController';
 import RegisterController from '../controller/RegisterController';
 import StorageController from '../controller/StorageController';
 import Client from './Client';
@@ -14,6 +15,7 @@ class App {
   private loginController: LoginController;
   private registerController: RegisterController;
   private logoutController: LogoutController;
+  private profileController: ProfileController;
   private validator: Validator;
   private unexpectedErrorPage: UnexpectedErrorPage;
   private routerController: RouterController;
@@ -29,6 +31,7 @@ class App {
       this.loginController,
     );
     this.logoutController = new LogoutController(client, this.storage);
+    this.profileController = new ProfileController(client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
   }
   navigateTo(url: string) {
@@ -41,6 +44,7 @@ class App {
       { path: '/', view: this.start.bind(this), name: 'Home' },
       { path: '/login', view: this.login.bind(this), name: 'Login' },
       { path: '/register', view: this.register.bind(this), name: 'Register' },
+      { path: '/profile', view: this.profile.bind(this), name: 'Profile' },
       {
         path: '/unexpected-error',
         view: this.errorPage.bind(this),
@@ -64,6 +68,10 @@ class App {
   register() {
     this.registerController.draw().finally(() => this.initRegisterListeners());
   }
+  profile() {
+    this.profileController.draw();
+    // this.initProfileListeners();
+  }
 
   private initMainLoginListeners() {
     const logoutButton = document.querySelector(
@@ -77,6 +85,20 @@ class App {
       });
     }
   }
+
+  // private initProfileListeners() {
+  //   const profileForm = document.getElementById(
+  //     'profile-form',
+  //   ) as HTMLFormElement;
+  //   // this.validator.initFormListeners(profileForm);
+
+  //   profileForm.addEventListener('submit', e => {
+  //     // if (this.validator.checkSubmit(e, profileForm)) {
+  //     this.profileController.profile(e);
+  //     // }
+  //   });
+  // }
+
   private initLoginListeners() {
     const loginForm = document.getElementById('login-form') as HTMLFormElement;
     this.validator.initFormListeners(loginForm);
