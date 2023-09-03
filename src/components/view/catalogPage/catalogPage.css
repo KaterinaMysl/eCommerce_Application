@@ -1052,8 +1052,7 @@ i::before {
   content: '\2605';
 }
 
-.button.book_button a {
-  display: block;
+.button.book_button {
   font-size: 13px;
   font-weight: 700;
   color: #fff;
@@ -1063,6 +1062,7 @@ i::before {
   padding-right: 46px;
   white-space: nowrap;
   z-index: 2;
+  cursor: pointer;
 }
 .social_list i::before {
   color: #fff;
@@ -1201,7 +1201,7 @@ input[type='number'] {
     -o-transition: all 200ms ease;
     transition: all 200ms ease;
   }
-  
+
   .search_tab:not(:first-child):not(:nth-child(2)) {
     border: none;
     margin-right: 0px;

@@ -1,34 +1,19 @@
+import { ProductProjection } from '@commercetools/platform-sdk';
 import bicycle from '../../../assets/icons/bicycle.webp';
 import post from '../../../assets/icons/post.webp';
 import compass from '../../../assets/icons/compass.webp';
 import sailboat from '../../../assets/icons/sailboat.webp';
-import { Attribute, ProductProjection } from '@commercetools/platform-sdk';
 
-export default class CatalogProductPage {
+export default class ProductItemPage {
   draw(product: ProductProjection) {
-    const offerGrid = document.querySelector('.offers_grid') as HTMLElement;
+    const pageContainer = document.querySelector(
+      '.container-products',
+    ) as HTMLElement;
     const normalPrice =
       (product.masterVariant.prices?.[0].value.centAmount as number) / 100;
     const discountPrice =
       (product.masterVariant.prices?.[0].discounted?.value
         .centAmount as number) / 100;
-
-    const attributeKeys: Record<string, string | number> = {
-      days: '',
-      stars: '',
-      rating: '',
-      reviewsSubtitle: '',
-      reviewsTitle: '',
-    };
-    const attributes = product.masterVariant.attributes as Attribute[];
-
-    const attributeObject: Record<string, string | number> = {};
-    for (const attribute of attributes) {
-      const key = attribute.name;
-      if (key in attributeKeys) {
-        attributeObject[key] = attribute.value;
-      }
-    }
     const content = `
       <div class="offers_item rating_4">
         <div class="row">
@@ -46,9 +31,6 @@ export default class CatalogProductPage {
                 <div class="offers_price ${
                   discountPrice ? 'discount' : ''
                 }"><span class="normal_price">$${normalPrice}</span><span class="discount_price">$${discountPrice}</span></div>
-                <div class="rating_r rating_r_${
-                  attributeObject.stars
-                } offers_rating" data-rating="3">
                   <i></i>
                   <i></i>
                   <i></i>
@@ -64,26 +46,14 @@ export default class CatalogProductPage {
                     <li class="offers_icons_item"><img src="${sailboat}" alt></li>
                   </ul>
                 </div>
-                <div class="button book_button" prod-name="${
-                  product.key
+                <div class="button book_button" prod-id="${
+                  product.id
                 }">view tour<span></span><span></span><span></span></a></div>
-                <div class="offer_reviews">
-                  <div class="offer_reviews_content">
-                  <div class="offer_reviews_title">${
-                    attributeObject.reviewsTitle
-                  }</div>
-                  <div class="offer_reviews_subtitle">${
-                    attributeObject.reviewsSubtitle
-                  } reviews</div>
-                </div>
-                <div class="offer_reviews_rating reviews_rating_${Math.floor(
-                  attributeObject.rating as number,
-                )} text-center">${attributeObject.rating}</div>
-              </div>
             </div>
           </div>
         </div>
       </div>`;
-    offerGrid.insertAdjacentHTML('afterbegin', content);
+
+    pageContainer.innerHTML = content;
   }
 }

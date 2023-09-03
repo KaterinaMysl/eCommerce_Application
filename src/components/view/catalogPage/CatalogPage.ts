@@ -24,7 +24,7 @@ export default class CatalogPage {
     this.ratingSlider = null;
     this.filtersSelection = null;
   }
-  draw() {
+  async draw() {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
           <div class="container-offers">
@@ -185,7 +185,7 @@ export default class CatalogPage {
         </div> 
     `;
     bodyContainer.innerHTML = content;
-    this.catalogController.getProducts();
+    await this.catalogController.getProducts();
     this.initEventCatalog();
   }
   initEventCatalog() {

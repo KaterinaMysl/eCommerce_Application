@@ -8,6 +8,7 @@ import Validator from '../controller/Validator/Validator';
 import UnexpectedErrorPage from '../view/unexpectedErrorPage/UnexpectedErrorPage';
 import RouterController from '../controller/RouterController';
 import CatalogPage from '../view/catalogPage/CatalogPage';
+import ProductItemController from '../controller/ProductController';
 class App {
   private mainController: MainController;
   private storage: StorageController;
@@ -17,6 +18,7 @@ class App {
   private validator: Validator;
   private unexpectedErrorPage: UnexpectedErrorPage;
   private catalogPage: CatalogPage;
+  private productItemController: ProductItemController;
   private routerController: RouterController;
   constructor() {
     const client = new Client();
@@ -32,6 +34,7 @@ class App {
     this.logoutController = new LogoutController(client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
     this.catalogPage = new CatalogPage();
+    this.productItemController = new ProductItemController();
   }
   navigateTo(url: string) {
     history.pushState({}, '', url);
@@ -43,7 +46,11 @@ class App {
       { path: '/', view: this.start.bind(this), name: 'Home' },
       { path: '/login', view: this.login.bind(this), name: 'Login' },
       { path: '/register', view: this.register.bind(this), name: 'Register' },
-      { path: '/catalog', view: this.catalog.bind(this), name: 'Offers' },
+      {
+        path: '/catalog',
+        view: this.checkRouteAndExecute.bind(this),
+        name: 'Offers',
+      },
       {
         path: '/unexpected-error',
         view: this.errorPage.bind(this),
@@ -52,8 +59,30 @@ class App {
     ];
     this.routerController.init(routes);
   }
-  catalog() {
-    this.catalogPage.draw();
+
+  checkRouteAndExecute() {
+    const productName = this.getProductNameFromURL();
+
+    if (productName) {
+      this.product(productName);
+    } else {
+      this.catalog();
+    }
+  }
+  private async catalog() {
+    await this.catalogPage.draw();
+    this.initCatalogListeners();
+  }
+  private product(productName: string) {
+    if (!productName) {
+      console.error('Product name is missing from the URL!');
+      return;
+    }
+    this.productItemController.openProductPage(productName);
+  }
+  private getProductNameFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('name');
   }
   errorPage() {
     this.unexpectedErrorPage.draw();
@@ -104,6 +133,19 @@ class App {
       if (this.validator.checkSubmit(e, registrationForm)) {
         this.registerController.register(e);
       }
+    });
+  }
+
+  private initCatalogListeners() {
+    const offerItemBtns = document.querySelectorAll('.book_button');
+    offerItemBtns.forEach(item => {
+      item.addEventListener('click', e => {
+        const targetEl = e.target as HTMLElement;
+        const productName = targetEl.getAttribute('prod-name');
+        if (productName) {
+          window.location.href = `/catalog?name=${productName}`;
+        }
+      });
     });
   }
 }
