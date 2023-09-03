@@ -257,10 +257,7 @@ div div.visible.invalidText .error-message {
   .form-profile input[type='date'],
   .form-profile input[type='password'],
   .form-profile .form-profile__two fieldset,
-  .form-profile
-    .form-profile__two
-    fieldset
-    input:not([type='checkbox']),
+  .form-profile .form-profile__two fieldset input:not([type='checkbox']),
   .form-profile .form-profile__two fieldset select {
     width: 100%;
   }

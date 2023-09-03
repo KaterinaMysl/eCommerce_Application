@@ -19,19 +19,21 @@ class App {
   private validator: Validator;
   private unexpectedErrorPage: UnexpectedErrorPage;
   private routerController: RouterController;
+  private client: Client;
+
   constructor() {
-    const client = new Client();
+    this.client = new Client();
     this.storage = new StorageController();
     this.validator = new Validator();
     this.routerController = new RouterController(this.storage);
     this.mainController = new MainController(this.storage);
-    this.loginController = new LoginController(client, this.storage);
+    this.loginController = new LoginController(this.client, this.storage);
     this.registerController = new RegisterController(
-      client,
+      this.client,
       this.loginController,
     );
-    this.logoutController = new LogoutController(client, this.storage);
-    this.profileController = new ProfileController(client, this.storage);
+    this.logoutController = new LogoutController(this.client, this.storage);
+    this.profileController = new ProfileController(this.client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
   }
   navigateTo(url: string) {

@@ -3,6 +3,7 @@ import {
   createApiBuilderFromCtpClient,
   CustomerDraft,
   Customer,
+  ClientResponse,
 } from '@commercetools/platform-sdk';
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +14,16 @@ const anonymusApi = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
 });
 
 class Client {
+  private customerData: Customer | undefined;
+
+  setCustomerData(data: Customer) {
+    this.customerData = data;
+  }
+
+  getCustomerData() {
+    return this.customerData;
+  }
+
   login(email: string, password: string) {
     const api = createApiBuilderFromCtpClient(
       ctpPasswordClient(email, password),
@@ -22,13 +33,33 @@ class Client {
         .login()
         .post({ body: { email: email, password: password } })
         .execute()
-        .then(() => {
-          const customerSessionId = this.generateCustomerId();
+        .then(({ body }) => {
+          const customerSessionId = body.customer.id;
+          console.log(customerSessionId);
           userApis.set(customerSessionId, api);
           resolve(customerSessionId);
         })
         .catch((e: Error) => reject(e));
     });
+  }
+
+  async getCustomerDetails(customerSessionId: string): Promise<Customer> {
+    const api = userApis.get(customerSessionId);
+    console.log('1111');
+    console.log(userApis);
+    console.log(api);
+    console.log(customerSessionId);
+    if (!api) {
+      throw new Error('Session not found');
+    }
+    const response: ClientResponse<Customer> = await api
+      .customers()
+      .withId({ ID: customerSessionId })
+      .get()
+      .execute();
+    const customerData: Customer = response.body;
+    console.log('Customer Data:', customerData);
+    return customerData;
   }
 
   register(customer: CustomerDraft) {
@@ -38,24 +69,6 @@ class Client {
   logout(customerSessionId: string) {
     userApis.delete(customerSessionId);
   }
-
-  // async getProfile(customerSessionId: string): Promise<Customer | undefined> {
-  //   const api = userApis.get(customerSessionId);
-  //   if (!api) {
-  //     throw new Error('API instance not found');
-  //   }
-
-  //   try {
-  //     const response = await api.me().get().execute();
-  //     if (response && response.body) {
-  //       return response.body;
-  //     } else {
-  //       throw new Error('Failed to fetch profile');
-  //     }
-  //   } catch (error) {
-  //     throw new Error('Failed to fetch profile: ' + error);
-  //   }
-  // }
 
   getOrders(email: string) {
     const api = userApis.get(email);
