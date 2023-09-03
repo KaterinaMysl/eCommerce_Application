@@ -625,7 +625,7 @@ summary {
 /* End filter */
 /* catalog-settings */
 
-.catalog-navigator_container{
+.catalog-navigator_container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -635,10 +635,10 @@ summary {
   border-bottom: 1px solid #e9e9e9;
   background-color: #fff;
 }
-.catalog-navigation > div{
+.catalog-navigation > div {
   display: flex;
 }
-.navigator_link{
+.navigator_link {
   display: block;
   padding: 0 15px 0 15px;
   /* position: relative; */
@@ -647,21 +647,21 @@ summary {
   cursor: pointer;
   border-bottom: 1px solid transparent;
 }
-.navigator_link:hover{
+.navigator_link:hover {
   color: #513b1b;
   border-bottom: 1px solid #513b1b;
 }
 .navigator-container_box,
-.navigator_subcategory{
+.navigator_subcategory {
   display: none;
 }
 
 .navigator_category,
-.navigator_subcategory{
+.navigator_subcategory {
   position: relative;
 }
 .navigator_category::before,
-.navigator_subcategory::before{
+.navigator_subcategory::before {
   content: '';
   position: absolute;
   background: url(../../../assets/icons/arow.png);
@@ -671,7 +671,7 @@ summary {
   left: -9px;
   top: 12px;
 }
-.navigator_link.last::after{
+.navigator_link.last::after {
   width: 0;
   height: 0;
 }
@@ -1131,7 +1131,7 @@ input[type='number'] {
   .catalog-settings {
     padding-left: 104px;
   }
-  .catalog-navigator_container{
+  .catalog-navigator_container {
     padding-left: 104px;
   }
 }
@@ -1199,7 +1199,6 @@ input[type='number'] {
     transition: all 200ms ease;
   }
 
-  
   .search_tab:not(:first-child):not(:nth-child(2)) {
     border: none;
     margin-right: 0px;
@@ -1440,14 +1439,14 @@ input[type='number'] {
   }
 }
 @media (max-width: 460px) {
-  .catalog-navigator_container{
+  .catalog-navigator_container {
     padding: 16px 0px;
   }
-  .navigator_link{
+  .navigator_link {
     font-size: 18px;
   }
   .navigator_category::before,
-  .navigator_subcategory::before{
+  .navigator_subcategory::before {
     top: 6px;
   }
 }
