@@ -4,7 +4,9 @@ import { FILTERS_ACTIVE } from '../../constants';
 export default class FilterSelection {
   createSearchFilter(value: string) {
     const parentDiv = document.querySelector('.catalog-selection_filters');
+
     this.removeFilter('search');
+
     if (parentDiv) {
       parentDiv.insertAdjacentHTML(
         'beforeend',
@@ -48,6 +50,7 @@ export default class FilterSelection {
         this.getProducts();
         element.remove();
         const link = document.querySelector('.catalog-selection__link');
+
         if (!link) {
           div.style.display = 'none';
         }

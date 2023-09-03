@@ -675,6 +675,7 @@ summary {
   width: 0;
   height: 0;
 }
+
 .catalog-settings {
   width: 100%;
   display: flex;
@@ -1075,6 +1076,7 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
 .details_category {
   position: absolute;
   bottom: 0px;
@@ -1120,6 +1122,7 @@ input[type='number'] {
 .search_panel_content.active {
   padding-top: 56px;
 }
+
 @media (min-width: 1730px) {
   .col-lg-3 {
     flex: 0 0 25%;
@@ -1198,7 +1201,7 @@ input[type='number'] {
     -o-transition: all 200ms ease;
     transition: all 200ms ease;
   }
-
+  
   .search_tab:not(:first-child):not(:nth-child(2)) {
     border: none;
     margin-right: 0px;
@@ -1438,6 +1441,7 @@ input[type='number'] {
     font-size: 13px;
   }
 }
+
 @media (max-width: 460px) {
   .catalog-navigator_container {
     padding: 16px 0px;

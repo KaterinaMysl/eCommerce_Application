@@ -15,6 +15,7 @@ export default class ProductController {
     this.catalogProduct = new CatalogProductPage();
     this.filtersSelection = new FilterSelection();
   }
+
   async getChildrenCategory(parentId: string) {
     const response = await this.anonymsApi
       .categories()
@@ -48,7 +49,6 @@ export default class ProductController {
       detailsParent.classList.remove('active');
     }
   }
-
   async getCategory(nameCategory: string) {
     const response = await this.anonymsApi
       .categories()
@@ -56,6 +56,7 @@ export default class ProductController {
         queryArgs: { where: `name(en="${nameCategory}")` },
       })
       .execute();
+
     console.log(response.body.results[0]);
     await this.getCategoryProduct(response.body.results[0].id);
     if (response.body.results[0].ancestors.length === 0) {
@@ -67,12 +68,14 @@ export default class ProductController {
   }
 
   async getCategoryProduct(id: string) {
+    
     const response = await this.anonymsApi
       .productProjections()
       .get({
         queryArgs: { where: `categories(id="${id}")` },
       })
       .execute();
+
     this.createProductsCart(response.body.results);
     FILTERS_ACTIVE.category = id;
   }
@@ -121,7 +124,9 @@ export default class ProductController {
     )})` as string;
     this.getProd();
   }
+
   createProductsCart(products: ProductProjection[]) {
+
     const offerGrid = document.querySelector('.offers_grid') as HTMLElement;
     const searchCount = document.querySelector('.search-count') as HTMLElement;
     searchCount.textContent = `${products.length}`;
@@ -132,6 +137,7 @@ export default class ProductController {
   }
 
   async getProd() {
+
     const category =
       FILTERS_ACTIVE.category.length > 2
         ? `categories.id:"${FILTERS_ACTIVE.category}"`
