@@ -41,21 +41,20 @@ export default class CatalogPage {
               <div class="search">
                 <div class="search_inner">
                   <div class="container fill_height no-padding">
-                    <div class="row fill_height no-margin">
+                    <div class="row fill_height no-margin search-container_box">
                       <div class="col fill_height no-padding">
                         <div class="search_tabs_container">
                           <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start">
-                            <div class="search_tab" data-category="Hotels"><div><img src="${suitcase}" alt><span>hotels</span></div></div>
-                            <div class="search_tab" data-category="Rentals"><div><img src="${bus}" alt>car rentals</div></div>
-                            <div class="search_tab" data-category="Flights"><div><img src="${departure}" alt>flights</div></div>
-                            <div class="search_tab" data-category="Trips"><div><img src="${island}" alt>trips</div></div>
-                            <div class="search_tab" data-category="Cruises"><div><img src="${cruise}" alt>cruises</div></div>
-                            <div class="search_tab" data-category="Activities"><div><img src="${diving}" alt>activities</div></div>
+                            <a class="search_tab" data-category="Hotels"><div><img src="${suitcase}" alt><span>hotels</span></div></a>
+                            <a class="search_tab" data-category="Rentals"><div><img src="${bus}" alt>car rentals</div></a>
+                            <a class="search_tab" data-category="Flights"><div><img src="${departure}" alt>flights</div></a>
+                            <a class="search_tab" data-category="Trips"><div><img src="${island}" alt>trips</div></a>
+                            <a class="search_tab" data-category="Cruises"><div><img src="${cruise}" alt>cruises</div></a>
+                            <a class="search_tab" data-category="Activities"><div><img src="${diving}" alt>activities</div></a>
                           </div>
                           <details class="details_category">
                           <summary style="display: none"></summary>
                           <div class="details-container">
-                            <a href="#">Ocean Cruise</a><a href="#">River Cruises</a><a href="#">Polar Cruises</a>
                           </div>
                           </details>
                         </div>
@@ -136,6 +135,22 @@ export default class CatalogPage {
                   <div class="col-lg-1 temp_col"></div>
                   <div class="col-lg-11"></div>
                   <div class="col-lg-12">
+                    <details class="catalog-navigation">
+                      <summary style="display:none"></summary>
+                      <div class="catalog-navigator_container">
+                        <div class="navigator-container_box">
+                          <div class="navigator_catalog">
+                            <a href="/catalog" class="navigator_link" data-navigator="catalog">Catalog</a>
+                          </div>
+                          <div class="navigator_category">
+                            <a class="navigator_link" data-navigator="Cruises">Cruises</a>
+                          </div>
+                        </div>
+                        <div class="navigator_subcategory">
+                          <a class="navigator_link last" data-navigator="Polar cruises">Polar cruises</a>
+                        </div>
+                      </div>
+                    </details>
                     <div class="catalog-settings">
                       <div class="catalog-settings_selection">
                         <div class="catalog-settings_none">
@@ -209,7 +224,6 @@ export default class CatalogPage {
     });
   }
   categoryClick(tabs: HTMLElement[], tab: HTMLElement) {
-    console.log(tab.dataset.category);
     const details = document.querySelector(
       'details.details_category',
     ) as HTMLDetailsElement;

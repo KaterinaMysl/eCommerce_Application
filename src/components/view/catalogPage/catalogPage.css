@@ -624,6 +624,58 @@ summary {
 }
 /* End filter */
 /* catalog-settings */
+
+.catalog-navigator_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 16px;
+  min-height: 69px;
+  border-bottom: 1px solid #e9e9e9;
+  background-color: #fff;
+}
+.catalog-navigation > div {
+  display: flex;
+}
+.navigator_link {
+  display: block;
+  padding: 0 15px 0 15px;
+  /* position: relative; */
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+.navigator_link:hover {
+  color: #513b1b;
+  border-bottom: 1px solid #513b1b;
+}
+.navigator-container_box,
+.navigator_subcategory {
+  display: none;
+}
+
+.navigator_category,
+.navigator_subcategory {
+  position: relative;
+}
+.navigator_category::before,
+.navigator_subcategory::before {
+  content: '';
+  position: absolute;
+  background: url(../../../assets/icons/arow.png);
+  background-size: cover;
+  width: 14px;
+  height: 14px;
+  left: -9px;
+  top: 12px;
+}
+.navigator_link.last::after {
+  width: 0;
+  height: 0;
+}
+
 .catalog-settings {
   width: 100%;
   display: flex;
@@ -1025,6 +1077,52 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+.details_category {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  transition: all 0.5s;
+}
+.details_category.active {
+  bottom: -56px;
+  border-radius: 20px;
+  z-index: 55;
+}
+.details_category div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.details_category > div > a:first-child {
+  border-radius: 0px 0px 0 63px;
+}
+
+.details_category > div > a:last-child {
+  border-radius: 0px 0px 63px 0;
+}
+
+.details_category a {
+  display: block;
+  padding: 18px 10px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  background: #fff;
+  border: solid 1px white;
+  color: #2d2c2c;
+  font-weight: 700;
+}
+
+.details_category a:hover,
+.details_category a.active {
+  background: #fa9e1b;
+  color: #ffffff;
+}
+.search_panel_content.active {
+  padding-top: 56px;
+}
+
 @media (min-width: 1730px) {
   .col-lg-3 {
     flex: 0 0 25%;
@@ -1034,6 +1132,9 @@ input[type='number'] {
     min-height: 100vh;
   }
   .catalog-settings {
+    padding-left: 104px;
+  }
+  .catalog-navigator_container {
     padding-left: 104px;
   }
 }
@@ -1100,52 +1201,7 @@ input[type='number'] {
     -o-transition: all 200ms ease;
     transition: all 200ms ease;
   }
-
-  .details_category {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    transition: all 0.5s;
-  }
-  .details_category.active {
-    bottom: -56px;
-    border-radius: 20px;
-    z-index: 55;
-  }
-  .details_category div {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .details_category > div > a:first-child {
-    border-radius: 0px 0px 0 63px;
-  }
-
-  .details_category > div > a:last-child {
-    border-radius: 0px 0px 63px 0;
-  }
-
-  .details_category a {
-    display: block;
-    padding: 18px 10px;
-    width: 33.3%;
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    text-transform: uppercase;
-    background: #fff;
-    border: solid 1px white;
-    color: #2d2c2c;
-    font-weight: 700;
-  }
-
-  .details_category a:hover,
-  .details_category a.active {
-    background: #fa9e1b;
-    color: #ffffff;
-  }
-  .search_panel_content.active {
-    padding-top: 56px;
-  }
+  
   .search_tab:not(:first-child):not(:nth-child(2)) {
     border: none;
     margin-right: 0px;
@@ -1278,7 +1334,7 @@ input[type='number'] {
     height: auto;
   }
   .search_tab {
-    justify-content: start;
+    align-items: start;
     height: 62px;
     width: 100%;
     padding-left: 15px;
@@ -1383,5 +1439,23 @@ input[type='number'] {
   }
   .footer_about_text {
     font-size: 13px;
+  }
+}
+
+@media (max-width: 460px) {
+  .catalog-navigator_container {
+    padding: 16px 0px;
+  }
+  .navigator_link {
+    font-size: 18px;
+  }
+  .navigator_category::before,
+  .navigator_subcategory::before {
+    top: 6px;
+  }
+}
+@media (max-width: 416px) {
+  .details_category.active {
+    bottom: -74px;
   }
 }

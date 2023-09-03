@@ -103,7 +103,7 @@ export const LOGIN_ERROR = [
 export const SCROLL_THRESHOLD = 100;
 
 export const FILTERS_ACTIVE: FilterActive = {
-  categoryID: '',
+  category: '',
   price: '',
   days: '',
   stars: '',
