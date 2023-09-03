@@ -1,0 +1,28 @@
+body {
+  color: #090909;
+}
+
+.product {
+  padding: 50px;
+}
+
+.product__name {
+  font-size: 30px;
+  font-weight: 600;
+  margin: 10px 0 10px 0;
+}
+
+.product__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image {
+  min-height: 500px;
+  margin-top: 10px;
+}
+
+.reviews {
+  position: relative;
+  margin-top: 15px;
+}

@@ -863,14 +863,14 @@ p.catalog-setting_label {
   background: #fa9e1b;
   overflow: hidden;
 }
-.offer_name a {
-  display: block;
+.offer_name {
   font-size: 16px;
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
   line-height: 35px;
   padding: 0 15px;
+  cursor: default;
 }
 
 .normal_price {
