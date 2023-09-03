@@ -7,7 +7,7 @@ import Client from './Client';
 import Validator from '../controller/Validator/Validator';
 import UnexpectedErrorPage from '../view/unexpectedErrorPage/UnexpectedErrorPage';
 import RouterController from '../controller/RouterController';
-
+import CatalogPage from '../view/catalogPage/CatalogPage';
 class App {
   private mainController: MainController;
   private storage: StorageController;
@@ -16,6 +16,7 @@ class App {
   private logoutController: LogoutController;
   private validator: Validator;
   private unexpectedErrorPage: UnexpectedErrorPage;
+  private catalogPage: CatalogPage;
   private routerController: RouterController;
   constructor() {
     const client = new Client();
@@ -30,6 +31,7 @@ class App {
     );
     this.logoutController = new LogoutController(client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
+    this.catalogPage = new CatalogPage();
   }
   navigateTo(url: string) {
     history.pushState({}, '', url);
@@ -41,6 +43,7 @@ class App {
       { path: '/', view: this.start.bind(this), name: 'Home' },
       { path: '/login', view: this.login.bind(this), name: 'Login' },
       { path: '/register', view: this.register.bind(this), name: 'Register' },
+      { path: '/catalog', view: this.catalog.bind(this), name: 'Offers' },
       {
         path: '/unexpected-error',
         view: this.errorPage.bind(this),
@@ -49,7 +52,9 @@ class App {
     ];
     this.routerController.init(routes);
   }
-
+  catalog() {
+    this.catalogPage.draw();
+  }
   errorPage() {
     this.unexpectedErrorPage.draw();
   }

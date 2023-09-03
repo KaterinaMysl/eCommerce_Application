@@ -55,6 +55,7 @@
     "@commercetools/platform-sdk": "^4.11.0",
     "@commercetools/sdk-client-v2": "^2.2.0",
     "dotenv": "^16.3.1",
+    "nouislider": "^15.7.1",
     "uuid": "^9.0.0"
   }
 }

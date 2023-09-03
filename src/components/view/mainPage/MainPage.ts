@@ -41,7 +41,7 @@ class MainPage {
               <ul class="main_nav_list">
                 <li class="main_nav_item"><a href="/" class="navigator">home</a></li>
                 <li class="main_nav_item"><a href="#">about us</a></li>
-                <li class="main_nav_item"><a href="#">offers</a></li>
+                <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
                 <li class="main_nav_item"><a href="#">news</a></li>
                 <li class="main_nav_item"><a href="#">contact</a></li>
               </ul>
