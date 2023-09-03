@@ -15,6 +15,40 @@ export default class ProductController {
     this.catalogProduct = new CatalogProductPage();
     this.filtersSelection = new FilterSelection();
   }
+  async getChildrenCategory(parentId: string) {
+    const response = await this.anonymsApi
+      .categories()
+      .get({
+        queryArgs: {
+          where: `parent(id="${parentId}")`,
+        },
+      })
+      .execute();
+    const categories = response.body.results;
+    const details = document.querySelector('.details-container') as HTMLElement;
+    if (categories.length > 0) {
+      details.innerHTML = '';
+      categories.forEach(category =>
+        details.insertAdjacentHTML(
+          'beforeend',
+          `<a data-category="${category.name.en}">${category.name.en}</a>`,
+        ),
+      );
+      const links = details.querySelectorAll('a');
+      links.forEach(link =>
+        link.addEventListener('click', () => {
+          links.forEach(link => link.classList.remove('active'));
+          link.classList.add('active');
+          this.getCategory(link.dataset.category as string);
+        }),
+      );
+    } else {
+      const detailsParent = details.closest('details') as HTMLDetailsElement;
+      details.innerHTML = '';
+      detailsParent.classList.remove('active');
+    }
+  }
+
   async getCategory(nameCategory: string) {
     const response = await this.anonymsApi
       .categories()
@@ -22,20 +56,27 @@ export default class ProductController {
         queryArgs: { where: `name(en="${nameCategory}")` },
       })
       .execute();
-    // console.log(response.body.results[0].id);
+    console.log(response.body.results[0]);
     await this.getCategoryProduct(response.body.results[0].id);
+    if (response.body.results[0].ancestors.length === 0) {
+      this.getChildrenCategory(response.body.results[0].id);
+      this.createCatalogNavigator(nameCategory, 'container_box');
+    } else {
+      this.createCatalogNavigator(nameCategory, 'subcategory');
+    }
   }
+
   async getCategoryProduct(id: string) {
-    console.log(id);
     const response = await this.anonymsApi
       .productProjections()
       .get({
         queryArgs: { where: `categories(id="${id}")` },
       })
       .execute();
-    console.log(response.body);
-    this.createProducts(response.body.results);
+    this.createProductsCart(response.body.results);
+    FILTERS_ACTIVE.category = id;
   }
+
   async getProducts() {
     const response = await this.anonymsApi.productProjections().get().execute();
     const products: ProductProjection[] = response.body.results;
@@ -80,7 +121,7 @@ export default class ProductController {
     )})` as string;
     this.getProd();
   }
-  createProducts(products: ProductProjection[]) {
+  createProductsCart(products: ProductProjection[]) {
     const offerGrid = document.querySelector('.offers_grid') as HTMLElement;
     const searchCount = document.querySelector('.search-count') as HTMLElement;
     searchCount.textContent = `${products.length}`;
@@ -91,24 +132,56 @@ export default class ProductController {
   }
 
   async getProd() {
+    const category =
+      FILTERS_ACTIVE.category.length > 2
+        ? `categories.id:"${FILTERS_ACTIVE.category}"`
+        : '';
     const response = await this.anonymsApi
       .productProjections()
       .search()
       .get({
         queryArgs: {
           filter: [
+            category,
             FILTERS_ACTIVE.days,
             FILTERS_ACTIVE.stars,
             FILTERS_ACTIVE.price,
             FILTERS_ACTIVE.rating,
           ],
-          limit: 5,
+          // limit: 5,
           sort: [FILTERS_ACTIVE.sort],
           ['text.en']: FILTERS_ACTIVE.search,
         },
       })
       .execute();
     const products: ProductProjection[] = response.body.results;
-    this.createProducts(products);
+    this.createProductsCart(products);
+  }
+  createCatalogNavigator(name: string, type: string) {
+    console.log('name', name, 'type', type);
+    const containerBox = document.querySelector(
+      '.navigator-container_box',
+    ) as HTMLElement;
+    const details = containerBox.closest('details') as HTMLDetailsElement;
+    const category = document.querySelector(
+      '.navigator_category',
+    ) as HTMLElement;
+    const subcategory = document.querySelector(
+      '.navigator_subcategory',
+    ) as HTMLElement;
+    let link: HTMLLinkElement | null = null;
+    if (type === 'subcategory') {
+      link = subcategory.firstElementChild as HTMLLinkElement;
+      subcategory.style.display = 'flex';
+    } else {
+      const link2 = subcategory.firstElementChild as HTMLElement;
+      link2.textContent = '';
+      subcategory.style.display = 'none';
+      link = category.firstElementChild as HTMLLinkElement;
+      category.style.display = 'flex';
+      containerBox.style.display = 'flex';
+    }
+    details.open = true;
+    link.textContent = name;
   }
 }
