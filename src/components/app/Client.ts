@@ -2,9 +2,9 @@ import { ctpClient, ctpPasswordClient } from './BuildClient';
 import {
   createApiBuilderFromCtpClient,
   CustomerDraft,
+  ProductProjection,
 } from '@commercetools/platform-sdk';
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
-import { v4 as uuidv4 } from 'uuid';
 
 const userApis: Map<string, ByProjectKeyRequestBuilder> = new Map();
 const anonymusApi = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
@@ -21,8 +21,8 @@ class Client {
         .login()
         .post({ body: { email: email, password: password } })
         .execute()
-        .then(() => {
-          const customerSessionId = this.generateCustomerId();
+        .then(({ body }) => {
+          const customerSessionId = body.customer.id;
           userApis.set(customerSessionId, api);
           resolve(customerSessionId);
         })
@@ -38,6 +38,26 @@ class Client {
     userApis.delete(customerSessionId);
   }
 
+  getCustomerDetails(customerSessionId: string) {
+    const api = userApis.get(customerSessionId);
+    if (!api) {
+      throw new Error('Session not found');
+    }
+    return api
+      .customers()
+      .withId({ ID: customerSessionId })
+      .get()
+      .execute()
+      .then(response => {
+        console.log('API response received:', response.body);
+        return response;
+      })
+      .catch(error => {
+        console.error('Error in getCustomerDetails:', error);
+        throw error;
+      });
+  }
+
   getOrders(email: string) {
     const api = userApis.get(email);
     if (api) {
@@ -48,8 +68,15 @@ class Client {
   getAnonymsApi() {
     return anonymusApi;
   }
-  getProducts() {
-    return anonymusApi.products().get().execute();
+
+  async getProductByKeyName(productKey: string): Promise<ProductProjection> {
+    const response = await anonymusApi
+      .productProjections()
+      .withKey({ key: productKey })
+      .get()
+      .execute();
+    console.log('product', response.body);
+    return response.body;
   }
 
   getCountries() {
@@ -62,9 +89,9 @@ class Client {
     });
   }
 
-  private generateCustomerId(): string {
+  /* private generateCustomerId(): string {
     return uuidv4();
-  }
+  } */
 }
 
 export default Client;

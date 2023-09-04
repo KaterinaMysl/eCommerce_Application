@@ -38,7 +38,9 @@ export default class CatalogProductPage {
                 <div class="offers_image_background" style="background-image:url(${
                   product.masterVariant.images?.[0]?.url
                 })"></div>
-                <div class="offer_name"><a href="#">${product.name.en}</a></div>
+                <div class="offer_name" prod-name="${product.key}">${
+      product.name.en
+    }</div>
               </div>
             </div>
             <div class="col-lg-8">
@@ -64,7 +66,9 @@ export default class CatalogProductPage {
                     <li class="offers_icons_item"><img src="${sailboat}" alt></li>
                   </ul>
                 </div>
-                <div class="button book_button"><a href="#">view tour<span></span><span></span><span></span></a></div>
+                <div class="button book_button" prod-name="${
+                  product.key
+                }">view tour<span></span><span></span><span></span></div>
                 <div class="offer_reviews">
                   <div class="offer_reviews_content">
                   <div class="offer_reviews_title">${

@@ -68,7 +68,6 @@ export default class ProductController {
   }
 
   async getCategoryProduct(id: string) {
-    
     const response = await this.anonymsApi
       .productProjections()
       .get({
@@ -126,7 +125,6 @@ export default class ProductController {
   }
 
   createProductsCart(products: ProductProjection[]) {
-
     const offerGrid = document.querySelector('.offers_grid') as HTMLElement;
     const searchCount = document.querySelector('.search-count') as HTMLElement;
     searchCount.textContent = `${products.length}`;
@@ -137,7 +135,6 @@ export default class ProductController {
   }
 
   async getProd() {
-
     const category =
       FILTERS_ACTIVE.category.length > 2
         ? `categories.id:"${FILTERS_ACTIVE.category}"`
