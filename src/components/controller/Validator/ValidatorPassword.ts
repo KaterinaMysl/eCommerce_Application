@@ -6,9 +6,11 @@ export default class ValidatorPassword {
     const input = event.parentElement?.firstElementChild as HTMLInputElement;
     const img = event as HTMLImageElement;
 
-    const isTextType = input.type === 'text';
-    input.type = isTextType ? 'password' : 'text';
-    img.src = isTextType ? imgHidden : imgVisible;
+    if (img.classList.contains('img-password')) {
+      const isTextType = input.type === 'text';
+      input.type = isTextType ? 'password' : 'text';
+      img.src = isTextType ? imgHidden : imgVisible;
+    }
   }
 
   public updatePasswordConfirmStatus(input: HTMLInputElement): void {

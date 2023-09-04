@@ -1,5 +1,6 @@
 import './ProfileForm.css';
 import eyeHidden from '../../../assets/icons/icon-eye-hidden.png';
+import pencil from '../../../assets/icons/pencil.png';
 import { Customer } from '@commercetools/platform-sdk';
 
 class ProfileForm {
@@ -18,6 +19,7 @@ class ProfileForm {
                     <div>
                       <input type="text" data-pattern="firstName" id="first-name" name="firstName">
                       <span>First name</span>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your first name."></p>
                     </div>
                 </div>
@@ -26,6 +28,7 @@ class ProfileForm {
                   <div>
                     <input type="text" data-pattern="lastName" id="last-name" name="lastName">
                     <span>Last name</span>
+                    <img src="${pencil}" class="img-input-icon">
                     <p class="error-message" data-message="Please enter your last name."></p>
                   </div>
                 </div>
@@ -36,6 +39,7 @@ class ProfileForm {
                   <div>
                     <input type="text" class="required" data-pattern="email" id="form-email" name="email">
                     <span>user@example.com</span>
+                    <img src="${pencil}" class="img-input-icon">
                     <p class="error-message" data-message="Please enter your email."></p>
                   </div>
                 </div>
@@ -44,6 +48,7 @@ class ProfileForm {
                   <div>
                     <input type="date" class="required" data-pattern="age" id="form-age" name="dateOfBirth">
                     <span class="date">11/11/1997</span>
+                    <img src="${pencil}" class="img-input-icon">
                     <p class="error-message" data-message="Please enter your date of birth"></p>
                   </div>
                 </div>
@@ -54,11 +59,12 @@ class ProfileForm {
                 <div class="flex-box">
                   <div class="input-box">
                     <label class="details" for="form-country">Country</label>
-                    <div>
+                    <div class = "icon-arrow">
                       <select id="form-country" class="required" name="countryBilling">
                         <option value="">Select your country</option>
                           ${this.buildContriesOptions()}
                       </select>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your country"></p>
                     </div>
                   </div>
@@ -67,6 +73,7 @@ class ProfileForm {
                     <div>
                       <input type="text" class="required"  data-pattern="postalCode" id="form-postalCode" name="postalCodeBilling">
                       <span>42351</span>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your postal code"></p>
                     </div>
                   </div>
@@ -77,6 +84,7 @@ class ProfileForm {
                     <div>
                       <input type="text" data-pattern="street" id="form-street" name="streetBilling">
                       <span>Street</span>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your street"></p>
                     </div>
                   </div>
@@ -85,6 +93,7 @@ class ProfileForm {
                     <div>
                       <input type="text" data-pattern="city" id="form-city" name="cityBilling">
                       <span>City</span>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your city"></p>
                     </div>
                   </div>
@@ -102,11 +111,12 @@ class ProfileForm {
                 <div class="flex-box">
                   <div class="input-box">
                     <label class="details" for="form-country2">Country</label>
-                    <div>
+                    <div class = "icon-arrow">
                       <select  id="form-country2" class="required" name="countryShipping">
                         <option value="" >Select your country</option>
                           ${this.buildContriesOptions()}
                       </select>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your country"></p>
                     </div>
                   </div>
@@ -115,6 +125,7 @@ class ProfileForm {
                     <div>
                       <input type="text" class="required" data-pattern="postalCode"  id="form-postalCode2" name="postalCodeShipping">
                       <span>42351</span>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your postal code"></p>
                     </div>
                   </div>
@@ -125,6 +136,7 @@ class ProfileForm {
                     <div>
                       <input type="text" data-pattern="street" id="form-street2" name="streetShipping">
                       <span>Street</span>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your street"></p>
                     </div>
                   </div>
@@ -133,6 +145,7 @@ class ProfileForm {
                     <div>
                       <input type="text" data-pattern="city" id="form-city2" name="cityShipping">
                       <span>City</span>
+                      <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your city"></p>
                     </div>
                   </div>
