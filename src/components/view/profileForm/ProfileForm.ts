@@ -8,7 +8,7 @@ class ProfileForm {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
     <div class="container-profile">
-      <div class="container-form">
+      <div class="container-form profile">
         <div class="title">Profile</div>
         <div class="content">
           <form id="profile-form" class="form-profile">

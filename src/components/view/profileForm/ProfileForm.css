@@ -153,8 +153,8 @@
 .form-profile .icon-arrow::before {
   content: '';
   position: absolute;
-  width: 27px;
-  height: 27px;
+  width: 20px;
+  height: 20px;
   top: 14px;
   right: 37px;
   opacity: 0.7;
@@ -162,7 +162,6 @@
   background-size: cover;
   z-index: 2;
 }
-
 
 .form-profile option {
   padding: 10px;
@@ -278,6 +277,19 @@ div div.visible.invalidText .error-message {
   right: 7px;
   top: 16px;
 }
+
+/* edit
+*/
+.container-profile .profile .edit{
+  background-color: #eeeeeeb6;
+}
+.form-profile input[type='text'] .edit, .form-profile input[type='date'] .edit, .form-profile input[type='password'] .edit, .form-profile select .edit {
+  background-color: #f0c5692d;
+}
+.form-profile input[type='submit'] .edit{
+  background: linear-gradient(135deg, #9eb7ca, #c294d4);
+}
+
 
 @media (max-width: 764px) {
   .form-profile input[type='text'],
