@@ -3,7 +3,7 @@ import eyeHidden from '../../../assets/icons/icon-eye-hidden.png';
 import { Customer } from '@commercetools/platform-sdk';
 
 class ProfileForm {
-  draw(countries: string[]) {
+  draw(countries: string[], customerData: Customer) {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
     <div class="container-profile">
@@ -32,7 +32,7 @@ class ProfileForm {
               </div>
               <div class="flex-box">
                 <div class="input-box">
-                  <label class="details" for="last-name">Email</label>
+                  <label class="details" for="form-email">Email</label>
                   <div>
                     <input type="text" class="required" data-pattern="email" id="form-email" name="email">
                     <span>user@example.com</span>
@@ -175,75 +175,78 @@ class ProfileForm {
       </div>
     `;
     bodyContainer.innerHTML = content;
+
+    const setInputValue = (selector: string, value: string) => {
+      const input = document.querySelector(selector) as HTMLInputElement;
+      if (input) {
+        input.value = value;
+      }
+    };
+
+    const setSelectValue = (selector: string, value: string) => {
+      const select = document.querySelector(selector) as HTMLSelectElement;
+      if (select) {
+        select.value = value;
+      }
+    };
+
+    const setCheckboxValue = (selector: string, value: boolean) => {
+      const checkbox = document.querySelector(selector) as HTMLInputElement;
+      if (checkbox) {
+        checkbox.checked = value;
+      }
+    };
+
+    setInputValue('#first-name', customerData.firstName || '');
+    setInputValue('#last-name', customerData.lastName || '');
+    setInputValue('#form-email', customerData.email || '');
+
+    if (customerData.dateOfBirth) {
+      const dateParts = customerData.dateOfBirth.split('-');
+      const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
+      setInputValue('#form-age', formattedDate);
+    }
+
+    const billingAddress = customerData.addresses[0];
+    if (billingAddress) {
+      setSelectValue('#form-country', billingAddress.country);
+      setInputValue('#form-postalCode', billingAddress.postalCode || '');
+      setInputValue('#form-street', billingAddress.streetName || '');
+      setInputValue('#form-city', billingAddress.city || '');
+    }
+
+    const shippingAddress = customerData.addresses[1];
+    if (shippingAddress) {
+      setSelectValue('#form-country2', shippingAddress.country);
+      setInputValue('#form-postalCode2', shippingAddress.postalCode || '');
+      setInputValue('#form-street2', shippingAddress.streetName || '');
+      setInputValue('#form-city2', shippingAddress.city || '');
+
+      const billingAndShippingCheckbox = document.querySelector(
+        '#set-billing-and-shipping',
+      ) as HTMLInputElement;
+
+      if (billingAndShippingCheckbox) {
+        const streetsMatch =
+          billingAddress.streetName === shippingAddress.streetName;
+        billingAndShippingCheckbox.checked = streetsMatch;
+      }
+    }
+
+    setCheckboxValue(
+      '#billing-as-default',
+      !!customerData.defaultBillingAddressId,
+    );
+    setCheckboxValue(
+      '#shipping-as-default',
+      !!customerData.defaultShippingAddressId,
+    );
   }
 
   private buildContriesOptions(countries: string[]): string {
     let options = '';
     countries.forEach(c => (options += `<option value="${c}">${c}</option>`));
     return options;
-  }
-
-  // drawProfileData(customer: Customer) {
-  //   // Отобразите данные профиля пользователя в полях формы
-  //   document.getElementById('firstNameInput').value = customer.firstName || '';
-  //   document.getElementById('lastNameInput').value = customer.lastName || '';
-  //   document.getElementById('birthdateInput').value = customer.birthdate || '';
-  //   // Отобразите адреса и другие данные
-  // }
-
-  // enableEditMode() {
-  //   // Включите режим редактирования формы
-  //   document.getElementById('firstNameInput').disabled = false;
-  //   document.getElementById('lastNameInput').disabled = false;
-  //   document.getElementById('birthdateInput').disabled = false;
-  //   // Включите другие поля для редактирования
-  // }
-
-  // disableEditMode() {
-  //   // Выключите режим редактирования формы
-  //   document.getElementById('firstNameInput').disabled = true;
-  //   document.getElementById('lastNameInput').disabled = true;
-  //   document.getElementById('birthdateInput').disabled = true;
-  //   // Выключите другие поля для редактирования
-  // }
-
-  // getUpdatedData(): Partial<Customer> {
-  //   // Соберите обновленные данные из полей формы и верните их
-  //   return {
-  //     firstName: (document.getElementById('firstNameInput') as HTMLInputElement)
-  //       .value,
-  //     lastName: (document.getElementById('lastNameInput') as HTMLInputElement)
-  //       .value,
-  //     birthdate: (document.getElementById('birthdateInput') as HTMLInputElement)
-  //       .value,
-  //     // Соберите другие обновленные данные
-  //   };
-  // }
-  drawProfileData(customer: Customer | undefined) {
-    // Отобразите данные профиля пользователя в полях формы
-    console.log(customer);
-    // Отобразите адреса и другие данные
-  }
-
-  enableEditMode() {
-    // Включите режим редактирования формы
-    // Включите другие поля для редактирования
-  }
-
-  disableEditMode() {
-    // Выключите режим редактирования формы
-    // Выключите другие поля для редактирования
-  }
-
-  getUpdatedData(): Partial<Customer> {
-    // Соберите обновленные данные из полей формы и верните их
-    return {
-      firstName: (document.getElementById('firstNameInput') as HTMLInputElement)
-        .value,
-      lastName: (document.getElementById('lastNameInput') as HTMLInputElement)
-        .value,
-      // Соберите другие обновленные данные
-    };
   }
 }
 

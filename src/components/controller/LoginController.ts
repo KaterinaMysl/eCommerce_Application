@@ -32,7 +32,7 @@ class LoginController implements Controller {
       })
       .then(customerData => {
         this.client.setCustomerData(customerData);
-        window.location.href = '/';
+        // window.location.href = '/';
       })
       .catch(error => {
         handleServerError(error, form);

@@ -72,7 +72,7 @@ class App {
   }
   profile() {
     this.profileController.draw();
-    // this.initProfileListeners();
+    this.initProfileListeners();
   }
 
   private initMainLoginListeners() {
@@ -88,18 +88,18 @@ class App {
     }
   }
 
-  // private initProfileListeners() {
-  //   const profileForm = document.getElementById(
-  //     'profile-form',
-  //   ) as HTMLFormElement;
-  //   // this.validator.initFormListeners(profileForm);
+  private initProfileListeners() {
+    const profileForm = document.getElementById(
+      'profile-form',
+    ) as HTMLFormElement;
+    this.validator.initFormListeners(profileForm);
 
-  //   profileForm.addEventListener('submit', e => {
-  //     // if (this.validator.checkSubmit(e, profileForm)) {
-  //     this.profileController.profile(e);
-  //     // }
-  //   });
-  // }
+    profileForm.addEventListener('submit', e => {
+      if (this.validator.checkSubmit(e, profileForm)) {
+        this.profileController.profile(e);
+      }
+    });
+  }
 
   private initLoginListeners() {
     const loginForm = document.getElementById('login-form') as HTMLFormElement;

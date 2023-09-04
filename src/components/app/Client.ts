@@ -66,6 +66,24 @@ class Client {
     return anonymusApi.customers().post({ body: customer }).execute();
   }
 
+  // updateCustomer(customerData: Customer): Promise<ClientResponse<Customer>> {
+  //   // const api = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
+  //   //   projectKey: process.env.CTP_PROJECT_KEY ?? '',
+  //   // });
+  //   // if (!customerData.version) {
+  //   //   throw new Error('Invalid customer data for update.');
+  //   // }
+
+  //   // return api
+  //   //   .customers()
+  //   //   .withId({ ID: id })
+  //   //   .update({
+  //   //     ID: customerData.id,
+  //   //     version: customerData.version,
+  //   //   })
+  //   //   .execute();
+  // }
+
   logout(customerSessionId: string) {
     userApis.delete(customerSessionId);
   }
