@@ -1,3 +1,4 @@
+import { Customer } from '@commercetools/platform-sdk';
 import { MessageError, ValidatorPattern } from './interfaces';
 import { MessageType } from './type';
 
@@ -101,3 +102,10 @@ export const LOGIN_ERROR = [
 ];
 
 export const SCROLL_THRESHOLD = 100;
+type User = {
+  customer: null | Customer;
+};
+
+export const User: User = {
+  customer: null,
+};

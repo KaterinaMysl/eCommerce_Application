@@ -4,6 +4,7 @@ import LoginForm from '../view/loginForm/LoginForm';
 import LoginPage from '../view/loginPage/LoginPage';
 import { Controller } from './Controller';
 import { handleServerError } from './Validator/handleServerError';
+import { navigateTo } from '../app/Router';
 
 class LoginController implements Controller {
   private client: Client;
@@ -28,11 +29,7 @@ class LoginController implements Controller {
       .login(username, password)
       .then((id: string) => {
         this.storage.saveCustomerSessionId(id);
-        return this.client.getCustomerDetails(id);
-      })
-      .then(customerData => {
-        this.client.setCustomerData(customerData);
-        // window.location.href = '/';
+        navigateTo('/');
       })
       .catch(error => {
         handleServerError(error, form);
@@ -44,10 +41,10 @@ class LoginController implements Controller {
       .login(username, password)
       .then((id: string) => {
         this.storage.saveCustomerSessionId(id);
-        window.location.href = '/';
+        navigateTo('/');
       })
       .catch(() => {
-        window.location.href = '/unexpected-error';
+        navigateTo('/unexpected-error');
       });
   }
 

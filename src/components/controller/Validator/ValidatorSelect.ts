@@ -3,7 +3,7 @@ import FormSubmitHandler from './FormSubmitHandle';
 export default class ValidatorSelect {
   public handleSelectChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
-
+    console.log('work');
     if (select.tagName !== 'SELECT') {
       return;
     }

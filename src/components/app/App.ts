@@ -44,6 +44,7 @@ class App {
   routerControllers() {
     const routes = [
       { path: '/', view: this.start.bind(this), name: 'Home' },
+      { path: '/test', view: this.profile.bind(this), name: 'Home' },
       { path: '/login', view: this.login.bind(this), name: 'Login' },
       { path: '/register', view: this.register.bind(this), name: 'Register' },
       { path: '/profile', view: this.profile.bind(this), name: 'Profile' },
@@ -70,11 +71,13 @@ class App {
   register() {
     this.registerController.draw().finally(() => this.initRegisterListeners());
   }
-  profile() {
-    this.profileController.draw();
-    this.initProfileListeners();
+  async profile() {
+    const customer = await this.client.getCustomer();
+    if (customer) {
+      this.profileController.draw(customer);
+      this.initUserFormListener();
+    }
   }
-
   private initMainLoginListeners() {
     const logoutButton = document.querySelector(
       '.user_box_logout',
@@ -88,19 +91,6 @@ class App {
     }
   }
 
-  private initProfileListeners() {
-    const profileForm = document.getElementById(
-      'profile-form',
-    ) as HTMLFormElement;
-    this.validator.initFormListeners(profileForm);
-
-    profileForm.addEventListener('submit', e => {
-      if (this.validator.checkSubmit(e, profileForm)) {
-        this.profileController.profile(e);
-      }
-    });
-  }
-
   private initLoginListeners() {
     const loginForm = document.getElementById('login-form') as HTMLFormElement;
     this.validator.initFormListeners(loginForm);
@@ -111,7 +101,15 @@ class App {
       }
     });
   }
-
+  private initUserFormListener() {
+    const userForm = document.querySelector('#profile-form') as HTMLFormElement;
+    this.validator.initFormListeners(userForm);
+    userForm.addEventListener('submit', e => {
+      if (this.validator.checkSubmit(e, userForm)) {
+        this.profileController.updateData(e);
+      }
+    });
+  }
   private initRegisterListeners() {
     const registrationForm = document.getElementById(
       'register-form',

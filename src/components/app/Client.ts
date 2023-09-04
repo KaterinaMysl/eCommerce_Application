@@ -3,7 +3,6 @@ import {
   createApiBuilderFromCtpClient,
   CustomerDraft,
   Customer,
-  ClientResponse,
 } from '@commercetools/platform-sdk';
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
 import { v4 as uuidv4 } from 'uuid';
@@ -35,7 +34,6 @@ class Client {
         .execute()
         .then(({ body }) => {
           const customerSessionId = body.customer.id;
-          console.log(customerSessionId);
           userApis.set(customerSessionId, api);
           resolve(customerSessionId);
         })
@@ -43,46 +41,21 @@ class Client {
     });
   }
 
-  async getCustomerDetails(customerSessionId: string): Promise<Customer> {
-    const api = userApis.get(customerSessionId);
-    console.log('1111');
-    console.log(userApis);
-    console.log(api);
-    console.log(customerSessionId);
-    if (!api) {
-      throw new Error('Session not found');
+  async getCustomer() {
+    const id = localStorage.getItem('session-id');
+    if (id) {
+      const response = await anonymusApi
+        .customers()
+        .withId({ ID: id })
+        .get()
+        .execute();
+      return response.body;
     }
-    const response: ClientResponse<Customer> = await api
-      .customers()
-      .withId({ ID: customerSessionId })
-      .get()
-      .execute();
-    const customerData: Customer = response.body;
-    console.log('Customer Data:', customerData);
-    return customerData;
   }
 
   register(customer: CustomerDraft) {
     return anonymusApi.customers().post({ body: customer }).execute();
   }
-
-  // updateCustomer(customerData: Customer): Promise<ClientResponse<Customer>> {
-  //   // const api = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
-  //   //   projectKey: process.env.CTP_PROJECT_KEY ?? '',
-  //   // });
-  //   // if (!customerData.version) {
-  //   //   throw new Error('Invalid customer data for update.');
-  //   // }
-
-  //   // return api
-  //   //   .customers()
-  //   //   .withId({ ID: id })
-  //   //   .update({
-  //   //     ID: customerData.id,
-  //   //     version: customerData.version,
-  //   //   })
-  //   //   .execute();
-  // }
 
   logout(customerSessionId: string) {
     userApis.delete(customerSessionId);
@@ -98,7 +71,7 @@ class Client {
   getAnonymsApi() {
     return anonymusApi;
   }
-  getuserApis() {
+  getUserApis() {
     return userApis;
   }
   getProducts() {

@@ -3,7 +3,7 @@ import eyeHidden from '../../../assets/icons/icon-eye-hidden.png';
 import { Customer } from '@commercetools/platform-sdk';
 
 class ProfileForm {
-  draw(countries: string[], customerData: Customer) {
+  draw(customerData: Customer) {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
     <div class="container-profile">
@@ -56,8 +56,8 @@ class ProfileForm {
                     <label class="details" for="form-country">Country</label>
                     <div>
                       <select id="form-country" class="required" name="countryBilling">
-                        <option value="" disabled selected hidden>Select your country</option>
-                          ${this.buildContriesOptions(countries)}
+                        <option value="">Select your country</option>
+                          ${this.buildContriesOptions()}
                       </select>
                       <p class="error-message" data-message="Please enter your country"></p>
                     </div>
@@ -65,7 +65,7 @@ class ProfileForm {
                   <div class="input-box disabled" >
                     <label class="details" for="form-postalCode">Postal code</label>
                     <div>
-                      <input type="text" class="required" disabled data-pattern="postalCode" id="form-postalCode" name="postalCodeBilling">
+                      <input type="text" class="required"  data-pattern="postalCode" id="form-postalCode" name="postalCodeBilling">
                       <span>42351</span>
                       <p class="error-message" data-message="Please enter your postal code"></p>
                     </div>
@@ -104,8 +104,8 @@ class ProfileForm {
                     <label class="details" for="form-country2">Country</label>
                     <div>
                       <select  id="form-country2" class="required" name="countryShipping">
-                        <option value="" disabled selected hidden>Select your country</option>
-                          ${this.buildContriesOptions(countries)}
+                        <option value="" >Select your country</option>
+                          ${this.buildContriesOptions()}
                       </select>
                       <p class="error-message" data-message="Please enter your country"></p>
                     </div>
@@ -113,7 +113,7 @@ class ProfileForm {
                   <div class="input-box">
                     <label class="details" for="form-postalCode2">Postal code</label>
                     <div>
-                      <input type="text" class="required" data-pattern="postalCode" disabled id="form-postalCode2" name="postalCodeShipping">
+                      <input type="text" class="required" data-pattern="postalCode"  id="form-postalCode2" name="postalCodeShipping">
                       <span>42351</span>
                       <p class="error-message" data-message="Please enter your postal code"></p>
                     </div>
@@ -185,6 +185,7 @@ class ProfileForm {
 
     const setSelectValue = (selector: string, value: string) => {
       const select = document.querySelector(selector) as HTMLSelectElement;
+      select.dispatchEvent(new Event('change'));
       if (select) {
         select.value = value;
       }
@@ -241,12 +242,25 @@ class ProfileForm {
       '#shipping-as-default',
       !!customerData.defaultShippingAddressId,
     );
+    this.markInput();
   }
 
-  private buildContriesOptions(countries: string[]): string {
+  private buildContriesOptions(countries: string[] = ['US']): string {
     let options = '';
     countries.forEach(c => (options += `<option value="${c}">${c}</option>`));
     return options;
+  }
+  markInput() {
+    const inputs = Array.from(
+      document.querySelectorAll(
+        '#profile-form input:not(type="password"), select',
+      ),
+    ) as HTMLInputElement[];
+    inputs.forEach(async input => {
+      await input.focus();
+      await input.blur();
+      await input.classList.add('valid');
+    });
   }
 }
 
