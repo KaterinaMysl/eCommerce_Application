@@ -1,11 +1,21 @@
 import './ProductPage.css';
-import { Attribute, ProductProjection } from '@commercetools/platform-sdk';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import {
+  Attribute,
+  Image,
+  ProductProjection,
+} from '@commercetools/platform-sdk';
 import bicycle from '../../../assets/icons/bicycle.webp';
 import post from '../../../assets/icons/post.webp';
 import compass from '../../../assets/icons/compass.webp';
 import sailboat from '../../../assets/icons/sailboat.webp';
+import Swiper from 'swiper';
+import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 
-export default class ProductItemPage {
+class ProductItemPage {
   draw(product: ProductProjection) {
     const pageContainer = document.querySelector('.main') as HTMLElement;
     const normalPrice =
@@ -69,10 +79,13 @@ export default class ProductItemPage {
                     )} text-center">${attributeObject.rating}</div>
                 </div>
               </div>
-              <div class="offers_image_container image">
-                <div class="offers_image_background" style="background-image:url(${
-                  product.masterVariant.images?.[0]?.url
-                })"></div>
+              <div class="swiper">
+                <div class="swiper-wrapper">
+                    ${this.createSlides(product.masterVariant.images || [])}
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
               </div>
               <p class="offers_text">${product.description?.en}</p>
               <div class="offers_icons">
@@ -86,5 +99,38 @@ export default class ProductItemPage {
             </div>`;
 
     pageContainer.innerHTML = content;
+
+    this.initSlider();
+  }
+
+  private createSlides(images: Image[]) {
+    let content = '';
+    images.forEach(image => {
+      content += `<div class="swiper-slide"><img src="${image.url}"></div>`;
+    });
+    return content;
+  }
+
+  private initSlider() {
+    new Swiper('.swiper', {
+      modules: [EffectFade, Navigation, Pagination],
+
+      loop: true,
+      effect: 'fade',
+      slidesPerView: 'auto',
+      centeredSlides: true,
+
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
   }
 }
+
+export default ProductItemPage;
