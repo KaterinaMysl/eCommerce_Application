@@ -79,13 +79,13 @@ class ProductItemPage {
                     )} text-center">${attributeObject.rating}</div>
                 </div>
               </div>
-              <div class="swiper">
+              <div id="slider" class="swiper">
                 <div class="swiper-wrapper">
                     ${this.createSlides(product.masterVariant.images || [])}
                 </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div id="product-slider-pagination" class="swiper-pagination"></div>
+                <div id="product-slider-prev" class="swiper-button-prev"></div>
+                <div id="product-slider-next" class="swiper-button-next"></div>
               </div>
               <p class="offers_text">${product.description?.en}</p>
               <div class="offers_icons">
@@ -96,11 +96,15 @@ class ProductItemPage {
                   <li class="offers_icons_item"><img src="${sailboat}" alt></li>
                 </ul>
               </div>
-            </div>`;
+            </div>
+        </div>
+        ${this.createModal(product.masterVariant.images || [])}
+    </div>`;
 
     pageContainer.innerHTML = content;
 
     this.initSlider();
+    this.initProductModalSlider();
   }
 
   private createSlides(images: Image[]) {
@@ -112,7 +116,7 @@ class ProductItemPage {
   }
 
   private initSlider() {
-    new Swiper('.swiper', {
+    new Swiper('#slider', {
       modules: [EffectFade, Navigation, Pagination],
 
       loop: true,
@@ -121,13 +125,47 @@ class ProductItemPage {
       centeredSlides: true,
 
       pagination: {
-        el: '.swiper-pagination',
+        el: '#product-slider-pagination',
         clickable: true,
       },
 
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '#product-slider-next',
+        prevEl: '#product-slider-prev',
+      },
+    });
+  }
+
+  private createModal(images: Image[]) {
+    const content = `
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span id="modal-close" class="close">&times;</span>
+                <div id="modal-slider" class="swiper">
+                    <div class="swiper-wrapper">
+                        ${this.createSlides(images)}
+                    </div>
+                    <div id="modal-slider-prev" class="swiper-button-prev"></div>
+                    <div id="modal-slider-next" class="swiper-button-next"></div>
+              </div>
+            </div>
+        </div>
+    `;
+    return content;
+  }
+
+  private initProductModalSlider() {
+    new Swiper('#modal-slider', {
+      modules: [EffectFade, Navigation],
+
+      loop: true,
+      effect: 'fade',
+      slidesPerView: 'auto',
+      centeredSlides: true,
+
+      navigation: {
+        nextEl: '#modal-slider-next',
+        prevEl: '#modal-slider-prev',
       },
     });
   }

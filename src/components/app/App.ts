@@ -73,12 +73,13 @@ class App {
     await this.catalogPage.draw();
     this.initCatalogListeners();
   }
-  private product(productName: string) {
+  private async product(productName: string) {
     if (!productName) {
       console.error('Product name is missing from the URL!');
       return;
     }
-    this.productItemController.openProductPage(productName);
+    await this.productItemController.openProductPage(productName);
+    this.initProductModalListeners();
   }
   private getProductNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -147,6 +148,33 @@ class App {
         }
       });
     });
+  }
+
+  private initProductModalListeners() {
+    const modal = document.getElementById('product-modal') as HTMLElement;
+    const closeBtn = document.getElementById('modal-close') as HTMLElement;
+    const imgs = document
+      .getElementById('slider')
+      ?.querySelectorAll('.swiper-slide');
+
+    imgs?.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'block';
+        document.body.style.overflowY = 'hidden';
+      });
+    });
+
+    closeBtn.onclick = function () {
+      modal.style.display = 'none';
+      document.body.style.overflowY = 'visible';
+    };
+
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+        document.body.style.overflowY = 'visible';
+      }
+    };
   }
 }
 
