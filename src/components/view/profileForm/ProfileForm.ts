@@ -253,7 +253,7 @@ class ProfileForm {
   markInput() {
     const inputs = Array.from(
       document.querySelectorAll(
-        '#profile-form input:not(type="password"), select',
+        '#profile-form input:not([type="password"]), select',
       ),
     ) as HTMLInputElement[];
     inputs.forEach(async input => {

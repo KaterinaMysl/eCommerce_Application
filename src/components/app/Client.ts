@@ -15,14 +15,6 @@ const anonymusApi = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
 class Client {
   private customerData: Customer | undefined;
 
-  setCustomerData(data: Customer) {
-    this.customerData = data;
-  }
-
-  getCustomerData() {
-    return this.customerData;
-  }
-
   login(email: string, password: string) {
     const api = createApiBuilderFromCtpClient(
       ctpPasswordClient(email, password),
@@ -49,7 +41,49 @@ class Client {
         .withId({ ID: id })
         .get()
         .execute();
+      localStorage.setItem('version', `${response.body.version}`);
       return response.body;
+    }
+  }
+  async updateCustomer(
+    newFirstName: string,
+    newLastName: string,
+    newDateOfBirth: string,
+    newEmail: string,
+  ) {
+    const userVersion = Number(localStorage.getItem('version')) as number;
+    const userToken = localStorage.getItem('session-id') as string;
+    try {
+      const response = anonymusApi
+        .customers()
+        .withId({ ID: userToken })
+        .post({
+          body: {
+            version: userVersion,
+            actions: [
+              {
+                action: 'setFirstName',
+                firstName: newFirstName,
+              },
+              {
+                action: 'setLastName',
+                lastName: newLastName,
+              },
+              {
+                action: 'setDateOfBirth',
+                dateOfBirth: newDateOfBirth,
+              },
+              {
+                action: 'changeEmail',
+                email: newEmail,
+              },
+            ],
+          },
+        })
+        .execute();
+      console.log(response);
+    } catch {
+      (error: Error) => console.log(error);
     }
   }
 

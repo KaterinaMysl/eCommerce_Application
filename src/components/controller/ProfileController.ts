@@ -25,7 +25,20 @@ class ProfileController {
     await this.profileForm.markInput();
   }
   updateData(e: Event) {
-    console.log(e.target);
+    const form = new FormData(e.target as HTMLFormElement);
+    const customer = {
+      email: (form.get('email') as string) ?? '',
+      password: (form.get('password') as string) ?? '',
+      firstName: (form.get('firstName') as string) ?? '',
+      lastName: (form.get('lastName') as string) ?? '',
+      dateOfBirth: (form.get('dateOfBirth') as string) ?? '',
+    };
+    this.client.updateCustomer(
+      customer.firstName,
+      customer.lastName,
+      customer.dateOfBirth,
+      customer.email,
+    );
   }
 }
 
