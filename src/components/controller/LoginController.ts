@@ -29,7 +29,8 @@ class LoginController implements Controller {
       .login(username, password)
       .then((id: string) => {
         this.storage.saveCustomerSessionId(id);
-        navigateTo('/');
+        this.client.getCustomerDetails(id);
+        window.location.href = '/';
       })
       .catch(error => {
         handleServerError(error, form);

@@ -4,3 +4,6 @@ export interface ValidatorPattern {
 export interface MessageError {
   [key: string]: string;
 }
+export interface FilterActive {
+  [key: string]: string;
+}

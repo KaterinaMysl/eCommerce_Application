@@ -4,6 +4,7 @@ import {
   CustomerDraft,
   Customer,
   CustomerUpdateAction,
+  ProductProjection,
   Address,
   CustomerSetDefaultShippingAddressAction,
   CustomerSetDefaultBillingAddressAction,
@@ -31,7 +32,6 @@ class Client {
         .execute()
         .then(({ body }) => {
           const customerSessionId = body.customer.id;
-          localStorage.setItem('version', `${body.customer.version}`);
           userApis.set(customerSessionId, api);
           resolve(customerSessionId);
         })
@@ -249,13 +249,15 @@ class Client {
   getAnonymsApi() {
     return anonymusApi;
   }
-  getUserApis() {
-    return userApis;
+  async getProductByKeyName(productKey: string): Promise<ProductProjection> {
+    const response = await anonymusApi
+      .productProjections()
+      .withKey({ key: productKey })
+      .get()
+      .execute();
+    console.log('product', response.body);
+    return response.body;
   }
-  getProducts() {
-    return anonymusApi.products().get().execute();
-  }
-
   getCountries() {
     return new Promise<string[]>((resolve, reject) => {
       anonymusApi

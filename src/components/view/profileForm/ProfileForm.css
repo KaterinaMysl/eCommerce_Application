@@ -277,10 +277,10 @@ div div.visible.invalidText .error-message {
   right: 7px;
   top: 16px;
 }
-.form-profile .form-profile__three{
+.form-profile .form-profile__three {
   flex-direction: column;
 }
-.edit-address_container{
+.edit-address_container {
   display: flex;
   font-size: 0px;
   justify-content: space-around;
@@ -290,7 +290,7 @@ div div.visible.invalidText .error-message {
 .add-new_address,
 .delete_address,
 .edit_address,
-.create_address{
+.create_address {
   height: 34px;
   background-color: #71b7e6;
   font-size: 20px;
@@ -307,7 +307,7 @@ div div.visible.invalidText .error-message {
 .delete_address:hover,
 .add-new_address:hover,
 .edit-password:hover,
-.edit-address:hover .edit-address > p.edit-address_type{
+.edit-address:hover .edit-address > p.edit-address_type {
   background-color: #1904e5;
   color: white;
   /* color: #ff0000; */
@@ -317,35 +317,37 @@ div div.visible.invalidText .error-message {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.new-address_type div{
+.new-address_type div {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50%;
 }
-.new-address_type div input{
+.new-address_type div input {
   margin: 0;
   padding: 0;
   width: 20px;
   height: 20px;
 }
-.new-address_type div label{
+.new-address_type div label {
   margin: 0;
   padding: 0;
   margin-left: 5px;
 }
 /* edit
 */
-.container-profile .profile .edit{
+.container-profile .profile .edit {
   background-color: #eeeeeeb6;
 }
-.form-profile input[type='text'] .edit, .form-profile input[type='date'] .edit, .form-profile input[type='password'] .edit, .form-profile select .edit {
+.form-profile input[type='text'] .edit,
+.form-profile input[type='date'] .edit,
+.form-profile input[type='password'] .edit,
+.form-profile select .edit {
   background-color: #f0c5692d;
 }
-.form-profile input[type='submit'] .edit{
+.form-profile input[type='submit'] .edit {
   background: linear-gradient(135deg, #9eb7ca, #c294d4);
 }
-
 
 @media (max-width: 764px) {
   .form-profile input[type='text'],
