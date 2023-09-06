@@ -68,7 +68,7 @@ export default class CatalogProductPage {
                 </div>
                 <div class="button book_button" prod-name="${
                   product.key
-                }">view tour<span></span><span></span><span></span></div>
+                }">view more<span></span><span></span><span></span></div>
                 <div class="offer_reviews">
                   <div class="offer_reviews_content">
                   <div class="offer_reviews_title">${
