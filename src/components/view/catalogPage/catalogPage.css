@@ -1,6 +1,6 @@
 .container-offers {
   background-color: #fff;
-  overflow: hidden;
+  min-height: 100vh;
 }
 .container-offers div,
 .container-offers span {
@@ -56,14 +56,6 @@
   white-space: nowrap;
 }
 
-/*********************************
-2. Offers
-*********************************/
-.offers {
-  width: 100%;
-  padding-top: 115px;
-  padding-bottom: 115px;
-}
 /*********************************
 2. Search
 *********************************/
@@ -859,16 +851,14 @@ p.catalog-setting_label {
   left: 0;
   bottom: 27px;
   /* width: 180px; */
-  height: 33px;
+  /* height: 33px; */
   background: #fa9e1b;
   overflow: hidden;
-}
-.offer_name {
   font-size: 16px;
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
-  line-height: 35px;
+  line-height: 24px;
   padding: 0 15px;
   cursor: default;
 }
