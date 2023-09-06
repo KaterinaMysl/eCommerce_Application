@@ -6,9 +6,11 @@ export default class ValidatorPassword {
     const input = event.parentElement?.firstElementChild as HTMLInputElement;
     const img = event as HTMLImageElement;
 
-    const isTextType = input.type === 'text';
-    input.type = isTextType ? 'password' : 'text';
-    img.src = isTextType ? imgHidden : imgVisible;
+    if (img.classList.contains('img-password')) {
+      const isTextType = input.type === 'text';
+      input.type = isTextType ? 'password' : 'text';
+      img.src = isTextType ? imgHidden : imgVisible;
+    }
   }
 
   public updatePasswordConfirmStatus(input: HTMLInputElement): void {
@@ -30,10 +32,14 @@ export default class ValidatorPassword {
     const password = document.querySelector(
       '#form-password',
     ) as HTMLInputElement;
-
-    confirmPassword.classList.remove('invalid', 'valid');
-    confirmPassword.classList.add(
-      confirmPassword.value === password.value ? 'valid' : 'invalid',
-    );
+    const form = password.closest('form') as HTMLFormElement;
+    if (form.classList.contains('form-profile')) {
+      return;
+    } else {
+      confirmPassword.classList.remove('invalid', 'valid');
+      confirmPassword.classList.add(
+        confirmPassword.value === password.value ? 'valid' : 'invalid',
+      );
+    }
   }
 }

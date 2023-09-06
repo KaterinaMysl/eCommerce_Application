@@ -83,7 +83,7 @@ class MainPage {
       </div>
     </div>
     <div class="text">
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias expedita suscipit animi quibusdam, laboriosam nostrum? Nulla iure exercitationem cupiditate nobis tempore odio voluptate repellendus temporibus vel quo? Eos, aliquam repudiandae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, exercitationem? Ducimus sapiente et corrupti eos adipisci numquam. Quasi eius quis earum qui cum minima. Ipsam sed beatae atque aut in?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae neque vero, sapiente commodi, esse rem porro eum alias sit, tempora ex impedit. Eaque, accusantium molestias ad repudiandae commodi velit hic!Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. In delectus recusandae esse saepe rem repellendus quas quasi quam temporibus corrupti, natus rerum veritatis a dolor quaerat sit ducimus suscipit necessitatibus?
+    
     </div>
   </div>
 </div>
@@ -108,10 +108,13 @@ class MainPage {
 
   private getButtons(isLoggedIn: boolean): string {
     return isLoggedIn
-      ? `<div class="user_box_logout user_box_link"><a href="/" class="navigator">logout</a></div>`
+      ? `<div class="user_box_logout user_box_link"><a href="/" class="navigator">logout</a></div>
+         <div class="user_box_profile user_box_link"><a href="/profile" class="navigator">profile</a></div>
+        `
       : `
         <div class="user_box_login user_box_link"><a href="/login" class="navigator">login</a></div>
         <div class="user_box_register user_box_link"><a href="/register" class="navigator">register</a></div>
+        <div class="user_box_profile user_box_link"><a href="/profile" class="navigator">profile</a></div>
       `;
   }
 }

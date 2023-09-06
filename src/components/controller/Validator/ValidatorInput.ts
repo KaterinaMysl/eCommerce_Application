@@ -34,6 +34,10 @@ export default class ValidationInput {
       const validator = new ValidatorForm(input);
       validator.handleInput();
     } else {
+      const form = input.closest('form') as HTMLElement;
+      if (form.classList.contains('form-profile')) {
+        return;
+      }
       const validatorAddress = new ValidatorAddress();
       validatorAddress.toggleShippingAddressVisibility(input);
     }

@@ -1,3 +1,4 @@
+import { navigateTo } from '../app/Router';
 import { show404Page } from '../view/page404/page404';
 import StorageController from './StorageController';
 
@@ -9,7 +10,8 @@ export default class RouterController {
   }
 
   private redirectToHome(): void {
-    window.location.href = '/';
+    // window.location.href = '/';
+    navigateTo('/');
   }
 
   init(routes: { path: string; view: () => void; name: string }[]): void {

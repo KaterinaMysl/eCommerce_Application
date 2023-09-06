@@ -31,7 +31,7 @@ class RegistrationForm {
               </div>
               <div class="flex-box">
                 <div class="input-box">
-                  <label class="details" for="last-name">Email</label>
+                  <label class="details" for="form-email">Email</label>
                   <div>
                     <input type="text" class="required" data-pattern="email" id="form-email" name="email">
                     <span>user@example.com</span>
