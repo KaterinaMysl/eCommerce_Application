@@ -10,6 +10,7 @@ import UnexpectedErrorPage from '../view/unexpectedErrorPage/UnexpectedErrorPage
 import RouterController from '../controller/RouterController';
 import CatalogPage from '../view/catalogPage/CatalogPage';
 import ProductItemController from '../controller/ProductController';
+
 class App {
   private mainController: MainController;
   private storage: StorageController;
@@ -78,7 +79,6 @@ class App {
   }
   private async catalog() {
     await this.catalogPage.draw();
-    this.initCatalogListeners();
   }
   private async product(productName: string) {
     if (!productName) {
@@ -128,13 +128,15 @@ class App {
 
   private initLoginListeners() {
     const loginForm = document.getElementById('login-form') as HTMLFormElement;
-    this.validator.initFormListeners(loginForm);
+    if (loginForm) {
+      this.validator.initFormListeners(loginForm);
 
-    loginForm.addEventListener('submit', e => {
-      if (this.validator.checkSubmit(e, loginForm)) {
-        this.loginController.login(e);
-      }
-    });
+      loginForm.addEventListener('submit', e => {
+        if (this.validator.checkSubmit(e, loginForm)) {
+          this.loginController.login(e);
+        }
+      });
+    }
   }
   private initUserFormListener() {
     const addNewAddress = document.querySelector(
@@ -226,19 +228,6 @@ class App {
       if (this.validator.checkSubmit(e, registrationForm)) {
         this.registerController.register(e);
       }
-    });
-  }
-
-  private initCatalogListeners() {
-    const offerItemBtns = document.querySelectorAll('.book_button');
-    offerItemBtns.forEach(item => {
-      item.addEventListener('click', e => {
-        const targetEl = e.target as HTMLElement;
-        const productName = targetEl.getAttribute('prod-name');
-        if (productName) {
-          window.location.href = `/catalog?name=${productName}`;
-        }
-      });
     });
   }
 

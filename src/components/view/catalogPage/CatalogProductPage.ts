@@ -3,6 +3,7 @@ import post from '../../../assets/icons/post.webp';
 import compass from '../../../assets/icons/compass.webp';
 import sailboat from '../../../assets/icons/sailboat.webp';
 import { Attribute, ProductProjection } from '@commercetools/platform-sdk';
+import { navigateTo } from '../../app/Router';
 
 export default class CatalogProductPage {
   draw(product: ProductProjection) {
@@ -87,5 +88,16 @@ export default class CatalogProductPage {
         </div>
       </div>`;
     offerGrid.insertAdjacentHTML('afterbegin', content);
+    const offerItemBtns = document.querySelectorAll('.book_button');
+    offerItemBtns.forEach(item => {
+      item.addEventListener('click', e => {
+        const targetEl = e.target as HTMLElement;
+        const productName = targetEl.getAttribute('prod-name');
+        if (productName) {
+          navigateTo(`/catalog?name=${productName}`);
+          // window.location.href = `/catalog?name=${productName}`;
+        }
+      });
+    });
   }
 }

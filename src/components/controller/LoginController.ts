@@ -30,7 +30,7 @@ class LoginController implements Controller {
       .then((id: string) => {
         this.storage.saveCustomerSessionId(id);
         this.client.getCustomerDetails(id);
-        window.location.href = '/';
+        navigateTo('/');
       })
       .catch(error => {
         handleServerError(error, form);
