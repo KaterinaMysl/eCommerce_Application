@@ -102,12 +102,82 @@ class App {
     });
   }
   private initUserFormListener() {
+    const addNewAddress = document.querySelector(
+      '.add-new_address',
+    ) as HTMLElement;
+    addNewAddress.addEventListener('click', async () => {
+      await this.profileController.addNewAddress();
+      const createAddress = Array.from(
+        document.querySelectorAll('.create_address'),
+      ) as HTMLElement[];
+      await createAddress.forEach(create =>
+        create.addEventListener('click', async (event: Event) => {
+          await this.profileController.addCreateNewAddress(event);
+          updateEvent();
+        }),
+      );
+    });
+
     const userForm = document.querySelector('#profile-form') as HTMLFormElement;
     this.validator.initFormListeners(userForm);
-    userForm.addEventListener('submit', e => {
-      if (this.validator.checkSubmit(e, userForm)) {
-        this.profileController.updateData(e);
-      }
+
+    const saveAddress = Array.from(
+      document.querySelectorAll('.edit_address'),
+    ) as HTMLElement[];
+    const deleteAddress = Array.from(
+      document.querySelectorAll('.delete_address'),
+    ) as HTMLElement[];
+    const saveEdit = Array.from(
+      document.querySelectorAll('.img-input-icon'),
+    ) as HTMLElement[];
+    const password = document.querySelector('.edit-password') as HTMLElement;
+
+    const updateEvent = () => {
+      const saveAddress = Array.from(
+        document.querySelectorAll('.edit_address'),
+      ) as HTMLElement[];
+      saveAddress.forEach(save => {
+        save.removeEventListener('click', (event: Event) => {
+          this.profileController.editAddress(event);
+        });
+      });
+      saveAddress.forEach(save =>
+        save.addEventListener('click', (event: Event) => {
+          this.profileController.editAddress(event);
+        }),
+      );
+      const deleteAddress = Array.from(
+        document.querySelectorAll('.delete_address'),
+      ) as HTMLElement[];
+      deleteAddress.forEach(address =>
+        address.removeEventListener('click', (event: Event) => {
+          this.profileController.deleteAddress(event);
+        }),
+      );
+      deleteAddress.forEach(address =>
+        address.addEventListener('click', (event: Event) => {
+          this.profileController.deleteAddress(event);
+        }),
+      );
+    };
+    deleteAddress.forEach(address =>
+      address.addEventListener('click', (event: Event) => {
+        this.profileController.deleteAddress(event);
+      }),
+    );
+    saveEdit.forEach(save => {
+      save.addEventListener('click', (event: Event) => {
+        const target = event.target as HTMLImageElement;
+        this.profileController.editElements(target);
+      });
+    });
+    saveAddress.forEach(save =>
+      save.addEventListener('click', (event: Event) => {
+        this.profileController.editAddress(event);
+      }),
+    );
+    password.addEventListener('click', (event: Event) => {
+      this.profileController.editPasswords(event);
     });
   }
   private initRegisterListeners() {

@@ -2,9 +2,10 @@ import './ProfileForm.css';
 import eyeHidden from '../../../assets/icons/icon-eye-hidden.png';
 import pencil from '../../../assets/icons/pencil.png';
 import { Customer } from '@commercetools/platform-sdk';
+import { AddAddress } from '../../type';
 
 class ProfileForm {
-  draw(customerData: Customer) {
+  async draw(customerData: Customer) {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
     <div class="container-profile">
@@ -17,7 +18,7 @@ class ProfileForm {
                 <div class="input-box">
                   <label class="details" for="first-name">First name</label>
                     <div>
-                      <input type="text" data-pattern="firstName" id="first-name" name="firstName">
+                      <input type="text" data-pattern="firstName" value="${customerData.firstName}" disabled id="first-name">
                       <span>First name</span>
                       <img src="${pencil}" class="img-input-icon">
                       <p class="error-message" data-message="Please enter your first name."></p>
@@ -26,7 +27,7 @@ class ProfileForm {
                 <div class="input-box">
                   <label class="details" for="last-name">Last name</label>
                   <div>
-                    <input type="text" data-pattern="lastName" id="last-name" name="lastName">
+                    <input type="text" data-pattern="lastName" value="${customerData.lastName}" disabled id="last-name">
                     <span>Last name</span>
                     <img src="${pencil}" class="img-input-icon">
                     <p class="error-message" data-message="Please enter your last name."></p>
@@ -37,7 +38,7 @@ class ProfileForm {
                 <div class="input-box">
                   <label class="details" for="form-email">Email</label>
                   <div>
-                    <input type="text" class="required" data-pattern="email" id="form-email" name="email">
+                    <input type="text" class="required" value="${customerData.email}" disabled data-pattern="email" id="form-email">
                     <span>user@example.com</span>
                     <img src="${pencil}" class="img-input-icon">
                     <p class="error-message" data-message="Please enter your email."></p>
@@ -46,7 +47,7 @@ class ProfileForm {
                 <div class="input-box">
                   <label class="details" for="form-age">Date of birth</label>
                   <div>
-                    <input type="date" class="required" data-pattern="age" id="form-age" name="dateOfBirth">
+                    <input type="date" class="required" value="${customerData.dateOfBirth}" disabled data-pattern="age" id="form-age">
                     <span class="date">11/11/1997</span>
                     <img src="${pencil}" class="img-input-icon">
                     <p class="error-message" data-message="Please enter your date of birth"></p>
@@ -55,131 +56,36 @@ class ProfileForm {
               </div>
             </div>
             <div class="form-profile__two">
-              <fieldset  name="billingAddress"><legend>Billing address:</legend>
-                <div class="flex-box">
-                  <div class="input-box">
-                    <label class="details" for="form-country">Country</label>
-                    <div class = "icon-arrow">
-                      <select id="form-country" class="required" name="countryBilling">
-                        <option value="">Select your country</option>
-                          ${this.buildContriesOptions()}
-                      </select>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your country"></p>
-                    </div>
-                  </div>
-                  <div class="input-box disabled" >
-                    <label class="details" for="form-postalCode">Postal code</label>
-                    <div>
-                      <input type="text" class="required"  data-pattern="postalCode" id="form-postalCode" name="postalCodeBilling">
-                      <span>42351</span>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your postal code"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-box">
-                  <div class="input-box">
-                    <label class="details" for="form-street">Street</label>
-                    <div>
-                      <input type="text" data-pattern="street" id="form-street" name="streetBilling">
-                      <span>Street</span>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your street"></p>
-                    </div>
-                  </div>
-                  <div class="input-box">
-                    <label class="details" for="form-city">City</label>
-                    <div>
-                      <input type="text" data-pattern="city" id="form-city" name="cityBilling">
-                      <span>City</span>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your city"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-box input-checkbox">
-                  <input type="checkbox" name="default-billing" id="billing-as-default">
-                  <label class="details" for="billing-as-default">use as default</label>
-                </div>
-              </fieldset>
-              <div class="input-box input-checkbox">
-                <input type="checkbox" class="use-for" name="billing-shipping" id="set-billing-and-shipping">
-                <label class="details" for="set-billing-and-shipping">Set as address for billing and shipping</label>
-              </div>
-              <fieldset name="shippingAddress" class="fieldset-two"><legend>Shipping address:</legend>
-                <div class="flex-box">
-                  <div class="input-box">
-                    <label class="details" for="form-country2">Country</label>
-                    <div class = "icon-arrow">
-                      <select  id="form-country2" class="required" name="countryShipping">
-                        <option value="" >Select your country</option>
-                          ${this.buildContriesOptions()}
-                      </select>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your country"></p>
-                    </div>
-                  </div>
-                  <div class="input-box">
-                    <label class="details" for="form-postalCode2">Postal code</label>
-                    <div>
-                      <input type="text" class="required" data-pattern="postalCode"  id="form-postalCode2" name="postalCodeShipping">
-                      <span>42351</span>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your postal code"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-box">
-                  <div class="input-box">
-                    <label class="details" for="form-street2">Street</label>
-                    <div>
-                      <input type="text" data-pattern="street" id="form-street2" name="streetShipping">
-                      <span>Street</span>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your street"></p>
-                    </div>
-                  </div>
-                  <div class="input-box">
-                    <label class="details" for="form-city2">City</label>
-                    <div>
-                      <input type="text" data-pattern="city" id="form-city2" name="cityShipping">
-                      <span>City</span>
-                      <img src="${pencil}" class="img-input-icon">
-                      <p class="error-message" data-message="Please enter your city"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-box input-checkbox">
-                  <input type="checkbox" name="default-shipping" id="shipping-as-default">
-                  <label class="details" for="shipping-as-default">use as default</label>
-                </div>
-              </fieldset>
+              
+             
              </div>
-              <div class="user-details form-profile__three">
+             <div>
+             <div class="add-new_address">Add new address</div>
+           </div>
+             <div class="user-details form-profile__three">
                 <div class="flex-box">
                   <div class="input-box">
-                    <label class="details" for="form-password">Password</label>
+                    <label class="details" for="form-password">Current Password</label>
                     <div>
-                      <input type="password" class="input-password required" data-pattern="password" id="form-password" name="password" >
-                      <span>password</span>
+                      <input type="password" class="input-password required" disabled data-pattern="password" id="form-password" name="password" >
                       <img src="${eyeHidden}" class="img-password">
                       <p class="error-message" data-message="Please enter your password."></p>
                     </div>
                   </div>
                   <div class="input-box">
-                    <label class="details" for="confirm-password">Confirm password</label>
+                    <label class="details" for="new-password">New password</label>
                     <div>
-                      <input type="password" class="input-password required" disabled data-pattern="confirmPassword" id="confirm-password" name="password">
-                      <span>Confirm your password</span>
+                      <input type="password" class="input-password required" disabled data-pattern="password" id="new-password" name="password">
                       <img src="${eyeHidden}" class="img-password">
                       <p class="error-message" data-message="Please enter your password."></p>
                     </div>
-                  </div>   
-                </div> 
+                  </div> 
+                </div>
+                <div>
+                  <div class="edit-password">Edit password</div>
+                </div>
               </div>
               <div class="input-box form-profile__four button">
-                <input class="submit-btn" type="submit" value="Save profile">
                 <p id="error-message" class="error-message" data-message=" " style="color: red; height:40px"></p>
               </div>
             </form>
@@ -189,79 +95,133 @@ class ProfileForm {
     `;
     bodyContainer.innerHTML = content;
 
-    const setInputValue = (selector: string, value: string) => {
-      const input = document.querySelector(selector) as HTMLInputElement;
-      if (input) {
-        input.value = value;
-      }
-    };
-
-    const setSelectValue = (selector: string, value: string) => {
-      const select = document.querySelector(selector) as HTMLSelectElement;
-      select.dispatchEvent(new Event('change'));
-      if (select) {
-        select.value = value;
-      }
-    };
-
-    const setCheckboxValue = (selector: string, value: boolean) => {
-      const checkbox = document.querySelector(selector) as HTMLInputElement;
-      if (checkbox) {
-        checkbox.checked = value;
-      }
-    };
-
-    setInputValue('#first-name', customerData.firstName || '');
-    setInputValue('#last-name', customerData.lastName || '');
-    setInputValue('#form-email', customerData.email || '');
-
-    if (customerData.dateOfBirth) {
-      const dateParts = customerData.dateOfBirth.split('-');
-      const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
-      setInputValue('#form-age', formattedDate);
-    }
-
-    const billingAddress = customerData.addresses[0];
-    if (billingAddress) {
-      setSelectValue('#form-country', billingAddress.country);
-      setInputValue('#form-postalCode', billingAddress.postalCode || '');
-      setInputValue('#form-street', billingAddress.streetName || '');
-      setInputValue('#form-city', billingAddress.city || '');
-    }
-
-    const shippingAddress = customerData.addresses[1];
-    if (shippingAddress) {
-      setSelectValue('#form-country2', shippingAddress.country);
-      setInputValue('#form-postalCode2', shippingAddress.postalCode || '');
-      setInputValue('#form-street2', shippingAddress.streetName || '');
-      setInputValue('#form-city2', shippingAddress.city || '');
-
-      const billingAndShippingCheckbox = document.querySelector(
-        '#set-billing-and-shipping',
-      ) as HTMLInputElement;
-
-      if (billingAndShippingCheckbox) {
-        const streetsMatch =
-          billingAddress.streetName === shippingAddress.streetName;
-        billingAndShippingCheckbox.checked = streetsMatch;
-      }
-    }
-
-    setCheckboxValue(
-      '#billing-as-default',
-      !!customerData.defaultBillingAddressId,
-    );
-    setCheckboxValue(
-      '#shipping-as-default',
-      !!customerData.defaultShippingAddressId,
-    );
     this.markInput();
+    this.createAddress(customerData);
   }
 
-  private buildContriesOptions(countries: string[] = ['US']): string {
-    let options = '';
-    countries.forEach(c => (options += `<option value="${c}">${c}</option>`));
-    return options;
+  createAddress(customerData: Customer) {
+    const addressContainer = document.querySelector(
+      '.form-profile__two',
+    ) as HTMLElement;
+    addressContainer.innerHTML = '';
+    customerData.addresses.forEach(address => {
+      const addresse: AddAddress = {
+        address: address,
+        billing: false,
+        shipping: false,
+        default: false,
+        new: false,
+      };
+      if (customerData.billingAddressIds?.includes(address.id as string)) {
+        addresse.billing = true;
+      }
+      if (customerData.shippingAddressIds?.includes(address.id as string)) {
+        addresse.shipping = true;
+      }
+      if (
+        customerData.defaultBillingAddressId?.includes(address.id as string) ||
+        customerData.defaultShippingAddressId?.includes(address.id as string)
+      ) {
+        addresse.default = true;
+      }
+      this.addAddress(addresse);
+    });
+  }
+  addAddress(address: AddAddress) {
+    const addressContainer = document.querySelector(
+      '.form-profile__two',
+    ) as HTMLElement;
+    const content = `
+    <fieldset  name="billingAddress"><legend>${
+      address.billing ? 'Billing' : address.shipping ? 'Shipping' : 'New'
+    } address:</legend>
+    <div class="flex-box">
+      <div class="input-box">
+        <label class="details">Country</label>
+        <div class = "icon-arrow">
+          <select data-index="${address.address.id}" ${
+      address.new ? '' : 'disabled'
+    } class="required" name="countryBilling">
+          <option value="">Select your country</option>
+          <option value="US" ${
+            address.address.country === 'US' ? 'selected' : ''
+          }>US</option>
+          <option value="NL" ${
+            address.address.country === 'NL' ? 'selected' : ''
+          }>NL</option>
+          </select>
+          <p class="error-message" data-message="Please enter your country"></p>
+        </div>
+      </div>
+      <div class="input-box disabled" >
+        <label class="details">Postal code</label>
+        <div>
+          <input type="text" class="required" ${
+            address.new ? '' : 'disabled'
+          } value="${
+      address.address.postalCode
+    }"  data-pattern="postalCode"  name="postalCodeBilling">
+          <p class="error-message" data-message="Please enter your postal code"></p>
+        </div>
+      </div>
+    </div>
+    <div class="flex-box">
+      <div class="input-box">
+        <label class="details">Street</label>
+        <div>
+          <input type="text" data-pattern="street" class="required" value="${
+            address.address.streetName
+          }" ${address.new ? '' : 'disabled'}  name="streetBilling">
+          <p class="error-message" data-message="Please enter your street"></p>
+        </div>
+      </div>
+      <div class="input-box">
+        <label class="details" >City</label>
+        <div>
+          <input type="text" data-pattern="city" class="required" value="${
+            address.address.city
+          }" ${address.new ? '' : 'disabled'}  name="cityBilling">
+          <p class="error-message" data-message="Please enter your city"></p>
+        </div>
+      </div>
+    </div>
+    <div>
+    <div class="new-address_type" style="display: ${
+      address.new ? 'flex' : 'none'
+    }">
+    <div>
+      <input type="radio" class="input_address" name="type">
+      <label class="details">use as shipping</label>
+    </div>
+    <div>
+      <input type="radio" class="input_address" name="type">
+      <label class="details">use as billing</label>
+    </div>
+    <div>
+      <input type="checkbox">
+      <label class="details">use as default</label>
+    </div>
+  </div>
+  
+      <div class="input-box input-checkbox" style="display: ${
+        address.new ? 'none' : 'flex'
+      }">
+        <input type="checkbox" name="default-${
+          address.billing ? 'billing' : ''
+        }" ${address.default ? 'checked' : ''} ${address.new ? '' : 'disabled'}>
+        <label class="details">use as default</label>
+      </div>
+      <div class="edit-address_container">
+        <div class="delete_address" style="display: ${
+          address.new ? 'none' : 'flex'
+        }">Delete address</div>
+        <div class="${address.new ? 'create' : 'edit'}_address">${
+      address.new ? 'Create' : 'Edit'
+    } address</div>
+      </div>
+    </div>
+  </fieldset>`;
+    addressContainer.insertAdjacentHTML('beforeend', content);
   }
   markInput() {
     const inputs = Array.from(
@@ -270,9 +230,10 @@ class ProfileForm {
       ),
     ) as HTMLInputElement[];
     inputs.forEach(async input => {
-      await input.focus();
-      await input.blur();
-      await input.classList.add('valid');
+      const span: HTMLElement | null = input.nextElementSibling as HTMLElement;
+      if (span && span.tagName === 'SPAN') {
+        span.style.display = 'none';
+      }
     });
   }
 }

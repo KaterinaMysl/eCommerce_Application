@@ -32,10 +32,14 @@ export default class ValidatorPassword {
     const password = document.querySelector(
       '#form-password',
     ) as HTMLInputElement;
-
-    confirmPassword.classList.remove('invalid', 'valid');
-    confirmPassword.classList.add(
-      confirmPassword.value === password.value ? 'valid' : 'invalid',
-    );
+    const form = password.closest('form') as HTMLFormElement;
+    if (form.classList.contains('form-profile')) {
+      return;
+    } else {
+      confirmPassword.classList.remove('invalid', 'valid');
+      confirmPassword.classList.add(
+        confirmPassword.value === password.value ? 'valid' : 'invalid',
+      );
+    }
   }
 }

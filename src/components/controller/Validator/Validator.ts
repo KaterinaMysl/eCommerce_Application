@@ -15,8 +15,13 @@ export default class Validator {
   }
 
   private focusin(event: Event): void {
-    const validatorFocusin = new ValidatorFocusin();
-    validatorFocusin.handleFocusValidation(event);
+    const element = event.target as HTMLElement;
+    if (element.classList.contains('input_address')) {
+      return;
+    } else {
+      const validatorFocusin = new ValidatorFocusin();
+      validatorFocusin.handleFocusValidation(event);
+    }
   }
 
   private focusout(event: Event): void {
@@ -25,13 +30,23 @@ export default class Validator {
   }
 
   private click(event: Event): void {
-    const validatorClick = new ValidationClick();
-    validatorClick.handleClick(event);
+    const element = event.target as HTMLElement;
+    if (element.classList.contains('input_address')) {
+      return;
+    } else {
+      const validatorClick = new ValidationClick();
+      validatorClick.handleClick(event);
+    }
   }
 
   private input(event: Event): void {
-    const validatorInput = new ValidationInput();
-    validatorInput.handleInputEvent(event);
+    const element = event.target as HTMLElement;
+    if (element.classList.contains('input_address')) {
+      return;
+    } else {
+      const validatorInput = new ValidationInput();
+      validatorInput.handleInputEvent(event);
+    }
   }
 
   public checkSubmit(event: Event, form: HTMLFormElement): boolean {
@@ -41,7 +56,12 @@ export default class Validator {
   }
 
   private select(event: Event): void {
-    const validatorSelect = new ValidatorSelect();
-    validatorSelect.handleSelectChange(event);
+    const element = event.target as HTMLElement;
+    if (element.classList.contains('input_address')) {
+      return;
+    } else {
+      const validatorSelect = new ValidatorSelect();
+      validatorSelect.handleSelectChange(event);
+    }
   }
 }
