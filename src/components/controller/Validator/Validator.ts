@@ -7,11 +7,13 @@ import FormSubmitHandle from './FormSubmitHandle';
 
 export default class Validator {
   public initFormListeners(form: HTMLFormElement): void {
-    form.addEventListener('focusin', (event: Event) => this.focusin(event));
-    form.addEventListener('focusout', (event: Event) => this.focusout(event));
-    form.addEventListener('input', (event: Event) => this.input(event));
-    form.addEventListener('click', (event: Event) => this.click(event));
-    form.addEventListener('change', (event: Event) => this.select(event));
+    if (form) {
+      form.addEventListener('focusin', (event: Event) => this.focusin(event));
+      form.addEventListener('focusout', (event: Event) => this.focusout(event));
+      form.addEventListener('input', (event: Event) => this.input(event));
+      form.addEventListener('click', (event: Event) => this.click(event));
+      form.addEventListener('change', (event: Event) => this.select(event));
+    }
   }
 
   private focusin(event: Event): void {

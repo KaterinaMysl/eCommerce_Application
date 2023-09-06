@@ -10,7 +10,7 @@ import {
   CustomerSetDefaultBillingAddressAction,
 } from '@commercetools/platform-sdk';
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { someFunction } from '../controller/ToastifyControler';
 const userApis: Map<string, ByProjectKeyRequestBuilder> = new Map();
 const anonymusApi = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
@@ -67,7 +67,12 @@ class Client {
       localStorage.setItem('version', `${response.body.version}`);
       someFunction('Your data has been updated.', true);
     } catch (error) {
-      // someFunction('', true);
+      if (action.action === 'changeEmail') {
+        someFunction(
+          'There is already an existing customer with the provided email.',
+          false,
+        );
+      }
     }
   }
   async updateAddress(address: Address) {

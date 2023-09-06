@@ -175,7 +175,7 @@ class ProfileController {
   async editPasswords(event: Event) {
     const btn = event.target as HTMLElement;
     const passwords = (await Array.from(
-      document.querySelectorAll('input[type="password"]'),
+      document.querySelectorAll('input[name="password"]'),
     )) as HTMLInputElement[];
     if (btn.classList.contains('save')) {
       if (passwords.every(password => password.classList.contains('valid'))) {

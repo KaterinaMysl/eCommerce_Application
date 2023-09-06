@@ -10,14 +10,12 @@ export default class RouterController {
   }
 
   private redirectToHome(): void {
-    // window.location.href = '/';
     navigateTo('/');
   }
 
   init(routes: { path: string; view: () => void; name: string }[]): void {
     const isLoggedIn = this.storage.isLoggedIn();
-    const currentPath = location.pathname;
-
+    let currentPath = location.pathname;
     if (
       isLoggedIn &&
       (currentPath === '/login' || currentPath === '/register')
@@ -26,7 +24,9 @@ export default class RouterController {
       document.title = 'Home';
       return;
     }
-
+    if (!isLoggedIn && currentPath === '/profile') {
+      currentPath = '/login';
+    }
     const potentialMatches = routes.map(route => ({
       route,
       isMatch: currentPath === route.path,
