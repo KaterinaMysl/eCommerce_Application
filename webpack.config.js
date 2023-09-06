@@ -29,7 +29,7 @@ const baseConfig = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|webp)$/i,
         use: [
           {
             loader: 'url-loader',
@@ -55,6 +55,7 @@ const baseConfig = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
+      favicon: './src/assets/icons/favicon.png',
     }),
     new CleanWebpackPlugin(),
     new EslingPlugin({ extensions: 'ts' }),

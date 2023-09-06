@@ -12,7 +12,6 @@ import {
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
 import { v4 as uuidv4 } from 'uuid';
 import { someFunction } from '../controller/ToastifyControler';
-
 const userApis: Map<string, ByProjectKeyRequestBuilder> = new Map();
 const anonymusApi = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
   projectKey: process.env.CTP_PROJECT_KEY ?? '',
@@ -239,6 +238,26 @@ class Client {
     userApis.delete(customerSessionId);
   }
 
+  getCustomerDetails(customerSessionId: string) {
+    const api = userApis.get(customerSessionId);
+    if (!api) {
+      throw new Error('Session not found');
+    }
+    return api
+      .customers()
+      .withId({ ID: customerSessionId })
+      .get()
+      .execute()
+      .then(response => {
+        console.log('API response received:', response.body);
+        return response;
+      })
+      .catch(error => {
+        console.error('Error in getCustomerDetails:', error);
+        throw error;
+      });
+  }
+
   getOrders(email: string) {
     const api = userApis.get(email);
     if (api) {
@@ -268,9 +287,9 @@ class Client {
     });
   }
 
-  private generateCustomerId(): string {
+  /* private generateCustomerId(): string {
     return uuidv4();
-  }
+  } */
 }
 
 export default Client;
