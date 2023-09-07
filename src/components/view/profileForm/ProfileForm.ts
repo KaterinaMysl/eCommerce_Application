@@ -146,9 +146,6 @@ class ProfileForm {
           <option value="US" ${
             address.address.country === 'US' ? 'selected' : ''
           }>US</option>
-          <option value="NL" ${
-            address.address.country === 'NL' ? 'selected' : ''
-          }>NL</option>
           </select>
           <p class="error-message" data-message="Please enter your country"></p>
         </div>
@@ -215,6 +212,9 @@ class ProfileForm {
         <div class="delete_address" style="display: ${
           address.new ? 'none' : 'flex'
         }">Delete address</div>
+        <div class="cancel-new_address" style="display: ${
+          address.new ? 'flex' : 'none'
+        }">Cancel</div>
         <div class="${address.new ? 'create' : 'edit'}_address">${
       address.new ? 'Create' : 'Edit'
     } address</div>
@@ -222,6 +222,15 @@ class ProfileForm {
     </div>
   </fieldset>`;
     addressContainer.insertAdjacentHTML('beforeend', content);
+    const cancel = Array.from(
+      document.querySelectorAll('.cancel-new_address'),
+    ) as HTMLElement[];
+    cancel.forEach(btn =>
+      btn.addEventListener('click', () => {
+        const fieldset = btn.closest('fieldset') as HTMLElement;
+        fieldset.remove();
+      }),
+    );
   }
   markInput() {
     const inputs = Array.from(

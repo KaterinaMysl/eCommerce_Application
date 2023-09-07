@@ -2,7 +2,7 @@ import './RegistrationForm.css';
 import eyeHidden from '../../../assets/icons/icon-eye-hidden.png';
 
 class RegistrationForm {
-  draw(countries: string[]) {
+  draw() {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
     <div class="container-registration">
@@ -56,7 +56,7 @@ class RegistrationForm {
                     <div>
                       <select id="form-country" class="required" name="countryBilling">
                         <option value="" disabled selected hidden>Select your country</option>
-                          ${this.buildContriesOptions(countries)}
+                        <option value="US">US</option>
                       </select>
                       <p class="error-message" data-message="Please enter your country"></p>
                     </div>
@@ -104,7 +104,7 @@ class RegistrationForm {
                     <div>
                       <select  id="form-country2" class="required" name="countryShipping">
                         <option value="" disabled selected hidden>Select your country</option>
-                          ${this.buildContriesOptions(countries)}
+                        <option value="US">US</option>
                       </select>
                       <p class="error-message" data-message="Please enter your country"></p>
                     </div>
@@ -175,12 +175,6 @@ class RegistrationForm {
       </div>
     `;
     bodyContainer.innerHTML = content;
-  }
-
-  private buildContriesOptions(countries: string[]): string {
-    let options = '';
-    countries.forEach(c => (options += `<option value="${c}">${c}</option>`));
-    return options;
   }
 }
 

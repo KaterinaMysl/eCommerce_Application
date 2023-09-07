@@ -18,7 +18,7 @@ class RegisterController implements Controller {
   async draw() {
     await this.client
       .getCountries()
-      .then(c => this.registrationForm.draw(c))
+      .then(() => this.registrationForm.draw())
       .catch(console.log);
   }
 
