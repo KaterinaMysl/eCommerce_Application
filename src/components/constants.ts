@@ -104,10 +104,10 @@ export const SCROLL_THRESHOLD = 100;
 
 export const FILTERS_ACTIVE: FilterActive = {
   category: '',
+  sort: '',
   price: '',
   days: '',
   stars: '',
   rating: '',
-  sort: '',
   search: '',
 };

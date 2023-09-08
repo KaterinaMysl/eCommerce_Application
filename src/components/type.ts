@@ -18,6 +18,7 @@ export type MessageType = {
     [key: string]: string;
   };
 };
+
 export type AddressS = {
   country: string;
   post: string;
@@ -25,6 +26,7 @@ export type AddressS = {
   city: string;
   addressId: string;
 };
+
 export type AddAddress = {
   address: Address;
   billing: boolean;

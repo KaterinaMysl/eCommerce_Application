@@ -1,6 +1,6 @@
 import noUiSlider, { API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
-import ProductController from '../../controller/ProductsController';
+import ProductController from '../../controller/CatalogController';
 import FilterSelection from './FilterSelection';
 
 export default class PriceSlider {

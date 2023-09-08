@@ -10,8 +10,8 @@ import {
   CustomerSetDefaultBillingAddressAction,
 } from '@commercetools/platform-sdk';
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
-// import { v4 as uuidv4 } from 'uuid';
 import { someFunction } from '../controller/ToastifyControler';
+
 const userApis: Map<string, ByProjectKeyRequestBuilder> = new Map();
 const anonymusApi = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
   projectKey: process.env.CTP_PROJECT_KEY ?? '',
@@ -291,10 +291,6 @@ class Client {
         .catch(e => reject(e));
     });
   }
-
-  /* private generateCustomerId(): string {
-    return uuidv4();
-  } */
 }
 
 export default Client;

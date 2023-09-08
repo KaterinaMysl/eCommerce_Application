@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import LoginController from '../components/controller/LoginController';
 import Client from '../components/app/Client';
 import StorageController from '../components/controller/StorageController';
@@ -21,7 +17,6 @@ class MockFormData {
   }
 }
 
-// Ensure window and location are available
 global.window = global.window || {};
 global.window.location = global.window.location || { href: '' };
 

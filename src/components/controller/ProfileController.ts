@@ -71,7 +71,7 @@ class ProfileController {
     const newPassword = inputs[1].value as string;
     this.client.updatePassword(currentPassword, newPassword);
   }
-  updateAddress(elements: HTMLInputElement[]) {
+  async updateAddress(elements: HTMLInputElement[]) {
     const address = {
       country: elements[0].value,
       postalCode: elements[1].value,
@@ -85,7 +85,8 @@ class ProfileController {
       elements[7].name === 'default-billing'
         ? this.setDefaultBillingAddress(defaultChecked)
         : this.setDefaultShippingAddress(defaultChecked);
-    this.client.updateDefaultAddress(addressType);
+    const customer = await this.client.updateDefaultAddress(addressType);
+    await this.profileForm.createAddress(customer);
   }
 
   setDefaultShippingAddress(id: string | undefined) {
@@ -123,7 +124,6 @@ class ProfileController {
       billing: inputs[5].checked,
       defaultAddress: inputs[6].checked,
     };
-    console.log(newAddress);
     let customer = await this.client.createAddress(
       newAddress.country,
       newAddress.post,
@@ -215,8 +215,9 @@ class ProfileController {
 
     await this.profileForm.addAddress(newAddress);
   }
-  editAddress(event: Event) {
+  async editAddress(event: Event) {
     const btn = event.target as HTMLElement;
+
     if (btn.classList.contains('save')) {
       const fieldset = btn.closest('fieldset') as HTMLElement;
       const elements = Array.from(
@@ -225,7 +226,7 @@ class ProfileController {
       if (!elements.some(element => element.classList.contains('invalid'))) {
         elements.forEach(element => (element.disabled = true));
         btn.classList.remove('save');
-        this.updateAddress(elements);
+        await this.updateAddress(elements);
         btn.textContent = 'Edit address';
       } else {
         someFunction('Please fill correct in all the fields', false);
@@ -241,6 +242,7 @@ class ProfileController {
         elements.forEach(element => (element.disabled = false));
       }
     }
+    return true;
   }
   async addCreateNewAddress(event: Event) {
     const fieldset = (event.target as HTMLElement).closest('fieldset');
@@ -259,6 +261,10 @@ class ProfileController {
       if (typeAddress && required) {
         await this.createNewAddress(fieldset);
         fieldset.remove();
+        const btnAddAddress = document.querySelector(
+          '.add-new_address',
+        ) as HTMLElement;
+        btnAddAddress.style.display = 'flex';
       } else {
         someFunction('Please fill in all the fields', false);
       }
