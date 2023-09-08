@@ -1,4 +1,4 @@
-import LogoutController from '../components/controller/LogoutController'; // Adjust the path as needed
+import LogoutController from '../components/controller/LogoutController';
 import Client from '../components/app/Client';
 import StorageController from '../components/controller/StorageController';
 

@@ -5,9 +5,10 @@ import departure from '../../../assets/icons/departure.webp';
 import diving from '../../../assets/icons/diving.webp';
 import island from '../../../assets/icons/island.webp';
 import suitcase from '../../../assets/icons/suitcase.webp';
-import ProductController from '../../controller/ProductsController';
+import ProductController from '../../controller/CatalogController';
 import PriceSlider from './PriceSlider';
 import FilterSelection from './FilterSelection';
+
 export default class CatalogPage {
   private catalogController: ProductController;
   private priceSlider: PriceSlider | null;
@@ -189,7 +190,7 @@ export default class CatalogPage {
     this.initEventCatalog();
   }
   initEventCatalog() {
-    this.priceSlider = new PriceSlider(150, 50000, 'price');
+    this.priceSlider = new PriceSlider(35, 50000, 'price');
     this.daysSlider = new PriceSlider(1, 30, 'days');
     this.starsSlider = new PriceSlider(1, 5, 'stars');
     this.ratingSlider = new PriceSlider(1, 10, 'rating');

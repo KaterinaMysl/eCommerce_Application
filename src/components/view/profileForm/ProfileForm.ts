@@ -221,16 +221,20 @@ class ProfileForm {
       </div>
     </div>
   </fieldset>`;
+    const btnAddAddress = document.querySelector(
+      '.add-new_address',
+    ) as HTMLElement;
+
+    if (address.new) {
+      btnAddAddress.style.display = 'none';
+    }
     addressContainer.insertAdjacentHTML('beforeend', content);
-    const cancel = Array.from(
-      document.querySelectorAll('.cancel-new_address'),
-    ) as HTMLElement[];
-    cancel.forEach(btn =>
-      btn.addEventListener('click', () => {
-        const fieldset = btn.closest('fieldset') as HTMLElement;
-        fieldset.remove();
-      }),
-    );
+    const cancel = document.querySelector('.cancel-new_address') as HTMLElement;
+    cancel.addEventListener('click', () => {
+      const fieldset = cancel.closest('fieldset') as HTMLElement;
+      fieldset.remove();
+      btnAddAddress.style.display = 'flex';
+    });
   }
   markInput() {
     const inputs = Array.from(

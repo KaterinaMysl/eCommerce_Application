@@ -139,9 +139,47 @@ class App {
     }
   }
   private initUserFormListener() {
+    const userForm = document.querySelector('#profile-form') as HTMLFormElement;
     const addNewAddress = document.querySelector(
       '.add-new_address',
     ) as HTMLElement;
+    const saveEdit = Array.from(
+      document.querySelectorAll('.img-input-icon'),
+    ) as HTMLElement[];
+    const password = document.querySelector('.edit-password') as HTMLElement;
+    const updateEvent = () => {
+      const saveAddress = Array.from(
+        document.querySelectorAll('.edit_address'),
+      ) as HTMLElement[];
+      const deleteAddress = Array.from(
+        document.querySelectorAll('.delete_address'),
+      ) as HTMLElement[];
+
+      saveAddress.forEach(save => {
+        save.removeEventListener('click', (event: Event) => {
+          this.profileController.editAddress(event);
+        });
+      });
+      saveAddress.forEach(save =>
+        save.addEventListener('click', async (event: Event) => {
+          const resolve = await this.profileController.editAddress(event);
+          if (resolve) {
+            updateEvent();
+          }
+        }),
+      );
+
+      deleteAddress.forEach(address =>
+        address.removeEventListener('click', (event: Event) => {
+          this.profileController.deleteAddress(event);
+        }),
+      );
+      deleteAddress.forEach(address =>
+        address.addEventListener('click', (event: Event) => {
+          this.profileController.deleteAddress(event);
+        }),
+      );
+    };
     addNewAddress.addEventListener('click', async () => {
       await this.profileController.addNewAddress();
       const createAddress = Array.from(
@@ -155,67 +193,18 @@ class App {
       );
     });
 
-    const userForm = document.querySelector('#profile-form') as HTMLFormElement;
     this.validator.initFormListeners(userForm);
 
-    const saveAddress = Array.from(
-      document.querySelectorAll('.edit_address'),
-    ) as HTMLElement[];
-    const deleteAddress = Array.from(
-      document.querySelectorAll('.delete_address'),
-    ) as HTMLElement[];
-    const saveEdit = Array.from(
-      document.querySelectorAll('.img-input-icon'),
-    ) as HTMLElement[];
-    const password = document.querySelector('.edit-password') as HTMLElement;
-
-    const updateEvent = () => {
-      const saveAddress = Array.from(
-        document.querySelectorAll('.edit_address'),
-      ) as HTMLElement[];
-      saveAddress.forEach(save => {
-        save.removeEventListener('click', (event: Event) => {
-          this.profileController.editAddress(event);
-        });
-      });
-      saveAddress.forEach(save =>
-        save.addEventListener('click', (event: Event) => {
-          this.profileController.editAddress(event);
-        }),
-      );
-      const deleteAddress = Array.from(
-        document.querySelectorAll('.delete_address'),
-      ) as HTMLElement[];
-      deleteAddress.forEach(address =>
-        address.removeEventListener('click', (event: Event) => {
-          this.profileController.deleteAddress(event);
-        }),
-      );
-      deleteAddress.forEach(address =>
-        address.addEventListener('click', (event: Event) => {
-          this.profileController.deleteAddress(event);
-        }),
-      );
-    };
-    deleteAddress.forEach(address =>
-      address.addEventListener('click', (event: Event) => {
-        this.profileController.deleteAddress(event);
-      }),
-    );
     saveEdit.forEach(save => {
       save.addEventListener('click', (event: Event) => {
         const target = event.target as HTMLImageElement;
         this.profileController.editElements(target);
       });
     });
-    saveAddress.forEach(save =>
-      save.addEventListener('click', (event: Event) => {
-        this.profileController.editAddress(event);
-      }),
-    );
     password.addEventListener('click', (event: Event) => {
       this.profileController.editPasswords(event);
     });
+    updateEvent();
   }
   private initRegisterListeners() {
     const registrationForm = document.getElementById(

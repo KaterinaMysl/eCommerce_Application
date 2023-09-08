@@ -1,4 +1,4 @@
-import ProductController from '../../controller/ProductsController';
+import ProductController from '../../controller/CatalogController';
 import { FILTERS_ACTIVE } from '../../constants';
 
 export default class FilterSelection {
@@ -38,18 +38,20 @@ export default class FilterSelection {
       isFilter.remove();
     }
   }
+
   initEvent(attr: string) {
     const div = document.querySelector('.catalog-settings_none') as HTMLElement;
-    div.style.display = 'flex';
     const reset = document.querySelector('.catalog-selection_reset');
     const element = document.querySelector(`[data-type="${attr}"]`);
+    div.style.display = 'flex';
+
     if (element) {
       element.addEventListener('click', () => {
         const type: string = attr;
-        FILTERS_ACTIVE[type] = '';
         this.getProducts();
-        element.remove();
         const link = document.querySelector('.catalog-selection__link');
+        FILTERS_ACTIVE[type] = '';
+        element.remove();
 
         if (!link) {
           div.style.display = 'none';
@@ -61,14 +63,19 @@ export default class FilterSelection {
         const filters = div.lastElementChild as HTMLElement;
         filters.innerHTML = '';
         const keyFilters = Object.keys(FILTERS_ACTIVE);
-        keyFilters.forEach(key => (FILTERS_ACTIVE[key] = ''));
+        keyFilters.forEach((key, index) => {
+          if (index > 1) {
+            FILTERS_ACTIVE[key] = '';
+          }
+        });
         this.getProducts();
         div.style.display = 'none';
       });
     }
   }
+
   getProducts() {
     const productController = new ProductController();
-    productController.getProd();
+    productController.getProductsWithFilters();
   }
 }

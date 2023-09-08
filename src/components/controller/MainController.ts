@@ -1,5 +1,4 @@
 import MainPage from '../view/mainPage/MainPage';
-
 import { Controller } from './Controller';
 import StorageController from './StorageController';
 

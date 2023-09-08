@@ -4,11 +4,12 @@ import CatalogProductPage from '../view/catalogPage/CatalogProductPage';
 import FilterSelection from '../view/catalogPage/FilterSelection';
 import { FILTERS_ACTIVE } from '../constants';
 
-export default class ProductController {
+export default class CatalogController {
   private client: Client;
   private anonymsApi;
   private catalogProduct: CatalogProductPage;
   private filtersSelection: FilterSelection;
+
   constructor() {
     this.client = new Client();
     this.anonymsApi = this.client.getAnonymsApi();
@@ -27,6 +28,7 @@ export default class ProductController {
       .execute();
     const categories = response.body.results;
     const details = document.querySelector('.details-container') as HTMLElement;
+
     if (categories.length > 0) {
       details.innerHTML = '';
       categories.forEach(category =>
@@ -57,7 +59,6 @@ export default class ProductController {
       })
       .execute();
 
-    console.log(response.body.results[0]);
     await this.getCategoryProduct(response.body.results[0].id);
     if (response.body.results[0].ancestors.length === 0) {
       this.getChildrenCategory(response.body.results[0].id);
@@ -68,15 +69,8 @@ export default class ProductController {
   }
 
   async getCategoryProduct(id: string) {
-    const response = await this.anonymsApi
-      .productProjections()
-      .get({
-        queryArgs: { where: `categories(id="${id}")` },
-      })
-      .execute();
-
-    this.createProductsCart(response.body.results);
     FILTERS_ACTIVE.category = id;
+    this.getProductsWithFilters();
   }
 
   async getProducts() {
@@ -87,7 +81,7 @@ export default class ProductController {
 
   async sortProducts(typeSort: string) {
     FILTERS_ACTIVE.sort = typeSort;
-    this.getProd();
+    this.getProductsWithFilters();
   }
 
   async searchProducts(searchText: string) {
@@ -109,9 +103,8 @@ export default class ProductController {
     });
     if (searchName.length !== 0) {
       this.filtersSelection.createSearchFilter(searchText);
-      console.log('run search');
       FILTERS_ACTIVE.search = searchName.join(' ');
-      this.getProd();
+      this.getProductsWithFilters();
     }
   }
 
@@ -121,7 +114,7 @@ export default class ProductController {
     }:range (${Math.round(attr ? from : from * 100)} to ${Math.round(
       attr ? to : to * 100,
     )})` as string;
-    this.getProd();
+    this.getProductsWithFilters();
   }
 
   createProductsCart(products: ProductProjection[]) {
@@ -134,7 +127,7 @@ export default class ProductController {
     });
   }
 
-  async getProd() {
+  async getProductsWithFilters() {
     const category =
       FILTERS_ACTIVE.category.length > 2
         ? `categories.id:"${FILTERS_ACTIVE.category}"`
@@ -151,7 +144,7 @@ export default class ProductController {
             FILTERS_ACTIVE.price,
             FILTERS_ACTIVE.rating,
           ],
-          // limit: 5,
+          limit: 5,
           sort: [FILTERS_ACTIVE.sort],
           ['text.en']: FILTERS_ACTIVE.search,
         },
@@ -161,7 +154,6 @@ export default class ProductController {
     this.createProductsCart(products);
   }
   createCatalogNavigator(name: string, type: string) {
-    console.log('name', name, 'type', type);
     const containerBox = document.querySelector(
       '.navigator-container_box',
     ) as HTMLElement;

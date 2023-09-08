@@ -95,7 +95,6 @@ export default class CatalogProductPage {
         const productName = targetEl.getAttribute('prod-name');
         if (productName) {
           navigateTo(`/catalog?name=${productName}`);
-          // window.location.href = `/catalog?name=${productName}`;
         }
       });
     });
