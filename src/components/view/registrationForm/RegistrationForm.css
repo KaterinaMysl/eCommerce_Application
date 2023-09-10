@@ -25,6 +25,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 1000px) {
+  .container-form {
+    margin-top: -70px;
+  }
+}
+
 .container-form .title {
   font-size: 25px;
   font-weight: 500;
