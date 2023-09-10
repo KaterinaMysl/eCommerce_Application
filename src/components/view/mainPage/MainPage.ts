@@ -98,6 +98,8 @@ class MainPage {
     
     </div>
   </div>
+  <div class="background">
+  </div>
 </div>
     `;
     document.body.innerHTML = content;
@@ -129,12 +131,16 @@ class MainPage {
     const burgerNav = document.querySelector('.main_nav') as HTMLElement;
     const topBar = document.querySelector('.top_bar') as HTMLElement;
     const header = document.querySelector('.header') as HTMLElement;
+    const background = document.querySelector('.background') as HTMLElement;
 
     burgerMenuButton.addEventListener('click', () => {
       burgerNav.classList.toggle('show');
       burgerNavCont.classList.toggle('show');
       topBar.classList.toggle('show');
       burgerMenuButton.classList.toggle('cross');
+      header.classList.toggle('show');
+      background.classList.toggle('show');
+
       if (burgerNav.classList.contains('show')) {
         header.classList.add('scrollable-nav');
         document.body.classList.add('no-scroll');
@@ -145,7 +151,7 @@ class MainPage {
     });
 
     const menuItems = document.querySelectorAll(
-      '.main_nav_item a',
+      '.main_nav_item a, .logo, .user_box_login, .user_box_register, .user_box_logout, .user_box_profile',
     ) as NodeListOf<HTMLElement>;
 
     menuItems.forEach(menuItem => {
@@ -155,6 +161,8 @@ class MainPage {
         topBar.classList.remove('show');
         burgerMenuButton.classList.remove('cross');
         document.body.classList.remove('no-scroll');
+        header.classList.remove('show');
+        background.classList.remove('show');
       });
     });
   }
