@@ -26,6 +26,13 @@ class MainPage {
             <div class="user_box ml-auto">
               ${this.getButtons(isLoggedIn)}
             </div>
+            <div class="burger_menu">
+              <div class="burger_icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -35,7 +42,12 @@ class MainPage {
         <div class="row">
           <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
             <div class="logo_container">
-              <div class="logo"><a href="/" class="navigator"><img src="${logoImage}" alt="">seagull</a></div>
+              <div class="logo">
+                <a href="/" class="navigator">
+                  <img src="${logoImage}" alt="">
+                  <div class="logo_text">seagull</div>
+                </a>
+              </div>
             </div>
             <div class="main_nav_container">
               <ul class="main_nav_list">
@@ -90,6 +102,7 @@ class MainPage {
     `;
     document.body.innerHTML = content;
     this.setHeader();
+    this.setupBurgerMenu();
   }
 
   private setHeader() {
@@ -104,6 +117,46 @@ class MainPage {
     }
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
+  }
+
+  private setupBurgerMenu() {
+    const burgerMenuButton = document.querySelector(
+      '.burger_icon',
+    ) as HTMLElement;
+    const burgerNavCont = document.querySelector(
+      '.main_nav_container',
+    ) as HTMLElement;
+    const burgerNav = document.querySelector('.main_nav') as HTMLElement;
+    const topBar = document.querySelector('.top_bar') as HTMLElement;
+    const header = document.querySelector('.header') as HTMLElement;
+
+    burgerMenuButton.addEventListener('click', () => {
+      burgerNav.classList.toggle('show');
+      burgerNavCont.classList.toggle('show');
+      topBar.classList.toggle('show');
+      burgerMenuButton.classList.toggle('cross');
+      if (burgerNav.classList.contains('show')) {
+        header.classList.add('scrollable-nav');
+        document.body.classList.add('no-scroll');
+      } else {
+        header.classList.remove('scrollable-nav');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
+    const menuItems = document.querySelectorAll(
+      '.main_nav_item a',
+    ) as NodeListOf<HTMLElement>;
+
+    menuItems.forEach(menuItem => {
+      menuItem.addEventListener('click', () => {
+        burgerNav.classList.remove('show');
+        burgerNavCont.classList.remove('show');
+        topBar.classList.remove('show');
+        burgerMenuButton.classList.remove('cross');
+        document.body.classList.remove('no-scroll');
+      });
+    });
   }
 
   private getButtons(isLoggedIn: boolean): string {
