@@ -1,6 +1,5 @@
 .container-profile {
   padding: 140px 10px 30px 10px;
-  height: 100%;
   min-height: 100vh;
   background-image: linear-gradient(135deg, #fab2ff 10%, #1904e5 100%);
   background-size: cover;
@@ -41,12 +40,10 @@
   display: block;
   margin-bottom: 5px;
   height: 50px;
-  border: 1px solid #de870d;
+  border: none;
+  border-bottom: 3px solid #4840a2;
   outline: none;
   width: 300px;
-  border-radius: 5px;
-  border-bottom: 2px solid #de870d;
-  box-shadow: 2px 2px 5px #2b1a023d;
   padding: 15px 32px 5px 10px;
   cursor: pointer;
 }
@@ -138,7 +135,7 @@
 
 .form-profile .input-box input:disabled,
 .form-profile .input-box select:disabled {
-  background-color: rgb(243, 243, 239);
+  background-color: rgb(255, 255, 255);
   cursor: auto;
 }
 
@@ -236,12 +233,12 @@ div div.visible .error-message {
 
 .form-profile input.invalid,
 .form-profile select.invalid {
-  border-bottom: red 4px solid;
+  border-bottom: red 3px solid;
 }
 
 .form-profile input.valid,
 .form-profile select.valid {
-  border-bottom: green 4px solid;
+  border-bottom: green 3px solid;
 }
 
 div div.visible.invalidText .error-message {
@@ -277,31 +274,43 @@ div div.visible.invalidText .error-message {
   right: 7px;
   top: 16px;
 }
+
 .form-profile .form-profile__three {
   flex-direction: column;
 }
+
 .edit-address_container {
   display: flex;
   font-size: 0px;
   justify-content: space-around;
   align-items: center;
 }
+
 .edit-password,
 .add-new_address,
 .delete_address,
 .edit_address,
 .create_address,
 .cancel-new_address {
-  height: 34px;
-  background-color: #71b7e6;
+  height: 40px;
+  background: #4840a2;
   font-size: 20px;
   padding: 5px 15px;
-  border-radius: 10px;
+  border-radius: 27px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  padding-left: 40px;
+  padding-right: 40px;
+  line-height: 53px;
+  white-space: nowrap;
   cursor: pointer;
 }
+
 .cancel-new_address:hover,
 .edit_address:hover,
 .create_address:hover,
@@ -309,43 +318,34 @@ div div.visible.invalidText .error-message {
 .add-new_address:hover,
 .edit-password:hover,
 .edit-address:hover .edit-address > p.edit-address_type {
-  background-color: #1904e5;
   color: white;
+  opacity: 0.8;
 }
+
 .new-address_type {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
 .new-address_type div {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50%;
 }
+
 .new-address_type div input {
   margin: 0;
   padding: 0;
   width: 20px;
   height: 20px;
 }
+
 .new-address_type div label {
   margin: 0;
   padding: 0;
   margin-left: 5px;
-}
-
-.container-profile .profile .edit {
-  background-color: #eeeeeeb6;
-}
-.form-profile input[type='text'] .edit,
-.form-profile input[type='date'] .edit,
-.form-profile input[type='password'] .edit,
-.form-profile select .edit {
-  background-color: #f0c5692d;
-}
-.form-profile input[type='submit'] .edit {
-  background: linear-gradient(135deg, #9eb7ca, #c294d4);
 }
 
 @media (max-width: 764px) {
@@ -391,6 +391,7 @@ div div.visible.invalidText .error-message {
     width: 100%;
   }
 }
+
 @media (max-width: 450px) {
   fieldset .delete_address,
   fieldset .create_address,
@@ -400,15 +401,18 @@ div div.visible.invalidText .error-message {
     padding: 5px;
     font-size: 16px;
   }
+
   .new-address_type {
     flex-direction: column;
     align-content: center;
   }
+
   .new-address_type label {
     min-width: 140px;
     padding: 0;
     margin: 0;
   }
+  
   .new-address_type div input {
     width: 20px !important;
     height: 20px !important;

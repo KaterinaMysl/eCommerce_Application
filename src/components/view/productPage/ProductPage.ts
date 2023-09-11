@@ -3,6 +3,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+
 import {
   Attribute,
   Image,
@@ -79,15 +80,17 @@ class ProductItemPage {
                     )} text-center">${attributeObject.rating}</div>
                 </div>
               </div>
-              <div id="slider" class="swiper">
-                <div class="swiper-wrapper">
+              <div class="box-info-product">
+                <div id="slider" class="swiper">
+                  <div class="swiper-wrapper">
                     ${this.createSlides(product.masterVariant.images || [])}
+                  </div>
+                  <div id="product-slider-pagination" class="swiper-pagination"></div>
+                  <div id="product-slider-prev" class="swiper-button-prev"></div>
+                  <div id="product-slider-next" class="swiper-button-next"></div>
                 </div>
-                <div id="product-slider-pagination" class="swiper-pagination"></div>
-                <div id="product-slider-prev" class="swiper-button-prev"></div>
-                <div id="product-slider-next" class="swiper-button-next"></div>
+                <p class="offers_text">${product.description?.en}</p>
               </div>
-              <p class="offers_text">${product.description?.en}</p>
               <div class="offers_icons">
                 <ul class="offers_icons_list">
                   <li class="offers_icons_item"><img src="${post}" alt></li>
