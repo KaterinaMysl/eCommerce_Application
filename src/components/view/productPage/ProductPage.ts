@@ -130,6 +130,7 @@ class ProductItemPage {
       pagination: {
         el: '#product-slider-pagination',
         clickable: true,
+        dynamicBullets: true,
       },
 
       navigation: {
