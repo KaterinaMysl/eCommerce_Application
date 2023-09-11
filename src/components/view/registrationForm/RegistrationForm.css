@@ -77,12 +77,10 @@
   display: block;
   margin-bottom: 5px;
   height: 50px;
-  border: 1px solid #de870d;
+  border: none;
+  border-bottom: 3px solid #4840a2;
   outline: none;
   width: 300px;
-  border-radius: 5px;
-  border-bottom: 2px solid #de870d;
-  box-shadow: 2px 2px 5px #2b1a023d;
   padding: 15px 5px 5px 10px;
   cursor: pointer;
 }
@@ -125,6 +123,8 @@
 fieldset {
   margin-bottom: 15px;
   width: 100%;
+  border-color: #de870d41;
+  border-style: solid;
 }
 
 fieldset legend {
@@ -183,7 +183,7 @@ fieldset legend {
 
 .form-registration .input-box input:disabled,
 .form-registration .input-box select:disabled {
-  background-color: rgb(243, 243, 239);
+  background-color: rgba(243, 243, 239, 0.504);
   cursor: auto;
 }
 
