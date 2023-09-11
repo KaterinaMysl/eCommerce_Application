@@ -78,7 +78,7 @@ class MainPage {
                       <h1>the world</h1>
                       <div class="button home_slider_button">
                         <div class="button_bcg"></div>
-                        <a href="#">
+                        <a href="/catalog">
                         explore now
                         <span></span>
                         <span></span>
