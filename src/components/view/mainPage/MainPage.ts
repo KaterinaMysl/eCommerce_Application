@@ -120,6 +120,27 @@ class MainPage {
               </ul>
         </div>
     </div>
+    <div class="text-plus-main">
+      <div class="cta_background"></div>
+      <div class="main_plus_container">
+        <div class="row-plus">
+          <div class="col-plus">
+            <div class="cta_plus_container">
+              <div class="owl-plus">
+                <div class="cta_item text-center">
+                  <div class="cta_title">SEAGULL - Your guide to adventures around the world</div>
+                  <p class="cta_text">We are a team of professionals ready to make your dream of an unforgettable journey a reality. Our tour packages are created with love for nature, culture, and the history of different corners of the world.</p>
+                  <div class="button cta_button">
+                    <div class="button_bcg"></div>
+                    <a href="#">about us</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <footer class="footer">
     <div class="container-footer">
@@ -163,7 +184,7 @@ class MainPage {
                 <div class="footer_blog_image"><img src="${blog1}" alt=""></div>
                 <div class="footer_blog_content">
                   <div class="footer_blog_title"><a href="#">Travel with us this year</a></div>
-                  <div class="footer_blog_date">Nov 29, 2023</div>
+                  <div class="footer_blog_date">Sep 29, 2023</div>
                 </div>
               </div>
   
@@ -171,7 +192,7 @@ class MainPage {
                 <div class="footer_blog_image"><img src="${blog2}" alt=""></div>
                 <div class="footer_blog_content">
                   <div class="footer_blog_title"><a href="#">New destinations for you</a></div>
-                  <div class="footer_blog_date">Nov 29, 2023</div>
+                  <div class="footer_blog_date">Sep 29, 2023</div>
                 </div>
               </div>
   
@@ -179,7 +200,7 @@ class MainPage {
                 <div class="footer_blog_image"><img src="${blog3}" alt=""></div>
                   <div class="footer_blog_content">
                     <div class="footer_blog_title"><a href="#">Travel with us this year</a></div>
-                    <div class="footer_blog_date">Nov 29, 2023</div>
+                    <div class="footer_blog_date">Sep 29, 2023</div>
                   </div>
                 </div>
               </div>
@@ -194,15 +215,15 @@ class MainPage {
               <ul class="contact_info_list">
                 <li class="contact_info_item d-flex flex-row">
                   <div><div class="contact_info_icon"><img src="${placeholder}" alt=""></div></div>
-                  <div class="contact_info_text">4127 Raoul Wallenber 45b-c Gibraltar</div>
+                  <div class="contact_info_text">Exotic Avenue 123 WLD 45678 Adventureland</div>
                 </li>
                 <li class="contact_info_item d-flex flex-row">
                   <div><div class="contact_info_icon"><img src="${phone}" alt=""></div></div>
-                  <div class="contact_info_text">2556-808-8613</div>
+                  <div class="contact_info_text">256-06-8561</div>
                 </li>
                 <li class="contact_info_item d-flex flex-row">
                   <div><div class="contact_info_icon"><img src="${message}" alt=""></div></div>
-                  <div class="contact_info_text"><a href="#" target="_top">contactme@gmail.com</a></div>
+                  <div class="contact_info_text"><a href="#" target="_top">info@exoticave.com</a></div>
                 </li>
                 <li class="contact_info_item d-flex flex-row">
                   <div><div class="contact_info_icon"><img src="${planet}" alt=""></div></div>
