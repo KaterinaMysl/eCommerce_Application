@@ -281,6 +281,7 @@ class MainPage {
         document.body.classList.remove('no-scroll');
         header.classList.remove('show');
         background.classList.remove('show');
+        header.classList.remove('scrollable-nav');
       });
     });
   }
