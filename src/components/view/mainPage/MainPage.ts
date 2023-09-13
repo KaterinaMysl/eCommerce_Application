@@ -60,10 +60,10 @@ class MainPage {
             <div class="main_nav_container">
               <ul class="main_nav_list">
                 <li class="main_nav_item"><a href="/" class="navigator">home</a></li>
-                <li class="main_nav_item"><a href="#">about us</a></li>
+                <li class="main_nav_item"><a href="/about">about us</a></li>
                 <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
-                <li class="main_nav_item"><a href="#">news</a></li>
-                <li class="main_nav_item"><a href="#">contact</a></li>
+                <li class="main_nav_item"><a href="/news">news</a></li>
+                <li class="main_nav_item"><a href="/contact">contact</a></li>
               </ul>
             </div>
           </div>
@@ -132,7 +132,7 @@ class MainPage {
                   <p class="cta_text">We are a team of professionals ready to make your dream of an unforgettable journey a reality. Our tour packages are created with love for nature, culture, and the history of different corners of the world.</p>
                   <div class="button cta_button">
                     <div class="button_bcg"></div>
-                    <a href="#">about us</a>
+                    <a href="/about">about us</a>
                   </div>
                 </div>
               </div>
@@ -183,7 +183,7 @@ class MainPage {
               <div class="footer_blog_item clearfix">
                 <div class="footer_blog_image"><img src="${blog1}" alt=""></div>
                 <div class="footer_blog_content">
-                  <div class="footer_blog_title"><a href="#">Travel with us this year</a></div>
+                  <div class="footer_blog_title"><a href="/news">Travel with us this year</a></div>
                   <div class="footer_blog_date">Sep 29, 2023</div>
                 </div>
               </div>
@@ -191,7 +191,7 @@ class MainPage {
               <div class="footer_blog_item clearfix">
                 <div class="footer_blog_image"><img src="${blog2}" alt=""></div>
                 <div class="footer_blog_content">
-                  <div class="footer_blog_title"><a href="#">New destinations for you</a></div>
+                  <div class="footer_blog_title"><a href="/news">New destinations for you</a></div>
                   <div class="footer_blog_date">Sep 29, 2023</div>
                 </div>
               </div>
@@ -199,7 +199,7 @@ class MainPage {
               <div class="footer_blog_item clearfix">
                 <div class="footer_blog_image"><img src="${blog3}" alt=""></div>
                   <div class="footer_blog_content">
-                    <div class="footer_blog_title"><a href="#">Travel with us this year</a></div>
+                    <div class="footer_blog_title"><a href="/news">Travel with us this year</a></div>
                     <div class="footer_blog_date">Sep 29, 2023</div>
                   </div>
                 </div>
