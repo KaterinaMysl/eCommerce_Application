@@ -250,20 +250,37 @@ class App {
 
     imgs?.forEach(img => {
       img.addEventListener('click', () => {
-        modal.style.display = 'block';
+        const fixedHeader = document.querySelector('.header') as HTMLElement;
+        const scrollWidth =
+          window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflowY = 'hidden';
+        document.body.style.paddingRight = scrollWidth + 'px';
+        if (fixedHeader) {
+          fixedHeader.style.width = `calc(100% - ${scrollWidth}px)`;
+        }
+        modal.style.display = 'block';
       });
     });
 
     closeBtn.onclick = function () {
       modal.style.display = 'none';
-      document.body.style.overflowY = 'visible';
+      const fixedHeader = document.querySelector('.header') as HTMLElement;
+      document.body.style.overflowY = 'auto';
+      document.body.style.paddingRight = '0';
+      if (fixedHeader) {
+        fixedHeader.style.width = `calc(100%)`;
+      }
     };
 
     window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = 'none';
-        document.body.style.overflowY = 'visible';
+        const fixedHeader = document.querySelector('.header') as HTMLElement;
+        document.body.style.overflowY = 'auto';
+        document.body.style.paddingRight = '0';
+        if (fixedHeader) {
+          fixedHeader.style.width = `calc(100%)`;
+        }
       }
     };
   }
