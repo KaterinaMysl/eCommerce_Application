@@ -2,6 +2,9 @@ import MainController from '../controller/MainController';
 import LoginController from '../controller/LoginController';
 import LogoutController from '../controller/LogoutController';
 import ProfileController from '../controller/ProfileController';
+import AboutController from '../view/about/About';
+import NewsController from '../view/news/News';
+import ContactController from '../view/contact/Contact';
 import RegisterController from '../controller/RegisterController';
 import StorageController from '../controller/StorageController';
 import Client from './Client';
@@ -18,6 +21,9 @@ class App {
   private registerController: RegisterController;
   private logoutController: LogoutController;
   private profileController: ProfileController;
+  private aboutController: AboutController;
+  private newsController: NewsController;
+  private contactController: ContactController;
   private validator: Validator;
   private unexpectedErrorPage: UnexpectedErrorPage;
   private catalogPage: CatalogPage;
@@ -31,6 +37,9 @@ class App {
     this.validator = new Validator();
     this.routerController = new RouterController(this.storage);
     this.mainController = new MainController(this.storage);
+    this.aboutController = new AboutController();
+    this.newsController = new NewsController();
+    this.contactController = new ContactController();
     this.loginController = new LoginController(this.client, this.storage);
     this.registerController = new RegisterController(
       this.client,
@@ -54,6 +63,9 @@ class App {
       { path: '/login', view: this.login.bind(this), name: 'Login' },
       { path: '/register', view: this.register.bind(this), name: 'Register' },
       { path: '/profile', view: this.profile.bind(this), name: 'Profile' },
+      { path: '/about', view: this.about.bind(this), name: 'About' },
+      { path: '/news', view: this.news.bind(this), name: 'News' },
+      { path: '/contact', view: this.contact.bind(this), name: 'Contact' },
       {
         path: '/catalog',
         view: this.checkRouteAndExecute.bind(this),
@@ -112,6 +124,15 @@ class App {
       this.profileController.draw(customer);
       this.initUserFormListener();
     }
+  }
+  about() {
+    this.aboutController.draw();
+  }
+  news() {
+    this.newsController.draw();
+  }
+  contact() {
+    this.contactController.draw();
   }
   private initMainLoginListeners() {
     const logoutButton = document.querySelector(
@@ -229,20 +250,37 @@ class App {
 
     imgs?.forEach(img => {
       img.addEventListener('click', () => {
-        modal.style.display = 'block';
+        const fixedHeader = document.querySelector('.header') as HTMLElement;
+        const scrollWidth =
+          window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflowY = 'hidden';
+        document.body.style.paddingRight = scrollWidth + 'px';
+        if (fixedHeader) {
+          fixedHeader.style.width = `calc(100% - ${scrollWidth}px)`;
+        }
+        modal.style.display = 'block';
       });
     });
 
     closeBtn.onclick = function () {
       modal.style.display = 'none';
-      document.body.style.overflowY = 'visible';
+      const fixedHeader = document.querySelector('.header') as HTMLElement;
+      document.body.style.overflowY = 'auto';
+      document.body.style.paddingRight = '0';
+      if (fixedHeader) {
+        fixedHeader.style.width = `calc(100%)`;
+      }
     };
 
     window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = 'none';
-        document.body.style.overflowY = 'visible';
+        const fixedHeader = document.querySelector('.header') as HTMLElement;
+        document.body.style.overflowY = 'auto';
+        document.body.style.paddingRight = '0';
+        if (fixedHeader) {
+          fixedHeader.style.width = `calc(100%)`;
+        }
       }
     };
   }

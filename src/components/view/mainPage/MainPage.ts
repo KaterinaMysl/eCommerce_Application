@@ -1,6 +1,14 @@
 import './MainPage.css';
 import logoImage from '../../../assets/images/logo.png';
 import homeSlider from '../../../assets/images/home_slider.jpg';
+import map from '../../../assets/images/map.png';
+import blog1 from '../../../assets/images/blog1.jpg';
+import blog2 from '../../../assets/images/blog2.png';
+import blog3 from '../../../assets/images/blog3.jpg';
+import phone from '../../../assets/icons/phone-call.svg';
+import message from '../../../assets/icons/message.svg';
+import planet from '../../../assets/icons/planet-earth.svg';
+import placeholder from '../../../assets/icons/placeholder.svg';
 import { SCROLL_THRESHOLD } from '../../constants';
 
 class MainPage {
@@ -52,10 +60,10 @@ class MainPage {
             <div class="main_nav_container">
               <ul class="main_nav_list">
                 <li class="main_nav_item"><a href="/" class="navigator">home</a></li>
-                <li class="main_nav_item"><a href="#">about us</a></li>
+                <li class="main_nav_item"><a href="/about">about us</a></li>
                 <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
-                <li class="main_nav_item"><a href="#">news</a></li>
-                <li class="main_nav_item"><a href="#">contact</a></li>
+                <li class="main_nav_item"><a href="/news">news</a></li>
+                <li class="main_nav_item"><a href="/contact">contact</a></li>
               </ul>
             </div>
           </div>
@@ -94,10 +102,141 @@ class MainPage {
         </div>
       </div>
     </div>
-    <div class="text">
-    
+    <div class="text-info-main">
+        <h1>travel with us</h1>
+        <img src="${map}" alt="">
+        <div class="main_info_container">
+              <ul class="main_info_list">
+                <li class="main_info_item">Travel with Confidence</li>
+                <li class="main_info_item">Expert Guides</li>
+                <li class="main_info_item">Cultural Immersion</li>
+                <li class="main_info_item">Convenience</li>
+                <li class="main_info_item">Safety</li>
+                <li class="main_info_item">Flexibility</li>
+                <li class="main_info_item">Sustainability</li>
+                <li class="main_info_item">Memorable Souvenirs</li>
+                <li class="main_info_item">Personalized Service</li>
+                <li class="main_info_item">Positive Reviews</li>
+              </ul>
+        </div>
+    </div>
+    <div class="text-plus-main">
+      <div class="cta_background"></div>
+      <div class="main_plus_container">
+        <div class="row-plus">
+          <div class="col-plus">
+            <div class="cta_plus_container">
+              <div class="owl-plus">
+                <div class="cta_item text-center">
+                  <div class="cta_title">SEAGULL - Your guide to adventures around the world</div>
+                  <p class="cta_text">We are a team of professionals ready to make your dream of an unforgettable journey a reality. Our tour packages are created with love for nature, culture, and the history of different corners of the world.</p>
+                  <div class="button cta_button">
+                    <div class="button_bcg"></div>
+                    <a href="/about">about us</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <footer class="footer">
+    <div class="container-footer">
+      <div class="row">
+  
+        <div class="col-lg-4 footer_column">
+          <div class="footer_col">
+            <div class="footer_content footer_about">
+              <div class="logo_container footer_logo">
+                <div class="logo"><a href="/" class="navigator">
+                <img src="${logoImage}" alt="">
+                <div class="logo_text">seagull</div>
+              </a></div>
+              </div>
+              <p class="footer_about_text">
+              Travel with us and enjoy: <br>
+              <br>
+              Exclusive tours and excursions.<br>
+              Experienced guides who will share unique stories with you.<br>
+              Comfort and safety in every detail of your journey.<br>
+              Support at any time of day or night.<br>
+              <br>
+              Trust us and leave a mark in the world of adventures!</p>
+              <ul class="footer_social_list">
+                <li class="footer_social_item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                <li class="footer_social_item"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                <li class="footer_social_item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li class="footer_social_item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                <li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-4 footer_column">
+          <div class="footer_col">
+            <div class="footer_title">blog posts</div>
+            <div class="footer_content footer_blog">
+  
+              <div class="footer_blog_item clearfix">
+                <div class="footer_blog_image"><img src="${blog1}" alt=""></div>
+                <div class="footer_blog_content">
+                  <div class="footer_blog_title"><a href="/news">Travel with us this year</a></div>
+                  <div class="footer_blog_date">Sep 29, 2023</div>
+                </div>
+              </div>
+  
+              <div class="footer_blog_item clearfix">
+                <div class="footer_blog_image"><img src="${blog2}" alt=""></div>
+                <div class="footer_blog_content">
+                  <div class="footer_blog_title"><a href="/news">New destinations for you</a></div>
+                  <div class="footer_blog_date">Sep 29, 2023</div>
+                </div>
+              </div>
+  
+              <div class="footer_blog_item clearfix">
+                <div class="footer_blog_image"><img src="${blog3}" alt=""></div>
+                  <div class="footer_blog_content">
+                    <div class="footer_blog_title"><a href="/news">Travel with us this year</a></div>
+                    <div class="footer_blog_date">Sep 29, 2023</div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+  
+    
+        <div class="col-lg-4 footer_column">
+          <div class="footer_col">
+            <div class="footer_title">contact info</div>
+            <div class="footer_content footer_contact">
+              <ul class="contact_info_list">
+                <li class="contact_info_item d-flex flex-row">
+                  <div><div class="contact_info_icon"><img src="${placeholder}" alt=""></div></div>
+                  <div class="contact_info_text">Exotic Avenue 123 WLD 45678 Adventureland</div>
+                </li>
+                <li class="contact_info_item d-flex flex-row">
+                  <div><div class="contact_info_icon"><img src="${phone}" alt=""></div></div>
+                  <div class="contact_info_text">256-06-8561</div>
+                </li>
+                <li class="contact_info_item d-flex flex-row">
+                  <div><div class="contact_info_icon"><img src="${message}" alt=""></div></div>
+                  <div class="contact_info_text"><a href="#" target="_top">info@exoticave.com</a></div>
+                </li>
+                <li class="contact_info_item d-flex flex-row">
+                  <div><div class="contact_info_icon"><img src="${planet}" alt=""></div></div>
+                  <div class="contact_info_text"><a href="#">www.seagull.com</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <div class="background">
   </div>
 </div>
@@ -163,6 +302,7 @@ class MainPage {
         document.body.classList.remove('no-scroll');
         header.classList.remove('show');
         background.classList.remove('show');
+        header.classList.remove('scrollable-nav');
       });
     });
   }

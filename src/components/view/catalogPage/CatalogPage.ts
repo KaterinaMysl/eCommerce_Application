@@ -42,7 +42,7 @@ export default class CatalogPage {
               <div class="search">
                 <div class="search_inner">
                   <div class="container fill_height no-padding">
-                    <div class="row fill_height no-margin search-container_box">
+                    <div class="fill_height no-margin search-container_box">
                       <div class="col fill_height no-padding">
                         <div class="search_tabs_container">
                           <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start">
