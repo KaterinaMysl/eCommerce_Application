@@ -1,7 +1,3 @@
-/***********
-1. Fonts
-***********/
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 @font-face {
   font-family: 'Beyond';
@@ -22,10 +18,6 @@
   font-style: normal;
 }
 
-/*********************************
-2. Body and some general stuff
-*********************************/
-
 *,
 ::after,
 ::before {
@@ -39,6 +31,7 @@ html {
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent;
+  height: 100%;
 }
 
 body {
@@ -51,7 +44,11 @@ body {
   text-align: left;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  height: 100%;
+}
+
+.main {
+  height: 100%;
 }
 
 div {
@@ -83,26 +80,27 @@ ul {
   margin-left: auto;
 }
 
-@media (min-width: 768px) {
-  .container-main {
-    max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container-main {
-    max-width: 960px;
-  }
-}
-
 .d-flex {
   display: -ms-flexbox !important;
   display: flex !important;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
+.allow-scroll {
+  overflow: auto;
+}
+
+.scrollable-nav {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
 .ml-auto,
 .mx-auto {
-  margin-left: auto !important;
+  margin-left: auto;
 }
 
 .align-items-center {
@@ -111,8 +109,8 @@ ul {
 }
 
 .justify-content-start {
-  -ms-flex-pack: start !important;
-  justify-content: flex-start !important;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .flex-row {
@@ -220,7 +218,7 @@ h6 {
 
 .body-container {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background-image: linear-gradient(135deg, #fab2ff 10%, #1904e5 100%);
 }
 
@@ -351,10 +349,6 @@ h6 {
   content: '\f0e1';
 }
 
-/*********************************
-3. Header
-*********************************/
-
 .header {
   position: fixed;
   width: 100%;
@@ -365,10 +359,6 @@ h6 {
 .header.scrolled {
   background: rgba(54, 19, 84, 0.85);
 }
-
-/*********************************
-3.1 Top Bar
-*********************************/
 
 .top_bar {
   width: 100%;
@@ -443,35 +433,28 @@ h6 {
   font-weight: 600;
   color: #ffffff;
   text-transform: uppercase;
+  padding-left: 10px;
 }
 
 .user_box_link a:hover {
   color: #fa9e1c;
 }
 
-.user_box_login {
+.user_box_login,
+.user_box_logout {
   margin-right: 15px;
 }
 
-.user_box_login::after {
+.user_box_login::after,
+.user_box_logout::after {
   display: block;
   position: absolute;
-  top: 15px;
-  right: -9px;
+  top: 14px;
+  right: -16px;
   background: #ffffff;
-  width: 1px;
+  width: 2px;
   height: 9px;
   content: '';
-}
-
-@media only screen and (max-width: 575px) {
-  .phone,
-  .social {
-    display: none;
-  }
-  .top_bar {
-    background: none;
-  }
 }
 
 .main_nav_col {
@@ -483,19 +466,9 @@ h6 {
   transition: all 400ms ease;
 }
 
-@media only screen and (max-width: 575px) {
-  .main_nav_col {
-    height: 60px;
-  }
-}
-
 .header.scrolled .main_nav_col {
   height: 100px;
 }
-
-/*********************************
-3.2 Logo
-*********************************/
 
 .logo_container {
   -webkit-transform: translateY(-6px);
@@ -505,42 +478,16 @@ h6 {
   transform: translateY(-6px);
 }
 
-@media only screen and (max-width: 575px) {
-  .logo_container {
-    -webkit-transform: none;
-    -moz-transform: none;
-    -ms-transform: none;
-    -o-transform: none;
-    transform: none;
-  }
-}
-
-.header.scrolled .logo_container {
-  -webkit-transform: none;
-  -moz-transform: none;
-  -ms-transform: none;
-  -o-transform: none;
-  transform: none;
-}
-
 .logo a {
+  display: flex;
+}
+
+.logo_text {
   font-family: 'Open Sans', sans-serif;
   font-size: 30px;
   color: #f4f4f8;
   font-weight: 800;
   text-transform: uppercase;
-}
-
-@media only screen and (max-width: 630px) {
-  .logo a {
-    font-size: 16px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .logo a {
-    display: none;
-  }
 }
 
 .logo a img {
@@ -555,40 +502,9 @@ h6 {
   transform: translateY(2px);
 }
 
-@media only screen and (max-width: 575px) {
-  .logo a img {
-    width: 50px;
-    margin-right: 7px;
-  }
-}
-
-/*********************************
-3.3 Main Nav
-*********************************/
-
 .main_nav_container {
   margin-right: 151px;
   margin-left: auto;
-}
-
-@media only screen and (max-width: 1199px) {
-  .main_nav_container {
-    margin-right: 100px;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  .main_nav_container {
-    margin-right: 20px;
-    font-size: 10px;
-  }
-}
-
-@media only screen and (max-width: 520px) {
-  .main_nav_container {
-    font-size: 5px;
-    margin: 0 auto;
-  }
 }
 
 .main_nav_item {
@@ -609,24 +525,6 @@ h6 {
   text-transform: uppercase;
   padding-bottom: 10px;
   padding-top: 10px;
-}
-
-@media only screen and (max-width: 991px) {
-  .main_nav_item a {
-    font-size: 10px;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  .main_nav_item {
-    margin-right: 15px;
-  }
-}
-
-@media only screen and (max-width: 520px) {
-  .main_nav_item {
-    margin-right: 7px;
-  }
 }
 
 .main_nav_item::after {
@@ -650,18 +548,10 @@ h6 {
   opacity: 1;
 }
 
-/*********************************
-4. Home
-*********************************/
-
 .home {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
-
-/*********************************
-4.1 Home Slider
-*********************************/
 
 .home_slider_container {
   position: absolute;
@@ -677,6 +567,7 @@ h6 {
   width: 100%;
   height: 100%;
 }
+
 .home_slider_item {
   width: 100%;
   height: 100%;
@@ -687,7 +578,7 @@ h6 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -783,4 +674,206 @@ h6 {
 
 .text-center {
   text-align: center !important;
+}
+
+.burger_menu {
+  display: none;
+}
+
+.background {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .container-main {
+    max-width: 750px;
+  }
+
+  .header,
+  .header.scrolled {
+    background: none;
+  }
+
+  .body-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .header.show {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  .top_bar {
+    background: rgba(54, 19, 84, 0.82);
+    height: 44px;
+  }
+
+  .top_bar.show {
+    background: none;
+  }
+
+  .user_box {
+    margin: 0;
+    padding-left: 90px;
+    z-index: 1;
+  }
+
+  .user_box_link a {
+    font-size: 12px;
+  }
+
+  .phone,
+  .social {
+    display: none;
+  }
+
+  .col {
+    position: relative;
+    padding-top: 5px;
+  }
+
+  .logo_container {
+    margin-bottom: 120px;
+    z-index: 2;
+  }
+
+  .burger_menu {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    cursor: pointer;
+    z-index: 15;
+  }
+
+  .main_nav {
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    width: 100%;
+  }
+
+  .logo a img {
+    width: 65px;
+    margin-right: 0px;
+  }
+
+  .main_nav_container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 50px 0 0;
+    margin: 0 auto;
+  }
+
+  .main_nav_container.show {
+    display: flex;
+  }
+
+  .burger_icon {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .burger_icon.cross .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-6px, 7px);
+  }
+
+  .burger_icon.cross .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger_icon.cross .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-6px, -7px);
+  }
+
+  .bar {
+    width: 100%;
+    height: 2px;
+    border-radius: 20px;
+    background: #fff;
+    transition: background 0.3s ease;
+  }
+
+  .main_nav_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 300px 0 50px 0;
+    margin: 0;
+  }
+
+  .main_nav_item {
+    margin: 10px 0 10px 0;
+  }
+
+  .main_nav_item a {
+    font-size: 36px;
+    font-family: 'Beyond';
+    text-transform: lowercase;
+  }
+
+  .main_nav_item::after {
+    display: block;
+    position: absolute;
+    left: -30px;
+    bottom: 30%;
+    width: calc(100% + 14px);
+    height: 4px;
+    background: #ffffff;
+    border-radius: 5px;
+    content: '';
+    opacity: 0;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    z-index: -1;
+  }
+
+  .main_nav_item:hover::after {
+    width: calc(100%+14px);
+    left: -8px;
+    opacity: 1;
+  }
+
+  .main_nav_item:last-child {
+    margin-bottom: 0;
+  }
+
+  .logo_text {
+    display: none;
+  }
+
+  .header.scrolled .top_bar {
+    visibility: visible;
+    opacity: 1;
+    height: 44px;
+  }
+
+  .header.scrolled .main_nav_col {
+    height: 80px;
+  }
+
+  .background.show {
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, #fa9e1b, #8d4fff);
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+  }
 }

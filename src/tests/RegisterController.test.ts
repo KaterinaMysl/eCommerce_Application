@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import RegisterController from '../components/controller/RegisterController';
 import Client from '../components/app/Client';
 import { handleServerError } from '../components/controller/Validator/handleServerError';

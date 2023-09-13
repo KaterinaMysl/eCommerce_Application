@@ -1,4 +1,4 @@
-import { MessageError, ValidatorPattern } from './interfaces';
+import { FilterActive, MessageError, ValidatorPattern } from './interfaces';
 import { MessageType } from './type';
 
 export const ERROR_MESSAGES: MessageError = {
@@ -101,3 +101,13 @@ export const LOGIN_ERROR = [
 ];
 
 export const SCROLL_THRESHOLD = 100;
+
+export const FILTERS_ACTIVE: FilterActive = {
+  category: '',
+  sort: '',
+  price: '',
+  days: '',
+  stars: '',
+  rating: '',
+  search: '',
+};

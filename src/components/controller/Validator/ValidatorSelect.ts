@@ -3,7 +3,6 @@ import FormSubmitHandler from './FormSubmitHandle';
 export default class ValidatorSelect {
   public handleSelectChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
-
     if (select.tagName !== 'SELECT') {
       return;
     }
@@ -31,11 +30,13 @@ export default class ValidatorSelect {
     const selector =
       select.id === 'form-country' ? '#form-postalCode' : '#form-postalCode2';
     const input = document.querySelector(selector) as HTMLInputElement;
-    input.disabled = false;
-    input.dataset.pattern = codeV;
-    input.value = '';
-    input.classList.remove('valid');
-    this.updatePostalCode(select, input);
+    if (input) {
+      input.disabled = false;
+      input.dataset.pattern = codeV;
+      input.value = '';
+      input.classList.remove('valid');
+      this.updatePostalCode(select, input);
+    }
   }
 
   private updateErrorMessage(select: HTMLSelectElement): void {

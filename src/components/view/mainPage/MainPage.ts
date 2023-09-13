@@ -26,6 +26,13 @@ class MainPage {
             <div class="user_box ml-auto">
               ${this.getButtons(isLoggedIn)}
             </div>
+            <div class="burger_menu">
+              <div class="burger_icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -35,13 +42,18 @@ class MainPage {
         <div class="row">
           <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
             <div class="logo_container">
-              <div class="logo"><a href="/" class="navigator"><img src="${logoImage}" alt="">seagull</a></div>
+              <div class="logo">
+                <a href="/" class="navigator">
+                  <img src="${logoImage}" alt="">
+                  <div class="logo_text">seagull</div>
+                </a>
+              </div>
             </div>
             <div class="main_nav_container">
               <ul class="main_nav_list">
                 <li class="main_nav_item"><a href="/" class="navigator">home</a></li>
                 <li class="main_nav_item"><a href="#">about us</a></li>
-                <li class="main_nav_item"><a href="#">offers</a></li>
+                <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
                 <li class="main_nav_item"><a href="#">news</a></li>
                 <li class="main_nav_item"><a href="#">contact</a></li>
               </ul>
@@ -66,7 +78,7 @@ class MainPage {
                       <h1>the world</h1>
                       <div class="button home_slider_button">
                         <div class="button_bcg"></div>
-                        <a href="#">
+                        <a href="/catalog">
                         explore now
                         <span></span>
                         <span></span>
@@ -83,13 +95,16 @@ class MainPage {
       </div>
     </div>
     <div class="text">
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias expedita suscipit animi quibusdam, laboriosam nostrum? Nulla iure exercitationem cupiditate nobis tempore odio voluptate repellendus temporibus vel quo? Eos, aliquam repudiandae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, exercitationem? Ducimus sapiente et corrupti eos adipisci numquam. Quasi eius quis earum qui cum minima. Ipsam sed beatae atque aut in?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae neque vero, sapiente commodi, esse rem porro eum alias sit, tempora ex impedit. Eaque, accusantium molestias ad repudiandae commodi velit hic!Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. In delectus recusandae esse saepe rem repellendus quas quasi quam temporibus corrupti, natus rerum veritatis a dolor quaerat sit ducimus suscipit necessitatibus?
+    
     </div>
+  </div>
+  <div class="background">
   </div>
 </div>
     `;
     document.body.innerHTML = content;
     this.setHeader();
+    this.setupBurgerMenu();
   }
 
   private setHeader() {
@@ -106,9 +121,57 @@ class MainPage {
     window.addEventListener('resize', handleScroll);
   }
 
+  private setupBurgerMenu() {
+    const burgerMenuButton = document.querySelector(
+      '.burger_icon',
+    ) as HTMLElement;
+    const burgerNavCont = document.querySelector(
+      '.main_nav_container',
+    ) as HTMLElement;
+    const burgerNav = document.querySelector('.main_nav') as HTMLElement;
+    const topBar = document.querySelector('.top_bar') as HTMLElement;
+    const header = document.querySelector('.header') as HTMLElement;
+    const background = document.querySelector('.background') as HTMLElement;
+
+    burgerMenuButton.addEventListener('click', () => {
+      burgerNav.classList.toggle('show');
+      burgerNavCont.classList.toggle('show');
+      topBar.classList.toggle('show');
+      burgerMenuButton.classList.toggle('cross');
+      header.classList.toggle('show');
+      background.classList.toggle('show');
+
+      if (burgerNav.classList.contains('show')) {
+        header.classList.add('scrollable-nav');
+        document.body.classList.add('no-scroll');
+      } else {
+        header.classList.remove('scrollable-nav');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
+    const menuItems = document.querySelectorAll(
+      '.main_nav_item a, .logo, .user_box_login, .user_box_register, .user_box_logout, .user_box_profile',
+    ) as NodeListOf<HTMLElement>;
+
+    menuItems.forEach(menuItem => {
+      menuItem.addEventListener('click', () => {
+        burgerNav.classList.remove('show');
+        burgerNavCont.classList.remove('show');
+        topBar.classList.remove('show');
+        burgerMenuButton.classList.remove('cross');
+        document.body.classList.remove('no-scroll');
+        header.classList.remove('show');
+        background.classList.remove('show');
+      });
+    });
+  }
+
   private getButtons(isLoggedIn: boolean): string {
     return isLoggedIn
-      ? `<div class="user_box_logout user_box_link"><a href="/" class="navigator">logout</a></div>`
+      ? `<div class="user_box_logout user_box_link"><a href="/" class="navigator">logout</a></div>
+         <div class="user_box_profile user_box_link"><a href="/profile" class="navigator">profile</a></div>
+        `
       : `
         <div class="user_box_login user_box_link"><a href="/login" class="navigator">login</a></div>
         <div class="user_box_register user_box_link"><a href="/register" class="navigator">register</a></div>

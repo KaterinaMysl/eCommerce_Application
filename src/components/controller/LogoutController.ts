@@ -1,4 +1,5 @@
 import Client from '../app/Client';
+import { navigateTo } from '../app/Router';
 import StorageController from './StorageController';
 
 class LogoutController {
@@ -13,7 +14,7 @@ class LogoutController {
   logout() {
     this.client.logout(this.storage.getCustomerSessionId());
     this.storage.deleteCustomerSessionId();
-    window.location.href = '/';
+    navigateTo('/');
   }
 }
 
