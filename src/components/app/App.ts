@@ -13,6 +13,7 @@ import UnexpectedErrorPage from '../view/unexpectedErrorPage/UnexpectedErrorPage
 import RouterController from '../controller/RouterController';
 import CatalogPage from '../view/catalogPage/CatalogPage';
 import ProductItemController from '../controller/ProductController';
+import CartController from '../controller/CartController';
 
 class App {
   private mainController: MainController;
@@ -30,6 +31,7 @@ class App {
   private productItemController: ProductItemController;
   private routerController: RouterController;
   private client: Client;
+  private cartController: CartController;
 
   constructor() {
     this.client = new Client();
@@ -50,6 +52,7 @@ class App {
     this.unexpectedErrorPage = new UnexpectedErrorPage();
     this.catalogPage = new CatalogPage();
     this.productItemController = new ProductItemController();
+    this.cartController = new CartController();
   }
   navigateTo(url: string) {
     history.pushState({}, '', url);
@@ -66,6 +69,7 @@ class App {
       { path: '/about', view: this.about.bind(this), name: 'About' },
       { path: '/news', view: this.news.bind(this), name: 'News' },
       { path: '/contact', view: this.contact.bind(this), name: 'Contact' },
+      { path: '/cart', view: this.cart.bind(this), name: 'Cart' },
       {
         path: '/catalog',
         view: this.checkRouteAndExecute.bind(this),
@@ -106,6 +110,9 @@ class App {
   }
   errorPage() {
     this.unexpectedErrorPage.draw();
+  }
+  cart() {
+    this.cartController.draw();
   }
   start() {
     this.mainController.draw();

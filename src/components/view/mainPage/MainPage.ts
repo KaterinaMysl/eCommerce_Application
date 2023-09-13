@@ -60,10 +60,11 @@ class MainPage {
             <div class="main_nav_container">
               <ul class="main_nav_list">
                 <li class="main_nav_item"><a href="/" class="navigator">home</a></li>
-                <li class="main_nav_item"><a href="/about">about us</a></li>
+                <li class="main_nav_item"><a href="/about" class="navigator">about us</a></li>
                 <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
-                <li class="main_nav_item"><a href="/news">news</a></li>
-                <li class="main_nav_item"><a href="/contact">contact</a></li>
+                <li class="main_nav_item"><a href="/news" class="navigator">news</a></li>
+                <li class="main_nav_item"><a href="/contact" class="navigator">contact</a></li>
+                <li class="main_nav_item"><a href="/cart" class="navigator">cart</a></li>
               </ul>
             </div>
           </div>

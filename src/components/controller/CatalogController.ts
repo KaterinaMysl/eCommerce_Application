@@ -76,9 +76,19 @@ export default class CatalogController {
   async getProducts() {
     const response = await this.anonymsApi.productProjections().get().execute();
     const products: ProductProjection[] = response.body.results;
-    products.forEach(product => this.catalogProduct.draw(product));
+    await products.forEach(product => this.catalogProduct.draw(product));
+    this.addEventCart();
   }
-
+  addEventCart() {
+    const addCart = document.querySelectorAll('.add-product-to-cart');
+    addCart.forEach(item => {
+      item.addEventListener('click', e => {
+        const targetEl = e.target as HTMLElement;
+        const productName = targetEl.getAttribute('prod-key') as string;
+        this.addProductToCart(productName);
+      });
+    });
+  }
   async sortProducts(typeSort: string) {
     FILTERS_ACTIVE.sort = typeSort;
     this.getProductsWithFilters();
@@ -117,14 +127,15 @@ export default class CatalogController {
     this.getProductsWithFilters();
   }
 
-  createProductsCart(products: ProductProjection[]) {
+  async createProductsCart(products: ProductProjection[]) {
     const offerGrid = document.querySelector('.offers_grid') as HTMLElement;
     const searchCount = document.querySelector('.search-count') as HTMLElement;
     searchCount.textContent = `${products.length}`;
     offerGrid.innerHTML = '';
-    products.reverse().forEach(product => {
+    await products.reverse().forEach(product => {
       this.catalogProduct.draw(product);
     });
+    this.addEventCart();
   }
 
   async getProductsWithFilters() {
@@ -178,5 +189,24 @@ export default class CatalogController {
     }
     details.open = true;
     link.textContent = name;
+  }
+  async addProductToCart(keyName: string) {
+    const idProduct = await this.client.getProductByKeyName(keyName);
+    const id = localStorage.getItem('session-id');
+    if (id) {
+      console.log('with login');
+      if (!localStorage.getItem('cart')) {
+        console.log('create cart with login');
+        await this.client.createCart();
+      }
+      await this.client.addProductToCart(idProduct.id);
+    } else {
+      console.log('no login');
+      if (!localStorage.getItem('cart')) {
+        console.log('create cart with anonymous');
+        await this.client.createCartAnonymous();
+      }
+      await this.client.addProductToCart(idProduct.id);
+    }
   }
 }

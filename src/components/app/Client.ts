@@ -1,4 +1,4 @@
-import { ctpClient, ctpPasswordClient } from './BuildClient';
+import { anonymousClient, ctpClient, ctpPasswordClient } from './BuildClient';
 import {
   createApiBuilderFromCtpClient,
   CustomerDraft,
@@ -11,31 +11,225 @@ import {
 } from '@commercetools/platform-sdk';
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
 import { someFunction } from '../controller/ToastifyControler';
+import { CartLS } from '../type';
 
 const userApis: Map<string, ByProjectKeyRequestBuilder> = new Map();
 const anonymusApi = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
   projectKey: process.env.CTP_PROJECT_KEY ?? '',
 });
 
+let anonymousApiRoot = createApiBuilderFromCtpClient(
+  anonymousClient(),
+).withProjectKey({
+  projectKey: process.env.CTP_PROJECT_KEY2 ?? '',
+});
+
 class Client {
   private customerData: Customer | undefined;
 
-  login(email: string, password: string) {
-    const api = createApiBuilderFromCtpClient(
-      ctpPasswordClient(email, password),
-    ).withProjectKey({ projectKey: process.env.CTP_PROJECT_KEY ?? '' });
-    return new Promise<string>((resolve, reject) => {
-      api
+  async loginWithAnonymousSession(email: string, password: string) {
+    console.log('login with anonymous');
+    try {
+      const customer = await anonymousApiRoot
+        .me()
         .login()
-        .post({ body: { email: email, password: password } })
-        .execute()
-        .then(({ body }) => {
-          const customerSessionId = body.customer.id;
-          userApis.set(customerSessionId, api);
-          resolve(customerSessionId);
+        .post({
+          body: {
+            email: email,
+            password: password,
+            activeCartSignInMode: 'MergeWithExistingCustomerCart',
+          },
         })
-        .catch((e: Error) => reject(e));
+        .execute();
+      const api = createApiBuilderFromCtpClient(
+        ctpPasswordClient(email, password),
+      ).withProjectKey({ projectKey: process.env.CTP_PROJECT_KEY ?? '' });
+
+      const response = await api.me().get().execute();
+      if (response) {
+        const customerSessionId = response.body.id;
+        userApis.set(customerSessionId, api);
+      }
+      this.createMeCart(api);
+      return customer.body.customer.id;
+    } catch (error) {
+      return false;
+    }
+  }
+  async login(email: string, password: string) {
+    const anonymousSession = localStorage.getItem('session-anonymous');
+    if (anonymousSession) {
+      console.log('login with anonymous');
+      const id = await this.loginWithAnonymousSession(email, password);
+      if (id) {
+        return id;
+      } else {
+        return false;
+      }
+    } else {
+      console.log('login non anonymous');
+      const api = createApiBuilderFromCtpClient(
+        ctpPasswordClient(email, password),
+      ).withProjectKey({ projectKey: process.env.CTP_PROJECT_KEY ?? '' });
+      try {
+        const login = await api
+          .login()
+          .post({ body: { email: email, password: password } })
+          .execute();
+
+        const customerSessionId = login.body.customer.id;
+        userApis.set(customerSessionId, api);
+        this.createMeCart(api);
+        return customerSessionId;
+      } catch (error) {
+        console.error(error);
+        return error;
+      }
+    }
+  }
+  async createMeCart(api: ByProjectKeyRequestBuilder) {
+    try {
+      const cart = await api.me().activeCart().get().execute();
+      const cartLS = {
+        id: cart.body.id,
+        version: cart.body.version,
+      };
+      console.log('cart client', cart);
+      localStorage.setItem('cart', JSON.stringify(cartLS));
+    } catch (error) {
+      const createCart = await api
+        .me()
+        .carts()
+        .post({
+          body: {
+            currency: 'EUR',
+          },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .execute();
+      localStorage.setItem(
+        'cart',
+        JSON.stringify({
+          id: createCart.body.id,
+          version: createCart.body.version,
+        }),
+      );
+    }
+  }
+  async createCartAnonymous() {
+    try {
+      const customer = await anonymousApiRoot
+        .me()
+        .carts()
+        .post({
+          body: {
+            currency: 'EUR',
+          },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .execute();
+      localStorage.setItem(
+        'cart',
+        JSON.stringify({
+          id: customer.body.id,
+          version: customer.body.version,
+        }),
+      );
+      const id = (await customer.body.anonymousId) as string;
+      localStorage.setItem('session-anonymous', id);
+      return customer;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async createCart() {
+    try {
+      const customer = await anonymusApi
+        .carts()
+        .post({
+          body: {
+            currency: 'EUR',
+          },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .execute();
+      localStorage.setItem(
+        'cart',
+        JSON.stringify({
+          id: customer.body.id,
+          version: customer.body.version,
+        }),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async getRefreshAnonymousToken() {
+    anonymousApiRoot = createApiBuilderFromCtpClient(
+      anonymousClient(),
+    ).withProjectKey({
+      projectKey: process.env.CTP_PROJECT_KEY2 ?? '',
     });
+  }
+  async addProductToCart(id: string) {
+    console.log('add products');
+    const cartLS = localStorage.getItem('cart');
+    if (cartLS) {
+      const cart: CartLS = JSON.parse(cartLS);
+      const response = await anonymusApi
+        .carts()
+        .withId({ ID: cart.id })
+        .post({
+          body: {
+            version: Number(cart.version),
+            actions: [
+              {
+                action: 'addLineItem',
+                productId: id,
+              },
+            ],
+          },
+        })
+        .execute();
+      cart.version = response.body.version;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return response;
+    }
+  }
+  async removeProductWithCart(id: string) {
+    try {
+      const cartLS = localStorage.getItem('cart');
+      if (cartLS) {
+        const cart: CartLS = JSON.parse(cartLS);
+        const response = await anonymusApi
+          .carts()
+          .withId({ ID: cart.id })
+          .post({
+            body: {
+              version: Number(cart.version),
+              actions: [
+                {
+                  action: 'removeLineItem',
+                  lineItemId: id,
+                },
+              ],
+            },
+          })
+          .execute();
+        cart.version = response.body.version;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        return true;
+      }
+    } catch (error) {
+      return false;
+      // console.error(error);
+    }
   }
 
   async getCustomer() {
@@ -241,6 +435,8 @@ class Client {
 
   logout(customerSessionId: string) {
     userApis.delete(customerSessionId);
+    localStorage.removeItem('cart');
+    this.getRefreshAnonymousToken();
   }
 
   getCustomerDetails(customerSessionId: string) {

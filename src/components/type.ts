@@ -34,3 +34,8 @@ export type AddAddress = {
   default: boolean;
   new: boolean;
 };
+
+export type CartLS = {
+  id: string;
+  version: number;
+};
