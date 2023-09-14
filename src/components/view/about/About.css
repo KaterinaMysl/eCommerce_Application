@@ -16,7 +16,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../../../assets/images/about.jpeg);
+  background-image: url('../../../assets/images/about.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -42,6 +42,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
+
 .title-about {
   font-size: 30px;
   font-weight: 700;
@@ -203,8 +204,8 @@
 }
 
 .text-container .contact-bio {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .text-container a {
@@ -278,7 +279,7 @@ justify-content: center;
   transition: background-color 0.3s;
 }
 
-.details {
+.details-about {
   margin-top: 10px;
   padding: 10px;
   background-color: #f5f5f5;
@@ -471,7 +472,7 @@ justify-content: center;
   margin-bottom: 10px;
   color: #333;
   font-weight: 600;
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .rss_subtitle {
@@ -503,7 +504,7 @@ justify-content: center;
 @media only screen and (max-width: 1200px) {
   .container-intro,
   .add_content,
-  .container-rss{
+  .container-rss {
     max-width: 960px;
   }
 }
@@ -560,40 +561,40 @@ justify-content: center;
   .col-lg-5 {
     flex: 0 0 100%;
     max-width: 100%;
-}
-.col-lg-7 {
-  flex: 0 0 100%;
-  max-width: 100%;
-}
-.intro_image {
-  position: static;
-}
-.intro {
-  padding-top: 20px;
-  padding-bottom: 60px;
-  text-align: center;
-}
-.title-about {
-  font-size: 25px;
-text-align: center;
-}
-.intro_title {
-  font-size: 25px;
-  padding-top: 20px;
-}
-.intro_text {
-  margin-top: 40px;
-}
-.add_title {
-  font-size: 25px;
-  text-align: center;
-}
-.add_subtitle {
-text-align: center;
-}
-.rss_title {
-  font-size: 25px;
-}
+  }
+  .col-lg-7 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .intro_image {
+    position: static;
+  }
+  .intro {
+    padding-top: 20px;
+    padding-bottom: 60px;
+    text-align: center;
+  }
+  .title-about {
+    font-size: 25px;
+    text-align: center;
+  }
+  .intro_title {
+    font-size: 25px;
+    padding-top: 20px;
+  }
+  .intro_text {
+    margin-top: 40px;
+  }
+  .add_title {
+    font-size: 25px;
+    text-align: center;
+  }
+  .add_subtitle {
+    text-align: center;
+  }
+  .rss_title {
+    font-size: 25px;
+  }
 }
 
 @media only screen and (max-width: 500px) {

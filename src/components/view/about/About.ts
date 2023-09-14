@@ -54,7 +54,7 @@ class About {
               <div class="button_bcg"></div>
               <buttom>More...</buttom>
             </div>
-            <div class="details hidden">
+            <div class="details-about hidden">
               <div class="avatar-hidden">
                 <img src="${taras}" alt="participant1">
               </div>
@@ -91,7 +91,7 @@ class About {
               <div class="button_bcg"></div>
             <buttom>More...</buttom>
             </div>
-            <div class="details hidden">
+            <div class="details-about hidden">
               <div class="avatar-hidden">
                 <img src="${katerina}" alt="participant1">
               </div>
@@ -132,7 +132,7 @@ class About {
               <div class="button_bcg"></div>
               <buttom>More...</buttom>
             </div>
-            <div class="details hidden">
+            <div class="details-about hidden">
               <div class="avatar-hidden">
                 <img src="${kate}" alt="participant1">
               </div>
@@ -177,18 +177,18 @@ class About {
         </div>
       </div>
       <div class="rss">
-      <div class="container-rss">
-        <div class="rss-logo">
-          <a href="https://rs.school/" class="rss-link">
-            <img src="${rss}" alt="rss Icon" class="rss-image">
-          </a>
-        </div>
-        <div class="rss-content">
-          <h1 class="rss_title">How we managed to</h1>
-          <p class="rss_subtitle">We acquired valuable frontend development skills thanks to RS School. This free program, organized by The Rolling Scopes community since 2013, is open to everyone regardless of age, profession, or location. Our mentors are experienced developers from various countries and companies. RS School played a pivotal role in our learning and growth in this field. If you're looking to enhance your frontend development skills too, we highly recommend exploring RS School.</p>
+        <div class="container-rss">
+          <div class="rss-logo">
+            <a href="https://rs.school/" class="rss-link">
+              <img src="${rss}" alt="rss Icon" class="rss-image">
+            </a>
+          </div>
+          <div class="rss-content">
+            <h1 class="rss_title">How we managed to</h1>
+            <p class="rss_subtitle">We acquired valuable frontend development skills thanks to RS School. This free program, organized by The Rolling Scopes community since 2013, is open to everyone regardless of age, profession, or location. Our mentors are experienced developers from various countries and companies. RS School played a pivotal role in our learning and growth in this field. If you're looking to enhance your frontend development skills too, we highly recommend exploring RS School.</p>
+          </div>
         </div>
       </div>
-    </div>
     </div>
     `;
     bodyContainer.innerHTML = content;
@@ -213,7 +213,7 @@ class About {
     if (!participant) {
       return;
     }
-    const details = participant.querySelector('.details');
+    const details = participant.querySelector('.details-about');
     const modal = document.getElementById('modal-about');
     const modalDetails = document.getElementById('modal-details');
 
