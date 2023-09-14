@@ -71,7 +71,7 @@ export default class CatalogProductPage {
                   product.key
                 }">view more<span></span><span></span><span></span></div>
                 <div class="button book_button add-product-to-cart" prod-key="${
-                  product.key
+                  product.id
                 }">Add to cart</div>
                 <div class="offer_reviews">
                   <div class="offer_reviews_content">

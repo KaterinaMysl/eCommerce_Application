@@ -3,18 +3,21 @@ import Client from '../app/Client';
 import CatalogProductPage from '../view/catalogPage/CatalogProductPage';
 import FilterSelection from '../view/catalogPage/FilterSelection';
 import { FILTERS_ACTIVE } from '../constants';
+import CartController from './CartController';
 
 export default class CatalogController {
   private client: Client;
   private anonymsApi;
   private catalogProduct: CatalogProductPage;
   private filtersSelection: FilterSelection;
+  private cartController: CartController;
 
   constructor() {
     this.client = new Client();
     this.anonymsApi = this.client.getAnonymsApi();
     this.catalogProduct = new CatalogProductPage();
     this.filtersSelection = new FilterSelection();
+    this.cartController = new CartController();
   }
 
   async getChildrenCategory(parentId: string) {
@@ -85,7 +88,7 @@ export default class CatalogController {
       item.addEventListener('click', e => {
         const targetEl = e.target as HTMLElement;
         const productName = targetEl.getAttribute('prod-key') as string;
-        this.addProductToCart(productName);
+        this.cartController.addProductToCart(productName);
       });
     });
   }
@@ -189,24 +192,5 @@ export default class CatalogController {
     }
     details.open = true;
     link.textContent = name;
-  }
-  async addProductToCart(keyName: string) {
-    const idProduct = await this.client.getProductByKeyName(keyName);
-    const id = localStorage.getItem('session-id');
-    if (id) {
-      console.log('with login');
-      if (!localStorage.getItem('cart')) {
-        console.log('create cart with login');
-        await this.client.createCart();
-      }
-      await this.client.addProductToCart(idProduct.id);
-    } else {
-      console.log('no login');
-      if (!localStorage.getItem('cart')) {
-        console.log('create cart with anonymous');
-        await this.client.createCartAnonymous();
-      }
-      await this.client.addProductToCart(idProduct.id);
-    }
   }
 }

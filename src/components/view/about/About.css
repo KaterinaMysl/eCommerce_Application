@@ -96,7 +96,7 @@
   object-fit: cover;
 }
 
-.intro_image img{
+.intro_image img {
   object-fit: cover;
   width: 100%;
 }
@@ -258,7 +258,7 @@
 
 .text-container {
   position: relative;
-  margin-top: 20px; 
+  margin-top: 20px;
   margin-bottom: 30px;
   padding: 20px;
   background-color: #fff;
@@ -399,5 +399,3 @@
     max-width: 300px;
   }
 }
-
-

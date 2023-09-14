@@ -8,6 +8,7 @@ import {
   Address,
   CustomerSetDefaultShippingAddressAction,
   CustomerSetDefaultBillingAddressAction,
+  CartUpdateAction,
 } from '@commercetools/platform-sdk';
 import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/declarations/src/generated/client/by-project-key-request-builder';
 import { someFunction } from '../controller/ToastifyControler';
@@ -177,32 +178,7 @@ class Client {
       projectKey: process.env.CTP_PROJECT_KEY2 ?? '',
     });
   }
-  async addProductToCart(id: string) {
-    console.log('add products');
-    const cartLS = localStorage.getItem('cart');
-    if (cartLS) {
-      const cart: CartLS = JSON.parse(cartLS);
-      const response = await anonymusApi
-        .carts()
-        .withId({ ID: cart.id })
-        .post({
-          body: {
-            version: Number(cart.version),
-            actions: [
-              {
-                action: 'addLineItem',
-                productId: id,
-              },
-            ],
-          },
-        })
-        .execute();
-      cart.version = response.body.version;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      return response;
-    }
-  }
-  async removeProductWithCart(id: string) {
+  async updateProductsCart(actions: CartUpdateAction[]) {
     try {
       const cartLS = localStorage.getItem('cart');
       if (cartLS) {
@@ -213,17 +189,13 @@ class Client {
           .post({
             body: {
               version: Number(cart.version),
-              actions: [
-                {
-                  action: 'removeLineItem',
-                  lineItemId: id,
-                },
-              ],
+              actions,
             },
           })
           .execute();
         cart.version = response.body.version;
         localStorage.setItem('cart', JSON.stringify(cart));
+        console.log(cart);
         return true;
       }
     } catch (error) {
