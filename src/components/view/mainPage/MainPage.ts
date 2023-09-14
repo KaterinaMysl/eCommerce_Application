@@ -227,7 +227,7 @@ class MainPage {
                 </li>
                 <li class="contact_info_item d-flex flex-row">
                   <div><div class="contact_info_icon"><img src="${planet}" alt=""></div></div>
-                  <div class="contact_info_text"><a href="#">www.seagull.com</a></div>
+                  <div class="contact_info_text"><a href="/">www.seagull.com</a></div>
                 </li>
               </ul>
             </div>

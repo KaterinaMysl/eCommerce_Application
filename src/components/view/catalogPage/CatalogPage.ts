@@ -45,7 +45,7 @@ export default class CatalogPage {
                     <div class="fill_height no-margin search-container_box">
                       <div class="col fill_height no-padding">
                         <div class="search_tabs_container">
-                          <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start">
+                          <div class="search_tabs d-flex flex-lg-row align-items-lg-center align-items-start">
                             <a class="search_tab" data-category="Hotels"><div><img src="${suitcase}" alt><span>hotels</span></div></a>
                             <a class="search_tab" data-category="Rentals"><div><img src="${bus}" alt>car rentals</div></a>
                             <a class="search_tab" data-category="Flights"><div><img src="${departure}" alt>flights</div></a>
