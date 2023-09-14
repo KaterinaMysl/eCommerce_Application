@@ -100,6 +100,15 @@ body {
   cursor: pointer;
 }
 
+.offers_icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.offers_icons .button {
+  margin-top: -10px;
+}
+
 @media only screen and (max-width: 1000px) {
   .product {
     width: 90%;

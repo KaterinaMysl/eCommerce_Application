@@ -1016,14 +1016,26 @@ i::before {
   cursor: pointer;
 }
 
-.button.book_button.add-product-to-cart {
+.button.book_button.add-product-to-cart,
+.button.book_button.remove-product-from-cart {
   position: relative;
   padding-right: 76px;
-  background-color: #b909c6;
+  background-color: #aa64cd;
 }
+
 .button.book_button.add-product-to-cart::after {
   content: '';
   background: url(../../../assets/icons/add-cart.png);
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: 40px;
+  top: 8px;
+}
+
+.button.book_button.remove-product-from-cart::after {
+  content: '';
+  background: url(../../../assets/icons/remove-cart.png);
   width: 32px;
   height: 32px;
   position: absolute;

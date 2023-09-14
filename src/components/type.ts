@@ -39,3 +39,18 @@ export type CartLS = {
   id: string;
   version: number;
 };
+
+export type CartDraw = {
+  name: string;
+  quantity: number;
+  price: number;
+  discount?: number;
+  images: string;
+  id: string;
+  lineItemId: string;
+};
+
+export type CartDrawProducts = {
+  cartProducts: CartDraw[];
+  price: number;
+};

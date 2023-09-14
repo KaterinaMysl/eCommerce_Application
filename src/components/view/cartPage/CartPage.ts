@@ -1,8 +1,8 @@
-import { cartDraw } from '../../controller/CartController';
+import { CartDraw } from '../../type';
 import './cartPage.css';
 
 export default class CartPage {
-  async draw(productItems?: cartDraw[], price?: number) {
+  async draw(productItems?: CartDraw[], price?: number) {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
     <div class="container-cart">
@@ -14,7 +14,8 @@ export default class CartPage {
     bodyContainer.innerHTML = content;
     this.productDraw(productItems, price);
   }
-  productDraw(productItems?: cartDraw[], price?: number) {
+
+  productDraw(productItems?: CartDraw[], price?: number) {
     const container = document.querySelector('.container_inner') as HTMLElement;
     if (productItems) {
       container.insertAdjacentHTML(
@@ -36,14 +37,14 @@ export default class CartPage {
     </div>
     <div id="popup" class="popup">
         <div class="popup-content">
-            <p>Це текст Pop-up.</p>
+            <p>Do you really want to clear the cart?</p>
             <button id="yesButton">Yes</button>
             <button id="noButton">No</button>
         </div>
     </div>
     <div class="cart-block-btn">
-      <div class="clear-cart_btn">clear cart</div>
-      <div class="clear-cart_btn">to offers</div>
+      <div class="clear-cart_btn">Clear cart</div>
+      <div class="go-to-offers_btn">Go to offers</div>
       </div>
     <div class="cart-option">
       <div class="discount">
@@ -81,14 +82,14 @@ export default class CartPage {
                     <button class="product-minus" data-change="minus" ${
                       product.quantity === 1 ? 'disabled' : ''
                     }>-</button>
-                    <div class="product-count" data-id="${product.id}">${
-            product.quantity
-          }</div>
+                    <div class="product-count" data-id="${
+                      product.lineItemId
+                    }">${product.quantity}</div>
                     <button class="product-plus" data-change="plus">+</button>
                   </div>
                 </td>
                 <td><div class="btn-product_remove" data-id="${
-                  product.id
+                  product.lineItemId
                 }">remove</div></td>
                 <td class="table-right"><span>$</span>${
                   (product.price * product.quantity) / 100

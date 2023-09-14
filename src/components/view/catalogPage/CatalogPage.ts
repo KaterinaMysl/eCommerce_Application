@@ -8,6 +8,8 @@ import suitcase from '../../../assets/icons/suitcase.webp';
 import ProductController from '../../controller/CatalogController';
 import PriceSlider from './PriceSlider';
 import FilterSelection from './FilterSelection';
+import Client from '../../app/Client';
+import CartController from '../../controller/CartController';
 
 export default class CatalogPage {
   private catalogController: ProductController;
@@ -17,14 +19,15 @@ export default class CatalogPage {
   private ratingSlider: PriceSlider | null;
   private filtersSelection: FilterSelection | null;
 
-  constructor() {
-    this.catalogController = new ProductController();
+  constructor(client: Client, cartController: CartController) {
+    this.catalogController = new ProductController(client, cartController);
     this.priceSlider = null;
     this.daysSlider = null;
     this.starsSlider = null;
     this.ratingSlider = null;
     this.filtersSelection = null;
   }
+
   async draw() {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
@@ -189,11 +192,22 @@ export default class CatalogPage {
     await this.catalogController.getProducts();
     this.initEventCatalog();
   }
+
   initEventCatalog() {
-    this.priceSlider = new PriceSlider(35, 50000, 'price');
-    this.daysSlider = new PriceSlider(1, 30, 'days');
-    this.starsSlider = new PriceSlider(1, 5, 'stars');
-    this.ratingSlider = new PriceSlider(1, 10, 'rating');
+    this.priceSlider = new PriceSlider(
+      this.catalogController,
+      35,
+      50000,
+      'price',
+    );
+    this.daysSlider = new PriceSlider(this.catalogController, 1, 30, 'days');
+    this.starsSlider = new PriceSlider(this.catalogController, 1, 5, 'stars');
+    this.ratingSlider = new PriceSlider(
+      this.catalogController,
+      1,
+      10,
+      'rating',
+    );
     const sortSelect = document.querySelector(
       '.catalog-settings_sorting select',
     ) as HTMLSelectElement;
@@ -224,6 +238,7 @@ export default class CatalogPage {
       this.catalogController.sortProducts(targetElement.value);
     });
   }
+
   categoryClick(tabs: HTMLElement[], tab: HTMLElement) {
     const details = document.querySelector(
       'details.details_category',

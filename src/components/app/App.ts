@@ -34,8 +34,8 @@ class App {
   private cartController: CartController;
 
   constructor() {
-    this.client = new Client();
     this.storage = new StorageController();
+    this.client = new Client(this.storage);
     this.validator = new Validator();
     this.routerController = new RouterController(this.storage);
     this.mainController = new MainController(this.storage);
@@ -50,10 +50,14 @@ class App {
     this.logoutController = new LogoutController(this.client, this.storage);
     this.profileController = new ProfileController(this.client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
-    this.catalogPage = new CatalogPage();
-    this.productItemController = new ProductItemController();
-    this.cartController = new CartController();
+    this.productItemController = new ProductItemController(
+      this.client,
+      this.storage,
+    );
+    this.cartController = new CartController(this.client, this.storage);
+    this.catalogPage = new CatalogPage(this.client, this.cartController);
   }
+
   navigateTo(url: string) {
     history.pushState({}, '', url);
     this.routerControllers();
@@ -93,9 +97,11 @@ class App {
       this.catalog();
     }
   }
+
   private async catalog() {
     await this.catalogPage.draw();
   }
+
   private async product(productName: string) {
     if (!productName) {
       console.error('Product name is missing from the URL!');
@@ -104,27 +110,34 @@ class App {
     await this.productItemController.openProductPage(productName);
     this.initProductModalListeners();
   }
+
   private getProductNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('name');
   }
+
   errorPage() {
     this.unexpectedErrorPage.draw();
   }
+
   cart() {
     this.cartController.draw();
   }
+
   start() {
     this.mainController.draw();
     this.initMainLoginListeners();
   }
+
   login() {
     this.loginController.draw();
     this.initLoginListeners();
   }
+
   register() {
     this.registerController.draw().finally(() => this.initRegisterListeners());
   }
+
   async profile() {
     const customer = await this.client.getCustomer();
     if (customer) {
@@ -132,15 +145,19 @@ class App {
       this.initUserFormListener();
     }
   }
+
   about() {
     this.aboutController.draw();
   }
+
   news() {
     this.newsController.draw();
   }
+
   contact() {
     this.contactController.draw();
   }
+
   private initMainLoginListeners() {
     const logoutButton = document.querySelector(
       '.user_box_logout',
@@ -166,6 +183,7 @@ class App {
       });
     }
   }
+
   private initUserFormListener() {
     const userForm = document.querySelector('#profile-form') as HTMLFormElement;
     const addNewAddress = document.querySelector(
@@ -234,6 +252,7 @@ class App {
     });
     updateEvent();
   }
+
   private initRegisterListeners() {
     const registrationForm = document.getElementById(
       'register-form',
