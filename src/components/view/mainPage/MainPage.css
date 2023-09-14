@@ -257,6 +257,7 @@ h6 {
   font-weight: 700;
   color: #2d2c2c;
   text-transform: uppercase;
+  z-index: 3;
 }
 
 .text-plus-main {

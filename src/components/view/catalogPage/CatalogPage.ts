@@ -228,8 +228,6 @@ export default class CatalogPage {
     const details = document.querySelector(
       'details.details_category',
     ) as HTMLDetailsElement;
-    const form = document.querySelector('.search_panel_content') as HTMLElement;
-    form.classList.add('active');
     details.open = true;
     details.classList.add('active');
     tabs.forEach(tab => tab.classList.remove('active'));
