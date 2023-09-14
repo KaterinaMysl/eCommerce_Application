@@ -175,9 +175,8 @@
   transition: all 200ms ease;
 }
 
-.blog_post_title a:hover
-{
-	color: #fa9e1b;
+.blog_post_title a:hover {
+  color: #fa9e1b;
 }
 
 .blog_post_text {
@@ -209,9 +208,8 @@
   transition: all 200ms ease;
 }
 
-.blog_post_link a:hover
-{
-	color: #361f5d;
+.blog_post_link a:hover {
+  color: #361f5d;
 }
 
 .blog_navigation {
@@ -259,13 +257,11 @@
   transition: all 200ms ease;
 }
 
-.blog_dot:hover
-{
-	color: #fa9e1c;
+.blog_dot:hover {
+  color: #fa9e1c;
 }
-.blog_dot:hover.active div
-{
-	border-color: #fa9e1c;
+.blog_dot:hover.active div {
+  border-color: #fa9e1c;
 }
 
 .sidebar_search {
@@ -342,9 +338,8 @@ svg:not(:root) {
   transition: all 200ms ease;
 }
 
-.sidebar_search_button:hover .mag_glass
-{
-	fill: #371d5a;
+.sidebar_search_button:hover .mag_glass {
+  fill: #371d5a;
 }
 
 .sidebar_archives {
@@ -371,9 +366,8 @@ svg:not(:root) {
   color: #929191;
 }
 
-.sidebar_list li a:hover
-{
-	color: #404551;
+.sidebar_list li a:hover {
+  color: #404551;
 }
 
 .sidebar_categories {
@@ -421,9 +415,8 @@ svg:not(:root) {
   color: #2b2b2b;
 }
 
-.latest_post_title a:hover
-{
-	color: #fa9e1b;
+.latest_post_title a:hover {
+  color: #fa9e1b;
 }
 
 .latest_post_meta {
@@ -441,9 +434,8 @@ svg:not(:root) {
   color: #929191;
 }
 
-.latest_post_author a:hover
-{
-	color: #2b2b2b;
+.latest_post_author a:hover {
+  color: #2b2b2b;
 }
 
 .latest_post_author::after {
@@ -464,9 +456,8 @@ svg:not(:root) {
   color: #929191;
 }
 
-.latest_post_date a:hover
-{
-	color: #2b2b2b;
+.latest_post_date a:hover {
+  color: #2b2b2b;
 }
 
 .clearfix {
