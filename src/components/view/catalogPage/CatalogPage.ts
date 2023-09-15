@@ -7,8 +7,6 @@ import island from '../../../assets/icons/island.webp';
 import suitcase from '../../../assets/icons/suitcase.webp';
 import PriceSlider from './PriceSlider';
 import FilterSelection from './FilterSelection';
-import Client from '../../app/Client';
-import CartController from '../../controller/CartController';
 import CatalogController from '../../controller/CatalogController';
 
 export default class CatalogPage {
@@ -19,11 +17,7 @@ export default class CatalogPage {
   private ratingSlider: PriceSlider | null;
   private filtersSelection: FilterSelection | null;
 
-  constructor(
-    client: Client,
-    cartController: CartController,
-    catalogController: CatalogController,
-  ) {
+  constructor(catalogController: CatalogController) {
     this.catalogController = catalogController;
     this.priceSlider = null;
     this.daysSlider = null;

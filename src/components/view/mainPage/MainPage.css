@@ -260,7 +260,7 @@ h6 {
 }
 
 .text-plus-main {
-  padding-top: 125px;
+  padding-top: 90px;
   padding-bottom: 116px;
   background: linear-gradient(to right, #fa9e1b, #8d4fff);
 }
@@ -1280,6 +1280,35 @@ h6 {
 .contact_info_item:hover .contact_info_text a {
   color: #fa9e1b;
 }
+
+.discount-container {
+  background: linear-gradient(to right, #ebab71, #dad5f0, #879bdd);
+  width: 100%;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  min-height: 400px;
+}
+
+.discount-img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0.8;
+}
+
+.discount-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* .swiper-slide {
+  margin: 50px 20px 0 20px;
+} */
 
 @media only screen and (max-width: 1200px) {
   .container-footer,

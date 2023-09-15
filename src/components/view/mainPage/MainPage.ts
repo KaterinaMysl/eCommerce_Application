@@ -1,4 +1,7 @@
 import './MainPage.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 import logoImage from '../../../assets/images/logo.png';
 import homeSlider from '../../../assets/images/home_slider.jpg';
 import map from '../../../assets/images/map.png';
@@ -9,10 +12,14 @@ import phone from '../../../assets/icons/phone-call.svg';
 import message from '../../../assets/icons/message.svg';
 import planet from '../../../assets/icons/planet-earth.svg';
 import placeholder from '../../../assets/icons/placeholder.svg';
+import discount_logo from '../../../assets/images/special_offer.png';
 import { SCROLL_THRESHOLD } from '../../constants';
+import { DiscountCode } from '@commercetools/platform-sdk';
+// import Swiper from 'swiper';
+// import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
 class MainPage {
-  draw(isLoggedIn: boolean) {
+  draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
     const content = `
 <div class="body-container">
   <header class="header">
@@ -121,6 +128,7 @@ class MainPage {
               </ul>
         </div>
     </div>
+    ${this.getDiscountsBlock(discountCodes)}
     <div class="text-plus-main">
       <div class="cta_background"></div>
       <div class="main_plus_container">
@@ -245,6 +253,7 @@ class MainPage {
     document.body.innerHTML = content;
     this.setHeader();
     this.setupBurgerMenu();
+    // this.initSlider();
   }
 
   private setHeader() {
@@ -318,6 +327,60 @@ class MainPage {
         <div class="user_box_register user_box_link"><a href="/register" class="navigator">register</a></div>
       `;
   }
+
+  private getDiscountsBlock(discountCodes: DiscountCode[]): string {
+    let content = '';
+    if (discountCodes) {
+      content += `
+        <div class="discount-container">
+          <div class="discount-img">
+            <img src="${discount_logo}" alt="image">
+          </div>
+          <div id="discount-slider" class="swiper">
+            <div class="swiper-wrapper">
+              ${this.createSlides(discountCodes)}
+            </div>
+            <div id="discount-slider-pagination" class="swiper-pagination"></div>
+          </div>
+        </div>
+      `;
+    }
+    return content;
+  }
+
+  private createSlides(discountCodes: DiscountCode[]): string {
+    let content = '';
+    discountCodes.forEach(discountCode => {
+      content += `
+        <div class="swiper-slide">
+          <div>${discountCode.description?.en}</div>
+          <div>Code: <b>${discountCode.code}</b></div>
+        </div>`;
+    });
+    return content;
+  }
+
+  // private initSlider() {
+  //   new Swiper('#discount-slider', {
+  //     modules: [Autoplay, EffectFade, Pagination],
+
+  //     loop: true,
+  //     effect: 'fade',
+  //     slidesPerView: 'auto',
+  //     centeredSlides: true,
+
+  //     /* autoplay: {
+  //       delay: 2500,
+  //       disableOnInteraction: false,
+  //     }, */
+
+  //     pagination: {
+  //       el: '#discount-slider-pagination',
+  //       clickable: true,
+  //       dynamicBullets: true,
+  //     },
+  //   });
+  // }
 }
 
 export default MainPage;
