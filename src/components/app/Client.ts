@@ -426,6 +426,7 @@ class Client {
   logout(customerSessionId: string) {
     userApis.delete(customerSessionId);
     this.storage.deleteCart();
+    this.storage.removeCartProducts();
     this.getRefreshAnonymousToken();
   }
 
