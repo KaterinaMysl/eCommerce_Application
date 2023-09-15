@@ -17,7 +17,7 @@ import Swiper from 'swiper';
 import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 
 class ProductItemPage {
-  draw(product: ProductProjection, isProductInCart: boolean) {
+  draw(product: ProductProjection) {
     const pageContainer = document.querySelector('.main') as HTMLElement;
     const normalPrice =
       (product.masterVariant.prices?.[0].value.centAmount as number) / 100;
@@ -98,7 +98,12 @@ class ProductItemPage {
                   <li class="offers_icons_item"><img src="${bicycle}" alt></li>
                   <li class="offers_icons_item"><img src="${sailboat}" alt></li>
                 </ul>
-                ${this.drawActionButton(product.id, isProductInCart)}
+                <div class="button book_button remove-product-from-cart" prod-key="${
+                  product.id
+                }">Remove from cart</div>
+                <div class="button book_button add-product-to-cart" prod-key="${
+                  product.id
+                }">Add to cart</div>
               </div>
             </div>
         </div>
@@ -173,13 +178,6 @@ class ProductItemPage {
         prevEl: '#modal-slider-prev',
       },
     });
-  }
-
-  private drawActionButton(id: string, isProductInCart: boolean): string {
-    if (isProductInCart) {
-      return `<div class="button book_button remove-product-from-cart" prod-key="${id}">Remove from cart</div>`;
-    }
-    return `<div class="button book_button add-product-to-cart" prod-key="${id}">Add to cart</div>`;
   }
 }
 

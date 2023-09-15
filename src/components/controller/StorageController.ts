@@ -43,7 +43,7 @@ class StorageController {
     return cartProducts;
   }
 
-  isProductInCart(id: string) {
+  isProductInCart(id: string): boolean {
     const cart = this.getCartProducts();
     for (const product of cart.cartProducts) {
       if (product.id === id) {
@@ -51,6 +51,16 @@ class StorageController {
       }
     }
     return false;
+  }
+
+  getProductCartLineItem(id: string): string {
+    const cart = this.getCartProducts();
+    for (const product of cart.cartProducts) {
+      if (product.id === id) {
+        return product.lineItemId;
+      }
+    }
+    return '';
   }
 
   getCart(): CartLS {

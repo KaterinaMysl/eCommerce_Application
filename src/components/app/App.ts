@@ -14,6 +14,7 @@ import RouterController from '../controller/RouterController';
 import CatalogPage from '../view/catalogPage/CatalogPage';
 import ProductItemController from '../controller/ProductController';
 import CartController from '../controller/CartController';
+import CatalogController from '../controller/CatalogController';
 
 class App {
   private mainController: MainController;
@@ -32,6 +33,7 @@ class App {
   private routerController: RouterController;
   private client: Client;
   private cartController: CartController;
+  private catalogController: CatalogController;
 
   constructor() {
     this.storage = new StorageController();
@@ -50,12 +52,21 @@ class App {
     this.logoutController = new LogoutController(this.client, this.storage);
     this.profileController = new ProfileController(this.client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
+    this.cartController = new CartController(this.client, this.storage);
+    this.catalogController = new CatalogController(
+      this.client,
+      this.cartController,
+    );
+    this.catalogPage = new CatalogPage(
+      this.client,
+      this.cartController,
+      this.catalogController,
+    );
     this.productItemController = new ProductItemController(
       this.client,
       this.storage,
+      this.cartController,
     );
-    this.cartController = new CartController(this.client, this.storage);
-    this.catalogPage = new CatalogPage(this.client, this.cartController);
   }
 
   navigateTo(url: string) {

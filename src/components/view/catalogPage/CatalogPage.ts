@@ -5,22 +5,26 @@ import departure from '../../../assets/icons/departure.webp';
 import diving from '../../../assets/icons/diving.webp';
 import island from '../../../assets/icons/island.webp';
 import suitcase from '../../../assets/icons/suitcase.webp';
-import ProductController from '../../controller/CatalogController';
 import PriceSlider from './PriceSlider';
 import FilterSelection from './FilterSelection';
 import Client from '../../app/Client';
 import CartController from '../../controller/CartController';
+import CatalogController from '../../controller/CatalogController';
 
 export default class CatalogPage {
-  private catalogController: ProductController;
+  private catalogController: CatalogController;
   private priceSlider: PriceSlider | null;
   private daysSlider: PriceSlider | null;
   private starsSlider: PriceSlider | null;
   private ratingSlider: PriceSlider | null;
   private filtersSelection: FilterSelection | null;
 
-  constructor(client: Client, cartController: CartController) {
-    this.catalogController = new ProductController(client, cartController);
+  constructor(
+    client: Client,
+    cartController: CartController,
+    catalogController: CatalogController,
+  ) {
+    this.catalogController = catalogController;
     this.priceSlider = null;
     this.daysSlider = null;
     this.starsSlider = null;

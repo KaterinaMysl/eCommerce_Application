@@ -156,26 +156,28 @@ export default class CartController {
     this.draw();
   }
 
-  async addProductToCart(productId: string) {
+  async addProductToCart(productId: string): Promise<boolean> {
     const id = this.storage.getCustomerSessionId();
     if (id) {
       if (!this.storage.getCart()) {
         await this.client.createCart();
       }
       const actions = this.createAddItemActions(productId);
-      await this.client.updateProductsCart(
+      const result = await this.client.updateProductsCart(
         actions,
         'Item has been added to the cart successfully.',
       );
+      return result;
     } else {
       if (!this.storage.getCart()) {
         await this.client.createCartAnonymous();
       }
       const actions = this.createAddItemActions(productId);
-      await this.client.updateProductsCart(
+      const result = await this.client.updateProductsCart(
         actions,
         'Item has been added to the cart successfully.',
       );
+      return result;
     }
   }
 
@@ -187,6 +189,21 @@ export default class CartController {
     };
     actions.push(action);
     return actions;
+  }
+
+  async removeProductFromCart(lineItemId: string): Promise<boolean> {
+    const actions: CartUpdateAction[] = [];
+    const action: CartRemoveLineItemAction = {
+      action: 'removeLineItem',
+      lineItemId: lineItemId,
+    };
+    actions.push(action);
+
+    const result = await this.client.updateProductsCart(
+      actions,
+      'Your item has been deleted successfully.',
+    );
+    return result;
   }
 
   createRemoveItemActions(products: CartDraw[] | string) {

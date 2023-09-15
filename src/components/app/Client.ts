@@ -186,7 +186,7 @@ class Client {
   async updateProductsCart(
     actions: CartUpdateAction[],
     successMessage: string,
-  ) {
+  ): Promise<boolean> {
     try {
       const cart = this.storage.getCart();
       if (cart) {
@@ -207,7 +207,7 @@ class Client {
           alert(successMessage, true);
         }
         return true;
-      }
+      } else return false;
     } catch (error) {
       alert('Something went wrong. Please, try again later.', false);
       return false;

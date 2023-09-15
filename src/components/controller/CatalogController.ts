@@ -75,8 +75,8 @@ export default class CatalogController {
     addCart.forEach(item => {
       item.addEventListener('click', e => {
         const targetEl = e.target as HTMLElement;
-        const productName = targetEl.getAttribute('prod-key') as string;
-        this.cartController.addProductToCart(productName);
+        const productKey = targetEl.getAttribute('prod-key') as string;
+        this.cartController.addProductToCart(productKey);
       });
     });
   }

@@ -2,6 +2,7 @@
   background-color: white;
   min-height: 100vh;
   padding-top: 130px;
+  padding-bottom: 10px;
 }
 .container_inner {
   max-width: 1170px;
@@ -73,6 +74,8 @@ tbody td.table-left {
   text-align: center;
   background-color: rebeccapurple;
   border-radius: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .cart-empty {
@@ -96,6 +99,7 @@ tbody td.table-left {
   justify-content: space-between;
   max-width: 527px;
   width: 100%;
+  margin-bottom: 15px;
 }
 .discount input {
   width: 60%;
@@ -103,6 +107,7 @@ tbody td.table-left {
   /* height: 35px; */
   padding: 10px;
   border-radius: 10px;
+  margin-right: 10px;
 }
 .discount div {
   display: flex;
