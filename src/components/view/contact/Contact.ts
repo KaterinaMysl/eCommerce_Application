@@ -37,11 +37,10 @@ class Contact {
                     <br>
                     Exclusive tours and excursions. Experienced guides who will share unique stories with you. Comfort and safety in every detail of your journey. Support at any time of day or night. Trust us and leave a mark in the world of adventures!</p>
                     <ul class="contact_social_list">
-                      <li class="contact_social_item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                      <li class="contact_social_item"><a href="#"><i class="fa fa-insta"></i></a></li>
                       <li class="contact_social_item"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                      <li class="contact_social_item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                      <li class="contact_social_item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                      <li class="contact_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
+                      <li class="contact_social_item"><a href="#"><i class="fa fa-telegram"></i></a></li>
+                      <li class="contact_social_item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                   </div>
                 </div>

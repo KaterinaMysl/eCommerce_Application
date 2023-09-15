@@ -94,15 +94,20 @@
 }
 
 .intro_image {
-  position: absolute;
-  right: 0px;
-  top: 10px;
+  display: flex;
+  flex-direction: column;
   object-fit: cover;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .intro_image img {
+  display: flex;
+  flex-direction: column;
   object-fit: cover;
-  width: 100%;
+  width: 85%;
 }
 
 .intro_title {
@@ -566,8 +571,8 @@
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .intro_image {
-    position: static;
+  .intro_image img {
+    width: 50%;
   }
   .intro {
     padding-top: 20px;
