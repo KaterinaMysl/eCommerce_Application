@@ -2,6 +2,7 @@
   background-color: white;
   min-height: 100vh;
   padding-top: 130px;
+  padding-bottom: 10px;
 }
 .container_inner {
   max-width: 1170px;
@@ -54,26 +55,29 @@ tbody td.table-left {
   margin-right: 25px;
   border-radius: 10px;
 }
-.cart-block-btn{
+.cart-block-btn {
   display: flex;
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
   margin: 20px 0;
 }
-.clear-cart_btn {
+.clear-cart_btn,
+.go-to-offers_btn {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 15px 48px;
-  /* width: 30%; */
   height: 56px;
   color: white;
   cursor: pointer;
   text-align: center;
   background-color: rebeccapurple;
   border-radius: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
+
 .cart-empty {
   margin: 0 auto;
 }
@@ -84,26 +88,28 @@ tbody td.table-left {
   background-position: center;
   background-repeat: no-repeat;
 }
-.cart-option{
+.cart-option {
   display: flex;
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
 }
-.cart-option .discount{
+.cart-option .discount {
   display: flex;
   justify-content: space-between;
   max-width: 527px;
   width: 100%;
+  margin-bottom: 15px;
 }
-.discount input{
+.discount input {
   width: 60%;
   height: 56px;
   /* height: 35px; */
   padding: 10px;
   border-radius: 10px;
+  margin-right: 10px;
 }
-.discount div{
+.discount div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +123,7 @@ tbody td.table-left {
   border-radius: 10px;
 }
 
-.cart-total{
+.cart-total {
   max-width: 470px;
   width: 100%;
   border-radius: 4px;
@@ -126,16 +132,16 @@ tbody td.table-left {
   padding: 32px 24px;
 }
 
-.cart-total h4{
+.cart-total h4 {
   margin: 0;
   padding: 0;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 28px; 
+  line-height: 28px;
   margin-bottom: 24px;
 }
-.cart-total li{
+.cart-total li {
   display: flex;
   justify-content: space-between;
 }
@@ -152,9 +158,9 @@ tbody td.table-left {
 
 .popup-content {
   position: relative;
-  width: 250px;
+  width: 280px;
   height: 150px;
-  background-color: rgb(205, 15, 15);
+  background-color: #6d5483;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
@@ -162,6 +168,10 @@ tbody td.table-left {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.popup-content p {
+  color: white;
 }
 
 .popup button {

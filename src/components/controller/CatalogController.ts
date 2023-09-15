@@ -7,28 +7,19 @@ import CartController from './CartController';
 
 export default class CatalogController {
   private client: Client;
-  private anonymsApi;
   private catalogProduct: CatalogProductPage;
   private filtersSelection: FilterSelection;
   private cartController: CartController;
 
-  constructor() {
-    this.client = new Client();
-    this.anonymsApi = this.client.getAnonymsApi();
+  constructor(client: Client, cartController: CartController) {
+    this.client = client;
     this.catalogProduct = new CatalogProductPage();
-    this.filtersSelection = new FilterSelection();
-    this.cartController = new CartController();
+    this.filtersSelection = new FilterSelection(this);
+    this.cartController = cartController;
   }
 
   async getChildrenCategory(parentId: string) {
-    const response = await this.anonymsApi
-      .categories()
-      .get({
-        queryArgs: {
-          where: `parent(id="${parentId}")`,
-        },
-      })
-      .execute();
+    const response = await this.client.getProductCategoryByParentId(parentId);
     const categories = response.body.results;
     const details = document.querySelector('.details-container') as HTMLElement;
 
@@ -54,20 +45,16 @@ export default class CatalogController {
       detailsParent.classList.remove('active');
     }
   }
-  async getCategory(nameCategory: string) {
-    const response = await this.anonymsApi
-      .categories()
-      .get({
-        queryArgs: { where: `name(en="${nameCategory}")` },
-      })
-      .execute();
+
+  async getCategory(name: string) {
+    const response = await this.client.getProductCategoryByName(name);
 
     await this.getCategoryProduct(response.body.results[0].id);
     if (response.body.results[0].ancestors.length === 0) {
       this.getChildrenCategory(response.body.results[0].id);
-      this.createCatalogNavigator(nameCategory, 'container_box');
+      this.createCatalogNavigator(name, 'container_box');
     } else {
-      this.createCatalogNavigator(nameCategory, 'subcategory');
+      this.createCatalogNavigator(name, 'subcategory');
     }
   }
 
@@ -77,39 +64,32 @@ export default class CatalogController {
   }
 
   async getProducts() {
-    const response = await this.anonymsApi.productProjections().get().execute();
+    const response = await this.client.getProductProjections();
     const products: ProductProjection[] = response.body.results;
     await products.forEach(product => this.catalogProduct.draw(product));
     this.addEventCart();
   }
+
   addEventCart() {
     const addCart = document.querySelectorAll('.add-product-to-cart');
     addCart.forEach(item => {
       item.addEventListener('click', e => {
         const targetEl = e.target as HTMLElement;
-        const productName = targetEl.getAttribute('prod-key') as string;
-        this.cartController.addProductToCart(productName);
+        const productKey = targetEl.getAttribute('prod-key') as string;
+        this.cartController.addProductToCart(productKey);
       });
     });
   }
+
   async sortProducts(typeSort: string) {
     FILTERS_ACTIVE.sort = typeSort;
     this.getProductsWithFilters();
   }
 
   async searchProducts(searchText: string) {
-    const response = await this.anonymsApi
-      .productProjections()
-      .suggest()
-      .get({
-        queryArgs: {
-          'searchKeywords.en': searchText,
-          fuzzy: true,
-          staged: true,
-          fuzzyLevel: 0,
-        },
-      })
-      .execute();
+    const response = await this.client.getProductProjectionsBySearchQuery(
+      searchText,
+    );
     const searchName: string[] = [];
     response.body['searchKeywords.en'].forEach(async word => {
       searchName.push(word.text);
@@ -146,27 +126,13 @@ export default class CatalogController {
       FILTERS_ACTIVE.category.length > 2
         ? `categories.id:"${FILTERS_ACTIVE.category}"`
         : '';
-    const response = await this.anonymsApi
-      .productProjections()
-      .search()
-      .get({
-        queryArgs: {
-          filter: [
-            category,
-            FILTERS_ACTIVE.days,
-            FILTERS_ACTIVE.stars,
-            FILTERS_ACTIVE.price,
-            FILTERS_ACTIVE.rating,
-          ],
-          limit: 5,
-          sort: [FILTERS_ACTIVE.sort],
-          ['text.en']: FILTERS_ACTIVE.search,
-        },
-      })
-      .execute();
+    const response = await this.client.getProductProjectionsFilteredByCategory(
+      category,
+    );
     const products: ProductProjection[] = response.body.results;
     this.createProductsCart(products);
   }
+
   createCatalogNavigator(name: string, type: string) {
     const containerBox = document.querySelector(
       '.navigator-container_box',

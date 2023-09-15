@@ -13,8 +13,8 @@ jest.mock('../components/controller/Validator/handleServerError', () => ({
 
 describe('RegisterController', () => {
   let registerController: RegisterController;
-  const mockClient = new Client();
   const mockStorage = new StorageController();
+  const mockClient = new Client(mockStorage);
   const mockLoginController = new LoginController(mockClient, mockStorage);
 
   const mockEvent = {

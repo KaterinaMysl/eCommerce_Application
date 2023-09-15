@@ -98,6 +98,12 @@ class ProductItemPage {
                   <li class="offers_icons_item"><img src="${bicycle}" alt></li>
                   <li class="offers_icons_item"><img src="${sailboat}" alt></li>
                 </ul>
+                <div class="button book_button remove-product-from-cart" prod-key="${
+                  product.id
+                }">Remove from cart</div>
+                <div class="button book_button add-product-to-cart" prod-key="${
+                  product.id
+                }">Add to cart</div>
               </div>
             </div>
         </div>
