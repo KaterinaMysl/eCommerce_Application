@@ -1022,12 +1022,12 @@ i::before {
   padding-right: 76px;
   background-color: #aa64cd;
 }
-.button.book_button.add-product-to-cart.disabled{
-  background-color: rgb(170, 100, 205, .5);
+.button.book_button.add-product-to-cart.disabled {
+  background-color: rgb(170, 100, 205, 0.5);
 }
 
-.button.book_button.add-product-to-cart.disabled:hover{
-  background-color: rgb(170, 100, 205, .5);
+.button.book_button.add-product-to-cart.disabled:hover {
+  background-color: rgb(170, 100, 205, 0.5);
   opacity: 1;
   cursor: auto;
 }

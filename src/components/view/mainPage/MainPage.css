@@ -1282,37 +1282,74 @@ h6 {
 }
 
 .discount-container {
+  position: relative;
   background: linear-gradient(to right, #ebab71, #dad5f0, #879bdd);
   width: 100%;
   padding: 25px;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  min-height: 400px;
+  min-height: 300px;
+}
+
+.blur-border-div::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: inherit;
+  filter: blur(6px);
+  z-index: 1;
 }
 
 .discount-img {
-  top: 0;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   opacity: 0.8;
+  z-index: 99;
 }
 
 .discount-img img {
-  max-width: 100%;
+  max-width: 76%;
   height: auto;
 }
 
 #discount-slider {
-  width: 100%;
+  width: 90%;
+  padding: 20px;
+  margin: auto;
+  line-height: 2;
+}
+
+.discount-code {
+  font-family: 'Beyond' !important;
+  font-size: 35px;
+  color: #604b98;
+}
+
+.discount-desc {
+  font-size: 18px;
+}
+
+.swiper-wrapper {
+  margin-bottom: 20px;
 }
 
 .discount-item-slide {
   text-align: center;
   font-size: 18px;
+}
+
+@media only screen and (max-width: 450px) {
+  .discount-container {
+    flex-direction: column;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
