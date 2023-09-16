@@ -36,8 +36,8 @@ class News {
                       <div class="blog_post_image">
                         <img src="${b1}" alt="">
                           <div class="blog_post_date d-flex flex-column align-items-center justify-content-center">
-                            <div class="blog_post_day">01</div>
-                            <div class="blog_post_month">Dec, 2023</div>
+                            <div class="blog_post_day">25</div>
+                            <div class="blog_post_month">Sep, 2023</div>
                           </div>
                       </div>
                       <div class="blog_post_meta">
@@ -48,10 +48,10 @@ class News {
                         </ul>
                       </div>
                       <div class="blog_post_title">
-                        <a href="#">Try these new dream destinations</a>
+                        <a href="#">Exclusive Offer: Yacht Journey in the Mediterranean</a>
                       </div>
                       <div class="blog_post_text">
-                        <p>Aenean in lacus ligula. Phasellus euismod gravida eros. Aenean nec ipsum aliquet, pharetra magna id, interdum sapien. Etiam id lorem eu nisl pellentesque semper. Nullam tincidunt metus placerat, suscipit leo ut, tempus nulla. Fusce at eleifend tellus. Ut eleifend dui nunc, non fermentum qua.</p>
+                        <p>Are you interested in maritime adventures? We offer you an unforgettable opportunity to embark on a luxurious yacht journey across the Mediterranean Sea. Enjoy the sun, sea vistas, and azure waters in the company of a professional crew. Book your spot today!</p>
                       </div>
                       <div class="blog_post_link"><a href="#">read more</a></div>
                     </div>
@@ -60,7 +60,7 @@ class News {
                       <div class="blog_post_image">
                         <img src="${b2}" alt="https://unsplash.com/@tschax">
                         <div class="blog_post_date d-flex flex-column align-items-center justify-content-center">
-                          <div class="blog_post_day">01</div>
+                          <div class="blog_post_day">16</div>
                           <div class="blog_post_month">Dec, 2023</div>
                         </div>
                       </div>
@@ -71,9 +71,9 @@ class News {
                           <li class="blog_post_meta_item"><a href="">3 Comments</a></li>
                         </ul>
                       </div>
-                      <div class="blog_post_title"><a href="#">Try these new dream destinations</a></div>
+                      <div class="blog_post_title"><a href="#">New Route Unveiled: Winter Retreat in Switzerland</a></div>
                       <div class="blog_post_text">
-                        <p>Aenean in lacus ligula. Phasellus euismod gravida eros. Aenean nec ipsum aliquet, pharetra magna id, interdum sapien. Etiam id lorem eu nisl pellentesque semper. Nullam tincidunt metus placerat, suscipit leo ut, tempus nulla. Fusce at eleifend tellus. Ut eleifend dui nunc, non fermentum qua.</p>
+                        <p>Ready to immerse yourself in a magical winter wonderland? We are excited to announce the launch of a new route to Switzerland, where you can indulge in unique ski resorts, cozy chalets, and the incomparable festive atmosphere. Secure your winter getaway now!</p>
                       </div>
                       <div class="blog_post_link"><a href="#">read more</a></div>
                     </div>
@@ -93,9 +93,9 @@ class News {
                           <li class="blog_post_meta_item"><a href="">3 Comments</a></li>
                         </ul>
                       </div>
-                      <div class="blog_post_title"><a href="#">Try these new dream destinations</a></div>
+                      <div class="blog_post_title"><a href="#">Art Enthusiast's Delight: Tour of the World's Great Museums</a></div>
                       <div class="blog_post_text">
-                        <p>Aenean in lacus ligula. Phasellus euismod gravida eros. Aenean nec ipsum aliquet, pharetra magna id, interdum sapien. Etiam id lorem eu nisl pellentesque semper. Nullam tincidunt metus placerat, suscipit leo ut, tempus nulla. Fusce at eleifend tellus. Ut eleifend dui nunc, non fermentum qua.</p>
+                        <p>Do you love art and culture? We invite you to a unique journey dedicated to the world's great museums. From the Louvre in Paris to the Hermitage in St. Petersburg, you'll have the chance to admire global art masterpieces with an experienced guide. Learn more about our cultural tour!</p>
                       </div>
                       <div class="blog_post_link"><a href="#">read more</a></div>
                     </div>

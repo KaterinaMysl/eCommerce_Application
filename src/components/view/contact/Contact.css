@@ -45,8 +45,8 @@
 
 .content-contact {
   width: 100%;
+  /* flex: 1 1 auto; */
   padding-top: 92px;
-  padding-bottom: 105px;
   background: #f3f6f9;
 }
 
@@ -88,6 +88,7 @@
 
 .contact_social_list {
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .contact_social_item {
@@ -132,10 +133,19 @@
 
 .contact_social_item i::before {
   color: #fa9e1b;
+  transition: all 200ms ease;
 }
 
 .contact_social_item:last-child {
   margin-right: 0px;
+}
+
+.contact_social_item:hover {
+  background: #fa9e1b;
+}
+
+.contact_social_item:hover i::before {
+  color: #ffffff;
 }
 
 .row-contact .contact_col {
@@ -181,30 +191,54 @@
   padding-left: 15px;
 }
 
+.contact_image {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.contact_image img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .travelix_map {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 .google_map {
   width: 100%;
-  height: 581px;
+  min-height: 581px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 .map_container {
   width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   overflow: hidden;
 }
 
 #map {
   width: 100%;
-  height: calc(100% + 30px);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 iframe {
   height: 100%;
   width: 100%;
-  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -224,6 +258,7 @@ iframe {
   .col-lg-55 {
     flex: 0 0 100%;
     max-width: 100%;
+    margin-top: -350px;
   }
 
   .col-lg-44 {
@@ -246,8 +281,8 @@ iframe {
     top: 4px;
   }
 
-  .contact_col {
-    padding-top: 90px;
+  .row-contact .contact_col {
+    padding-top: 20px;
   }
 
   .contact_content .logo_text {
@@ -260,9 +295,8 @@ iframe {
     text-align: center;
     top: auto;
     left: auto;
-    margin-top: -38px;
   }
-  
+
   .row-contact .contact_info_list {
     margin-top: 0px;
   }

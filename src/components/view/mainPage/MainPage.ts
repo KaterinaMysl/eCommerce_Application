@@ -5,9 +5,9 @@ import 'swiper/css/effect-fade';
 import logoImage from '../../../assets/images/logo.png';
 import homeSlider from '../../../assets/images/home_slider.jpg';
 import map from '../../../assets/images/map.png';
-import blog1 from '../../../assets/images/blog1.jpg';
-import blog2 from '../../../assets/images/blog2.png';
-import blog3 from '../../../assets/images/blog3.jpg';
+import blog1 from '../../../assets/images/b1.png';
+import blog2 from '../../../assets/images/b2.png';
+import blog3 from '../../../assets/images/b3.png';
 import phone from '../../../assets/icons/phone-call.svg';
 import message from '../../../assets/icons/message.svg';
 import planet from '../../../assets/icons/planet-earth.svg';
@@ -27,14 +27,13 @@ class MainPage {
       <div class="container-main">
         <div class="row">
           <div class="col d-flex flex-row">
-            <div class="phone">+000 00 000 00 00</div>
+            <div class="phone">
+            256-06-8561</div>
             <div class="social">
               <ul class="social_list">
-                <li class="social_list_item"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                <li class="social_list_item"><a href="#"><i class="fa fa-insta" aria-hidden="true"></i></a></li>
                 <li class="social_list_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li class="social_list_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li class="social_list_item"><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                <li class="social_list_item"><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                <li class="social_list_item"><a href="#"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
                 <li class="social_list_item"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
               </ul>
             </div>
@@ -174,11 +173,10 @@ class MainPage {
               <br>
               Trust us and leave a mark in the world of adventures!</p>
               <ul class="footer_social_list">
-                <li class="footer_social_item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                <li class="footer_social_item"><a href="#"><i class="fa fa-insta"></i></a></li>
                 <li class="footer_social_item"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                <li class="footer_social_item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li class="footer_social_item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                <li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
+                <li class="footer_social_item"><a href="#"><i class="fa fa-telegram"></i></a></li>
+                <li class="footer_social_item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
               </ul>
             </div>
           </div>
@@ -192,24 +190,24 @@ class MainPage {
               <div class="footer_blog_item clearfix">
                 <div class="footer_blog_image"><img src="${blog1}" alt=""></div>
                 <div class="footer_blog_content">
-                  <div class="footer_blog_title"><a href="/news">Travel with us this year</a></div>
-                  <div class="footer_blog_date">Sep 29, 2023</div>
+                  <div class="footer_blog_title"><a href="/news">Exclusive Offer: Yacht Journey in the Mediterranean</a></div>
+                  <div class="footer_blog_date">Sep 25, 2023</div>
                 </div>
               </div>
   
               <div class="footer_blog_item clearfix">
                 <div class="footer_blog_image"><img src="${blog2}" alt=""></div>
                 <div class="footer_blog_content">
-                  <div class="footer_blog_title"><a href="/news">New destinations for you</a></div>
-                  <div class="footer_blog_date">Sep 29, 2023</div>
+                  <div class="footer_blog_title"><a href="/news">New Route Unveiled: Winter Retreat in Switzerland</a></div>
+                  <div class="footer_blog_date">Dec 16, 2023</div>
                 </div>
               </div>
   
               <div class="footer_blog_item clearfix">
                 <div class="footer_blog_image"><img src="${blog3}" alt=""></div>
                   <div class="footer_blog_content">
-                    <div class="footer_blog_title"><a href="/news">Travel with us this year</a></div>
-                    <div class="footer_blog_date">Sep 29, 2023</div>
+                    <div class="footer_blog_title"><a href="/news">Art Enthusiast's Delight: Tour of the World's Great Museums</a></div>
+                    <div class="footer_blog_date">Dec 01, 2023</div>
                   </div>
                 </div>
               </div>
