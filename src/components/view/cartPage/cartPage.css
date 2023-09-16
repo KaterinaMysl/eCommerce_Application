@@ -68,17 +68,17 @@ tbody td.table-right {
   margin-right: 25px;
   border-radius: 10px;
 }
-.product-quantity{
+.product-quantity {
   display: flex;
   height: 50px;
 }
-.product-quantity button{
+.product-quantity button {
   outline: none;
   width: 25px;
   border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .product-quantity button[disabled] {
   cursor: auto;
@@ -88,14 +88,14 @@ tbody td.table-right {
   cursor: auto;
   background-color: #dcdcdc;
 }
-.product-quantity button:hover{
-background-color: #6d5483;
-color: white;
+.product-quantity button:hover {
+  background-color: #6d5483;
+  color: white;
 }
-.product-quantity div{
- display: flex;
- justify-content: center;
- align-items: center;
+.product-quantity div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25px;
 }
 
@@ -109,13 +109,13 @@ color: white;
   flex-wrap: wrap;
   margin: 20px 0;
 }
-.btn-product_remove{
+.btn-product_remove {
   width: 32px;
   height: 32px;
   background-image: url(../../../assets/icons/cart-cancel.png);
-  transition: all .2s;
+  transition: all 0.2s;
 }
-.btn-product_remove:hover{
+.btn-product_remove:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -204,7 +204,7 @@ color: white;
   padding: 16px 0;
   border-bottom: 1px solid gray;
 }
-.process-to-checkout{
+.process-to-checkout {
   display: flex;
   align-items: center;
   justify-content: center;

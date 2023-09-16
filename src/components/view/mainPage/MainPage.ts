@@ -17,7 +17,7 @@ import discount_logo from '../../../assets/images/special_offer.png';
 import { SCROLL_THRESHOLD } from '../../constants';
 import { DiscountCode } from '@commercetools/platform-sdk';
 import Swiper from 'swiper';
-import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
 class MainPage {
   draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
@@ -333,7 +333,7 @@ class MainPage {
     let content = '';
     if (discountCodes) {
       content += `
-        <div class="discount-container">
+        <div class="discount-container blur-border-div">
           <div class="discount-img">
             <img src="${discount_logo}" alt="image">
           </div>
@@ -342,8 +342,6 @@ class MainPage {
               ${this.createSlides(discountCodes)}
             </div>
             <div id="discount-slider-pagination" class="swiper-pagination"></div>
-            <div id="discount-slider-prev" class="swiper-button-prev"></div>
-            <div id="discount-slider-next" class="swiper-button-next"></div>
           </div>
         </div>
       `;
@@ -356,8 +354,8 @@ class MainPage {
     discountCodes.forEach(discountCode => {
       content += `
         <div class="swiper-slide discount-item-slide">
-          <div>${discountCode.description?.en}</div>
-          <div>Code: <b>${discountCode.code}</b></div>
+          <div class="discount-code">Code: <b class="discount-code">${discountCode.code}</b></div>
+          <div class="discount-desc">${discountCode.description?.en}</div>
         </div>`;
     });
     return content;
@@ -365,7 +363,7 @@ class MainPage {
 
   private initDiscountSlider() {
     new Swiper('#discount-slider', {
-      modules: [Autoplay, EffectFade, Pagination, Navigation],
+      modules: [Autoplay, EffectFade, Pagination],
 
       loop: true,
       effect: 'fade',
@@ -384,11 +382,6 @@ class MainPage {
         el: '#discount-slider-pagination',
         clickable: true,
         dynamicBullets: true,
-      },
-
-      navigation: {
-        nextEl: '#discount-slider-next',
-        prevEl: '#discount-slider-prev',
       },
     });
   }
