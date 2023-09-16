@@ -1,4 +1,4 @@
-import { CartDrawProducts, CartLS } from '../type';
+import { CartDrawProducts, CartLS, Discount } from '../type';
 
 class StorageController {
   isLoggedIn(): boolean {
@@ -85,6 +85,18 @@ class StorageController {
 
   getVersion() {
     return Number(localStorage.getItem('version')) as number;
+  }
+  setDiscounts(discounts: Discount[]) {
+    localStorage.setItem('discounts', JSON.stringify(discounts));
+  }
+  getDiscounts() {
+    return JSON.parse(localStorage.getItem('discounts') as string);
+  }
+  setActiveDiscounts(discounts: Discount[]) {
+    localStorage.setItem('discounts', JSON.stringify(discounts));
+  }
+  getActiveDiscounts() {
+    return JSON.parse(localStorage.getItem('discounts') as string);
   }
 }
 

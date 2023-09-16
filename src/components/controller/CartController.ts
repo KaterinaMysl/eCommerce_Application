@@ -1,6 +1,9 @@
 import {
+  CartAddDiscountCodeAction,
   CartAddLineItemAction,
   CartChangeLineItemQuantityAction,
+  CartRecalculateAction,
+  CartRemoveDiscountCodeAction,
   CartRemoveLineItemAction,
   CartUpdateAction,
 } from '@commercetools/platform-sdk';
@@ -10,6 +13,7 @@ import { CartDraw } from '../type';
 import StorageController from './StorageController';
 import { cartToDrawProducts } from './Utils';
 import { navigateTo } from '../app/Router';
+import { alert } from './ToastifyControler';
 
 export default class CartController {
   private client: Client;
@@ -49,13 +53,13 @@ export default class CartController {
   initEventCart() {
     const clearBtn = document.querySelector('.clear-cart_btn');
     const goToOffersBtn = document.querySelector('.go-to-offers_btn');
+    const addCoupon = document.querySelector('.add-coupon');
     const removeProduct = Array.from(
       document.querySelectorAll('.btn-product_remove'),
     ) as HTMLElement[];
     const changeQuantity = Array.from(
       document.querySelectorAll('.product-minus, .product-plus'),
     ) as HTMLElement[];
-
     if (clearBtn) {
       clearBtn.addEventListener('click', async () => {
         const popup = document.getElementById('popup') as HTMLElement;
@@ -103,6 +107,43 @@ export default class CartController {
         }),
       );
     }
+    if (addCoupon) {
+      addCoupon.addEventListener('click', () => {
+        const input = addCoupon.previousElementSibling as HTMLInputElement;
+        const value = input.value;
+        if (value.length > 3) {
+          this.addDiscountToCart(value);
+          input.value = '';
+        } else {
+          alert('Please enter valid discount code', false);
+        }
+      });
+    }
+  }
+  async addDiscountToCart(code: string) {
+    const actions = this.createAddDiscountAction(code);
+    const discountId = await this.client.updateDiscountCart(
+      actions,
+      'Your discount has been successfully activated.',
+    );
+    if (discountId) {
+      this.cartPage.createDiscountItem(discountId);
+      this.removeDiscountWithCart(discountId);
+    }
+  }
+  removeDiscountWithCart(id: string) {
+    const item = document.querySelector(
+      `[data-discountid="${id}"]`,
+    ) as HTMLElement;
+    item?.addEventListener('click', async () => {
+      const id = item.getAttribute('data-discountid') as string;
+      const actions = this.createRemoveDiscountAction(id);
+      await this.client.updateDiscountCart(
+        actions,
+        'Your discount has been successfully deactivated.',
+      );
+      item.remove();
+    });
   }
 
   async removeProductWithCart(event: Event) {
@@ -232,6 +273,36 @@ export default class CartController {
       action: 'changeLineItemQuantity',
       lineItemId: id,
       quantity: count,
+    };
+    actions.push(action);
+    return actions;
+  }
+  createAddDiscountAction(code: string) {
+    const actions: CartUpdateAction[] = [];
+    const action: CartAddDiscountCodeAction = {
+      action: 'addDiscountCode',
+      code: code,
+    };
+    actions.push(action);
+    return actions;
+  }
+  createRecalculateAction() {
+    const actions: CartUpdateAction[] = [];
+    const action: CartRecalculateAction = {
+      action: 'recalculate',
+      updateProductData: true,
+    };
+    actions.push(action);
+    return actions;
+  }
+  createRemoveDiscountAction(discountCode: string) {
+    const actions: CartUpdateAction[] = [];
+    const action: CartRemoveDiscountCodeAction = {
+      action: 'removeDiscountCode',
+      discountCode: {
+        typeId: 'discount-code',
+        id: discountCode,
+      },
     };
     actions.push(action);
     return actions;

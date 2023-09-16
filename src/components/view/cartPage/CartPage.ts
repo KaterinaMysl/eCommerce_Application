@@ -1,6 +1,6 @@
-import { CartDraw } from '../../type';
+import { CartDraw, Discount } from '../../type';
 import './cartPage.css';
-
+import StorageController from '../../controller/StorageController';
 export default class CartPage {
   async draw(productItems?: CartDraw[], price?: number) {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
@@ -48,7 +48,7 @@ export default class CartPage {
     <div class="cart-option">
       <div class="discount">
         <input type="text">
-        <div>Apply Coupon</div>
+        <div class="add-coupon">Apply Coupon</div>
       </div>
       
       <div class="cart-total">
@@ -60,6 +60,9 @@ export default class CartPage {
             price ? price / 100 : 0
           }</span></li>
         </ul>
+        <div class="discount-items">
+          
+        </div>
       <div class="process-to-checkout">Process to checkout</div>
     </div>
   </div>`,
@@ -111,5 +114,15 @@ export default class CartPage {
          </div>`,
       );
     }
+  }
+  createDiscountItem(codeId: string) {
+    const storages = new StorageController();
+    const discounts: Discount[] = storages.getDiscounts();
+    const discount = discounts.find(discoun => discoun.id === codeId);
+    const items = document.querySelector('.discount-items') as HTMLElement;
+    items.insertAdjacentHTML(
+      'beforeend',
+      `<div class="discount-item" data-discountId="${codeId}">${discount?.name}<span>X</span></div>`,
+    );
   }
 }

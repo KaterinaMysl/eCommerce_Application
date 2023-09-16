@@ -54,3 +54,8 @@ export type CartDrawProducts = {
   cartProducts: CartDraw[];
   price: number;
 };
+
+export type Discount = {
+  id: string;
+  name: string;
+};

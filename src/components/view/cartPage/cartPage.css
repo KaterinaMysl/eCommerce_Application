@@ -198,11 +198,49 @@ tbody td.table-right {
   line-height: 28px;
   margin-bottom: 24px;
 }
+.cart-total ul{
+  margin-bottom: 16px;
+} 
 .cart-total li {
   display: flex;
   justify-content: space-between;
   padding: 16px 0;
   border-bottom: 1px solid gray;
+}
+.discount-items{
+  display: flex;
+}
+.discount-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 16px;
+    padding-right: 4px;
+    border: 1px solid #d2d2d2;
+    border-radius: 50px;
+    font-size: 14px;
+    white-space: nowrap;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+}
+.discount-item:hover{
+  background-color: rgba(128, 128, 128, 0.5);
+  cursor: pointer;
+}
+.discount-item span{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #000;
+    font-weight: 700;
 }
 .process-to-checkout {
   display: flex;
