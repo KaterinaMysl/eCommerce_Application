@@ -1,5 +1,7 @@
 .container-about {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .about-home {
@@ -14,10 +16,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../../../assets/images/about.jpeg);
+  background-image: url('../../../assets/images/about.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  opacity: 0.9;
 }
 
 .about-home_content {
@@ -39,6 +42,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
+
 .title-about {
   font-size: 30px;
   font-weight: 700;
@@ -51,7 +55,7 @@
   width: 100%;
   padding-top: 92px;
   padding-bottom: 105px;
-  background: rgb(246, 249, 251);
+  background: rgb(255, 255, 255);
 }
 
 .container-intro {
@@ -115,12 +119,25 @@
   margin-top: 60px;
 }
 
+.testimonials {
+  width: 100%;
+}
+
+.test_border {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #fa9e1b, #8d4fff);
+}
+
 .about {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
-  padding: 20px;
+  padding: 70px;
+  background: #f3f6f9;
 }
 
 .content-about {
@@ -162,12 +179,50 @@
   grid-row: 2;
 }
 
-.participant h2 {
+.participant h2,
+.text-container h2 {
   font-size: 24px;
   margin: 6px 0;
   color: #333;
+  text-align: center;
 }
 
+.text-container {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.avatar-hidden:hover + .text-container {
+  transform: translateY(40px);
+}
+
+.text-container .contact-bio {
+  display: flex;
+  justify-content: center;
+}
+
+.text-container a {
+  border-bottom: none;
+  transition: all 0.3s ease-in-out;
+  padding: 5px;
+}
+
+.text-container a:hover {
+  background: none;
+  color: #8d4fff;
+}
+
+.text-container a img {
+  width: 40px;
+  height: 40px;
+}
 .participant p {
   font-size: 13px;
   margin: 0;
@@ -224,7 +279,7 @@
   transition: background-color 0.3s;
 }
 
-.details {
+.details-about {
   margin-top: 10px;
   padding: 10px;
   background-color: #f5f5f5;
@@ -256,28 +311,9 @@
   margin-top: 50px;
 }
 
-.text-container {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  transition: all 0.3s ease-in-out;
-}
-
-.avatar-hidden:hover + .text-container {
-  transform: translateY(40px);
-}
-
-.text-container a {
-  transition: all 0.3s ease-in-out;
-}
-
-.text-container a:hover {
+.bio {
   color: #fa9e1b;
+  font-weight: 600;
 }
 
 .modal-about {
@@ -294,7 +330,7 @@
 
 .modal-content-about {
   background-color: #fff;
-  margin: 30% auto;
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -345,11 +381,130 @@
   z-index: 1;
 }
 
+.add-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.add_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 52px;
+  padding-bottom: 64px;
+  flex: 1 1 auto;
+}
+
+.add_background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.add_content {
+  width: 1140px;
+  padding: 30px;
+  margin: 0 auto;
+  background-color: #ffffff42;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+.add_title {
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #333;
+  padding-left: 2px;
+}
+
+.add_subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  padding-left: 7px;
+}
+
+.rss {
+  background: #ffffff;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.container-rss {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rss-logo {
+  position: relative;
+  animation: rotateLogo 6s infinite linear;
+}
+
+@keyframes rotateLogo {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rss-content {
+  text-align: center;
+  color: #333;
+  padding: 20px;
+}
+
+.rss_title {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rss_subtitle {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.rss-link {
+  background: #fa9e1b;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.rss-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.rss-link:hover .rss-image {
+  transform: rotate(360deg);
+}
+
 @media only screen and (max-width: 1200px) {
-  .container-footer,
-  .container-main,
-  .main_plus_container,
-  .container-intro {
+  .container-intro,
+  .add_content,
+  .container-rss {
     max-width: 960px;
   }
 }
@@ -375,7 +530,9 @@
   .modal-content-about {
     max-width: 520px;
   }
-  .container-intro {
+  .container-intro,
+  .add_content,
+  .container-rss {
     max-width: 720px;
   }
 }
@@ -389,8 +546,54 @@
   .modal-content-about {
     max-width: 380px;
   }
-  .container-intro {
+  .container-intro,
+  .add_content {
     width: 95%;
+  }
+  .container-rss {
+    width: 95%;
+    flex-direction: column-reverse;
+  }
+  .row-intro {
+    display: flex;
+    flex-direction: column;
+  }
+  .col-lg-5 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .col-lg-7 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .intro_image {
+    position: static;
+  }
+  .intro {
+    padding-top: 20px;
+    padding-bottom: 60px;
+    text-align: center;
+  }
+  .title-about {
+    font-size: 25px;
+    text-align: center;
+  }
+  .intro_title {
+    font-size: 25px;
+    padding-top: 20px;
+  }
+  .intro_text {
+    margin-top: 40px;
+  }
+  .add_title {
+    font-size: 25px;
+    text-align: center;
+  }
+  .add_subtitle {
+    text-align: center;
+  }
+  .rss_title {
+    font-size: 25px;
   }
 }
 
