@@ -1,4 +1,8 @@
 import './MainPage.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 import logoImage from '../../../assets/images/logo.png';
 import homeSlider from '../../../assets/images/home_slider.jpg';
 import map from '../../../assets/images/map.png';
@@ -9,10 +13,14 @@ import phone from '../../../assets/icons/phone-call.svg';
 import message from '../../../assets/icons/message.svg';
 import planet from '../../../assets/icons/planet-earth.svg';
 import placeholder from '../../../assets/icons/placeholder.svg';
+import discount_logo from '../../../assets/images/special_offer.png';
 import { SCROLL_THRESHOLD } from '../../constants';
+import { DiscountCode } from '@commercetools/platform-sdk';
+import Swiper from 'swiper';
+import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 
 class MainPage {
-  draw(isLoggedIn: boolean) {
+  draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
     const content = `
 <div class="body-container">
   <header class="header">
@@ -121,6 +129,7 @@ class MainPage {
               </ul>
         </div>
     </div>
+    ${this.getDiscountsBlock(discountCodes)}
     <div class="text-plus-main">
       <div class="cta_background"></div>
       <div class="main_plus_container">
@@ -228,7 +237,7 @@ class MainPage {
                 </li>
                 <li class="contact_info_item d-flex flex-row">
                   <div><div class="contact_info_icon"><img src="${planet}" alt=""></div></div>
-                  <div class="contact_info_text"><a href="#">www.seagull.com</a></div>
+                  <div class="contact_info_text"><a href="/">www.seagull.com</a></div>
                 </li>
               </ul>
             </div>
@@ -245,6 +254,7 @@ class MainPage {
     document.body.innerHTML = content;
     this.setHeader();
     this.setupBurgerMenu();
+    this.initDiscountSlider();
   }
 
   private setHeader() {
@@ -317,6 +327,70 @@ class MainPage {
         <div class="user_box_login user_box_link"><a href="/login" class="navigator">login</a></div>
         <div class="user_box_register user_box_link"><a href="/register" class="navigator">register</a></div>
       `;
+  }
+
+  private getDiscountsBlock(discountCodes: DiscountCode[]): string {
+    let content = '';
+    if (discountCodes) {
+      content += `
+        <div class="discount-container">
+          <div class="discount-img">
+            <img src="${discount_logo}" alt="image">
+          </div>
+          <div id="discount-slider" class="swiper">
+            <div class="swiper-wrapper">
+              ${this.createSlides(discountCodes)}
+            </div>
+            <div id="discount-slider-pagination" class="swiper-pagination"></div>
+            <div id="discount-slider-prev" class="swiper-button-prev"></div>
+            <div id="discount-slider-next" class="swiper-button-next"></div>
+          </div>
+        </div>
+      `;
+    }
+    return content;
+  }
+
+  private createSlides(discountCodes: DiscountCode[]): string {
+    let content = '';
+    discountCodes.forEach(discountCode => {
+      content += `
+        <div class="swiper-slide discount-item-slide">
+          <div>${discountCode.description?.en}</div>
+          <div>Code: <b>${discountCode.code}</b></div>
+        </div>`;
+    });
+    return content;
+  }
+
+  private initDiscountSlider() {
+    new Swiper('#discount-slider', {
+      modules: [Autoplay, EffectFade, Pagination, Navigation],
+
+      loop: true,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true,
+      },
+      slidesPerView: 'auto',
+      centeredSlides: true,
+
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+
+      pagination: {
+        el: '#discount-slider-pagination',
+        clickable: true,
+        dynamicBullets: true,
+      },
+
+      navigation: {
+        nextEl: '#discount-slider-next',
+        prevEl: '#discount-slider-prev',
+      },
+    });
   }
 }
 

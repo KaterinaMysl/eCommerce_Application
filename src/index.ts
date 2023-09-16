@@ -1,9 +1,9 @@
 import App from './components/app/App';
 
 const app = new App();
-app.start();
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await app.start();
   app.routerControllers();
 });
 

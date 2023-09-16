@@ -537,6 +537,18 @@ class Client {
       })
       .execute();
   }
+
+  getDiscountCodes() {
+    const result = anonymusApi
+      .discountCodes()
+      .get()
+      .execute()
+      .then(response => {
+        return response.body.results;
+      });
+    return result;
+  }
+
 }
 
 export default Client;

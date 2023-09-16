@@ -40,7 +40,7 @@ class App {
     this.client = new Client(this.storage);
     this.validator = new Validator();
     this.routerController = new RouterController(this.storage);
-    this.mainController = new MainController(this.storage);
+    this.mainController = new MainController(this.client, this.storage);
     this.aboutController = new AboutController();
     this.newsController = new NewsController();
     this.contactController = new ContactController();
@@ -57,11 +57,7 @@ class App {
       this.client,
       this.cartController,
     );
-    this.catalogPage = new CatalogPage(
-      this.client,
-      this.cartController,
-      this.catalogController,
-    );
+    this.catalogPage = new CatalogPage(this.catalogController);
     this.productItemController = new ProductItemController(
       this.client,
       this.storage,
@@ -135,8 +131,9 @@ class App {
     this.cartController.draw();
   }
 
-  start() {
-    this.mainController.draw();
+
+  async start() {
+    await this.mainController.draw();
     this.initMainLoginListeners();
   }
 
