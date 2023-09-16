@@ -1306,9 +1306,14 @@ h6 {
   height: auto;
 }
 
-/* .swiper-slide {
-  margin: 50px 20px 0 20px;
-} */
+#discount-slider {
+  width: 100%;
+}
+
+.discount-item-slide {
+  text-align: center;
+  font-size: 18px;
+}
 
 @media only screen and (max-width: 1200px) {
   .container-footer,

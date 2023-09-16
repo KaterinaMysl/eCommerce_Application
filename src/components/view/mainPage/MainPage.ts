@@ -1,5 +1,6 @@
 import './MainPage.css';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import logoImage from '../../../assets/images/logo.png';
@@ -16,7 +17,7 @@ import discount_logo from '../../../assets/images/special_offer.png';
 import { SCROLL_THRESHOLD } from '../../constants';
 import { DiscountCode } from '@commercetools/platform-sdk';
 import Swiper from 'swiper';
-import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
+import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 
 class MainPage {
   draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
@@ -253,7 +254,7 @@ class MainPage {
     document.body.innerHTML = content;
     this.setHeader();
     this.setupBurgerMenu();
-    this.initSlider();
+    this.initDiscountSlider();
   }
 
   private setHeader() {
@@ -341,6 +342,8 @@ class MainPage {
               ${this.createSlides(discountCodes)}
             </div>
             <div id="discount-slider-pagination" class="swiper-pagination"></div>
+            <div id="discount-slider-prev" class="swiper-button-prev"></div>
+            <div id="discount-slider-next" class="swiper-button-next"></div>
           </div>
         </div>
       `;
@@ -352,7 +355,7 @@ class MainPage {
     let content = '';
     discountCodes.forEach(discountCode => {
       content += `
-        <div class="swiper-slide">
+        <div class="swiper-slide discount-item-slide">
           <div>${discountCode.description?.en}</div>
           <div>Code: <b>${discountCode.code}</b></div>
         </div>`;
@@ -360,24 +363,32 @@ class MainPage {
     return content;
   }
 
-  private initSlider() {
+  private initDiscountSlider() {
     new Swiper('#discount-slider', {
-      modules: [Autoplay, EffectFade, Pagination],
+      modules: [Autoplay, EffectFade, Pagination, Navigation],
 
       loop: true,
       effect: 'fade',
+      fadeEffect: {
+        crossFade: true,
+      },
       slidesPerView: 'auto',
       centeredSlides: true,
 
-      /* autoplay: {
-        delay: 2500,
+      autoplay: {
+        delay: 4000,
         disableOnInteraction: false,
-      }, */
+      },
 
       pagination: {
         el: '#discount-slider-pagination',
         clickable: true,
         dynamicBullets: true,
+      },
+
+      navigation: {
+        nextEl: '#discount-slider-next',
+        prevEl: '#discount-slider-prev',
       },
     });
   }
