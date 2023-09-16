@@ -22,29 +22,42 @@
 }
 .container-cart table tr {
   margin: 10px 0;
-  cursor: pointer;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
 }
 .container-cart table tr:hover {
   margin: 10px 0;
   background-color: antiquewhite;
 }
 .product-lists td {
+  width: 20%;
   text-align: center;
   padding: 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .product-lists td.table-right {
   text-align: right;
+  width: 5%;
   border-radius: 0px 10px 10px 0px;
 }
 .product-lists td.table-left {
+  width: 50%;
   border-radius: 10px 0 0 10px;
-  margin-right: -280px;
   max-width: 390px;
-  text-align: left;
 }
 tbody td.table-left {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+}
+tbody td.table-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 5%;
 }
 .cart-product_image {
   min-width: 150px;
@@ -55,12 +68,56 @@ tbody td.table-left {
   margin-right: 25px;
   border-radius: 10px;
 }
+.product-quantity{
+  display: flex;
+  height: 50px;
+}
+.product-quantity button{
+  outline: none;
+  width: 25px;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .3s;
+}
+.product-quantity button[disabled] {
+  cursor: auto;
+  background-color: #dcdcdc;
+}
+.product-quantity button[disabled]:hover {
+  cursor: auto;
+  background-color: #dcdcdc;
+}
+.product-quantity button:hover{
+background-color: #6d5483;
+color: white;
+}
+.product-quantity div{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+  width: 25px;
+}
+
+.product-quantity * {
+  height: 100%;
+}
 .cart-block-btn {
   display: flex;
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
   margin: 20px 0;
+}
+.btn-product_remove{
+  width: 32px;
+  height: 32px;
+  background-image: url(../../../assets/icons/cart-cancel.png);
+  transition: all .2s;
+}
+.btn-product_remove:hover{
+  transform: scale(1.1);
+  cursor: pointer;
 }
 .clear-cart_btn,
 .go-to-offers_btn {
@@ -144,6 +201,18 @@ tbody td.table-left {
 .cart-total li {
   display: flex;
   justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid gray;
+}
+.process-to-checkout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+  padding: 16px 48px;
+  color: white;
+  cursor: pointer;
+  background-color: blueviolet;
 }
 .popup {
   display: none;

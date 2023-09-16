@@ -4,9 +4,12 @@ import compass from '../../../assets/icons/compass.webp';
 import sailboat from '../../../assets/icons/sailboat.webp';
 import { Attribute, ProductProjection } from '@commercetools/platform-sdk';
 import { navigateTo } from '../../app/Router';
+import StorageController from '../../controller/StorageController';
+const storage = new StorageController();
 
 export default class CatalogProductPage {
   draw(product: ProductProjection) {
+    const isCart = storage.isProductInCart(product.id);
     const offerGrid = document.querySelector('.offers_grid') as HTMLElement;
     const normalPrice =
       (product.masterVariant.prices?.[0].value.centAmount as number) / 100;
@@ -70,9 +73,9 @@ export default class CatalogProductPage {
                 <div class="button book_button" prod-name="${
                   product.key
                 }">view more<span></span><span></span><span></span></div>
-                <div class="button book_button add-product-to-cart" prod-key="${
-                  product.id
-                }">Add to cart</div>
+                <div class="button book_button add-product-to-cart ${
+                  isCart ? 'disabled' : ''
+                }" prod-key="${product.id}">Add to cart</div>
                 <div class="offer_reviews">
                   <div class="offer_reviews_content">
                   <div class="offer_reviews_title">${

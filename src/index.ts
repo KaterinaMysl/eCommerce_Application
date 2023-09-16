@@ -3,8 +3,11 @@ import App from './components/app/App';
 const app = new App();
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // app.start();
-  app.routerControllers();
+  await app.start();
+  const url = new URL(window.location.href);
+  if (url.pathname.length > 1) {
+    app.routerControllers();
+  }
 });
 
 document.addEventListener('click', e => {
