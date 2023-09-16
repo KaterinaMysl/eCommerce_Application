@@ -15,8 +15,8 @@ import placeholder from '../../../assets/icons/placeholder.svg';
 import discount_logo from '../../../assets/images/special_offer.png';
 import { SCROLL_THRESHOLD } from '../../constants';
 import { DiscountCode } from '@commercetools/platform-sdk';
-// import Swiper from 'swiper';
-// import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
+import Swiper from 'swiper';
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
 class MainPage {
   draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
@@ -253,7 +253,7 @@ class MainPage {
     document.body.innerHTML = content;
     this.setHeader();
     this.setupBurgerMenu();
-    // this.initSlider();
+    this.initSlider();
   }
 
   private setHeader() {
@@ -360,27 +360,27 @@ class MainPage {
     return content;
   }
 
-  // private initSlider() {
-  //   new Swiper('#discount-slider', {
-  //     modules: [Autoplay, EffectFade, Pagination],
+  private initSlider() {
+    new Swiper('#discount-slider', {
+      modules: [Autoplay, EffectFade, Pagination],
 
-  //     loop: true,
-  //     effect: 'fade',
-  //     slidesPerView: 'auto',
-  //     centeredSlides: true,
+      loop: true,
+      effect: 'fade',
+      slidesPerView: 'auto',
+      centeredSlides: true,
 
-  //     /* autoplay: {
-  //       delay: 2500,
-  //       disableOnInteraction: false,
-  //     }, */
+      /* autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      }, */
 
-  //     pagination: {
-  //       el: '#discount-slider-pagination',
-  //       clickable: true,
-  //       dynamicBullets: true,
-  //     },
-  //   });
-  // }
+      pagination: {
+        el: '#discount-slider-pagination',
+        clickable: true,
+        dynamicBullets: true,
+      },
+    });
+  }
 }
 
 export default MainPage;

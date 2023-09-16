@@ -538,8 +538,8 @@ class Client {
       .execute();
   }
 
-  async getDiscountCodes() {
-    const result = await anonymusApi
+  getDiscountCodes() {
+    const result = anonymusApi
       .discountCodes()
       .get()
       .execute()

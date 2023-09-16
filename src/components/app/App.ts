@@ -131,8 +131,8 @@ class App {
     this.cartController.draw();
   }
 
-  start() {
-    this.mainController.draw();
+  async start() {
+    await this.mainController.draw();
     this.initMainLoginListeners();
   }
 
