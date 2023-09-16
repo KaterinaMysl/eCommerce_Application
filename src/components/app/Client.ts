@@ -548,6 +548,7 @@ class Client {
       });
     return result;
   }
+
 }
 
 export default Client;
