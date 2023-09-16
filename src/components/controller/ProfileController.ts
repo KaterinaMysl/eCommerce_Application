@@ -9,7 +9,7 @@ import ProfileForm from '../view/profileForm/ProfileForm';
 import StorageController from './StorageController';
 import editOk from '../../assets/icons/ok-edit.png';
 import pencil from '../../assets/icons/pencil.png';
-import { someFunction } from './ToastifyControler';
+import { alert } from './ToastifyControler';
 
 class ProfileController {
   private client: Client;
@@ -154,7 +154,7 @@ class ProfileController {
     const input = parent.querySelector('input') as HTMLInputElement;
     if (img.classList.contains('save-edit')) {
       if (input.value.length === 0 || input.classList.contains('invalid')) {
-        someFunction('Please correct fill in this field', false);
+        alert('Please correct fill in this field', false);
         return;
       }
       img.src = pencil;
@@ -188,7 +188,7 @@ class ProfileController {
           password.classList.remove('valid');
         });
       } else {
-        someFunction('Please enter your current and new password', false);
+        alert('Please enter your current and new password', false);
       }
     } else {
       btn.classList.add('save');
@@ -229,7 +229,7 @@ class ProfileController {
         await this.updateAddress(elements);
         btn.textContent = 'Edit address';
       } else {
-        someFunction('Please fill correct in all the fields', false);
+        alert('Please fill correct in all the fields', false);
       }
     } else {
       btn.textContent = 'Save address';
@@ -266,7 +266,7 @@ class ProfileController {
         ) as HTMLElement;
         btnAddAddress.style.display = 'flex';
       } else {
-        someFunction('Please fill in all the fields', false);
+        alert('Please fill in all the fields', false);
       }
     }
   }

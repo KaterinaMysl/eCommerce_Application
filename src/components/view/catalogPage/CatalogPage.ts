@@ -5,26 +5,27 @@ import departure from '../../../assets/icons/departure.webp';
 import diving from '../../../assets/icons/diving.webp';
 import island from '../../../assets/icons/island.webp';
 import suitcase from '../../../assets/icons/suitcase.webp';
-import ProductController from '../../controller/CatalogController';
 import PriceSlider from './PriceSlider';
 import FilterSelection from './FilterSelection';
+import CatalogController from '../../controller/CatalogController';
 
 export default class CatalogPage {
-  private catalogController: ProductController;
+  private catalogController: CatalogController;
   private priceSlider: PriceSlider | null;
   private daysSlider: PriceSlider | null;
   private starsSlider: PriceSlider | null;
   private ratingSlider: PriceSlider | null;
   private filtersSelection: FilterSelection | null;
 
-  constructor() {
-    this.catalogController = new ProductController();
+  constructor(catalogController: CatalogController) {
+    this.catalogController = catalogController;
     this.priceSlider = null;
     this.daysSlider = null;
     this.starsSlider = null;
     this.ratingSlider = null;
     this.filtersSelection = null;
   }
+
   async draw() {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
@@ -189,11 +190,22 @@ export default class CatalogPage {
     await this.catalogController.getProducts();
     this.initEventCatalog();
   }
+
   initEventCatalog() {
-    this.priceSlider = new PriceSlider(35, 50000, 'price');
-    this.daysSlider = new PriceSlider(1, 30, 'days');
-    this.starsSlider = new PriceSlider(1, 5, 'stars');
-    this.ratingSlider = new PriceSlider(1, 10, 'rating');
+    this.priceSlider = new PriceSlider(
+      this.catalogController,
+      35,
+      50000,
+      'price',
+    );
+    this.daysSlider = new PriceSlider(this.catalogController, 1, 30, 'days');
+    this.starsSlider = new PriceSlider(this.catalogController, 1, 5, 'stars');
+    this.ratingSlider = new PriceSlider(
+      this.catalogController,
+      1,
+      10,
+      'rating',
+    );
     const sortSelect = document.querySelector(
       '.catalog-settings_sorting select',
     ) as HTMLSelectElement;
@@ -224,6 +236,7 @@ export default class CatalogPage {
       this.catalogController.sortProducts(targetElement.value);
     });
   }
+
   categoryClick(tabs: HTMLElement[], tab: HTMLElement) {
     const details = document.querySelector(
       'details.details_category',

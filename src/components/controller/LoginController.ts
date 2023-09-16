@@ -5,6 +5,7 @@ import LoginPage from '../view/loginPage/LoginPage';
 import { Controller } from './Controller';
 import { handleServerError } from './Validator/handleServerError';
 import { navigateTo } from '../app/Router';
+import { ErrorResponse } from '../type';
 
 class LoginController implements Controller {
   private client: Client;
@@ -19,34 +20,30 @@ class LoginController implements Controller {
     this.loginForm = new LoginForm();
   }
 
-  login(e: Event) {
+  async login(e: Event) {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
     const username = formData.get('email') as string;
     const password = formData.get('password') as string;
-    this.client
-      .login(username, password)
-      .then((id: string) => {
-        this.storage.saveCustomerSessionId(id);
-        this.client.getCustomerDetails(id);
-        navigateTo('/');
-      })
-      .catch(error => {
-        handleServerError(error, form);
-      });
+    const response = await this.client.login(username, password);
+    if (typeof response === 'string') {
+      this.storage.saveCustomerSessionId(response as string);
+      this.client.getCustomerDetails(response as string);
+      navigateTo('/');
+    } else {
+      handleServerError(response as ErrorResponse[], form);
+    }
   }
 
-  loginWithCreds(username: string, password: string) {
-    this.client
-      .login(username, password)
-      .then((id: string) => {
-        this.storage.saveCustomerSessionId(id);
-        navigateTo('/');
-      })
-      .catch(() => {
-        navigateTo('/unexpected-error');
-      });
+  async loginWithCreds(username: string, password: string) {
+    const response = await this.client.login(username, password);
+    if (typeof response === 'string') {
+      this.storage.saveCustomerSessionId(response);
+      navigateTo('/');
+    } else {
+      navigateTo('/unexpected-error');
+    }
   }
 
   draw() {

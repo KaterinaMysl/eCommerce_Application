@@ -2,6 +2,12 @@ import ProductController from '../../controller/CatalogController';
 import { FILTERS_ACTIVE } from '../../constants';
 
 export default class FilterSelection {
+  private productController: ProductController;
+
+  constructor(productController: ProductController) {
+    this.productController = productController;
+  }
+
   createSearchFilter(value: string) {
     const parentDiv = document.querySelector('.catalog-selection_filters');
 
@@ -75,7 +81,6 @@ export default class FilterSelection {
   }
 
   getProducts() {
-    const productController = new ProductController();
-    productController.getProductsWithFilters();
+    this.productController.getProductsWithFilters();
   }
 }
