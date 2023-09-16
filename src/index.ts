@@ -3,7 +3,7 @@ import App from './components/app/App';
 const app = new App();
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await app.start();
+  // app.start();
   app.routerControllers();
 });
 
