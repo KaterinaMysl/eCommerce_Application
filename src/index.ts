@@ -4,7 +4,10 @@ const app = new App();
 
 document.addEventListener('DOMContentLoaded', async () => {
   await app.start();
-  app.routerControllers();
+  const url = new URL(window.location.href);
+  if (url.pathname.length > 1) {
+    app.routerControllers();
+  }
 });
 
 document.addEventListener('click', e => {
