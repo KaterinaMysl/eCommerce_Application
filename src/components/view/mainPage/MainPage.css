@@ -257,6 +257,7 @@ h6 {
   font-weight: 700;
   color: #2d2c2c;
   text-transform: uppercase;
+  z-index: 3;
 }
 
 .text-plus-main {
@@ -745,12 +746,8 @@ li.main_nav_item a.cart-total_products span {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.fa-pinterest:before {
-  content: '\f0d2';
-}
-
-.fa-pinterest-square:before {
-  content: '\f0d3';
+.fa-insta:before {
+  content: '\f16d';
 }
 
 .fa-facebook-f:before,
@@ -758,20 +755,8 @@ li.main_nav_item a.cart-total_products span {
   content: '\f09a';
 }
 
-.fa-twitter:before {
-  content: '\f099';
-}
-
-.fa-dribbble:before {
-  content: '\f17d';
-}
-
-.fa-behance:before {
-  content: '\f1b4';
-}
-
-.fa-behance-square:before {
-  content: '\f1b5';
+.fa-telegram:before {
+  content: '\f2c6';
 }
 
 .fa-linkedin:before {
