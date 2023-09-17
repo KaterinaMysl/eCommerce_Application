@@ -20,6 +20,7 @@ class MainController implements Controller {
     const discounts: Discount[] = discountCodes.map(discountCode => ({
       id: discountCode.id,
       name: discountCode.name?.en || '',
+      code: discountCode.code || '',
     }));
     this.storage.setDiscounts(discounts);
     this.mainPage.draw(this.storage.isLoggedIn(), discountCodes);

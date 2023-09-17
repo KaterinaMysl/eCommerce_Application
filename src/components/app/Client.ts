@@ -188,6 +188,9 @@ class Client {
     successMessage: string,
   ): Promise<boolean> {
     try {
+      const span = document.querySelector(
+        '.cart-total_products span',
+      ) as HTMLElement;
       const cart = this.storage.getCart();
       if (cart) {
         const response = await anonymusApi
@@ -201,45 +204,13 @@ class Client {
           })
           .execute();
         cart.version = response.body.version;
+        span.textContent = `${response.body.lineItems.length}`;
         this.storage.saveCart(cart);
         this.storage.saveCartProducts(cartToDrawProducts(response.body));
         if (successMessage) {
           alert(successMessage, true);
         }
         return true;
-      } else return false;
-    } catch (error) {
-      alert('Something went wrong. Please, try again later.', false);
-      return false;
-    }
-  }
-  async updateDiscountCart(
-    actions: CartUpdateAction[],
-    successMessage: string,
-  ) {
-    try {
-      const cart = this.storage.getCart();
-      if (cart) {
-        const response = await anonymusApi
-          .carts()
-          .withId({ ID: cart.id })
-          .post({
-            body: {
-              version: Number(cart.version),
-              actions,
-            },
-          })
-          .execute();
-        cart.version = response.body.version;
-        this.storage.saveCart(cart);
-        if (successMessage) {
-          alert(successMessage, true);
-        }
-        if (response.body.discountCodes.length) {
-          return response.body.discountCodes[
-            response.body.discountCodes.length - 1
-          ].discountCode.id;
-        }
       } else return false;
     } catch (error) {
       alert('Something went wrong. Please, try again later.', false);

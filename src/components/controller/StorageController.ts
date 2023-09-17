@@ -42,6 +42,11 @@ class StorageController {
     this.removeCartProducts();
     return cartProducts;
   }
+  getAndRemoveDiscounts(): Discount[] {
+    const activeDiscounts = this.getActiveDiscounts();
+    this.removeActiveDiscounts();
+    return activeDiscounts;
+  }
 
   isProductInCart(id: string): boolean {
     const cart = this.getCartProducts();
@@ -93,10 +98,13 @@ class StorageController {
     return JSON.parse(localStorage.getItem('discounts') as string);
   }
   setActiveDiscounts(discounts: Discount[]) {
-    localStorage.setItem('discounts', JSON.stringify(discounts));
+    localStorage.setItem('ActiveDiscounts', JSON.stringify(discounts));
   }
   getActiveDiscounts() {
-    return JSON.parse(localStorage.getItem('discounts') as string);
+    return JSON.parse(localStorage.getItem('ActiveDiscounts') as string);
+  }
+  removeActiveDiscounts() {
+    localStorage.removeItem('ActiveDiscounts');
   }
 }
 

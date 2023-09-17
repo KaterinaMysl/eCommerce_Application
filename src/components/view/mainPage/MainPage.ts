@@ -18,9 +18,12 @@ import { SCROLL_THRESHOLD } from '../../constants';
 import { DiscountCode } from '@commercetools/platform-sdk';
 import Swiper from 'swiper';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
+import StorageController from '../../controller/StorageController';
 
 class MainPage {
   draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
+    const storage = new StorageController();
+    const productsInCart = storage.getCartProducts()?.cartProducts?.length || 0;
     const content = `
 <div class="body-container">
   <header class="header">
@@ -72,7 +75,7 @@ class MainPage {
                 <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
                 <li class="main_nav_item"><a href="/news" class="navigator">news</a></li>
                 <li class="main_nav_item"><a href="/contact" class="navigator">contact</a></li>
-                <li class="main_nav_item"><a href="/cart" class="navigator">cart</a></li>
+                <li class="main_nav_item"><a href="/cart" class="navigator cart-total_products"><span class="navigator">${productsInCart}</span></a></li>
               </ul>
             </div>
           </div>

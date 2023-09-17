@@ -2,14 +2,13 @@ import {
   CartAddDiscountCodeAction,
   CartAddLineItemAction,
   CartChangeLineItemQuantityAction,
-  CartRecalculateAction,
   CartRemoveDiscountCodeAction,
   CartRemoveLineItemAction,
   CartUpdateAction,
 } from '@commercetools/platform-sdk';
 import Client from '../app/Client';
 import CartPage from '../view/cartPage/CartPage';
-import { CartDraw } from '../type';
+import { CartDraw, Discount } from '../type';
 import StorageController from './StorageController';
 import { cartToDrawProducts } from './Utils';
 import { navigateTo } from '../app/Router';
@@ -60,6 +59,15 @@ export default class CartController {
     const changeQuantity = Array.from(
       document.querySelectorAll('.product-minus, .product-plus'),
     ) as HTMLElement[];
+    const items = Array.from(
+      document.querySelectorAll('.discount-item'),
+    ) as HTMLElement[];
+    items.forEach(item =>
+      item.addEventListener('click', () => {
+        const id = item.getAttribute('data-discountId') as string;
+        this.removeDiscountWithCart(id);
+      }),
+    );
     if (clearBtn) {
       clearBtn.addEventListener('click', async () => {
         const popup = document.getElementById('popup') as HTMLElement;
@@ -71,9 +79,14 @@ export default class CartController {
         yesButton.addEventListener('click', async () => {
           popup.style.display = 'none';
           const cartProduct = this.storage.getAndRemoveCartProducts();
-          const actions = await this.createRemoveItemActions(
+          const discount: Discount[] = this.storage.getAndRemoveDiscounts();
+          const actionsProducts = await this.createRemoveItemActions(
             cartProduct.cartProducts,
           );
+          const actionsDiscounts = await this.createRemoveDiscountAction(
+            discount,
+          );
+          const actions = [...actionsProducts, ...actionsDiscounts];
           this.client.updateProductsCart(actions, '');
           await this.cartPage.draw();
         });
@@ -122,30 +135,20 @@ export default class CartController {
   }
   async addDiscountToCart(code: string) {
     const actions = this.createAddDiscountAction(code);
-    const discountId = await this.client.updateDiscountCart(
+    await this.client.updateProductsCart(
       actions,
       'Your discount has been successfully activated.',
     );
-    if (discountId) {
-      this.cartPage.createDiscountItem(discountId);
-      this.removeDiscountWithCart(discountId);
-    }
+    await this.draw();
   }
-  removeDiscountWithCart(id: string) {
-    const item = document.querySelector(
-      `[data-discountid="${id}"]`,
-    ) as HTMLElement;
-    item?.addEventListener('click', async () => {
-      const id = item.getAttribute('data-discountid') as string;
-      const actions = this.createRemoveDiscountAction(id);
-      await this.client.updateDiscountCart(
-        actions,
-        'Your discount has been successfully deactivated.',
-      );
-      item.remove();
-    });
+  async removeDiscountWithCart(id: string) {
+    const actions = this.createRemoveDiscountAction(id);
+    await this.client.updateProductsCart(
+      actions,
+      'Your discount has been successfully deactivated.',
+    );
+    this.draw();
   }
-
   async removeProductWithCart(event: Event) {
     const id = (event.target as HTMLElement).dataset.id;
     if (id) {
@@ -286,25 +289,29 @@ export default class CartController {
     actions.push(action);
     return actions;
   }
-  createRecalculateAction() {
+  createRemoveDiscountAction(discount: Discount[] | string) {
     const actions: CartUpdateAction[] = [];
-    const action: CartRecalculateAction = {
-      action: 'recalculate',
-      updateProductData: true,
-    };
-    actions.push(action);
-    return actions;
-  }
-  createRemoveDiscountAction(discountCode: string) {
-    const actions: CartUpdateAction[] = [];
-    const action: CartRemoveDiscountCodeAction = {
-      action: 'removeDiscountCode',
-      discountCode: {
-        typeId: 'discount-code',
-        id: discountCode,
-      },
-    };
-    actions.push(action);
+    if (typeof discount === 'string') {
+      const action: CartRemoveDiscountCodeAction = {
+        action: 'removeDiscountCode',
+        discountCode: {
+          typeId: 'discount-code',
+          id: discount,
+        },
+      };
+      actions.push(action);
+    } else {
+      discount.forEach(discoun => {
+        const action: CartRemoveDiscountCodeAction = {
+          action: 'removeDiscountCode',
+          discountCode: {
+            typeId: 'discount-code',
+            id: discoun.id,
+          },
+        };
+        actions.push(action);
+      });
+    }
     return actions;
   }
 }

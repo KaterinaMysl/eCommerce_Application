@@ -45,6 +45,7 @@ export type CartDraw = {
   quantity: number;
   price: number;
   discount?: number;
+  discountCode?: number;
   images: string;
   id: string;
   lineItemId: string;
@@ -58,4 +59,5 @@ export type CartDrawProducts = {
 export type Discount = {
   id: string;
   name: string;
+  code: string;
 };

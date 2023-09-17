@@ -13,11 +13,24 @@ export default class CartPage {
     `;
     bodyContainer.innerHTML = content;
     this.productDraw(productItems, price);
+    this.createDiscountItem();
   }
 
   productDraw(productItems?: CartDraw[], price?: number) {
     const container = document.querySelector('.container_inner') as HTMLElement;
     if (productItems) {
+      const subTotal = productItems.reduce(
+        (acc, product) => acc + product.price * product.quantity,
+        0,
+      );
+      const saveTotal = productItems.reduce(
+        (acc, product) => acc + (product.discount || 0) * product.quantity,
+        0,
+      );
+      const discountTotal = productItems.reduce(
+        (acc, product) => acc + (product.discountCode || 0) * product.quantity,
+        0,
+      );
       container.insertAdjacentHTML(
         'beforeend',
         `<div class="cart-products">
@@ -54,11 +67,24 @@ export default class CartPage {
       <div class="cart-total">
         <h4>Cart total</h4>
         <ul>
-          <li><span>Subtotal:</span><span class="cart-total_price">$</span></li>
-          <li><span>Shipping:</span><span>free</span></li>
-          <li><span>Total:</span><span class="cart-total_price">$${
+          <li><span>Subtotal:</span><span class="cart-subtotal_price">${
+            subTotal / 100
+          }${'$'}</span></li>
+          <li class="${
+            saveTotal === 0 ? 'price-none' : ''
+          }"><span>Save:</span><span>-${
+          subTotal / 100 - saveTotal / 100
+        }${'$'}</span></li>
+          <li class="${
+            discountTotal === 0 ? 'price-none' : ''
+          }"><span>Discount:</span><span>-${(
+          subTotal / 100 -
+          saveTotal / 100 -
+          discountTotal / 100
+        ).toFixed(2)}${'$'}</span></li>
+          <li><span>Total:</span><span class="cart-total_price">${
             price ? price / 100 : 0
-          }</span></li>
+          }${'$'}</span></li>
         </ul>
         <div class="discount-items">
           
@@ -71,6 +97,11 @@ export default class CartPage {
         '.product-lists tbody',
       ) as HTMLElement;
       productItems.forEach(product => {
+        const subTotal = product.discountCode
+          ? product.discountCode
+          : product.discount
+          ? product.discount
+          : product.price;
         tBody.insertAdjacentHTML(
           'beforeend',
           `<tr>
@@ -81,7 +112,27 @@ export default class CartPage {
                   </div>
                   <div>${product.name}</div>
                 </td>
-                <td><span>$</span>${product.price / 100}</td>
+                <td class="td-price">
+                  <p class="base-price ${
+                    product.discount
+                      ? 'price-inactive'
+                      : product.discountCode
+                      ? 'price-inactive'
+                      : ''
+                  }">
+                  $${product.price / 100}
+                  </p>
+                  <p class="discount-price ${
+                    product.discountCode ? 'price-inactive' : ''
+                  } ${product.discount ? '' : 'price-none'}">
+                  $${product.discount ? product.discount / 100 : ''}
+                  </p>
+                  <p class="discountCode-price ${
+                    product.discountCode ? '' : 'price-none'
+                  }">
+                  $${product.discountCode ? product.discountCode / 100 : ''}
+                  </p>
+                </td>
                 <td>
                   <div class="product-quantity">
                     <button class="product-minus" data-change="minus" ${
@@ -94,9 +145,9 @@ export default class CartPage {
                   </div>
                 </td>
                 
-                <td><span>$</span>${
-                  (product.price * product.quantity) / 100
-                }</td>
+                <td>                  
+                  $${(subTotal * product.quantity) / 100}
+                </td>
                 <td class="table-right"><div class="btn-product_remove" data-id="${
                   product.lineItemId
                 }"></div></td>
@@ -115,14 +166,17 @@ export default class CartPage {
       );
     }
   }
-  createDiscountItem(codeId: string) {
+  createDiscountItem() {
     const storages = new StorageController();
-    const discounts: Discount[] = storages.getDiscounts();
-    const discount = discounts.find(discoun => discoun.id === codeId);
+    const discounts: Discount[] = storages.getActiveDiscounts();
     const items = document.querySelector('.discount-items') as HTMLElement;
-    items.insertAdjacentHTML(
-      'beforeend',
-      `<div class="discount-item" data-discountId="${codeId}">${discount?.name}<span>X</span></div>`,
-    );
+    if (items) {
+      discounts.forEach(discount => {
+        items.insertAdjacentHTML(
+          'beforeend',
+          `<div class="discount-item" data-discountId="${discount.id}">${discount.name}<span>X</span></div>`,
+        );
+      });
+    }
   }
 }

@@ -457,7 +457,26 @@ h6 {
   color: #2d2c2c;
   text-transform: uppercase;
 }
-
+li.main_nav_item a.cart-total_products{
+  position: relative;
+  z-index: 100;
+}
+.cart-total_products::before{
+content: '';
+position: absolute;
+width: 32px;
+height: 32px;
+background: url(../../../assets/icons/shopping-cart.png);
+left: -15px;
+top: -21px;
+}
+li.main_nav_item a.cart-total_products span{
+  position: absolute;
+  top: -30px;
+  left: -3px;
+  z-index: 99;
+  font-size: 24px;
+}
 @media only screen and (max-width: 1000px) {
   .text-info-main img {
     width: 540px;

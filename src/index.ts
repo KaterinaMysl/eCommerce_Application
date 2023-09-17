@@ -11,10 +11,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 document.addEventListener('click', e => {
-  const element = e.target as HTMLLinkElement;
-  if (element.tagName === 'A' && element.classList.contains('navigator')) {
-    e.preventDefault();
-    app.navigateTo(element.href);
+  const element = e.target as HTMLElement;
+  if (element.classList.contains('navigator')) {
+    if (element.tagName === 'A') {
+      const link = element as HTMLLinkElement;
+      e.preventDefault();
+      app.navigateTo(link.href);
+    } else if (element.tagName === 'SPAN') {
+      const link = element.closest('a') as unknown as HTMLLinkElement;
+      e.preventDefault();
+      app.navigateTo(link.href);
+    }
   }
 });
 window.addEventListener('popstate', () => app.routerControllers());
