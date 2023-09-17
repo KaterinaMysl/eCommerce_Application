@@ -23,7 +23,8 @@ import StorageController from '../../controller/StorageController';
 class MainPage {
   draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
     const storage = new StorageController();
-    const productsInCart = storage.getCartProducts()?.cartProducts?.length || 0;
+    const productsInCart =
+      storage.getCartProducts()?.cartProducts?.length || '';
     const content = `
 <div class="body-container">
   <header class="header">

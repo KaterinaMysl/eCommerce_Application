@@ -98,6 +98,15 @@ class Client {
   async createMeCart(api: ByProjectKeyRequestBuilder) {
     try {
       const cart = await api.me().activeCart().get().execute();
+      if (cart) {
+        const span = document.querySelector(
+          '.cart-total_products span',
+        ) as HTMLElement;
+        span.textContent = `${
+          cart.body.lineItems.length > 0 ? cart.body.lineItems.length : ''
+        }`;
+        this.storage.saveCartProducts(cartToDrawProducts(cart.body));
+      }
       const cartLS = {
         id: cart.body.id,
         version: cart.body.version,
@@ -204,7 +213,11 @@ class Client {
           })
           .execute();
         cart.version = response.body.version;
-        span.textContent = `${response.body.lineItems.length}`;
+        span.textContent = `${
+          response.body.lineItems.length > 0
+            ? response.body.lineItems.length
+            : ''
+        }`;
         this.storage.saveCart(cart);
         this.storage.saveCartProducts(cartToDrawProducts(response.body));
         if (successMessage) {

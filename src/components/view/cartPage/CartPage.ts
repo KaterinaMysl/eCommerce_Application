@@ -34,18 +34,19 @@ export default class CartPage {
       container.insertAdjacentHTML(
         'beforeend',
         `<div class="cart-products">
-      <table class="product-lists">
-        <thead>
-            <td class="table-left">Product</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Subtotal</td>
-            <td class="table-right"></td>
-        </thead>
-        <tbody>
-
-        </tbody>
-      </table>
+          <ul class="products-list">
+            <li class="title-list">
+              <div class="block-one">
+                <div class="product-data">Product</div>
+              </div>
+              <div class="block-two">
+                <div>Price</div>
+                <div>Quantity</div>
+                <div>Subtotal</div>
+                <div></div>
+              </div>
+            </li>
+        </ul>
     </div>
     <div id="popup" class="popup">
         <div class="popup-content">
@@ -72,9 +73,10 @@ export default class CartPage {
           }${'$'}</span></li>
           <li class="${
             saveTotal === 0 ? 'price-none' : ''
-          }"><span>Save:</span><span>-${
-          subTotal / 100 - saveTotal / 100
-        }${'$'}</span></li>
+          }"><span>Save:</span><span>-${(
+          subTotal / 100 -
+          saveTotal / 100
+        ).toFixed(2)}${'$'}</span></li>
           <li class="${
             discountTotal === 0 ? 'price-none' : ''
           }"><span>Discount:</span><span>-${(
@@ -93,65 +95,69 @@ export default class CartPage {
     </div>
   </div>`,
       );
-      const tBody = document.querySelector(
-        '.product-lists tbody',
-      ) as HTMLElement;
+      const ul = document.querySelector('.products-list') as HTMLElement;
       productItems.forEach(product => {
         const subTotal = product.discountCode
           ? product.discountCode
           : product.discount
           ? product.discount
           : product.price;
-        tBody.insertAdjacentHTML(
+        ul.insertAdjacentHTML(
           'beforeend',
-          `<tr>
-                <td class="table-left">
-                  <div class="cart-product_image" style="background-image:url(${
-                    product.images
-                  })">
-                  </div>
-                  <div>${product.name}</div>
-                </td>
-                <td class="td-price">
-                  <p class="base-price ${
-                    product.discount
-                      ? 'price-inactive'
-                      : product.discountCode
-                      ? 'price-inactive'
-                      : ''
-                  }">
-                  $${product.price / 100}
-                  </p>
-                  <p class="discount-price ${
-                    product.discountCode ? 'price-inactive' : ''
-                  } ${product.discount ? '' : 'price-none'}">
-                  $${product.discount ? product.discount / 100 : ''}
-                  </p>
-                  <p class="discountCode-price ${
-                    product.discountCode ? '' : 'price-none'
-                  }">
-                  $${product.discountCode ? product.discountCode / 100 : ''}
-                  </p>
-                </td>
-                <td>
-                  <div class="product-quantity">
-                    <button class="product-minus" data-change="minus" ${
-                      product.quantity === 1 ? 'disabled' : ''
-                    }>-</button>
-                    <div class="product-count" data-id="${
-                      product.lineItemId
-                    }">${product.quantity}</div>
-                    <button class="product-plus" data-change="plus">+</button>
-                  </div>
-                </td>
-                
-                <td>                  
-                  $${(subTotal * product.quantity) / 100}
-                </td>
-                <td class="table-right"><div class="btn-product_remove" data-id="${
-                  product.lineItemId
-                }"></div></td>
-              </tr>`,
+          `<li>
+            <div class="block-one">
+              <div class="product-data">
+                <div class="product-data_image" style="background-image:url(${
+                  product.images
+                })">
+                </div>
+                <div class="product-data_name">${product.name}</div>
+              </div>
+            </div>
+            <div class="block-two">
+              <div class="product-price">
+                <p class="base-price ${
+                  product.discount
+                    ? 'price-inactive'
+                    : product.discountCode
+                    ? 'price-inactive'
+                    : ''
+                }">
+                $${product.price / 100}
+                </p>
+                <p class="discount-price ${
+                  product.discountCode ? 'price-inactive' : ''
+                } ${product.discount ? '' : 'price-none'}">
+                $${product.discount ? product.discount / 100 : ''}
+                </p>  
+                <p class="discountCode-price ${
+                  product.discountCode ? '' : 'price-none'
+                }">
+                $${product.discountCode ? product.discountCode / 100 : ''}
+                </p>
+              </div>    
+              
+              <div class="product-quantity">
+                <button class="product-minus" data-change="minus" ${
+                  product.quantity === 1 ? 'disabled' : ''
+                }>-</button>
+                <div class="product-count" data-id="${product.lineItemId}">${
+            product.quantity
+          }</div>
+                <button class="product-plus" data-change="plus">+</button>
+              </div>    
+              
+              <div class="product-subtotal">                  
+                $${(subTotal * product.quantity) / 100}
+              </div>
+              <div class="product-remove" >
+                <div class="btn-product_remove" data-id="${product.lineItemId}">
+              </div>
+              </div>
+            </div>
+            
+            
+          </li>`,
         );
       });
     } else {
