@@ -76,9 +76,9 @@ class MainPage {
                 <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
                 <li class="main_nav_item"><a href="/news" class="navigator">news</a></li>
                 <li class="main_nav_item"><a href="/contact" class="navigator">contact</a></li>
-                <li class="main_nav_item"><a href="/cart" class="navigator cart-total_products"><span class="navigator">${productsInCart}</span></a></li>
               </ul>
             </div>
+            <div class="main_nav_cart"><a href="/cart" class="navigator cart-total_products"><span class="navigator">(${productsInCart})</span></a></div>
           </div>
         </div>
       </div>

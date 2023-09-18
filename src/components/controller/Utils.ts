@@ -1,6 +1,7 @@
 import { Cart } from '@commercetools/platform-sdk';
 import { CartDraw, Discount } from '../type';
 import StorageController from './StorageController';
+
 export const cartToDrawProducts = (cart: Cart) => {
   const cartDrawArray: CartDraw[] = [];
   const storages = new StorageController();
@@ -16,6 +17,7 @@ export const cartToDrawProducts = (cart: Cart) => {
       images: product.variant.images?.[0].url as string,
       id: product.productId,
       lineItemId: product.id,
+      key: product.productKey || '',
     };
     cartDrawArray.push(productItem);
   });

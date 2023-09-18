@@ -1,22 +1,21 @@
 import { CartDraw, Discount } from '../../type';
 import './cartPage.css';
 import StorageController from '../../controller/StorageController';
+
 export default class CartPage {
   async draw(productItems?: CartDraw[], price?: number) {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
-    const content = `
-    <div class="container-cart">
-      <div class="container_inner">
-        
-      </div>
-    </div>
-    `;
-    bodyContainer.innerHTML = content;
-    this.productDraw(productItems, price);
+    bodyContainer.innerHTML = `
+      <div class="container-cart">
+        <div class="container_inner">
+          
+        </div>
+      </div>`;
+    this.drawProducts(productItems, price);
     this.createDiscountItem();
   }
 
-  productDraw(productItems?: CartDraw[], price?: number) {
+  private drawProducts(productItems?: CartDraw[], price?: number) {
     const container = document.querySelector('.container_inner') as HTMLElement;
     if (productItems) {
       const subTotal = productItems.reduce(
@@ -72,13 +71,13 @@ export default class CartPage {
             subTotal / 100
           }${'$'}</span></li>
           <li class="${
-            saveTotal === 0 ? 'price-none' : ''
+            saveTotal === 0 ? 'price-none' : 'save-line'
           }"><span>Save:</span><span>-${(
           subTotal / 100 -
           saveTotal / 100
         ).toFixed(2)}${'$'}</span></li>
           <li class="${
-            discountTotal === 0 ? 'price-none' : ''
+            discountTotal === 0 ? 'price-none' : 'discount-line'
           }"><span>Discount:</span><span>-${(
           subTotal / 100 -
           saveTotal / 100 -
@@ -104,7 +103,7 @@ export default class CartPage {
           : product.price;
         ul.insertAdjacentHTML(
           'beforeend',
-          `<li>
+          `<li class="cart-line-item" product-key="${product.key}">
             <div class="block-one">
               <div class="product-data">
                 <div class="product-data_image" style="background-image:url(${
@@ -172,7 +171,8 @@ export default class CartPage {
       );
     }
   }
-  createDiscountItem() {
+
+  private createDiscountItem() {
     const storages = new StorageController();
     const discounts: Discount[] = storages.getActiveDiscounts();
     const items = document.querySelector('.discount-items') as HTMLElement;
