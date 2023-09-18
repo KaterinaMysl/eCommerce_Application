@@ -1,4 +1,4 @@
-import { CartDrawProducts, CartLS, Discount } from '../type';
+import { CartDrawProducts, CartLS, Discount, Pagination } from '../type';
 
 class StorageController {
   isLoggedIn(): boolean {
@@ -105,6 +105,12 @@ class StorageController {
   }
   removeActiveDiscounts() {
     localStorage.removeItem('ActiveDiscounts');
+  }
+  setPagination(pagination: Pagination) {
+    localStorage.setItem('pagination', JSON.stringify(pagination));
+  }
+  getPagination() {
+    return JSON.parse(localStorage.getItem('pagination') as string);
   }
 }
 

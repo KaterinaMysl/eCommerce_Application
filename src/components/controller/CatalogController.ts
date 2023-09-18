@@ -4,15 +4,18 @@ import CatalogProductPage from '../view/catalogPage/CatalogProductPage';
 import FilterSelection from '../view/catalogPage/FilterSelection';
 import { FILTERS_ACTIVE } from '../constants';
 import CartController from './CartController';
-
+import StorageController from './StorageController';
+import { Pagination } from '../type';
+import PaginationController from './PaginationController';
 export default class CatalogController {
   private client: Client;
   private catalogProduct: CatalogProductPage;
   private filtersSelection: FilterSelection;
   private cartController: CartController;
-
+  private storage: StorageController;
   constructor(client: Client, cartController: CartController) {
     this.client = client;
+    this.storage = new StorageController();
     this.catalogProduct = new CatalogProductPage();
     this.filtersSelection = new FilterSelection(this);
     this.cartController = cartController;
@@ -48,7 +51,6 @@ export default class CatalogController {
 
   async getCategory(name: string) {
     const response = await this.client.getProductCategoryByName(name);
-
     await this.getCategoryProduct(response.body.results[0].id);
     if (response.body.results[0].ancestors.length === 0) {
       this.getChildrenCategory(response.body.results[0].id);
@@ -68,6 +70,14 @@ export default class CatalogController {
     const products: ProductProjection[] = response.body.results;
     await products.forEach(product => this.catalogProduct.draw(product));
     this.addEventCart();
+    const { offset, total } = response.body;
+    const pagination: Pagination = {
+      offset: offset,
+      total: total as number,
+    };
+    this.storage.setPagination(pagination);
+    const paginationController = new PaginationController(this);
+    paginationController.setPages();
   }
 
   addEventCart() {
@@ -124,16 +134,25 @@ export default class CatalogController {
     this.addEventCart();
   }
 
-  async getProductsWithFilters() {
+  async getProductsWithFilters(offsetT?: number) {
     const category =
       FILTERS_ACTIVE.category.length > 2
         ? `categories.id:"${FILTERS_ACTIVE.category}"`
         : '';
     const response = await this.client.getProductProjectionsFilteredByCategory(
       category,
+      offsetT,
     );
     const products: ProductProjection[] = response.body.results;
     this.createProductsCart(products);
+    const { offset, total } = response.body;
+    const pagination: Pagination = {
+      offset: offset,
+      total: total as number,
+    };
+    this.storage.setPagination(pagination);
+    const paginationController = new PaginationController(this);
+    paginationController.setPages();
   }
 
   createCatalogNavigator(name: string, type: string) {

@@ -324,7 +324,7 @@
 .offers {
   width: 100%;
   padding-top: 115px;
-  padding-bottom: 115px;
+  padding-bottom: 40px;
 }
 
 .offers .container-products {
@@ -764,6 +764,7 @@ p.catalog-setting_label {
 .offers_grid {
   width: 100%;
   margin-top: 0px;
+  margin-bottom: 40px;
 }
 .offers_item {
   padding: 10px;
@@ -858,6 +859,8 @@ p.catalog-setting_label {
   margin-right: 2px;
 }
 .offers_text {
+  height: 80px;
+  overflow: hidden;
   font-size: 14px;
   font-weight: 400;
   color: #929191;
@@ -883,6 +886,9 @@ p.catalog-setting_label {
   -ms-transition: all 200ms ease;
   -o-transition: all 200ms ease;
   transition: all 200ms ease;
+}
+div.button.book_button{
+  margin-top: 20px;
 }
 .book_button:hover {
   opacity: 0.8;
@@ -1052,7 +1058,10 @@ i::before {
   right: 40px;
   top: 8px;
 }
-
+.button .book_button .add-product-to-cart,
+.button .book_button{
+  margin-top: 15px;
+} 
 .social_list i::before {
   color: #fff;
 }
@@ -1108,7 +1117,66 @@ input[type='number'] {
   background: #fa9e1b;
   color: #ffffff;
 }
-
+.catalog-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+  width: 100%;
+}
+.pagination-btn {
+  display: flex;
+  width: 52px;
+  height: 52px;
+  padding: 5px 4px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #fff;
+  color: #212b36;
+  text-align: center;
+  font-size: 20px;
+  border-width: 3px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  transition: all 0.3s;
+}
+div.pagination-btn {
+  border: 3px solid #8d4fff;
+  cursor: pointer;
+}
+.pagination-btn:hover {
+  border: 3px solid #4200ff;
+  color: #4200ff;
+  cursor: pointer;
+}
+.pagination-current{
+  color: white;
+  background-color: #fa9e1b;
+}
+.pagination-current:hover{
+  color: white;
+  cursor: auto;
+  border: 3px solid #8d4fff;
+  background-color: #fa9e1b;
+}
+button[disabled].pagination-btn{
+  cursor: auto;
+  color: #000;
+  background-color: transparent;
+  border: 1px solid grey;
+}
+button[disabled].pagination-btn:hover{
+  cursor: auto;
+  color: #000;
+  background-color: transparent;
+  border: 1px solid grey;
+}
 @media (min-width: 1950px) {
   .col-lg-3 {
     flex: 0 0 25%;

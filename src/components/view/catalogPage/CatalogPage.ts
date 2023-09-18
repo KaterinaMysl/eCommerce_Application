@@ -8,7 +8,7 @@ import suitcase from '../../../assets/icons/suitcase.webp';
 import PriceSlider from './PriceSlider';
 import FilterSelection from './FilterSelection';
 import CatalogController from '../../controller/CatalogController';
-
+import PaginationController from '../../controller/PaginationController';
 export default class CatalogPage {
   private catalogController: CatalogController;
   private priceSlider: PriceSlider | null;
@@ -175,8 +175,18 @@ export default class CatalogPage {
                         </select>
                       </div>
                     </div>
+                  
                     <div class="offers_grid">
-
+                    </div>
+                    <div class="catalog-pagination">
+                      <div class="pagination-container">
+                        <button class="pagination-prev pagination-btn" data-pagination="prev"><</button>
+                        <button class="pagination-first pagination-btn" data-pagination="first">1</button>
+                        <div class="pagination-current pagination-btn">1</div>
+                        <button class="pagination-last pagination-btn" data-pagination="last"></button>
+                        <button class="pagination-next pagination-btn" data-pagination="next">></button>
+                      </div>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -206,6 +216,9 @@ export default class CatalogPage {
       10,
       'rating',
     );
+    const btn = Array.from(
+      document.querySelectorAll('button.pagination-btn'),
+    ) as HTMLButtonElement[];
     const sortSelect = document.querySelector(
       '.catalog-settings_sorting select',
     ) as HTMLSelectElement;
@@ -235,6 +248,34 @@ export default class CatalogPage {
       const targetElement = event.target as HTMLSelectElement;
       this.catalogController.sortProducts(targetElement.value);
     });
+    if (btn.length) {
+      const paginationController = new PaginationController(
+        this.catalogController,
+      );
+      paginationController.setPages();
+      btn.forEach(b =>
+        b.addEventListener('click', (event: Event) => {
+          const button = event.target as HTMLButtonElement;
+          if (button) {
+            const type = button.dataset.pagination;
+            switch (type) {
+              case 'prev':
+                paginationController.prev();
+                break;
+              case 'next':
+                paginationController.next();
+                break;
+              case 'last':
+                paginationController.last();
+                break;
+              case 'first':
+                paginationController.first();
+                break;
+            }
+          }
+        }),
+      );
+    }
   }
 
   categoryClick(tabs: HTMLElement[], tab: HTMLElement) {

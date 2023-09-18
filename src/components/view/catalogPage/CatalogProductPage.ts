@@ -5,6 +5,7 @@ import sailboat from '../../../assets/icons/sailboat.webp';
 import { Attribute, ProductProjection } from '@commercetools/platform-sdk';
 import { navigateTo } from '../../app/Router';
 import StorageController from '../../controller/StorageController';
+
 const storage = new StorageController();
 
 export default class CatalogProductPage {

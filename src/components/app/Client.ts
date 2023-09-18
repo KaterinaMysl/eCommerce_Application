@@ -36,7 +36,6 @@ class Client {
   }
 
   async loginWithAnonymousSession(email: string, password: string) {
-    console.log('login with anonymous');
     try {
       const customer = await anonymousApiRoot
         .me()
@@ -99,7 +98,7 @@ class Client {
     try {
       const cart = await api.me().activeCart().get().execute();
       if (cart) {
-        this.setCountProductInCart(cart.body.lineItems.length);
+        this.setCountProductInCart(cart.body.totalLineItemQuantity || 0);
         this.storage.saveCartProducts(cartToDrawProducts(cart.body));
       }
       const cartLS = {
@@ -205,7 +204,7 @@ class Client {
           })
           .execute();
         cart.version = response.body.version;
-        this.setCountProductInCart(response.body.lineItems.length);
+        this.setCountProductInCart(response.body.totalLineItemQuantity || 0);
         this.storage.saveCart(cart);
         this.storage.saveCartProducts(cartToDrawProducts(response.body));
         if (successMessage) {
@@ -480,7 +479,6 @@ class Client {
       .withKey({ key: productKey })
       .get()
       .execute();
-    console.log('product', response.body);
     return response.body;
   }
 
@@ -515,7 +513,15 @@ class Client {
   }
 
   getProductProjections() {
-    return anonymusApi.productProjections().get().execute();
+    return anonymusApi
+      .productProjections()
+      .get({
+        queryArgs: {
+          limit: 5,
+          offset: 0,
+        },
+      })
+      .execute();
   }
 
   getProductProjectionsBySearchQuery(searchQuery: string) {
@@ -533,7 +539,7 @@ class Client {
       .execute();
   }
 
-  getProductProjectionsFilteredByCategory(category: string) {
+  getProductProjectionsFilteredByCategory(category: string, offset?: number) {
     return anonymusApi
       .productProjections()
       .search()
@@ -546,6 +552,7 @@ class Client {
             FILTERS_ACTIVE.price,
             FILTERS_ACTIVE.rating,
           ],
+          offset: offset,
           limit: 5,
           sort: [FILTERS_ACTIVE.sort],
           ['text.en']: FILTERS_ACTIVE.search,

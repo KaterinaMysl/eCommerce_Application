@@ -34,5 +34,6 @@ export const cartToDrawProducts = (cart: Cart) => {
   return {
     cartProducts: cartDrawArray,
     price: cart.totalPrice.centAmount,
+    count: cart.totalLineItemQuantity || 0,
   };
 };

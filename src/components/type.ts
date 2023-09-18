@@ -55,10 +55,16 @@ export type CartDraw = {
 export type CartDrawProducts = {
   cartProducts: CartDraw[];
   price: number;
+  count: number;
 };
 
 export type Discount = {
   id: string;
   name: string;
   code: string;
+};
+
+export type Pagination = {
+  offset: number;
+  total: number;
 };
