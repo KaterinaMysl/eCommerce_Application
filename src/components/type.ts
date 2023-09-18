@@ -45,12 +45,20 @@ export type CartDraw = {
   quantity: number;
   price: number;
   discount?: number;
+  discountCode?: number;
   images: string;
   id: string;
   lineItemId: string;
+  key: string;
 };
 
 export type CartDrawProducts = {
   cartProducts: CartDraw[];
   price: number;
+};
+
+export type Discount = {
+  id: string;
+  name: string;
+  code: string;
 };

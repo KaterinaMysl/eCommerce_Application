@@ -1,5 +1,6 @@
 import './MainPage.css';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import logoImage from '../../../assets/images/logo.png';
@@ -17,9 +18,13 @@ import { SCROLL_THRESHOLD } from '../../constants';
 import { DiscountCode } from '@commercetools/platform-sdk';
 import Swiper from 'swiper';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
+import StorageController from '../../controller/StorageController';
 
 class MainPage {
   draw(isLoggedIn: boolean, discountCodes: DiscountCode[]) {
+    const storage = new StorageController();
+    const productsInCart =
+      storage.getCartProducts()?.cartProducts?.length || '';
     const content = `
 <div class="body-container">
   <header class="header">
@@ -70,9 +75,11 @@ class MainPage {
                 <li class="main_nav_item"><a href="/catalog" class="navigator">offers</a></li>
                 <li class="main_nav_item"><a href="/news" class="navigator">news</a></li>
                 <li class="main_nav_item"><a href="/contact" class="navigator">contact</a></li>
-                <li class="main_nav_item"><a href="/cart" class="navigator">cart</a></li>
               </ul>
             </div>
+            <div class="main_nav_cart"><a href="/cart" class="navigator cart-total_products"><span class="navigator ${
+              typeof productsInCart === 'string' ? 'none' : ''
+            }">${productsInCart}</span></a></div>
           </div>
         </div>
       </div>
@@ -251,7 +258,7 @@ class MainPage {
     document.body.innerHTML = content;
     this.setHeader();
     this.setupBurgerMenu();
-    this.initSlider();
+    this.initDiscountSlider();
   }
 
   private setHeader() {
@@ -330,7 +337,7 @@ class MainPage {
     let content = '';
     if (discountCodes) {
       content += `
-        <div class="discount-container">
+        <div class="discount-container blur-border-div">
           <div class="discount-img">
             <img src="${discount_logo}" alt="image">
           </div>
@@ -350,27 +357,30 @@ class MainPage {
     let content = '';
     discountCodes.forEach(discountCode => {
       content += `
-        <div class="swiper-slide">
-          <div>${discountCode.description?.en}</div>
-          <div>Code: <b>${discountCode.code}</b></div>
+        <div class="swiper-slide discount-item-slide">
+          <div class="discount-code">Code: <b class="discount-code">${discountCode.code}</b></div>
+          <div class="discount-desc">${discountCode.description?.en}</div>
         </div>`;
     });
     return content;
   }
 
-  private initSlider() {
+  private initDiscountSlider() {
     new Swiper('#discount-slider', {
       modules: [Autoplay, EffectFade, Pagination],
 
       loop: true,
       effect: 'fade',
+      fadeEffect: {
+        crossFade: true,
+      },
       slidesPerView: 'auto',
       centeredSlides: true,
 
-      /* autoplay: {
-        delay: 2500,
+      autoplay: {
+        delay: 4000,
         disableOnInteraction: false,
-      }, */
+      },
 
       pagination: {
         el: '#discount-slider-pagination',

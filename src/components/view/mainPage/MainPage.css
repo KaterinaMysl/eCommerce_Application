@@ -36,7 +36,7 @@ html {
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   background: #ffffff;
   color: #a5a5a5;
@@ -458,7 +458,33 @@ h6 {
   color: #2d2c2c;
   text-transform: uppercase;
 }
+.cart-total_products {
+  display: flex;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background: url(../../../assets/icons/shopping-cart2.png);
+  background-size: contain;
+}
 
+span.navigator {
+  position: relative;
+  top: -9px;
+  left: 17px;
+  background-color: white;
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: blueviolet;
+  font-size: 15px;
+}
+span.navigator.none{
+  display: none;
+}
 @media only screen and (max-width: 1000px) {
   .text-info-main img {
     width: 540px;
@@ -546,6 +572,12 @@ h6 {
     padding-left: 30px;
     padding-top: 10px;
     font-size: 10px;
+  }
+
+  .main_nav_cart {
+    position: absolute;
+    right: 60px;
+    top: 12px;
   }
 }
 
@@ -1267,33 +1299,75 @@ h6 {
 }
 
 .discount-container {
+  position: relative;
   background: linear-gradient(to right, #ebab71, #dad5f0, #879bdd);
   width: 100%;
   padding: 25px;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  min-height: 400px;
+  min-height: 300px;
+}
+
+.blur-border-div::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: inherit;
+  filter: blur(6px);
+  z-index: 1;
 }
 
 .discount-img {
-  top: 0;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   opacity: 0.8;
+  z-index: 99;
 }
 
 .discount-img img {
-  max-width: 100%;
+  max-width: 76%;
   height: auto;
 }
 
-/* .swiper-slide {
-  margin: 50px 20px 0 20px;
-} */
+#discount-slider {
+  width: 90%;
+  padding: 20px;
+  margin: auto;
+  line-height: 2;
+}
+
+.discount-code {
+  font-family: 'Beyond' !important;
+  font-size: 35px;
+  color: #604b98;
+}
+
+.discount-desc {
+  font-size: 18px;
+}
+
+.swiper-wrapper {
+  margin-bottom: 20px;
+}
+
+.discount-item-slide {
+  text-align: center;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 450px) {
+  .discount-container {
+    flex-direction: column;
+  }
+}
 
 @media only screen and (max-width: 1200px) {
   .container-footer,

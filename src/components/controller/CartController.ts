@@ -1,15 +1,18 @@
 import {
+  CartAddDiscountCodeAction,
   CartAddLineItemAction,
   CartChangeLineItemQuantityAction,
+  CartRemoveDiscountCodeAction,
   CartRemoveLineItemAction,
   CartUpdateAction,
 } from '@commercetools/platform-sdk';
 import Client from '../app/Client';
 import CartPage from '../view/cartPage/CartPage';
-import { CartDraw } from '../type';
+import { CartDraw, Discount } from '../type';
 import StorageController from './StorageController';
 import { cartToDrawProducts } from './Utils';
 import { navigateTo } from '../app/Router';
+import { alert } from './ToastifyControler';
 
 export default class CartController {
   private client: Client;
@@ -49,13 +52,25 @@ export default class CartController {
   initEventCart() {
     const clearBtn = document.querySelector('.clear-cart_btn');
     const goToOffersBtn = document.querySelector('.go-to-offers_btn');
+    const addCoupon = document.querySelector('.add-coupon');
+    const cartLineItems = Array.from(
+      document.querySelectorAll('.cart-line-item'),
+    ) as HTMLElement[];
     const removeProduct = Array.from(
       document.querySelectorAll('.btn-product_remove'),
     ) as HTMLElement[];
     const changeQuantity = Array.from(
       document.querySelectorAll('.product-minus, .product-plus'),
     ) as HTMLElement[];
-
+    const items = Array.from(
+      document.querySelectorAll('.discount-item'),
+    ) as HTMLElement[];
+    items.forEach(item =>
+      item.addEventListener('click', () => {
+        const id = item.getAttribute('data-discountId') as string;
+        this.removeDiscountWithCart(id);
+      }),
+    );
     if (clearBtn) {
       clearBtn.addEventListener('click', async () => {
         const popup = document.getElementById('popup') as HTMLElement;
@@ -67,9 +82,14 @@ export default class CartController {
         yesButton.addEventListener('click', async () => {
           popup.style.display = 'none';
           const cartProduct = this.storage.getAndRemoveCartProducts();
-          const actions = await this.createRemoveItemActions(
+          const discount: Discount[] = this.storage.getAndRemoveDiscounts();
+          const actionsProducts = await this.createRemoveItemActions(
             cartProduct.cartProducts,
           );
+          const actionsDiscounts = await this.createRemoveDiscountAction(
+            discount,
+          );
+          const actions = [...actionsProducts, ...actionsDiscounts];
           this.client.updateProductsCart(actions, '');
           await this.cartPage.draw();
         });
@@ -87,6 +107,7 @@ export default class CartController {
     if (removeProduct && removeProduct.length > 0) {
       removeProduct.forEach(product =>
         product.addEventListener('click', async (event: Event) => {
+          event.stopPropagation();
           this.removeProductWithCart(event);
         }),
       );
@@ -95,6 +116,7 @@ export default class CartController {
     if (changeQuantity && changeQuantity.length > 0) {
       changeQuantity.forEach(product =>
         product.addEventListener('click', (event: Event) => {
+          event.stopPropagation();
           const element = event.target as HTMLButtonElement;
           const change = element.dataset.change;
           change === 'plus'
@@ -103,8 +125,46 @@ export default class CartController {
         }),
       );
     }
-  }
 
+    if (cartLineItems && cartLineItems.length > 0) {
+      cartLineItems.forEach(lineItem => {
+        lineItem.addEventListener('click', (event: Event) => {
+          const element = event.currentTarget as HTMLElement;
+          const productKey = element.getAttribute('product-key') as string;
+          navigateTo(`/catalog?name=${productKey}`);
+        });
+      });
+    }
+
+    if (addCoupon) {
+      addCoupon.addEventListener('click', () => {
+        const input = addCoupon.previousElementSibling as HTMLInputElement;
+        const value = input.value;
+        if (value.length > 3) {
+          this.addDiscountToCart(value);
+          input.value = '';
+        } else {
+          alert('Please enter valid discount code', false);
+        }
+      });
+    }
+  }
+  async addDiscountToCart(code: string) {
+    const actions = this.createAddDiscountAction(code);
+    await this.client.updateProductsCart(
+      actions,
+      'Your discount has been successfully activated.',
+    );
+    await this.draw();
+  }
+  async removeDiscountWithCart(id: string) {
+    const actions = this.createRemoveDiscountAction(id);
+    await this.client.updateProductsCart(
+      actions,
+      'Your discount has been successfully deactivated.',
+    );
+    this.draw();
+  }
   async removeProductWithCart(event: Event) {
     const id = (event.target as HTMLElement).dataset.id;
     if (id) {
@@ -234,6 +294,40 @@ export default class CartController {
       quantity: count,
     };
     actions.push(action);
+    return actions;
+  }
+  createAddDiscountAction(code: string) {
+    const actions: CartUpdateAction[] = [];
+    const action: CartAddDiscountCodeAction = {
+      action: 'addDiscountCode',
+      code: code,
+    };
+    actions.push(action);
+    return actions;
+  }
+  createRemoveDiscountAction(discount: Discount[] | string) {
+    const actions: CartUpdateAction[] = [];
+    if (typeof discount === 'string') {
+      const action: CartRemoveDiscountCodeAction = {
+        action: 'removeDiscountCode',
+        discountCode: {
+          typeId: 'discount-code',
+          id: discount,
+        },
+      };
+      actions.push(action);
+    } else {
+      discount.forEach(discoun => {
+        const action: CartRemoveDiscountCodeAction = {
+          action: 'removeDiscountCode',
+          discountCode: {
+            typeId: 'discount-code',
+            id: discoun.id,
+          },
+        };
+        actions.push(action);
+      });
+    }
     return actions;
   }
 }

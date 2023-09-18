@@ -98,6 +98,10 @@ class Client {
   async createMeCart(api: ByProjectKeyRequestBuilder) {
     try {
       const cart = await api.me().activeCart().get().execute();
+      if (cart) {
+        this.setCountProductInCart(cart.body.lineItems.length);
+        this.storage.saveCartProducts(cartToDrawProducts(cart.body));
+      }
       const cartLS = {
         id: cart.body.id,
         version: cart.body.version,
@@ -201,6 +205,7 @@ class Client {
           })
           .execute();
         cart.version = response.body.version;
+        this.setCountProductInCart(response.body.lineItems.length);
         this.storage.saveCart(cart);
         this.storage.saveCartProducts(cartToDrawProducts(response.body));
         if (successMessage) {
@@ -213,7 +218,18 @@ class Client {
       return false;
     }
   }
-
+  setCountProductInCart(count: number) {
+    const span = document.querySelector(
+      '.cart-total_products span',
+    ) as HTMLElement;
+    const countProducts = count > 0 ? count : '';
+    span.textContent = `${countProducts}`;
+    if (typeof countProducts === 'string') {
+      span.classList.add('none');
+    } else {
+      span.classList.remove('none');
+    }
+  }
   async getCustomer() {
     const id = this.storage.getCustomerSessionId();
     if (id) {

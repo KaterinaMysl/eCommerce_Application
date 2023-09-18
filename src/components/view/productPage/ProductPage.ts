@@ -1,5 +1,4 @@
 import './ProductPage.css';
-import 'swiper/css/navigation';
 
 import {
   Attribute,
