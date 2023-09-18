@@ -36,7 +36,7 @@ html {
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   background: #ffffff;
   color: #a5a5a5;
@@ -469,8 +469,8 @@ li.main_nav_item a.cart-total_products {
   height: 24px;
   background: url(../../../assets/icons/shopping-cart2.png);
   background-size: contain;
-  left: -15px;
-  top: -21px;
+  left: -31px;
+  top: -3px;
 }
 li.main_nav_item a.cart-total_products span {
   position: absolute;
@@ -478,6 +478,10 @@ li.main_nav_item a.cart-total_products span {
   left: -3px;
   z-index: 99;
   font-size: 24px;
+}
+.navigator {
+  color: #dad5f0;
+  font-size: 15px;
 }
 @media only screen and (max-width: 1000px) {
   .text-info-main img {
@@ -566,6 +570,12 @@ li.main_nav_item a.cart-total_products span {
     padding-left: 30px;
     padding-top: 10px;
     font-size: 10px;
+  }
+
+  .main_nav_cart {
+    position: absolute;
+    right: 60px;
+    top: 12px;
   }
 }
 

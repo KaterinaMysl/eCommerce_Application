@@ -53,6 +53,9 @@ export default class CartController {
     const clearBtn = document.querySelector('.clear-cart_btn');
     const goToOffersBtn = document.querySelector('.go-to-offers_btn');
     const addCoupon = document.querySelector('.add-coupon');
+    const cartLineItems = Array.from(
+      document.querySelectorAll('.cart-line-item'),
+    ) as HTMLElement[];
     const removeProduct = Array.from(
       document.querySelectorAll('.btn-product_remove'),
     ) as HTMLElement[];
@@ -104,6 +107,7 @@ export default class CartController {
     if (removeProduct && removeProduct.length > 0) {
       removeProduct.forEach(product =>
         product.addEventListener('click', async (event: Event) => {
+          event.stopPropagation();
           this.removeProductWithCart(event);
         }),
       );
@@ -112,6 +116,7 @@ export default class CartController {
     if (changeQuantity && changeQuantity.length > 0) {
       changeQuantity.forEach(product =>
         product.addEventListener('click', (event: Event) => {
+          event.stopPropagation();
           const element = event.target as HTMLButtonElement;
           const change = element.dataset.change;
           change === 'plus'
@@ -120,6 +125,17 @@ export default class CartController {
         }),
       );
     }
+
+    if (cartLineItems && cartLineItems.length > 0) {
+      cartLineItems.forEach(lineItem => {
+        lineItem.addEventListener('click', (event: Event) => {
+          const element = event.currentTarget as HTMLElement;
+          const productKey = element.getAttribute('product-key') as string;
+          navigateTo(`/catalog?name=${productKey}`);
+        });
+      });
+    }
+
     if (addCoupon) {
       addCoupon.addEventListener('click', () => {
         const input = addCoupon.previousElementSibling as HTMLInputElement;

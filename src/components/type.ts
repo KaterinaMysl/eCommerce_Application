@@ -49,6 +49,7 @@ export type CartDraw = {
   images: string;
   id: string;
   lineItemId: string;
+  key: string;
 };
 
 export type CartDrawProducts = {
