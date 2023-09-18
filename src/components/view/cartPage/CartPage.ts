@@ -50,8 +50,8 @@ export default class CartPage {
     <div id="popup" class="popup">
         <div class="popup-content">
             <p>Do you really want to clear the cart?</p>
-            <button id="yesButton">Yes</button>
-            <button id="noButton">No</button>
+            <button class="popup-btn-yes popup-btn" id="yesButton">Yes</button>
+            <button class="popup-btn-no popup-btn" id="noButton">No</button>
         </div>
     </div>
     <div class="cart-block-btn">
@@ -166,7 +166,7 @@ export default class CartPage {
            <div class="cart-empty_images"></div>
            <h2>The basket is empty</h2>
            <p>But it's never too late to fix it :)</p>
-           <div><a href="/catalog" class="navigator">to offers</a></div>
+           <div><a href="/catalog" class="navigator cart-empty-btn">to offers</a></div>
          </div>`,
       );
     }

@@ -99,12 +99,7 @@ class Client {
     try {
       const cart = await api.me().activeCart().get().execute();
       if (cart) {
-        const span = document.querySelector(
-          '.cart-total_products span',
-        ) as HTMLElement;
-        span.textContent = `${
-          cart.body.lineItems.length > 0 ? cart.body.lineItems.length : ''
-        }`;
+        this.setCountProductInCart(cart.body.lineItems.length);
         this.storage.saveCartProducts(cartToDrawProducts(cart.body));
       }
       const cartLS = {
@@ -197,9 +192,6 @@ class Client {
     successMessage: string,
   ): Promise<boolean> {
     try {
-      const span = document.querySelector(
-        '.cart-total_products span',
-      ) as HTMLElement;
       const cart = this.storage.getCart();
       if (cart) {
         const response = await anonymusApi
@@ -213,11 +205,7 @@ class Client {
           })
           .execute();
         cart.version = response.body.version;
-        span.textContent = `${
-          response.body.lineItems.length > 0
-            ? response.body.lineItems.length
-            : ''
-        }`;
+        this.setCountProductInCart(response.body.lineItems.length);
         this.storage.saveCart(cart);
         this.storage.saveCartProducts(cartToDrawProducts(response.body));
         if (successMessage) {
@@ -228,6 +216,18 @@ class Client {
     } catch (error) {
       alert('Something went wrong. Please, try again later.', false);
       return false;
+    }
+  }
+  setCountProductInCart(count: number) {
+    const span = document.querySelector(
+      '.cart-total_products span',
+    ) as HTMLElement;
+    const countProducts = count > 0 ? count : '';
+    span.textContent = `${countProducts}`;
+    if (typeof countProducts === 'string') {
+      span.classList.add('none');
+    } else {
+      span.classList.remove('none');
     }
   }
   async getCustomer() {

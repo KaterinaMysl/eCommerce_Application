@@ -77,7 +77,9 @@ class MainPage {
                 <li class="main_nav_item"><a href="/contact" class="navigator">contact</a></li>
               </ul>
             </div>
-            <div class="main_nav_cart"><a href="/cart" class="navigator cart-total_products"><span class="navigator">(${productsInCart})</span></a></div>
+            <div class="main_nav_cart"><a href="/cart" class="navigator cart-total_products"><span class="navigator ${
+              typeof productsInCart === 'string' ? 'none' : ''
+            }">${productsInCart}</span></a></div>
           </div>
         </div>
       </div>

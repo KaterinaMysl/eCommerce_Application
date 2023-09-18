@@ -195,6 +195,19 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+.cart-empty-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  border-radius: 27px;
+  overflow: hidden;
+  padding: 8px 16px;
+  background-color: #31124b;
+  color: white;
+  transition: all .3s;
+}
+
 .cart-option {
   display: flex;
   justify-content: space-between;
@@ -338,7 +351,17 @@
   font-size: 16px;
   cursor: pointer;
 }
-
+.popup-btn{
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid white; 
+}
+.popup-btn-yes{
+  background-color: #8d4fff;
+}
+.popup-btn-no{
+  background-color: #fa9e1b;
+}
 .save-line {
   background-color:#f1d2e8;
 }
