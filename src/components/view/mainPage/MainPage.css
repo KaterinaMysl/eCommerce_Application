@@ -33,7 +33,20 @@ html {
   -webkit-tap-highlight-color: transparent;
   height: 100%;
 }
+::-webkit-scrollbar-track {
+	border-radius: 10px;
+	background-color: #31124b;
+}
 
+::-webkit-scrollbar {
+	width: 12px;
+	background-color: #31124b;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #fa9e1b;
+}
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
@@ -482,7 +495,7 @@ span.navigator {
   color: blueviolet;
   font-size: 15px;
 }
-span.navigator.none{
+span.navigator.none {
   display: none;
 }
 @media only screen and (max-width: 1000px) {
