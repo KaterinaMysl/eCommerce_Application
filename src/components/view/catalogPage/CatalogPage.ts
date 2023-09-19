@@ -72,7 +72,7 @@ export default class CatalogPage {
                             </div>
                             
                           </form>
-                          <details>
+                          <details id="offers-start">
                           <summary>filters</summary>
                           <div class="filters">
                       <div>
@@ -272,6 +272,13 @@ export default class CatalogPage {
                 paginationController.first();
                 break;
             }
+          }
+          const catalogElement = document.querySelector('#offers-start');
+          if (catalogElement) {
+            catalogElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
           }
         }),
       );

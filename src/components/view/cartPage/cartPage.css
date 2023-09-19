@@ -27,7 +27,7 @@
   border-radius: 10px;
 }
 .title-list {
-    font-size: 17px;
+  font-size: 17px;
 }
 .block-one {
   width: 50%;
@@ -182,7 +182,7 @@
 .go-to-offers_btn:hover,
 .add-coupon:hover,
 .process-to-checkout:hover {
-  background-color:#512673;
+  background-color: #512673;
 }
 
 .cart-empty {
@@ -195,7 +195,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-.cart-empty-btn{
+.cart-empty-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -205,7 +205,7 @@
   padding: 8px 16px;
   background-color: #31124b;
   color: white;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .cart-option {
@@ -246,7 +246,7 @@
   border: 1.5px solid #000;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 14px 20px;
-  background-color:#f3f0f0;
+  background-color: #f3f0f0;
 }
 
 .cart-total h4 {
@@ -284,7 +284,7 @@
   white-space: nowrap;
   color: #333;
   transition: all 0.2s ease-in-out;
-  background-color:rgb(195, 141, 246);
+  background-color: rgb(195, 141, 246);
   color: white;
 }
 .discount-item:hover {
@@ -351,22 +351,22 @@
   font-size: 16px;
   cursor: pointer;
 }
-.popup-btn{
+.popup-btn {
   border-radius: 10px;
   outline: none;
-  border: 2px solid white; 
+  border: 2px solid white;
 }
-.popup-btn-yes{
+.popup-btn-yes {
   background-color: #8d4fff;
 }
-.popup-btn-no{
+.popup-btn-no {
   background-color: #fa9e1b;
 }
 .save-line {
-  background-color:#f1d2e8;
+  background-color: #f1d2e8;
 }
 .discount-line {
-  background-color:#f1f1d2;
+  background-color: #f1f1d2;
 }
 
 .cart-total ul li {

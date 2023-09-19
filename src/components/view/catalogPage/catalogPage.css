@@ -887,7 +887,7 @@ p.catalog-setting_label {
   -o-transition: all 200ms ease;
   transition: all 200ms ease;
 }
-div.button.book_button{
+div.button.book_button {
   margin-top: 20px;
 }
 .book_button:hover {
@@ -1059,9 +1059,9 @@ i::before {
   top: 8px;
 }
 .button .book_button .add-product-to-cart,
-.button .book_button{
+.button .book_button {
   margin-top: 15px;
-} 
+}
 .social_list i::before {
   color: #fff;
 }
@@ -1137,43 +1137,42 @@ input[type='number'] {
   align-items: center;
   border-radius: 10px;
   background: #fff;
-  color: #212b36;
+  color: #4200ff;
   text-align: center;
   font-size: 20px;
   border-width: 3px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
+  border: 3px solid #4200ff;
   transition: all 0.3s;
-}
-div.pagination-btn {
-  border: 3px solid #8d4fff;
-  cursor: pointer;
 }
 .pagination-btn:hover {
   border: 3px solid #4200ff;
-  color: #4200ff;
+  color: #fff;
+  background-color: #ef910a;
   cursor: pointer;
 }
-.pagination-current{
+.pagination-btn.pagination-current {
   color: white;
-  background-color: #fa9e1b;
+  background-color: #8d4fff;
+  border: 3px solid #31124b;
 }
-.pagination-current:hover{
+.pagination-btn.pagination-current:hover {
   color: white;
+  background-color: #8d4fff;
+  border: 3px solid #31124b;
   cursor: auto;
-  border: 3px solid #8d4fff;
-  background-color: #fa9e1b;
 }
-button[disabled].pagination-btn{
+button[disabled].pagination-btn {
   cursor: auto;
-  color: #000;
+  color: grey;
   background-color: transparent;
   border: 1px solid grey;
 }
-button[disabled].pagination-btn:hover{
+button[disabled].pagination-btn:hover {
   cursor: auto;
-  color: #000;
+  color: grey;
   background-color: transparent;
   border: 1px solid grey;
 }
