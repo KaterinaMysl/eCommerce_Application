@@ -213,6 +213,7 @@ class Client {
         return true;
       } else return false;
     } catch (error) {
+      console.log(error);
       alert('Something went wrong. Please, try again later.', false);
       return false;
     }
@@ -442,6 +443,7 @@ class Client {
     userApis.delete(customerSessionId);
     this.storage.deleteCart();
     this.storage.removeCartProducts();
+    this.storage.removeActiveDiscounts();
     this.getRefreshAnonymousToken();
   }
 

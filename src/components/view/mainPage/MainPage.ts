@@ -62,7 +62,7 @@ class MainPage {
             <div class="logo_container">
               <div class="logo">
                 <a href="/" class="navigator">
-                  <img src="${logoImage}" alt="">
+                  <img src="${logoImage}" class="navigator" alt="">
                   <div class="logo_text">seagull</div>
                 </a>
               </div>

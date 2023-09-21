@@ -143,7 +143,7 @@ class About {
                 <p> <span class="education bio">Education: </span>Belarusian National Technical University</p>
                 <p> <span class="english bio">English: </span>B1</p>
                 <p> <span class="skills bio">Skills: </span>Javascript/ES5/ES6, HTML5, CSS3, Bootstrap, Webpack/NPM, AJAX/JSON, Git, Figma, Visual Studio Code</p>
-                <p> <span class="contributions bio">Contributions: </span>Katerina - our super developer, who took on the role of the chief architect in the world of applications. She doesn't just code; she creates masterpieces! The repository, the main page, routing - all of it is her handiwork. But don't think she's boring – she added a ton of creativity and animations to make our project not only functional but also as beautiful as a sunrise. And, by the way, Katya is our chief puzzle solver, and team members can always rely on her smart advice.</p>
+                <p> <span class="contributions bio">Contributions: </span>Kate - our "web wizard" who made our project better than a magic ball! She was responsible for user login, creating product cards, and perfect work with the shopping cart. And just when you think that's all, don't forget about her meticulous testing, which made our project as solid as a rock against all challenges.</p>
                 <p class="contact-bio"> 
                   <a href="https://t.me/KatherinaMik">
                     <img src="${telegram}" alt="Telegram Icon">

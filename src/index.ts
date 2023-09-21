@@ -17,7 +17,7 @@ document.addEventListener('click', e => {
       const link = element as HTMLLinkElement;
       e.preventDefault();
       app.navigateTo(link.href);
-    } else if (element.tagName === 'SPAN') {
+    } else if (element.tagName === 'SPAN' || element.tagName === 'IMG') {
       const link = element.closest('a') as unknown as HTMLLinkElement;
       e.preventDefault();
       app.navigateTo(link.href);

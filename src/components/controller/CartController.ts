@@ -26,27 +26,21 @@ export default class CartController {
   }
 
   async draw() {
-    const productItems = await this.getCart();
-    if (productItems !== false && productItems.cartProducts.length > 0) {
-      await this.cartPage.draw(productItems.cartProducts, productItems.price);
-      this.storage.saveCartProducts(productItems);
-    } else {
-      await this.cartPage.draw();
-    }
-    this.initEventCart();
-  }
-
-  async getCart() {
-    const cartProducts = this.storage.getCartProducts();
-    if (!cartProducts) {
-      try {
-        const cart = await this.client.getCartById(this.storage.getCart().id);
-        return cartToDrawProducts(cart.body);
-      } catch (error) {
-        return false;
+    try {
+      const cart = await this.client.getCartById(this.storage.getCart().id);
+      const productItems = cartToDrawProducts(cart.body);
+      if (productItems && productItems.cartProducts.length > 0) {
+        await this.cartPage.draw(productItems.cartProducts, productItems.price);
+        this.storage.saveCartProducts(productItems);
+      } else {
+        await this.cartPage.draw();
       }
+    } catch (error) {
+      // console.error(error);
+      await this.cartPage.draw();
+    } finally {
+      this.initEventCart();
     }
-    return cartProducts;
   }
 
   initEventCart() {
