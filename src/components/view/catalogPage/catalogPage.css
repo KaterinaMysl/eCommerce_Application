@@ -1488,6 +1488,12 @@ button[disabled].pagination-btn:hover {
   .navigator_subcategory::before {
     top: 6px;
   }
+  .offers_price.discount .normal_price{
+    font-size: 16px;
+  }
+  .offers_price.discount .discount_price{
+    font-size: 24px;
+  }
 }
 @media (max-width: 416px) {
   .details_category.active {
