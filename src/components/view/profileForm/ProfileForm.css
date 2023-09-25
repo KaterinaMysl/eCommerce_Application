@@ -1,0 +1,421 @@
+.container-profile {
+  padding: 140px 10px 30px 10px;
+  min-height: 100vh;
+  background-image: linear-gradient(135deg, #fab2ff 10%, #1904e5 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Open Sans', sans-serif;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #350a4e;
+}
+
+.form-profile label {
+  color: #350a4e;
+  font-size: 20px;
+}
+
+.form-profile > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.form-profile input[type='text'],
+.form-profile input[type='date'],
+.form-profile input[type='password'],
+.form-profile select {
+  display: block;
+  margin-bottom: 5px;
+  height: 50px;
+  border: none;
+  border-bottom: 3px solid #4840a2;
+  outline: none;
+  width: 300px;
+  padding: 15px 32px 5px 10px;
+  cursor: pointer;
+}
+
+.form-profile input[type='text']:hover,
+.form-profile input[type='date']:hover,
+.form-profile input[type='password']:hover,
+.form-profile select:hover {
+  cursor: pointer;
+}
+
+.form-profile input[type='text']:focus:not(:placeholder-shown),
+.form-profile input[type='date']:focus:not(:placeholder-shown),
+.form-profile input[type='password']:focus:not(:placeholder-shown),
+.form-profile select:focus {
+  cursor: text;
+}
+
+.form-profile input[type='submit'] {
+  border-radius: 10px;
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  transition: all 2s;
+}
+
+.form-profile input[type='submit']:hover {
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  cursor: pointer;
+}
+
+.form-profile div div {
+  margin-bottom: 3px;
+}
+
+.form-profile feBlend input,
+.form-profile feBlend select {
+  min-width: 90%;
+}
+
+.form-profile__two,
+.form-profile__three {
+  padding: 20px 0px;
+}
+.form-profile__two {
+  display: flex;
+  flex-direction: column;
+}
+.form-profile__two .input-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+  font-size: 20px;
+  color: #de870d;
+}
+
+.form-profile__two .input-checkbox input,
+#set-billing-and-shipping {
+  cursor: pointer;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.form-profile__two .input-checkbox input:disabled,
+.form-profile input:disabled + span,
+#set-billing-and-shipping:disabled {
+  cursor: auto;
+}
+
+.form-profile__two .input-checkbox label {
+  padding-bottom: 0;
+}
+
+.form-profile__four {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.form-profile div div input {
+  margin-bottom: 3px;
+}
+
+.form-profile .input-box input:disabled,
+.form-profile .input-box select:disabled {
+  background-color: rgba(243, 243, 239, 0.504);
+  cursor: auto;
+}
+
+.form-profile select {
+  width: 300px;
+  height: 50px;
+  padding: 5px 32px 5px 10px;
+  -webkit-appearance: none;
+  position: relative;
+}
+
+.form-profile .icon-arrow::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 14px;
+  right: 37px;
+  opacity: 0.7;
+  background: url(../../../assets/icons/arrow.png) no-repeat;
+  background-size: cover;
+  z-index: 2;
+}
+
+.form-profile option {
+  padding: 10px;
+}
+
+.form-profile div div label {
+  display: block;
+  padding-bottom: 5px;
+}
+
+.form-profile div div div {
+  position: relative;
+}
+
+.form-profile div div div span {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  color: #350a4e7e;
+  transition: all 0.5s ease-in-out;
+}
+
+.form-profile div div div span.date {
+  position: absolute;
+  font-size: 20px;
+  top: 12px;
+  left: 10px;
+  transition: all 1s;
+  color: transparent;
+}
+
+.form-profile div div div span.active-focus {
+  font-size: 12px;
+  color: #350a4e;
+  transform: translateY(-10px);
+  transition: all 0.5s ease-in-out;
+}
+
+.form-profile .img-password {
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  right: 15px;
+  top: 18px;
+}
+
+.form-profile .error-message {
+  font-size: 14px;
+  line-height: 16px;
+  height: 33px;
+  width: 100%;
+  max-width: 250px;
+  color: transparent;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+  word-wrap: break-word;
+}
+
+.form-profile .button > .error-message {
+  min-width: 100%;
+  margin-top: 5px;
+}
+
+div div.visible .error-message {
+  color: #350a4e;
+}
+
+.form-profile input.invalid,
+.form-profile select.invalid {
+  border-bottom: red 3px solid;
+}
+
+.form-profile input.valid,
+.form-profile select.valid {
+  border-bottom: green 3px solid;
+}
+
+div div.visible.invalidText .error-message {
+  color: red;
+}
+
+.form-profile input.active {
+  margin-bottom: 5px;
+}
+
+.form-profile .none {
+  display: none;
+}
+
+.form-profile div.shipping-address h3 {
+  width: 100%;
+}
+
+.form-profile .flex-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+#profile-form .img-input-icon {
+  width: 23px;
+  opacity: 0.7;
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  right: 7px;
+  top: 16px;
+}
+
+.form-profile .form-profile__three {
+  flex-direction: column;
+}
+
+.edit-address_container {
+  display: flex;
+  font-size: 0px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.edit-password,
+.add-new_address,
+.delete_address,
+.edit_address,
+.create_address,
+.cancel-new_address {
+  height: 40px;
+  background: #4840a2;
+  font-size: 20px;
+  padding: 5px 15px;
+  border-radius: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  padding-left: 40px;
+  padding-right: 40px;
+  line-height: 53px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cancel-new_address:hover,
+.edit_address:hover,
+.create_address:hover,
+.delete_address:hover,
+.add-new_address:hover,
+.edit-password:hover,
+.edit-address:hover .edit-address > p.edit-address_type {
+  color: white;
+  opacity: 0.8;
+}
+
+.new-address_type {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.new-address_type div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.new-address_type div input {
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.new-address_type div label {
+  margin: 0;
+  padding: 0;
+  margin-left: 5px;
+}
+
+@media (max-width: 764px) {
+  .form-profile input[type='text'],
+  .form-profile input[type='date'],
+  .form-profile input[type='password'],
+  .form-profile .form-profile__two fieldset,
+  .form-profile .form-profile__two fieldset input:not([type='checkbox']),
+  .form-profile .form-profile__two fieldset select {
+    width: 100%;
+  }
+
+  .form-profile .error-message {
+    min-width: 100%;
+  }
+
+  .form-profile .form-profile__two .input-checkbox {
+    order: 2;
+  }
+
+  .form-profile .form-profile__two .fieldset-two {
+    order: 3;
+  }
+
+  .form-profile .input-checkbox label {
+    text-align: center;
+  }
+
+  .form-profile #set-billing-and-shipping {
+    min-width: 20px;
+  }
+
+  .form-profile .flex-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-profile input[type='submit'] {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  fieldset .delete_address,
+  fieldset .create_address,
+  fieldset .cancel-new_address,
+  fieldset .edit_address.save,
+  .edit-address_container .edit_address {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .new-address_type {
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .new-address_type label {
+    min-width: 140px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .new-address_type div input {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 20px;
+  }
+}

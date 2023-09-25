@@ -1,0 +1,354 @@
+.container-registration {
+  padding: 140px 10px 30px 10px;
+
+  min-height: 100vh;
+  background-image: linear-gradient(135deg, #fab2ff 10%, #1904e5 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Open Sans', sans-serif;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1000px) {
+  .container-form {
+    margin-top: -70px;
+  }
+}
+
+.container-form .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+  color: #350a4e;
+}
+
+.container-form .title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.form-registration {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #350a4e;
+}
+
+.form-registration label {
+  color: #350a4e;
+  font-size: 20px;
+}
+
+.form-registration > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.form-registration input[type='text'],
+.form-registration input[type='date'],
+.form-registration input[type='password'],
+.form-registration select {
+  display: block;
+  margin-bottom: 5px;
+  height: 50px;
+  border: none;
+  border-bottom: 3px solid #4840a2;
+  outline: none;
+  width: 300px;
+  padding: 15px 5px 5px 10px;
+  cursor: pointer;
+}
+
+.form-registration input[type='text']:hover,
+.form-registration input[type='date']:hover,
+.form-registration input[type='password']:hover,
+.form-registration select:hover {
+  cursor: pointer;
+}
+
+.form-registration input[type='text']:focus:not(:placeholder-shown),
+.form-registration input[type='date']:focus:not(:placeholder-shown),
+.form-registration input[type='password']:focus:not(:placeholder-shown),
+.form-registration select:focus {
+  cursor: text;
+}
+
+.form-registration input[type='submit'] {
+  border-radius: 10px;
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  transition: all 2s;
+}
+
+.form-registration input[type='submit']:hover {
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  cursor: pointer;
+}
+
+.form-registration div div {
+  margin-bottom: 3px;
+}
+
+fieldset {
+  margin-bottom: 15px;
+  width: 100%;
+  border-color: #de870d41;
+  border-style: solid;
+}
+
+fieldset legend {
+  color: #de870d;
+}
+
+.form-registration feBlend input,
+.form-registration feBlend select {
+  min-width: 90%;
+}
+
+.form-registration__two,
+.form-registration__three {
+  padding: 20px 0px;
+}
+.form-registration__two {
+  display: flex;
+  flex-direction: column;
+}
+.form-registration__two .input-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+  font-size: 20px;
+  color: #de870d;
+}
+
+.form-registration__two .input-checkbox input,
+#set-billing-and-shipping {
+  cursor: pointer;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.form-registration__two .input-checkbox input:disabled,
+.form-registration input:disabled + span,
+#set-billing-and-shipping:disabled {
+  cursor: auto;
+}
+
+.form-registration__two .input-checkbox label {
+  padding-bottom: 0;
+}
+
+.form-registration__four {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.form-registration div div input {
+  margin-bottom: 3px;
+}
+
+.form-registration .input-box input:disabled,
+.form-registration .input-box select:disabled {
+  background-color: rgba(243, 243, 239, 0.504);
+  cursor: auto;
+}
+
+.form-registration select {
+  width: 300px;
+  height: 50px;
+  padding: 5px 10px 5px 10px;
+  padding-right: 10px;
+}
+
+.form-registration option {
+  padding: 10px;
+}
+
+.form-registration div div label {
+  display: block;
+  padding-bottom: 5px;
+}
+
+.form-registration div div div {
+  position: relative;
+}
+
+.form-registration div div div span {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  color: #350a4e7e;
+  transition: all 0.5s ease-in-out;
+}
+
+.form-registration div div div span.date {
+  position: absolute;
+  font-size: 20px;
+  top: 12px;
+  left: 10px;
+  transition: all 1s;
+  color: transparent;
+}
+
+.form-registration div div div span.active-focus {
+  font-size: 12px;
+  color: #350a4e;
+  transform: translateY(-10px);
+  transition: all 0.5s ease-in-out;
+}
+
+.password-container {
+  position: relative;
+}
+
+.form-registration .img-password {
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  right: 15px;
+  top: 18px;
+}
+
+.form-registration .error-message {
+  font-size: 14px;
+  line-height: 16px;
+  height: 33px;
+  width: 100%;
+  max-width: 250px;
+  color: transparent;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+  word-wrap: break-word;
+}
+
+.form-registration .button > .error-message {
+  min-width: 100%;
+  margin-top: 5px;
+}
+
+div div.visible .error-message {
+  color: #350a4e;
+}
+
+.form-registration input.invalid,
+.form-registration select.invalid {
+  border-bottom: red 4px solid;
+}
+
+.form-registration input.valid,
+.form-registration select.valid {
+  border-bottom: green 4px solid;
+}
+
+div div.visible.invalidText .error-message {
+  color: red;
+}
+
+.form-registration input.active {
+  margin-bottom: 5px;
+}
+
+.form-registration .none {
+  display: none;
+}
+
+.form-registration div.shipping-address h3 {
+  width: 100%;
+}
+
+.form-registration .flex-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.container-form .login-accountP {
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (max-width: 764px) {
+  .form-registration input[type='text'],
+  .form-registration input[type='date'],
+  .form-registration input[type='password'],
+  .form-registration .form-registration__two fieldset,
+  .form-registration
+    .form-registration__two
+    fieldset
+    input:not([type='checkbox']),
+  .form-registration .form-registration__two fieldset select {
+    width: 100%;
+  }
+
+  .form-registration .error-message {
+    min-width: 100%;
+  }
+
+  .form-registration .form-registration__two .input-checkbox {
+    order: 2;
+  }
+
+  .form-registration .form-registration__two .fieldset-two {
+    order: 3;
+  }
+
+  .form-registration .input-checkbox label {
+    text-align: center;
+  }
+
+  .form-registration #set-billing-and-shipping {
+    min-width: 20px;
+  }
+
+  .form-registration .flex-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-registration input[type='submit'] {
+    width: 100%;
+  }
+}

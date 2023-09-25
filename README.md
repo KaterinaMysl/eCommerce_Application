@@ -1,7 +1,8 @@
 # eCommerce_Application
-We are students [katerinamysl](https://github.com/katerinamysl) 🙋‍♀️, [kazymirt](https://github.com/kazymirt) 🙋‍♂️, [katemihalovskaya](https://github.com/katemihalovskaya) 🙋‍♀️ of [The Rolling Scopes School](https://rollingscopes.com/). This is our educational project 📓🧑‍🎓. 
 
-This project replicates real-world shopping experiences 🛒. Users can browse through a range of products, view detailed descriptions, add their favorite items to the basket, and proceed to checkout.
+We are students [katerinamysl](https://github.com/katerinamysl) 🙋‍♀️, [kazymirt](https://github.com/kazymirt) 🙋‍♂️, [katemihalovskaya](https://github.com/katemihalovskaya) 🙋‍♀️ of [The Rolling Scopes School](https://rollingscopes.com/). This is our educational project 📓🧑‍🎓.
+
+This project replicates real-world shopping experiences 🛒. Users can browse through a range of products, view detailed descriptions, add their favorite items to the basket, and proceed to checkout. Also you can read news, saw info about creators, use discounts and find contacts about firm.
 
 An important aspect of our application is that it's responsive 🖥️📱. This feature makes the shopping experience enjoyable, irrespective of the device users prefer.
 
@@ -11,12 +12,20 @@ We use a task board in our project such as Jira for ease of work, interacting an
 
 **This project is created with:**
 
-* Webpack
-* TypeScript
-* ESLint
-* Prettier
-* Husky
-* Jest
+- Webpack
+- TypeScript
+- ESLint
+- Prettier
+- Husky
+- Jest
+
+- @commercetools/platform-sdk
+- @commercetools/sdk-client-v2
+- dotenv
+- toastify-js
+- nouislider
+- swiper
+- uuid
 
 **Prerequisites**
 
