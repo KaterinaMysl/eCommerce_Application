@@ -1,18 +1,29 @@
 import MainPage from '../view/mainPage/MainPage';
 import { Controller } from './Controller';
 import StorageController from './StorageController';
+import Client from '../app/Client';
+import { Discount } from '../type';
 
 class MainController implements Controller {
   private mainPage: MainPage;
+  private client: Client;
   private storage: StorageController;
 
-  constructor(storage: StorageController) {
+  constructor(client: Client, storage: StorageController) {
     this.mainPage = new MainPage();
     this.storage = storage;
+    this.client = client;
   }
 
-  draw() {
-    this.mainPage.draw(this.storage.isLoggedIn());
+  async draw() {
+    const discountCodes = await this.client.getDiscountCodes();
+    const discounts: Discount[] = discountCodes.map(discountCode => ({
+      id: discountCode.id,
+      name: discountCode.name?.en || '',
+      code: discountCode.code || '',
+    }));
+    this.storage.setDiscounts(discounts);
+    this.mainPage.draw(this.storage.isLoggedIn(), discountCodes);
   }
 }
 

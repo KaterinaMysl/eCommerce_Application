@@ -9,13 +9,19 @@ export default class PriceSlider {
   private productController: ProductController;
   private type: string;
   private filterSelection: FilterSelection;
-  constructor(from: number, to: number, type: string) {
+
+  constructor(
+    productController: ProductController,
+    from: number,
+    to: number,
+    type: string,
+  ) {
     this.type = type;
-    this.filterSelection = new FilterSelection();
+    this.filterSelection = new FilterSelection(productController);
     this.container = document.querySelector(
       `#range-slider_${this.type}`,
     ) as HTMLElement;
-    this.productController = new ProductController();
+    this.productController = productController;
     this.slider = noUiSlider.create(this.container, {
       start: [from, to],
       connect: true,

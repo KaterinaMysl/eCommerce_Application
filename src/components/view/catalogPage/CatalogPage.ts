@@ -5,26 +5,27 @@ import departure from '../../../assets/icons/departure.webp';
 import diving from '../../../assets/icons/diving.webp';
 import island from '../../../assets/icons/island.webp';
 import suitcase from '../../../assets/icons/suitcase.webp';
-import ProductController from '../../controller/CatalogController';
 import PriceSlider from './PriceSlider';
 import FilterSelection from './FilterSelection';
-
+import CatalogController from '../../controller/CatalogController';
+import PaginationController from '../../controller/PaginationController';
 export default class CatalogPage {
-  private catalogController: ProductController;
+  private catalogController: CatalogController;
   private priceSlider: PriceSlider | null;
   private daysSlider: PriceSlider | null;
   private starsSlider: PriceSlider | null;
   private ratingSlider: PriceSlider | null;
   private filtersSelection: FilterSelection | null;
 
-  constructor() {
-    this.catalogController = new ProductController();
+  constructor(catalogController: CatalogController) {
+    this.catalogController = catalogController;
     this.priceSlider = null;
     this.daysSlider = null;
     this.starsSlider = null;
     this.ratingSlider = null;
     this.filtersSelection = null;
   }
+
   async draw() {
     const bodyContainer = document.querySelector('.main') as HTMLElement;
     const content = `
@@ -42,10 +43,10 @@ export default class CatalogPage {
               <div class="search">
                 <div class="search_inner">
                   <div class="container fill_height no-padding">
-                    <div class="row fill_height no-margin search-container_box">
+                    <div class="fill_height no-margin search-container_box">
                       <div class="col fill_height no-padding">
                         <div class="search_tabs_container">
-                          <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start">
+                          <div class="search_tabs d-flex flex-lg-row align-items-lg-center align-items-start">
                             <a class="search_tab" data-category="Hotels"><div><img src="${suitcase}" alt><span>hotels</span></div></a>
                             <a class="search_tab" data-category="Rentals"><div><img src="${bus}" alt>car rentals</div></a>
                             <a class="search_tab" data-category="Flights"><div><img src="${departure}" alt>flights</div></a>
@@ -71,7 +72,7 @@ export default class CatalogPage {
                             </div>
                             
                           </form>
-                          <details>
+                          <details id="offers-start">
                           <summary>filters</summary>
                           <div class="filters">
                       <div>
@@ -174,8 +175,18 @@ export default class CatalogPage {
                         </select>
                       </div>
                     </div>
+                  
                     <div class="offers_grid">
-
+                    </div>
+                    <div class="catalog-pagination">
+                      <div class="pagination-container">
+                        <button class="pagination-prev pagination-btn" data-pagination="prev"><</button>
+                        <button class="pagination-first pagination-btn" data-pagination="first">1</button>
+                        <div class="pagination-current pagination-btn">1</div>
+                        <button class="pagination-last pagination-btn" data-pagination="last"></button>
+                        <button class="pagination-next pagination-btn" data-pagination="next">></button>
+                      </div>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -189,11 +200,25 @@ export default class CatalogPage {
     await this.catalogController.getProducts();
     this.initEventCatalog();
   }
+
   initEventCatalog() {
-    this.priceSlider = new PriceSlider(35, 50000, 'price');
-    this.daysSlider = new PriceSlider(1, 30, 'days');
-    this.starsSlider = new PriceSlider(1, 5, 'stars');
-    this.ratingSlider = new PriceSlider(1, 10, 'rating');
+    this.priceSlider = new PriceSlider(
+      this.catalogController,
+      35,
+      50000,
+      'price',
+    );
+    this.daysSlider = new PriceSlider(this.catalogController, 1, 30, 'days');
+    this.starsSlider = new PriceSlider(this.catalogController, 1, 5, 'stars');
+    this.ratingSlider = new PriceSlider(
+      this.catalogController,
+      1,
+      10,
+      'rating',
+    );
+    const btn = Array.from(
+      document.querySelectorAll('button.pagination-btn'),
+    ) as HTMLButtonElement[];
     const sortSelect = document.querySelector(
       '.catalog-settings_sorting select',
     ) as HTMLSelectElement;
@@ -223,13 +248,47 @@ export default class CatalogPage {
       const targetElement = event.target as HTMLSelectElement;
       this.catalogController.sortProducts(targetElement.value);
     });
+    if (btn.length) {
+      const paginationController = new PaginationController(
+        this.catalogController,
+      );
+      paginationController.setPages();
+      btn.forEach(b =>
+        b.addEventListener('click', (event: Event) => {
+          const button = event.target as HTMLButtonElement;
+          if (button) {
+            const type = button.dataset.pagination;
+            switch (type) {
+              case 'prev':
+                paginationController.prev();
+                break;
+              case 'next':
+                paginationController.next();
+                break;
+              case 'last':
+                paginationController.last();
+                break;
+              case 'first':
+                paginationController.first();
+                break;
+            }
+          }
+          const catalogElement = document.querySelector('#offers-start');
+          if (catalogElement) {
+            catalogElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }),
+      );
+    }
   }
+
   categoryClick(tabs: HTMLElement[], tab: HTMLElement) {
     const details = document.querySelector(
       'details.details_category',
     ) as HTMLDetailsElement;
-    const form = document.querySelector('.search_panel_content') as HTMLElement;
-    form.classList.add('active');
     details.open = true;
     details.classList.add('active');
     tabs.forEach(tab => tab.classList.remove('active'));

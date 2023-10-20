@@ -23,8 +23,8 @@ describe('LogoutController', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    mockClient = new Client() as jest.Mocked<Client>;
     mockStorage = new StorageController() as jest.Mocked<StorageController>;
+    mockClient = new Client(mockStorage) as jest.Mocked<Client>;
 
     logoutController = new LogoutController(mockClient, mockStorage);
   });

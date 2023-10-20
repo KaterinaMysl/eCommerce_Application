@@ -1,7 +1,7 @@
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
-export const someFunction = (text: string, ifGood: boolean) => {
+export const alert = (text: string, ifGood: boolean) => {
   Toastify({
     text: text,
     duration: 3000,
