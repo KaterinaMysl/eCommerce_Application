@@ -63,7 +63,7 @@ export function ctpPasswordClient(username: string, password: string): Client {
 }
 
 const options: AnonymousAuthMiddlewareOptions = {
-  host: 'https://auth.europe-west1.gcp.commercetools.com',
+  host: 'https://auth.us-central1.gcp.commercetools.com',
   projectKey: process.env.CTP_PROJECT_KEY2 ?? '',
   credentials: {
     clientId: process.env.CTP_CLIENT_ID2 || '',
