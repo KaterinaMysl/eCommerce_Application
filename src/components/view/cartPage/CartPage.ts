@@ -18,6 +18,7 @@ export default class CartPage {
   private drawProducts(productItems?: CartDraw[], price?: number) {
     const container = document.querySelector('.container_inner') as HTMLElement;
     if (productItems) {
+      console.log(productItems);
       const subTotal = productItems.reduce(
         (acc, product) => acc + product.price * product.quantity,
         0,
@@ -30,6 +31,9 @@ export default class CartPage {
         (acc, product) => acc + (product.discountCode || 0) * product.quantity,
         0,
       );
+      console.log(subTotal);
+      console.log(saveTotal);
+      console.log(discountTotal);
       container.insertAdjacentHTML(
         'beforeend',
         `<div class="cart-products">
@@ -78,10 +82,9 @@ export default class CartPage {
         ).toFixed(2)}${'$'}</span></li>
           <li class="${
             discountTotal === 0 ? 'price-none' : 'discount-line'
-          }"><span>Discount:</span><span>-${(
-          subTotal / 100 -
-          saveTotal / 100 -
-          discountTotal / 100
+          }"><span>Discount:</span><span>-${(saveTotal
+          ? saveTotal / 100 - discountTotal / 100
+          : subTotal / 100 - discountTotal / 100
         ).toFixed(2)}${'$'}</span></li>
           <li><span>Total:</span><span class="cart-total_price">${
             price ? price / 100 : 0

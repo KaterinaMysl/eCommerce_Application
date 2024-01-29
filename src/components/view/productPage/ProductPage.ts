@@ -14,6 +14,7 @@ import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 
 class ProductItemPage {
   draw(product: ProductProjection) {
+    console.log(product);
     const pageContainer = document.querySelector('.main') as HTMLElement;
     const normalPrice =
       (product.masterVariant.prices?.[0].value.centAmount as number) / 100;
@@ -36,6 +37,7 @@ class ProductItemPage {
         attributeObject[key] = attribute.value;
       }
     }
+    console.log(attributeObject);
     const content = `
       <div class="container-offers">
         <div class="offers-home">
