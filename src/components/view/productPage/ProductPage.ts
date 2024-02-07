@@ -1,8 +1,4 @@
 import './ProductPage.css';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
 
 import {
   Attribute,
@@ -18,6 +14,7 @@ import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 
 class ProductItemPage {
   draw(product: ProductProjection) {
+    console.log(product);
     const pageContainer = document.querySelector('.main') as HTMLElement;
     const normalPrice =
       (product.masterVariant.prices?.[0].value.centAmount as number) / 100;
@@ -40,6 +37,7 @@ class ProductItemPage {
         attributeObject[key] = attribute.value;
       }
     }
+    console.log(attributeObject);
     const content = `
       <div class="container-offers">
         <div class="offers-home">
@@ -98,6 +96,12 @@ class ProductItemPage {
                   <li class="offers_icons_item"><img src="${bicycle}" alt></li>
                   <li class="offers_icons_item"><img src="${sailboat}" alt></li>
                 </ul>
+                <div class="button book_button remove-product-from-cart" prod-key="${
+                  product.id
+                }">Remove from cart</div>
+                <div class="button book_button add-product-to-cart" prod-key="${
+                  product.id
+                }">Add to cart</div>
               </div>
             </div>
         </div>

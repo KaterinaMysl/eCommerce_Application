@@ -3,29 +3,26 @@ import Client from '../app/Client';
 import CatalogProductPage from '../view/catalogPage/CatalogProductPage';
 import FilterSelection from '../view/catalogPage/FilterSelection';
 import { FILTERS_ACTIVE } from '../constants';
-
+import CartController from './CartController';
+import StorageController from './StorageController';
+import { Pagination } from '../type';
+import PaginationController from './PaginationController';
 export default class CatalogController {
   private client: Client;
-  private anonymsApi;
   private catalogProduct: CatalogProductPage;
   private filtersSelection: FilterSelection;
-
-  constructor() {
-    this.client = new Client();
-    this.anonymsApi = this.client.getAnonymsApi();
+  private cartController: CartController;
+  private storage: StorageController;
+  constructor(client: Client, cartController: CartController) {
+    this.client = client;
+    this.storage = new StorageController();
     this.catalogProduct = new CatalogProductPage();
-    this.filtersSelection = new FilterSelection();
+    this.filtersSelection = new FilterSelection(this);
+    this.cartController = cartController;
   }
 
   async getChildrenCategory(parentId: string) {
-    const response = await this.anonymsApi
-      .categories()
-      .get({
-        queryArgs: {
-          where: `parent(id="${parentId}")`,
-        },
-      })
-      .execute();
+    const response = await this.client.getProductCategoryByParentId(parentId);
     const categories = response.body.results;
     const details = document.querySelector('.details-container') as HTMLElement;
 
@@ -51,20 +48,15 @@ export default class CatalogController {
       detailsParent.classList.remove('active');
     }
   }
-  async getCategory(nameCategory: string) {
-    const response = await this.anonymsApi
-      .categories()
-      .get({
-        queryArgs: { where: `name(en="${nameCategory}")` },
-      })
-      .execute();
 
+  async getCategory(name: string) {
+    const response = await this.client.getProductCategoryByName(name);
     await this.getCategoryProduct(response.body.results[0].id);
     if (response.body.results[0].ancestors.length === 0) {
       this.getChildrenCategory(response.body.results[0].id);
-      this.createCatalogNavigator(nameCategory, 'container_box');
+      this.createCatalogNavigator(name, 'container_box');
     } else {
-      this.createCatalogNavigator(nameCategory, 'subcategory');
+      this.createCatalogNavigator(name, 'subcategory');
     }
   }
 
@@ -74,9 +66,32 @@ export default class CatalogController {
   }
 
   async getProducts() {
-    const response = await this.anonymsApi.productProjections().get().execute();
+    const response = await this.client.getProductProjections();
     const products: ProductProjection[] = response.body.results;
-    products.forEach(product => this.catalogProduct.draw(product));
+    await products.forEach(product => this.catalogProduct.draw(product));
+    this.addEventCart();
+    const { offset, total } = response.body;
+    const pagination: Pagination = {
+      offset: offset,
+      total: total as number,
+    };
+    this.storage.setPagination(pagination);
+    const paginationController = new PaginationController(this);
+    paginationController.setPages();
+  }
+
+  addEventCart() {
+    const addCart = document.querySelectorAll('.add-product-to-cart');
+    addCart.forEach(item => {
+      item.addEventListener('click', e => {
+        const targetEl = e.target as HTMLElement;
+        if (!targetEl.classList.contains('disabled')) {
+          const productKey = targetEl.getAttribute('prod-key') as string;
+          this.cartController.addProductToCart(productKey);
+          targetEl.classList.add('disabled');
+        }
+      });
+    });
   }
 
   async sortProducts(typeSort: string) {
@@ -85,18 +100,9 @@ export default class CatalogController {
   }
 
   async searchProducts(searchText: string) {
-    const response = await this.anonymsApi
-      .productProjections()
-      .suggest()
-      .get({
-        queryArgs: {
-          'searchKeywords.en': searchText,
-          fuzzy: true,
-          staged: true,
-          fuzzyLevel: 0,
-        },
-      })
-      .execute();
+    const response = await this.client.getProductProjectionsBySearchQuery(
+      searchText,
+    );
     const searchName: string[] = [];
     response.body['searchKeywords.en'].forEach(async word => {
       searchName.push(word.text);
@@ -117,42 +123,38 @@ export default class CatalogController {
     this.getProductsWithFilters();
   }
 
-  createProductsCart(products: ProductProjection[]) {
+  async createProductsCart(products: ProductProjection[]) {
     const offerGrid = document.querySelector('.offers_grid') as HTMLElement;
     const searchCount = document.querySelector('.search-count') as HTMLElement;
     searchCount.textContent = `${products.length}`;
     offerGrid.innerHTML = '';
-    products.reverse().forEach(product => {
+    await products.reverse().forEach(product => {
       this.catalogProduct.draw(product);
     });
+    this.addEventCart();
   }
 
-  async getProductsWithFilters() {
+  async getProductsWithFilters(offsetT?: number) {
     const category =
       FILTERS_ACTIVE.category.length > 2
         ? `categories.id:"${FILTERS_ACTIVE.category}"`
         : '';
-    const response = await this.anonymsApi
-      .productProjections()
-      .search()
-      .get({
-        queryArgs: {
-          filter: [
-            category,
-            FILTERS_ACTIVE.days,
-            FILTERS_ACTIVE.stars,
-            FILTERS_ACTIVE.price,
-            FILTERS_ACTIVE.rating,
-          ],
-          limit: 5,
-          sort: [FILTERS_ACTIVE.sort],
-          ['text.en']: FILTERS_ACTIVE.search,
-        },
-      })
-      .execute();
+    const response = await this.client.getProductProjectionsFilteredByCategory(
+      category,
+      offsetT,
+    );
     const products: ProductProjection[] = response.body.results;
     this.createProductsCart(products);
+    const { offset, total } = response.body;
+    const pagination: Pagination = {
+      offset: offset,
+      total: total as number,
+    };
+    this.storage.setPagination(pagination);
+    const paginationController = new PaginationController(this);
+    paginationController.setPages();
   }
+
   createCatalogNavigator(name: string, type: string) {
     const containerBox = document.querySelector(
       '.navigator-container_box',

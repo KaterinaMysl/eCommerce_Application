@@ -5,6 +5,7 @@ import {
   Middleware,
   Client,
   createAuthForPasswordFlow,
+  AnonymousAuthMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
 import fetch from 'node-fetch';
 
@@ -60,3 +61,23 @@ export function ctpPasswordClient(username: string, password: string): Client {
     .withLoggerMiddleware()
     .build();
 }
+
+const options: AnonymousAuthMiddlewareOptions = {
+  host: 'https://auth.us-central1.gcp.commercetools.com',
+  projectKey: process.env.CTP_PROJECT_KEY2 ?? '',
+  credentials: {
+    clientId: process.env.CTP_CLIENT_ID2 || '',
+    clientSecret: process.env.CTP_CLIENT_SECRET2 || '',
+  },
+};
+const httpMiddlewareOptions2: HttpMiddlewareOptions = {
+  host: process.env.CTP_API_URL2 ?? '',
+  fetch,
+};
+export const anonymousClient = () => {
+  return new ClientBuilder()
+    .withAnonymousSessionFlow(options)
+    .withHttpMiddleware(httpMiddlewareOptions2)
+    .withLoggerMiddleware()
+    .build();
+};

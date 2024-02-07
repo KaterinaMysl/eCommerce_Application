@@ -2,6 +2,9 @@ import MainController from '../controller/MainController';
 import LoginController from '../controller/LoginController';
 import LogoutController from '../controller/LogoutController';
 import ProfileController from '../controller/ProfileController';
+import AboutController from '../view/about/About';
+import NewsController from '../view/news/News';
+import ContactController from '../view/contact/Contact';
 import RegisterController from '../controller/RegisterController';
 import StorageController from '../controller/StorageController';
 import Client from './Client';
@@ -10,6 +13,8 @@ import UnexpectedErrorPage from '../view/unexpectedErrorPage/UnexpectedErrorPage
 import RouterController from '../controller/RouterController';
 import CatalogPage from '../view/catalogPage/CatalogPage';
 import ProductItemController from '../controller/ProductController';
+import CartController from '../controller/CartController';
+import CatalogController from '../controller/CatalogController';
 
 class App {
   private mainController: MainController;
@@ -18,19 +23,27 @@ class App {
   private registerController: RegisterController;
   private logoutController: LogoutController;
   private profileController: ProfileController;
+  private aboutController: AboutController;
+  private newsController: NewsController;
+  private contactController: ContactController;
   private validator: Validator;
   private unexpectedErrorPage: UnexpectedErrorPage;
   private catalogPage: CatalogPage;
   private productItemController: ProductItemController;
   private routerController: RouterController;
   private client: Client;
+  private cartController: CartController;
+  private catalogController: CatalogController;
 
   constructor() {
-    this.client = new Client();
     this.storage = new StorageController();
+    this.client = new Client(this.storage);
     this.validator = new Validator();
     this.routerController = new RouterController(this.storage);
-    this.mainController = new MainController(this.storage);
+    this.mainController = new MainController(this.client, this.storage);
+    this.aboutController = new AboutController();
+    this.newsController = new NewsController();
+    this.contactController = new ContactController();
     this.loginController = new LoginController(this.client, this.storage);
     this.registerController = new RegisterController(
       this.client,
@@ -39,9 +52,19 @@ class App {
     this.logoutController = new LogoutController(this.client, this.storage);
     this.profileController = new ProfileController(this.client, this.storage);
     this.unexpectedErrorPage = new UnexpectedErrorPage();
-    this.catalogPage = new CatalogPage();
-    this.productItemController = new ProductItemController();
+    this.cartController = new CartController(this.client, this.storage);
+    this.catalogController = new CatalogController(
+      this.client,
+      this.cartController,
+    );
+    this.catalogPage = new CatalogPage(this.catalogController);
+    this.productItemController = new ProductItemController(
+      this.client,
+      this.storage,
+      this.cartController,
+    );
   }
+
   navigateTo(url: string) {
     history.pushState({}, '', url);
     this.routerControllers();
@@ -54,6 +77,10 @@ class App {
       { path: '/login', view: this.login.bind(this), name: 'Login' },
       { path: '/register', view: this.register.bind(this), name: 'Register' },
       { path: '/profile', view: this.profile.bind(this), name: 'Profile' },
+      { path: '/about', view: this.about.bind(this), name: 'About' },
+      { path: '/news', view: this.news.bind(this), name: 'News' },
+      { path: '/contact', view: this.contact.bind(this), name: 'Contact' },
+      { path: '/cart', view: this.cart.bind(this), name: 'Cart' },
       {
         path: '/catalog',
         view: this.checkRouteAndExecute.bind(this),
@@ -77,9 +104,11 @@ class App {
       this.catalog();
     }
   }
+
   private async catalog() {
     await this.catalogPage.draw();
   }
+
   private async product(productName: string) {
     if (!productName) {
       console.error('Product name is missing from the URL!');
@@ -88,24 +117,34 @@ class App {
     await this.productItemController.openProductPage(productName);
     this.initProductModalListeners();
   }
+
   private getProductNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('name');
   }
+
   errorPage() {
     this.unexpectedErrorPage.draw();
   }
-  start() {
-    this.mainController.draw();
+
+  cart() {
+    this.cartController.draw();
+  }
+
+  async start() {
+    await this.mainController.draw();
     this.initMainLoginListeners();
   }
+
   login() {
     this.loginController.draw();
     this.initLoginListeners();
   }
+
   register() {
     this.registerController.draw().finally(() => this.initRegisterListeners());
   }
+
   async profile() {
     const customer = await this.client.getCustomer();
     if (customer) {
@@ -113,6 +152,19 @@ class App {
       this.initUserFormListener();
     }
   }
+
+  about() {
+    this.aboutController.draw();
+  }
+
+  news() {
+    this.newsController.draw();
+  }
+
+  contact() {
+    this.contactController.draw();
+  }
+
   private initMainLoginListeners() {
     const logoutButton = document.querySelector(
       '.user_box_logout',
@@ -138,6 +190,7 @@ class App {
       });
     }
   }
+
   private initUserFormListener() {
     const userForm = document.querySelector('#profile-form') as HTMLFormElement;
     const addNewAddress = document.querySelector(
@@ -206,6 +259,7 @@ class App {
     });
     updateEvent();
   }
+
   private initRegisterListeners() {
     const registrationForm = document.getElementById(
       'register-form',
@@ -229,20 +283,37 @@ class App {
 
     imgs?.forEach(img => {
       img.addEventListener('click', () => {
-        modal.style.display = 'block';
+        const fixedHeader = document.querySelector('.header') as HTMLElement;
+        const scrollWidth =
+          window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflowY = 'hidden';
+        document.body.style.paddingRight = scrollWidth + 'px';
+        if (fixedHeader) {
+          fixedHeader.style.width = `calc(100% - ${scrollWidth}px)`;
+        }
+        modal.style.display = 'block';
       });
     });
 
     closeBtn.onclick = function () {
       modal.style.display = 'none';
-      document.body.style.overflowY = 'visible';
+      const fixedHeader = document.querySelector('.header') as HTMLElement;
+      document.body.style.overflowY = 'auto';
+      document.body.style.paddingRight = '0';
+      if (fixedHeader) {
+        fixedHeader.style.width = `calc(100%)`;
+      }
     };
 
     window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = 'none';
-        document.body.style.overflowY = 'visible';
+        const fixedHeader = document.querySelector('.header') as HTMLElement;
+        document.body.style.overflowY = 'auto';
+        document.body.style.paddingRight = '0';
+        if (fixedHeader) {
+          fixedHeader.style.width = `calc(100%)`;
+        }
       }
     };
   }

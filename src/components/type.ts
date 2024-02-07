@@ -34,3 +34,37 @@ export type AddAddress = {
   default: boolean;
   new: boolean;
 };
+
+export type CartLS = {
+  id: string;
+  version: number;
+};
+
+export type CartDraw = {
+  name: string;
+  quantity: number;
+  price: number;
+  discount?: number;
+  discountCode?: number;
+  images: string;
+  id: string;
+  lineItemId: string;
+  key: string;
+};
+
+export type CartDrawProducts = {
+  cartProducts: CartDraw[];
+  price: number;
+  count: number;
+};
+
+export type Discount = {
+  id: string;
+  name: string;
+  code: string;
+};
+
+export type Pagination = {
+  offset: number;
+  total: number;
+};

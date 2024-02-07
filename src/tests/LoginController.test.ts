@@ -41,8 +41,8 @@ describe('LoginController', () => {
       currentTarget: document.createElement('form'),
     };
 
-    mockClient = new Client() as jest.Mocked<Client>;
     mockStorage = new StorageController() as jest.Mocked<StorageController>;
+    mockClient = new Client(mockStorage) as jest.Mocked<Client>;
 
     loginController = new LoginController(mockClient, mockStorage);
   });

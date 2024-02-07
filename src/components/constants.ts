@@ -110,4 +110,5 @@ export const FILTERS_ACTIVE: FilterActive = {
   stars: '',
   rating: '',
   search: '',
+  offset: '',
 };
